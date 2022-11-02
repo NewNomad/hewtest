@@ -1,19 +1,18 @@
-import { AppBar, Container, Toolbar, Typography } from '@mui/material'
+import { AppBar,  Toolbar } from '@mui/material'
 import React from 'react'
-import { ShowDate } from '../1atoms/showDate'
+import { ShowDate } from '../1atoms/ShowDate'
 
 export const Header = () => {
 
 
   return (
     <AppBar
-      position='relative'
+      position='fixed'
       color='primary'
-      sx={{ borderBottom: (t) => `1px solid #ccc` }}>
+      // sx={{ borderBottom: (t) => `1px solid #ccc` }}
+      >
       <Toolbar>
-
-        <ShowDate />
-
+          <ShowDate />
       </Toolbar>
     </AppBar>
   )
