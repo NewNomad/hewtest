@@ -7,26 +7,28 @@ import React, { useState, useEffect }  from 'react'
 // ===================================================
 // 時間表示
 // ===================================================
-var nowDate = new Date();
-
 export const ShowDate = () => {
 
+    var nowDate = new Date();
+
     const [nowHour, setNowHour] = useState(nowDate.getHours().toString());
-    const [nowMin, setnowMin]   = useState(nowDate.getMinutes().toString());
+    const [nowMin, setNowMin]   = useState(nowDate.getMinutes().toString());
+    const [nowSec, setNowSec]   = useState(nowDate.getSeconds().toString());
 
     useEffect( () => {
-        setInterval( ()=>setNowHour(time => time=nowDate.getHours().toString()) , 1000);
+        var nowNewDate = new Date();
+        setInterval( ()=> 
+        {
+            setNowHour(nowNewDate.getHours().toString());
+            setNowMin(nowNewDate.getMinutes().toString());
+            setNowSec(nowNewDate.getSeconds().toString());
+        }, 1000)
     });
-
-    useEffect( ()=> {
-        setInterval( ()=> setnowMin(time => time=nowDate.getMinutes().toString()), 1000);
-    })
-        
 
     return (
         <Container>
             <Typography variant='h4' textAlign="center">
-                { nowHour + ":" + nowMin }
+                { nowHour }:{ nowMin }:{ nowSec }
             </Typography>
         </Container>
     )
