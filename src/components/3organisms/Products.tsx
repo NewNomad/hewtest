@@ -4,10 +4,10 @@ import React from 'react'
 export const Products = () => {
     return (
         // <Container>
-        <Grid container alignItems="center" spacing={1}>
+        <Grid container alignItems="center" spacing={0} padding={1}>
             {[...Array(12)].map((e) => (
                 <Grid item xs={1}>
-                    <Paper elevation={0}>Name</Paper>
+                    <Paper elevation={0} variant="outlined">Name</Paper>
                 </Grid>
             )
 
