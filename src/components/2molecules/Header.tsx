@@ -1,10 +1,12 @@
 import { AppBar,  Toolbar } from '@mui/material'
+import { ShowDate }         from '../1atoms/ShowDate'
+
 import React from 'react'
-import { ShowDate } from '../1atoms/ShowDate'
 
+// ===================================================
+// ヘッダー
+// ===================================================
 export const Header = () => {
-
-
   return (
     <AppBar
       position='fixed'
