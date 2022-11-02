@@ -24,7 +24,9 @@ const Home: NextPage = () => {
           <Grid item xs={11}>
             <Grid container spacing={0} justifyItems="center"> {/* 横並び */}
 
-              <Products></Products>
+              <Grid item xs={9}>
+                <Products></Products>
+              </Grid>
               <Grid item xs={3}>
                 cart
               </Grid>
