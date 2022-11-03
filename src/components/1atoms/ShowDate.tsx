@@ -8,10 +8,13 @@ import React from 'react'
 // ヘッダー 時間表示
 // ===================================================
 
+// ToDO：Component ⇔ ReactHooksの変換 について調査
+
 export default class ShowDate extends React.Component {
 
     constructor(props) {
         super(props);
+
         this.state = { current: new Date().toLocaleString() };
     }
 
