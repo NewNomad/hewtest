@@ -24,9 +24,9 @@ export const ShowDate = () => {
         var nowNewDate = new Date();
         setInterval( ()=> 
         {
-            setNowHour(nowNewDate.getHours().toString());
-            setNowMin(nowNewDate.getMinutes().toString());
-            setNowSec(nowNewDate.getSeconds().toString());
+            // setNowHour(nowNewDate.getHours().toString());
+            // setNowMin(nowNewDate.getMinutes().toString());
+            // setNowSec(nowNewDate.getSeconds().toString());
         }, 1000)
     });
 
