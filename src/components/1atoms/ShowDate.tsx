@@ -16,9 +16,9 @@ export const ShowDate = () => {
 
     var nowDate = new Date();
 
-    const [nowHour, setNowHour] = useState(nowDate.getHours().toString());
-    const [nowMin, setNowMin]   = useState(nowDate.getMinutes().toString());
-    const [nowSec, setNowSec]   = useState(nowDate.getSeconds().toString());
+    // const [nowHour, setNowHour] = useState(nowDate.getHours().toString());
+    // const [nowMin, setNowMin]   = useState(nowDate.getMinutes().toString());
+    // const [nowSec, setNowSec]   = useState(nowDate.getSeconds().toString());
 
     useEffect( () => {
         var nowNewDate = new Date();
@@ -33,7 +33,7 @@ export const ShowDate = () => {
     return (
         <Container>
             <Typography variant='h4' textAlign="center">
-                { nowHour }:{ nowMin }:{ nowSec }
+                {/* { nowHour }:{ nowMin }:{ nowSec } */}
             </Typography>
         </Container>
     )
