@@ -6,12 +6,19 @@ const theme = createTheme({
     palette: {
         primary: {
             main: "#f69c2f"
+
         },
         secondary: {
-            main: "#3879c3"
+            main: "#3879c3",
         },
+
         background: {
-            default: "#fff"
+            default: "#ecf2f3",
+            paper: "$fff"
+        },
+        text: {
+            primary: "#444",
+            secondary: "#444"
         }
     }
 });
