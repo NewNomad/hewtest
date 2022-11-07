@@ -3,11 +3,11 @@ import { ShowDate }         from '../1atoms/ShowDate'
 
 import React from 'react'
 
-
 // ===================================================
 // ヘッダー
 // ===================================================
 export const Header = () => {
+
   return (
     <AppBar position='fixed'
             color='primary'

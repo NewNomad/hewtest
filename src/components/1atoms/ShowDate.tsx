@@ -1,39 +1,30 @@
 import { Container }    from '@mui/system'          // コンテナ
 import { Typography }   from '@mui/material'        // テキスト(書式未設定)
+import dayjs            from 'dayjs'
 
-import React from 'react'
-
+import React, { useEffect, useState } from 'react'
 
 // ===================================================
 // ヘッダー 時間表示
 // ===================================================
+export const ShowDate = () => {
 
-// ToDO：Component ⇔ ReactHooksの変換 について調査
+    // 初期値
+    const [nowTime, setNowTime] = useState(dayjs());
 
-export default class ShowDate extends React.Component {
+    // 時刻更新
+    useEffect( () => {
+        const timeoutId = setTimeout( () => setNowTime(dayjs()), 1000 )
+        return () => { clearTimeout(timeoutId) }
+    }, [nowTime])
 
-    constructor(props) {
-        super(props);
-
-        this.state = { current: new Date().toLocaleString() };
-    }
-
-    render(){
-        return(
-            <Container>
-                <Typography variant='h4' textAlign="center">{ this.state.current }</Typography>
-            </Container>
-        );
-    }
+    // 表示
+    return (
+        <Container>
+            <Typography variant='h4' textAlign="center">
+                { dayjs(nowTime).format('HH:mm') }
+            </Typography>
+        </Container>
+    );
 }
-
-// export const ShowDate = () => {
-//     return (
-//         <Container>
-//             <Typography variant='h4' textAlign="center">
-//                 { nowHour }:{ nowMin }:{ nowSec }
-//             </Typography>
-//         </Container>
-//     );
-
 
