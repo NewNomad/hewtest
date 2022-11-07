@@ -1,4 +1,4 @@
-import { Box, Button, Container, Grid } from '@mui/material'
+import { Box, Button, Container, Grid, Paper } from '@mui/material'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -24,7 +24,10 @@ const Home: NextPage = () => {
           <Grid item xs={11} container spacing={0} justifyItems="center"> {/* 横並び */}
 
             <Grid item xs={9}>
+              {/* <Paper elevation={10} sx={{bgcolor:"#fff"}}> */}
               <Products></Products>
+
+              {/* </Paper> */}
             </Grid>
             <Grid item xs={3}>
               <Cart />

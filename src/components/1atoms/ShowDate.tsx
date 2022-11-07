@@ -32,8 +32,9 @@ export const ShowDate = () => {
 
     return (
         <Container>
-            <Typography variant='h4' textAlign="center">
+            <Typography variant='h4' textAlign="center" color="#fff">
                 {/* { nowHour }:{ nowMin }:{ nowSec } */}
+                11:45:24
             </Typography>
         </Container>
     )

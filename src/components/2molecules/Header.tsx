@@ -10,7 +10,7 @@ export const Header = () => {
   return (
     <AppBar
       position='fixed'
-      color='primary'
+      color='secondary'
       // sx={{ borderBottom: (t) => `1px solid #ccc` }}
       >
       <Toolbar>
