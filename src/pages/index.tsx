@@ -7,6 +7,7 @@ import { Header } from '../components/2molecules/Header'
 import { HeadInfo } from '../components/2molecules/HeadInfo'
 import { Cart } from '../components/3organisms/Cart'
 import { Products } from '../components/3organisms/Products'
+import { BgParticle } from '../components/libs/BgParticle'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
@@ -19,9 +20,9 @@ const Home: NextPage = () => {
 
         {/* <Container component="main" sx={{ height: "100vh",mt:10}} >1 */}
 
-        <Grid container direction="column" sx={{ height: "100vh", pt: 8 }}>{/* 縦並び */}
+        <Grid container direction="column" height="100vh" sx={{ pt: 8 }}>{/* 縦並び */}
           {/* justify:horizon alighitem:vertical */}
-          <Grid item xs={11} container spacing={0} justifyItems="center"> {/* 横並び */}
+          <Grid item xs={12} container spacing={0} padding={4} justifyItems="center"> {/* 横並び */}
 
             <Grid item xs={9}>
               {/* <Paper elevation={10} sx={{bgcolor:"#fff"}}> */}
@@ -33,9 +34,9 @@ const Home: NextPage = () => {
               <Cart />
             </Grid>
           </Grid>
-          <Grid item xs={1}>
+          {/* <Grid item xs={1}>
             案内
-          </Grid>
+          </Grid> */}
         </Grid>
         {/* </Container> */}
       </Box>
