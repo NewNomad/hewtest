@@ -7,7 +7,15 @@ import React from 'react'
 // ヘッダー
 // ===================================================
 export const Header = () => {
+
   return (
+    <AppBar position='fixed'
+            color='primary'
+            // sx={{ borderBottom: (t) => `1px solid #ccc` }}
+    >
+        <Toolbar>
+            <ShowDate />
+        </Toolbar>
     <AppBar
       position='fixed'
       color='secondary'
