@@ -1,41 +1,29 @@
-import { Typography }   from '@mui/material'
-import { Container }    from '@mui/system'
+import { Container }    from '@mui/system'          // コンテナ
+import { Typography }   from '@mui/material'        // テキスト(書式未設定)
+import dayjs            from 'dayjs'
 
-import React, { useState, useEffect }  from 'react'
-
+import React, { useEffect, useState } from 'react'
 
 // ===================================================
-// 時間表示
+// ヘッダー 時間表示
 // ===================================================
-
-// 解決でき次第、TODOは削除してください
-// TODO:更新の様子が微妙に怪しい(おそらく処理が重すぎる)
-// TODO:二桁表記未対応
-
 export const ShowDate = () => {
 
-    var nowDate = new Date();
+    // 初期値
+    const [nowTime, setNowTime] = useState(dayjs());
 
-    // const [nowHour, setNowHour] = useState(nowDate.getHours().toString());
-    // const [nowMin, setNowMin]   = useState(nowDate.getMinutes().toString());
-    // const [nowSec, setNowSec]   = useState(nowDate.getSeconds().toString());
-
+    // 時刻更新
     useEffect( () => {
-        var nowNewDate = new Date();
-        setInterval( ()=> 
-        {
-            // setNowHour(nowNewDate.getHours().toString());
-            // setNowMin(nowNewDate.getMinutes().toString());
-            // setNowSec(nowNewDate.getSeconds().toString());
-        }, 1000)
-    });
+        const timeoutId = setTimeout( () => setNowTime(dayjs()), 1000 )
+        return () => { clearTimeout(timeoutId) }
+    }, [nowTime])
 
+    // 表示
     return (
         <Container>
-            <Typography variant='h4' textAlign="center" color="#fff">
-                {/* { nowHour }:{ nowMin }:{ nowSec } */}
-                11:45:24
+            <Typography variant='h4' textAlign="center">
+                { dayjs(nowTime).format('HH:mm') }
             </Typography>
         </Container>
-    )
+    );
 }
