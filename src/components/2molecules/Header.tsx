@@ -1,5 +1,6 @@
 import { AppBar,  Toolbar } from '@mui/material'
 import { ShowDate }         from '../1atoms/ShowDate'
+import { ShowWeather }       from '../1atoms/ShowWeather'
 
 import React from 'react'
 
@@ -15,7 +16,8 @@ export const Header = () => {
       // sx={{ borderBottom: (t) => `1px solid #ccc` }}
       >
       <Toolbar>
-          <ShowDate />
+            <ShowWeather />
+            <ShowDate />
       </Toolbar>
     </AppBar>
   )
