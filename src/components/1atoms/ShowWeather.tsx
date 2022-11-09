@@ -29,5 +29,5 @@ export const ShowWeather = () => {
     if (!data) return <div>読込中</div>
 
     // 読み込み成功
-    return <div>{ machinePlace }：{ data[machinePlace][0]["forecast"] }</div>
+    return <div>{ machinePlace }:{ data[machinePlace][0]["forecast"] }</div>
 }
