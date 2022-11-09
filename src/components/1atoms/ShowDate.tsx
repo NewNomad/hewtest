@@ -1,6 +1,5 @@
 import { Container } from '@mui/system'          // コンテナ
 import { Typography } from '@mui/material'        // テキスト(書式未設定)
-import dayjs from 'dayjs'
 
 import React, { useEffect, useState } from 'react'
 
