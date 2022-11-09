@@ -22,7 +22,7 @@ export const ShowDate = () => {
     return (
         <Container>
             <Typography variant='h4' textAlign="center">
-                { dayjs(nowTime).format('HH:mm') }
+                { dayjs(nowTime).format('HH:mm:ss') }
             </Typography>
         </Container>
     );
