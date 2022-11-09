@@ -1,33 +1,29 @@
 import { Container }    from '@mui/system'          // コンテナ
 import { Typography }   from '@mui/material'        // テキスト(書式未設定)
 import useSWR           from 'swr'
-
-import React, { useEffect, useState } from 'react'
+import React            from 'react'
 
 // ===================================================
 // 定数
 // ===================================================
-// クジラWeb API
-const kujiraUrl     = 'https://api.aoikujira.com/tenki/week.php?fmt=json';
-
-// 自販機所在地
-const machinePlace  = "名古屋";
+const kujiraUrl     = 'https://api.aoikujira.com/tenki/week.php?fmt=json';      // クジラWeb API
+const machinePlace  = "名古屋";                                                  // 自販機所在地
 
 // ===================================================
 // ヘッダー 天気表示
 // ===================================================
-const fetcher = url => fetch(url).then(r => r.json())
+const fetcher = url => fetch(url).then(response => response.json());
 
 export const ShowWeather = () => {
 
     const { data, error } = useSWR(kujiraUrl, fetcher);
 
     // 読み込み失敗
-    if (error) return <div>読込失敗</div>
+    if(error) return <>読込失敗</>
 
     // 読み込み中
-    if (!data) return <div>読込中</div>
+    if(!data) return <>読込中</>
 
     // 読み込み成功
-    return <div>{ machinePlace }:{ data[machinePlace][0]["forecast"] }</div>
+    return <>{ machinePlace }:{ data[machinePlace][0]["forecast"] }</>
 }
