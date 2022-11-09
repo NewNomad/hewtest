@@ -5,25 +5,29 @@ import useSWR           from 'swr'
 import React, { useEffect, useState } from 'react'
 
 // ===================================================
+// 定数
+// ===================================================
+// クジラWeb API
+const kujiraUrl     = 'https://api.aoikujira.com/tenki/week.php?fmt=json';
+
+// 自販機所在地
+const machinePlace  = "名古屋";
+
+// ===================================================
 // ヘッダー 天気表示
 // ===================================================
-
 const fetcher = url => fetch(url).then(r => r.json())
 
 export const ShowWeather = () => {
 
-    const { data, error } = useSWR('https://api.aoikujira.com/tenki/week.php?fmt=json&city=329', fetcher)
+    const { data, error } = useSWR(kujiraUrl, fetcher);
 
     // 読み込み失敗
-    if (error) return <div>読み込み失敗</div>
+    if (error) return <div>読込失敗</div>
 
     // 読み込み中
-    if (!data) return <div>読み込み中</div>
+    if (!data) return <div>読込中</div>
 
     // 読み込み成功
-    return (
-        <>
-            {JSON.stringify(data, null, 2)}
-        </>
-    );
+    return <div>{ machinePlace }：{ data[machinePlace][0]["forecast"] }</div>
 }
