@@ -9,11 +9,11 @@ import React            from 'react'
 const kujiraUrl     = 'https://api.aoikujira.com/tenki/week.php?fmt=json';      // クジラWeb API
 const machinePlace  = "名古屋";                                                  // 自販機所在地
 
-// ===================================================
-// ヘッダー 天気表示
-// ===================================================
-const fetcher = url => fetch(url).then(response => response.json());
+const fetcher = (url:any) => fetch(url).then(response => response.json());
 
+// ===================================================
+// 天気表示
+// ===================================================
 export const ShowWeather = () => {
 
     const { data, error } = useSWR(kujiraUrl, fetcher);
