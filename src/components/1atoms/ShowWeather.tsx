@@ -26,16 +26,5 @@ export const ShowWeather = ( props:{ place:string } ) => {
     if(!data) return <Typography>読込中</Typography>
 
     // 読み込み成功
-    return (
-        <>
-            <Typography>最高気温：{ data[info.place][0]["maxtemp"] }</Typography>
-            <Typography>最低気温：{ data[info.place][0]["mintemp"] }</Typography>
-            <Typography>{ data[info.place][0]["forecast"] }</Typography>
-            {/* <WbSunny />
-            <WbCloudy />
-            <Umbrella />
-            <ElectricBolt />
-            <AcUnit /> */}
-        </>
-    )
+    return <Typography>{ data[info.place][0]["forecast"] }</Typography>
 }
