@@ -1,9 +1,13 @@
 import { AcUnit } from '@mui/icons-material'
-import { Box, Button, Card, Container, Paper, Tooltip } from '@mui/material'
+import { Button, Paper, Tooltip } from '@mui/material'
 import Image from 'next/image'
 import React from 'react'
 
-export default function Product() {
+type Props = {
+    OpenMInfo: () => void
+}
+
+export default function Product({ OpenMInfo }: Props) {
     return (
 
         // <Card key={0} 
@@ -19,6 +23,7 @@ export default function Product() {
             }}>
             <Tooltip title="詳細" arrow>
                 <Button
+                    onClick={OpenMInfo}
                     sx={{
                         borderRadius: 2,
                         width: 1,
