@@ -1,5 +1,5 @@
-import { Container }    from '@mui/system'             // コンテナ
-import { Typography }   from '@mui/material'          // テキスト(書式未設定)
+import { Container }    from '@mui/system'
+import { Typography }   from '@mui/material'
 
 import React, { useEffect, useState } from 'react'
 
@@ -23,4 +23,3 @@ export const ShowDate = () => {
     );
 
 }
-
