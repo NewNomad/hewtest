@@ -7,7 +7,7 @@ import { ProductTabs } from '../2molecules/ProductTabs'
 export const Products = () => {
     return (
         // <Container>
-        <Paper>
+        // <Paper>
             <Grid container direction="column" spacing={0} padding={0}>
                 {[...Array(3)].map((e,i) => (
 
@@ -26,7 +26,7 @@ export const Products = () => {
                     <ProductTabs />
                 </Grid>
             </Grid>
-        </Paper>
+        // </Paper>
         // </Container>
     )
 }

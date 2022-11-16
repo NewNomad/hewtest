@@ -9,10 +9,10 @@ export default function Product() {
         // <Card key={0} 
         //     sx={{
         //     }}>
-        <Paper elevation={0} variant="outlined" key={0}
+        <Paper elevation={3} variant="elevation" key={0}
             sx={{
                 borderRadius: 3,
-                backgroundColor: "rgba(0,0,0,0)",
+                backgroundColor: "#fff",
                 border: `2px solid #ccc `,
                 borderColor: `secondary.main`
 

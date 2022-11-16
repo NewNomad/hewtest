@@ -1,5 +1,5 @@
 import { ShoppingCartCheckout } from '@mui/icons-material'
-import { Box, Button, Container } from '@mui/material'
+import { Box, Button, Container, Typography } from '@mui/material'
 import React from 'react'
 
 export const BtnTotalAmount = () => {
@@ -7,15 +7,14 @@ export const BtnTotalAmount = () => {
         <Container sx={{ textAlign: "center" }}>
             <Button
                 variant="contained"
-                color='secondary'
-                sx={{
-                    width: 200,
-                    height:100
-                }}
-                endIcon={<ShoppingCartCheckout/>}
+                color='primary'
+                endIcon={<ShoppingCartCheckout fontSize='large' />}
+
             >
-                aaa
+                会計
+
             </Button>
         </Container>
     )
 }
+　
