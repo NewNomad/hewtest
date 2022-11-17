@@ -12,7 +12,11 @@ export const ShowMordal: React.FC<Props> = ({ children }) => {
                 position: "absolute",
                 top: "50%",
                 left: "50%",
-                // tran
+                transform: "translate(-50%, -50%)",
+                // width:au
+                bgcolor: "Background.paper",
+                boxShadow: 24,
+                p: 4
             }}
         >
             {children}
