@@ -1,0 +1,4 @@
+<GoCompPay/>
+<ShowAmount/>
+<ShowAmountRemain/>
+<ShowChange/>
