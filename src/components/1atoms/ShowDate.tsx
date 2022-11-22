@@ -13,11 +13,14 @@ export const ShowDate = () => {
 
     useEffect( () => { setInterval( () => setdate(new Date()) ) }, [] )
 
+
+    
     // 表示
     return (
         <Container>
             <Typography variant='h4' textAlign="center">
-                { date.toLocaleTimeString() }
+                {/* { date.toLocaleTimeString() } */}
+                { date.getHours()+":"+date.getMinutes() }
             </Typography>
         </Container>
     );
