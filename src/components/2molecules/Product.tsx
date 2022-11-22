@@ -15,17 +15,17 @@ export default function Product({ OpenMInfo }: Props) {
         //     }}>
         <Paper elevation={3} variant="elevation" key={0}
             sx={{
-                borderRadius: 3,
+                // borderRadius: 3,
                 backgroundColor: "#fff",
-                border: `2px solid #ccc `,
-                borderColor: `secondary.main`
+                // border: `2px solid #ccc `,
+                // borderColor: `secondary.main`
 
             }}>
             <Tooltip title="詳細" arrow>
                 <Button
                     onClick={OpenMInfo}
                     sx={{
-                        borderRadius: 2,
+                        // borderRadius: 1,
                         width: 1,
                         borderBottomLeftRadius: 0,
                         borderBottomRightRadius: 0,
@@ -37,7 +37,7 @@ export default function Product({ OpenMInfo }: Props) {
             <Tooltip title="カートに追加" arrow>
                 <Button color='secondary' variant='contained' disableElevation startIcon={<AcUnit color="primary" />}
                     sx={{
-                        borderRadius: 2,
+                        // borderRadius: 2,
                         width: 1,
                         borderStartEndRadius: 0,
                         borderStartStartRadius: 0

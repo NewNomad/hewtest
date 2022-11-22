@@ -21,7 +21,7 @@ export const Products = () => {
             <Grid container direction="column" spacing={0} padding={0}>
                 {[...Array(3)].map((e, i) => (
 
-                    <Grid key={i} item xs={4} sx={{ height: "100%" }} container spacing={0.5} padding={4} paddingTop={3} paddingBottom={0}>
+                    <Grid key={i} item xs={4} sx={{ height: "100%" }} container spacing={1} padding={4} paddingTop={3} paddingBottom={0}>
                         {[...Array(12)].map((item, i) => (
                             <Grid key={i} item xs={1}>
                                 <Product
