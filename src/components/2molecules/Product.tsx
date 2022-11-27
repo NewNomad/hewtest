@@ -1,11 +1,9 @@
-import { AcUnit } from '@mui/icons-material'
-import { Button, Paper, Tooltip } from '@mui/material'
+import { Button, Paper, Tooltip }   from '@mui/material'
+import { AcUnit }                   from '@mui/icons-material'
 import Image from 'next/image'
 import React from 'react'
 
-type Props = {
-    OpenMInfo: () => void
-}
+type Props = { OpenMInfo: () => void }
 
 export default function Product({ OpenMInfo }: Props) {
     return (

@@ -1,5 +1,5 @@
-import { LocalDrink } from '@mui/icons-material'
-import { Tab, Tabs } from '@mui/material'
+import { LocalDrink }   from '@mui/icons-material'
+import { Tab, Tabs }    from '@mui/material'
 import React from 'react'
 
 export const ProductTabs = () => {

@@ -1,18 +1,18 @@
-import { LocalDrink } from '@mui/icons-material'
-import { Grid, Modal, Paper, } from '@mui/material'
+import { LocalDrink }           from '@mui/icons-material'
+import { Grid, Modal, Paper, }  from '@mui/material'
+import Product              from '../2molecules/Product'
+import { ProductTabs }      from '../2molecules/ProductTabs'
+import { ShowModalInfo }    from '../2molecules/ShowModalInfo'
 import React, { useState } from 'react'
-import Product from '../2molecules/Product'
-import { ProductTabs } from '../2molecules/ProductTabs'
-import { ShowModalInfo } from '../2molecules/ShowModalInfo'
 
 export const Products = () => {
-    const [mordalConfirm, setmordalConfirm] = useState<boolean>(false) // 購入確認画面
-    const [mordalInfo, setmordalInfo] = useState<boolean>(false) // 商品詳細画面
+    const [mordalConfirm, setmordalConfirm] = useState<boolean>(false)  // 購入確認画面
+    const [mordalInfo, setmordalInfo] = useState<boolean>(false)        // 商品詳細画面
 
-    const OpenMConfirm = () => setmordalConfirm(true); // 購入確認画面の切り替え
-    const CloseMConfirm = () => setmordalConfirm(false); // 購入確認画面の切り替え
-    const OpenMInfo = () => setmordalInfo(true); // 商品詳細画面の切り替え
-    const CloseMInfo = () => setmordalInfo(false); // 商品詳細画面の切り替え
+    const OpenMConfirm = () => setmordalConfirm(true);                  // 購入確認画面の切り替え
+    const CloseMConfirm = () => setmordalConfirm(false);                // 購入確認画面の切り替え
+    const OpenMInfo = () => setmordalInfo(true);                        // 商品詳細画面の切り替え
+    const CloseMInfo = () => setmordalInfo(false);                      // 商品詳細画面の切り替え
 
     return (
         // <Container>
@@ -38,12 +38,9 @@ export const Products = () => {
                     <ProductTabs />
                 </Grid>
             </Grid>
-            {/* 商品詳細画面のモーダル */}
-            <Modal
-                open={mordalInfo}
-                onClose={CloseMInfo}
 
-            >
+            {/* 商品詳細画面のモーダル */}
+            <Modal open={mordalInfo} onClose={CloseMInfo} >
                 <ShowModalInfo></ShowModalInfo>
             </Modal>
         </>

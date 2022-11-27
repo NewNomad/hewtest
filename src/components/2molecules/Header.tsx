@@ -1,7 +1,6 @@
 import { AppBar,  Toolbar }   from '@mui/material'
 import { ShowDate }           from '../1atoms/ShowDate'
 import { ShowWeather }        from '../1atoms/ShowWeather'
-
 import React from 'react'
 
 // 自販機の設置場所
