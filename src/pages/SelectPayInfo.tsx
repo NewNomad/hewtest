@@ -7,7 +7,8 @@ import { ShowMordal } from '../components/1atoms/ShowModal'
 
 
 
-export const SelectPayInfo = () => {
+export const SelectPayInfo = (props) => {
+  const {ElProps,QrProps} = props
 
   const [mordalEl, setmordalEl] = useState<boolean>(false) // 購入確認画面
   const [mordalQr, setmordalQr] = useState<boolean>(false) // 購入確認画面
