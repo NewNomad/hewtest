@@ -1,19 +1,42 @@
-import React from 'react'
-import { Box, Button, Container, Grid, Paper } from '@mui/material'
+import { Box, Divider, List, ListItem, Modal, Paper, Button } from '@mui/material'
+import { Container } from '@mui/system'
+import React, { useState } from 'react'
+import Link from 'next/link'
 import { Header } from '../components/2molecules/Header'
-import { PayInfo } from '../components/3organisms/PayInfo'
-import { BackButton } from '../components/1atoms/Backbutton'
+import { ShowMordal } from '../components/1atoms/ShowModal'
+
+
+type Props = { OpenMEl: () => void }
+type Props = { OpenMQr: () => void }
 
 export const SelectPayInfo = () => {
+
+  const [mordalEl, setmordalEl] = useState<boolean>(false) // 購入確認画面
+  const [mordalQr, setmordalQr] = useState<boolean>(false) // 購入確認画面
+
+  const OpenMEl = () => setmordalEl(true); // 商品詳細画面の切り替え
+  const CloseMEl = () => setmordalEl(false); // 商品詳細画面の切り替え
+
+  const OpenMQr = () => setmordalQr(true); // 商品詳細画面の切り替え
+  const CloseMQr = () => setmordalQr(false); // 商品詳細画面の切り替え
+  
   return (
     <div>
-      <Header />
+      <Header></Header>
 
-      お支払方法の選択
-      <PayInfo />
-      <BackButton />
+      <Link href="src\pages\CheckPay.tsx">
+        <Button variant='contained' color='primary'>現金</Button>
+      </Link>
 
+      <Button variant='contained' color='secondary' OpenMPay={OpenMEl}>電子マネー</Button>
+      <Button variant='contained' color='secondary'OpenMPay={OpenMQr}>QRコード</Button>
 
+      <Modal open={mordalEl} onClose={CloseMEl} >
+        <ShowModalEl></ShowModalEl>
+      </Modal>
+      <Modal open={mordalEl} onClose={CloseMQr} >
+        <ShowModalQr></ShowModalQr>
+      </Modal>
     </div>
   )
 }
