@@ -5,7 +5,7 @@ import { CartItem }             from '../2molecules/CartItem'
 import React from 'react'
 
 // ====================================
-// カート情報
+// カート
 // ====================================
 export const Cart = () => {
     return (

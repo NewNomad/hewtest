@@ -3,11 +3,9 @@ import React from 'react'
 
 export const BackButton = () => {
     const ReturnPage =()=>{
-
-        
-    return (
+        return (
             <Button onClick={ReturnPage}>back</Button>
-    )
+        )
     }
 }
 

@@ -12,11 +12,7 @@ const machinePlace:string = "名古屋";
 export const Header = () => {
 
   return (
-    <AppBar
-      position='fixed'
-      color='secondary'
-      // sx={{ borderBottom: (t) => `1px solid #ccc` }}
-      >
+    <AppBar position='fixed' color='secondary'>
         <Toolbar>
             <ShowDate />
             <ShowWeather place={machinePlace} />

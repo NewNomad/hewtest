@@ -1,9 +1,9 @@
 import { LocalDrink }           from '@mui/icons-material'
-import { Grid, Modal, Paper, }  from '@mui/material'
-import Product              from '../2molecules/Product'
-import { ProductTabs }      from '../2molecules/ProductTabs'
-import { ShowModalInfo }    from '../2molecules/ShowModalInfo'
-import React, { useState } from 'react'
+import { Grid, Modal, Paper }   from '@mui/material'
+import Product                  from '../2molecules/Product'
+import { ProductTabs }          from '../2molecules/ProductTabs'
+import { ShowModalInfo }        from '../2molecules/ShowModalInfo'
+import React, { useState }      from 'react'
 
 export const Products = () => {
     const [mordalConfirm, setmordalConfirm] = useState<boolean>(false)  // 購入確認画面
@@ -11,8 +11,8 @@ export const Products = () => {
 
     const OpenMConfirm = () => setmordalConfirm(true);                  // 購入確認画面の切り替え
     const CloseMConfirm = () => setmordalConfirm(false);                // 購入確認画面の切り替え
-    const OpenMInfo = () => setmordalInfo(true);                        // 商品詳細画面の切り替え
-    const CloseMInfo = () => setmordalInfo(false);                      // 商品詳細画面の切り替え
+    const OpenMInfo = () => setmordalInfo(true);                        // 商品詳細画面(モーダル)開く
+    const CloseMInfo = () => setmordalInfo(false);                      // 商品詳細画面(モーダル)閉じる
 
     return (
         // <Container>
