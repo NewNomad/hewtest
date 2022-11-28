@@ -3,7 +3,7 @@ import React from 'react'
 // ===================================================
 // フッター
 // ===================================================
-export const footer = () => {
+export const Footer = () => {
     return (
         <div>footer</div>
     )

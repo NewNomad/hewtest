@@ -13,7 +13,9 @@ export default function CheckPay(){
 
             <Box sx={{ flexGrow: 1 }}>
                 <Header />
-                <PayDetail/>
+                <Box sx={{ pt: 8 }}>
+                    <PayDetail/>
+                </Box>
             </Box>
         </>
     )
