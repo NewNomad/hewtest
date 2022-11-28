@@ -8,7 +8,7 @@ const theme = createTheme({
         primary: {
             // orange
             // main: "#f69c2f",
-            main: "#F08300",
+            main: "#E45E00",
             light: "#FFA00",
             dark: "#E06030"
         },
@@ -23,8 +23,8 @@ const theme = createTheme({
 
         background: {
             // default: "#eee",
-            default: "#333",
-            // default: "#e7ebf0",
+            // default: "#333",
+            default: "#e7ebf0",
             // paper: "#fff"
         },
         text: {

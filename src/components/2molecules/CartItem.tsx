@@ -10,11 +10,9 @@ import React from 'react'
 export const CartItem = () => {
     return (
         <Grid container padding={3} spacing={0} alignItems="center">
-
             <Grid item xs={4}>
                 <Image src="/fanta.png" height={200} width={200} objectFit="contain"></Image>
             </Grid>
-
             <Grid item xs={8} textAlign="center">
                 <Typography variant='h5' fontWeight="bold">
                     <LocalDrink />ファンタ
