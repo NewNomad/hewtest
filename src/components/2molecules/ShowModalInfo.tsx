@@ -1,9 +1,11 @@
-import { Button, Container, Grid, Typography } from '@mui/material'
+import { Button, Container, Grid, Rating, Typography } from '@mui/material'
 import Image from 'next/image'
 import { ShowMordal } from '../1atoms/ShowModal'
 import React from 'react'
 
 export const ShowModalInfo = () => {
+
+
     return (
         <ShowMordal>
             <Grid container direction="column" spacing={0}>
@@ -20,7 +22,13 @@ export const ShowModalInfo = () => {
                             <Typography color="blue" variant='h4'>#炭酸</Typography>
                             <Typography>アレルギー表示</Typography>
                             <Typography>なし</Typography>
-
+                            <Rating
+                                name='rate'
+                                value={3}
+                                readOnly
+                                precision={0.5}
+                                size="large"
+                            />
                         </Container>
                     </Grid>
 
