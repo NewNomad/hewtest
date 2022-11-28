@@ -13,7 +13,7 @@ marginTop:2
 
                 </Grid>
                 <Grid item xs={4}>
-                    <Typography variant='h2' color="red">×３</Typography>
+                    <Typography variant='h2' color="red">×3</Typography>
                 </Grid>
                 <Grid item xs={4}>
                     <Typography variant='h2'>¥360</Typography>

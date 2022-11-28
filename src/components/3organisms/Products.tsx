@@ -6,10 +6,10 @@ import { ShowModalInfo }        from '../2molecules/ShowModalInfo'
 import React, { useState }      from 'react'
 
 export const Products = () => {
-    const [mordalInfo, setmordalInfo] = useState<boolean>(false) // 商品詳細画面
+    const [mordalInfo, setmordalInfo] = useState<boolean>(false)    // 商品詳細画面
 
-    const OpenMInfo = () => setmordalInfo(true); // 商品詳細画面の切り替え
-    const CloseMInfo = () => setmordalInfo(false); // 商品詳細画面の切り替え
+    const OpenMInfo = () => setmordalInfo(true);                    // 商品詳細画面(モーダル)開く
+    const CloseMInfo = () => setmordalInfo(false);                  // 商品詳細画面(モーダル)閉じる
 
     return (
         // <Container>
@@ -36,7 +36,7 @@ export const Products = () => {
                 </Grid>
             </Grid>
 
-            {/* 商品詳細画面のモーダル */}
+            {/* 商品詳細画面(モーダル) */}
             <Modal open={mordalInfo} onClose={CloseMInfo} >
                 <ShowModalInfo></ShowModalInfo>
             </Modal>

@@ -9,12 +9,13 @@ import { ShowModalConfirm } from '../2molecules/ShowModalConfirm'
 // カート
 // ====================================
 export const Cart = () => {
-    const [mordalConfirm, setmordalConfirm] = useState<boolean>(false) // 購入確認画面
+    const [mordalConfirm, setmordalConfirm] = useState<boolean>(false)  // 購入確認画面(モーダル)
 
-    const OpenMConfirm = () => setmordalConfirm(true); // 購入確認画面の切り替え
-    const CloseMConfirm = () => setmordalConfirm(false); // 購入確認画面の切り替え
+    const OpenMConfirm = () => setmordalConfirm(true);                  // 購入確認画面(モーダル)開く
+    const CloseMConfirm = () => setmordalConfirm(false);                // 購入確認画面(モーダル)閉じる
     return (
         <Paper>
+
             <Container>
                 <List>
                     {
@@ -28,13 +29,11 @@ export const Cart = () => {
                 </List>
                     <BtnTotalAmount OpenMConfirm={OpenMConfirm} />
             </Container>
-            <Modal
-                open={mordalConfirm}
-                onClose={CloseMConfirm}
 
-            >
-                <ShowModalConfirm></ShowModalConfirm>
+            <Modal open={mordalConfirm} onClose={CloseMConfirm}>
+                <ShowModalConfirm />
             </Modal>
+
         </Paper>
     )
 }

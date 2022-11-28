@@ -14,10 +14,10 @@ const Home: NextPage = () => {
 
   return (
     <Box>
-      <HeadInfo title='インデックス' />
+      <HeadInfo title='mopacal | インデックス' />
 
       <Box sx={{ flexGrow: 1 }}>
-        <Header></Header>
+        <Header />
 
         {/* <Container component="main" sx={{ height: "100vh",mt:10}} >1 */}
 
@@ -29,7 +29,7 @@ const Home: NextPage = () => {
                 {/* 商品 */}
                 <Grid item xs={9}>
                 {/* <Paper elevation={10} sx={{bgcolor:"#fff"}}> */}
-                    <Products></Products>
+                    <Products />
                 {/* </Paper> */}
                 </Grid>
 
