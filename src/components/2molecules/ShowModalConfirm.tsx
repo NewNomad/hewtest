@@ -25,7 +25,7 @@ export const ShowModalConfirm = () => {
                         <Button variant='contained' color='secondary'>戻る</Button>
                     </Grid>
                     <Grid item xs={6}>
-                        <Link href="src\pages\SelectPayInfo.tsx">
+                        <Link href="/SelectPayInfo">
                             <Button variant='contained' color='primary'>決定</Button>
                         </Link>
                     </Grid>

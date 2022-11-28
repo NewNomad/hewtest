@@ -2,16 +2,16 @@ import { Button }           from '@mui/material'
 import Router               from 'next/router'
 
 // =================================================
-// 画面遷移用ボタン(未完成)
+// 画面遷移用ボタン
 // =================================================
 
-const handler = (path:any) => Router.push(path)
+const handler = (path:string) => Router.push(path)
 
-export const LinkButton = ({ props:any} ) =>{
-
-    const[color, nextPage, title] = props
+export const LinkButton = ({ btnName="", url="", primary=false }) =>{
 
     return (
-        <Button variant='contained' color={color} onClick={()=>handler(nextPage)}>{ title }</Button>
+        <Button variant='contained' color={primary?'primary':'secondary'} onClick={()=>handler(url)}>
+            { btnName }
+        </Button>
     )
 }

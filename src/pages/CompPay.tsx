@@ -1,11 +1,7 @@
-import { Box, Typography, Button, Grid }                  from '@mui/material'
-import { HeadInfo }             from '../components/2molecules/HeadInfo'
-import { Header }               from '../components/2molecules/Header'
-import { GoCompPay }            from '../components/1atoms/GoCompPay'
-import { ShowAmount }           from '../components/1atoms/ShowAmount'
-import { ShowAmountRemain }     from '../components/1atoms/ShowAmountRemain'
-import { ShowChange }           from '../components/1atoms/ShowChange'
-import react from 'react'
+import { Box, Typography, Button, Grid }    from '@mui/material'
+import { HeadInfo }     from '../components/2molecules/HeadInfo'
+import { Header }       from '../components/2molecules/Header'
+import Link             from 'next/link'
 
 export default function CheckPay(){
     return (
@@ -22,7 +18,7 @@ export default function CheckPay(){
                             [ここに画像]
                     </Box>
 
-                    <Typography>画面タッチで商品画面に戻ります(未実装)</Typography>
+                    <Link href='/'>画面タッチで商品画面に戻ります(未実装)</Link>
                 </Box>
 
 
