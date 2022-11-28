@@ -17,19 +17,18 @@ export const Cart = () => {
         <Paper>
 
             <Container>
-                <List>
-                    {
+                <List>{
                         [...Array(3)].map( (e, i) => (
                             <Box key={i}>
                                 <ListItem><CartItem /></ListItem>
                                 <Divider />
                             </Box>
                         ) )
-                    }
-                </List>
-                    <BtnTotalAmount OpenMConfirm={OpenMConfirm} />
+                }</List>
+                <BtnTotalAmount OpenMConfirm={OpenMConfirm} />
             </Container>
 
+            {/* 購入確認画面(モーダル) */}
             <Modal open={mordalConfirm} onClose={CloseMConfirm}>
                 <ShowModalConfirm />
             </Modal>

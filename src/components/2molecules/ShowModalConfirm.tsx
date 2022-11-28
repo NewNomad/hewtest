@@ -1,6 +1,7 @@
 import { Box, Button, Container, Divider, Grid, Paper, Typography } from '@mui/material'
 import { ShowMordal }           from '../1atoms/ShowModal'
 import { ModalConfirmProduct }  from '../1atoms/ModalConfirmProduct'
+import Link from 'next/link'
 import React from 'react'
 
 export const ShowModalConfirm = () => {
@@ -24,7 +25,9 @@ export const ShowModalConfirm = () => {
                         <Button variant='contained' color='secondary'>戻る</Button>
                     </Grid>
                     <Grid item xs={6}>
-                        <Button variant='contained' color='primary'>決定</Button>
+                        <Link href="src\pages\SelectPayInfo.tsx">
+                            <Button variant='contained' color='primary'>決定</Button>
+                        </Link>
                     </Grid>
                 </Grid>
             </Container>

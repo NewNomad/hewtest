@@ -4,9 +4,7 @@ import React from 'react'
 
 export const ModalConfirmProduct = () => {
     return (
-        <Paper elevation={3} sx={{
-marginTop:2
-}}>
+        <Paper elevation={3} sx={{marginTop:2}}>
             <Grid container alignItems="center" padding={3}>
                 <Grid item xs={4}>
                     <Image src="/fanta.png" width={200} height={200} objectFit="contain"></Image>
