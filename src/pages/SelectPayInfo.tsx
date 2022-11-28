@@ -19,7 +19,7 @@ export const SelectPayInfo = () => {
 
   const OpenMQr = () => setmordalQr(true); // 商品詳細画面の切り替え
   const CloseMQr = () => setmordalQr(false); // 商品詳細画面の切り替え
-  
+
   return (
     <div>
       <Header></Header>
@@ -28,8 +28,8 @@ export const SelectPayInfo = () => {
         <Button variant='contained' color='primary'>現金</Button>
       </Link>
 
-      <Button variant='contained' color='secondary' OpenMPay={OpenMEl}>電子マネー</Button>
-      <Button variant='contained' color='secondary'OpenMPay={OpenMQr}>QRコード</Button>
+      <Button variant='contained' color='secondary' onClick={OpenMEl}>電子マネー</Button>
+      <Button variant='contained' color='secondary' onClick={OpenMQr}>QRコード</Button>
 
       <Modal open={mordalEl} onClose={CloseMEl} >
         <ShowModalEl></ShowModalEl>
