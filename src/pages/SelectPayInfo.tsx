@@ -6,8 +6,6 @@ import { Header } from '../components/2molecules/Header'
 import { ShowMordal } from '../components/1atoms/ShowModal'
 
 
-type Props = { OpenMEl: () => void }
-type Props = { OpenMQr: () => void }
 
 export const SelectPayInfo = () => {
 
