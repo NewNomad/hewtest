@@ -1,5 +1,5 @@
-import { ShoppingCartCheckout }                 from '@mui/icons-material'
-import { Box, Button, Container, Typography }   from '@mui/material'
+import { ShoppingCartCheckout } from '@mui/icons-material'
+import { Box, Button, Container, Typography } from '@mui/material'
 import React from 'react'
 type Props = {
     OpenMConfirm: () => void
@@ -10,6 +10,8 @@ type Props = {
 // ======================================================
 
 export const BtnTotalAmount = ({ OpenMConfirm }: Props) => {
+    const size = 50
+
     return (
         // <Container sx={{ textAlign: "center" }}>
         <Button
@@ -18,10 +20,15 @@ export const BtnTotalAmount = ({ OpenMConfirm }: Props) => {
 
             sx={{
                 width: "100%",
-                color: "#fff"
-
+                // padding: 5,
+                fontSize: size,
+                marginBottom: 3,
+                borderRadius:50
             }}
-            endIcon={<ShoppingCartCheckout fontSize='large' />}
+            endIcon={<ShoppingCartCheckout sx={{
+                width: size,
+                height: size
+            }} />}
             onClick={OpenMConfirm}
         >
             会計

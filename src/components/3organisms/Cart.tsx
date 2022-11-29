@@ -30,7 +30,7 @@ export const Cart = () => {
 
             {/* 購入確認画面(モーダル) */}
             <Modal open={mordalConfirm} onClose={CloseMConfirm}>
-                <ShowModalConfirm />
+                <ShowModalConfirm closeModal={CloseMConfirm} />
             </Modal>
 
         </Paper>

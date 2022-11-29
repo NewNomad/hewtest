@@ -1,13 +1,23 @@
 import { Box, Button, Container, Divider, Grid, Paper, Typography } from '@mui/material'
-import { ShowMordal }           from '../1atoms/ShowModal'
-import { ModalConfirmProduct }  from '../1atoms/ModalConfirmProduct'
+import { ShowMordal } from '../1atoms/ShowModal'
+import { ModalConfirmProduct } from '../1atoms/ModalConfirmProduct'
 import Link from 'next/link'
 import React from 'react'
 
-export const ShowModalConfirm = () => {
+type Props = {
+    closeModal: () => void
+}
+
+export const ShowModalConfirm = ({ closeModal }: Props) => {
     return (
         <ShowMordal >
-            <Box height={530} sx={{position: "flex", overflow: "scroll", overflowY: "scroll", padding: 3}}>
+            <Box height={530} sx={{
+                position: "flex",
+                overflow: "scroll",
+                overflowY: "scroll",
+                padding: 3,
+                overflowX: "hidden"
+            }}>
                 <ModalConfirmProduct />
                 <ModalConfirmProduct />
                 <ModalConfirmProduct />
@@ -22,7 +32,7 @@ export const ShowModalConfirm = () => {
 
                 <Grid container textAlign="center">
                     <Grid item xs={6}>
-                        <Button variant='contained' color='secondary'>戻る</Button>
+                        <Button variant='contained' color='secondary' onClick={closeModal}>戻る</Button>
                     </Grid>
                     <Grid item xs={6}>
                         <Link href="/SelectPayInfo">

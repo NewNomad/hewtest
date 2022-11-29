@@ -1,14 +1,10 @@
 import { Box, Button, Container, Grid, Paper } from '@mui/material'
 import type { NextPage }  from 'next'
-import Head               from 'next/head'
-import Image              from 'next/image'
-import { type }           from 'os'
 import { Header }         from '../components/2molecules/Header'
 import { HeadInfo }       from '../components/2molecules/HeadInfo'
 import { Cart }           from '../components/3organisms/Cart'
 import { Products }       from '../components/3organisms/Products'
 import { BgParticle }     from '../components/libs/BgParticle'      // パーティクル
-import styles             from '../styles/Home.module.css'          // 書式
 
 const Home: NextPage = () => {
 
