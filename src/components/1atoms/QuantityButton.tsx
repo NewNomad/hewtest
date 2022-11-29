@@ -13,7 +13,8 @@ const QuantityButton=()=> {
         <Box>
             <Button 
                 variant="outlined"
-                sx={{ p: 1,m:1,}} 
+                // sx={{ p: 1,m:1,}}
+                size="large" 
                 className="MinusButton" 
                 onClick={MinusClick}>
                     -
@@ -21,7 +22,7 @@ const QuantityButton=()=> {
             {count}
             <Button 
                 variant="outlined" 
-                sx={{ p: 1,m:1 }}  
+                // sx={{ p: 1,m:1 }}  
                 className="PlusButton" 
                 onClick={PlusClick}>
                     +
