@@ -4,7 +4,6 @@ import Router               from 'next/router'
 // =================================================
 // 画面遷移用ボタン
 // =================================================
-
 const handler = (path:string) => Router.push(path)
 
 export const LinkButton = ({ btnName="", url="", primary=false }) =>{
