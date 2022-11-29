@@ -3,6 +3,7 @@ import { Button, Grid, IconButton, List, ListItemAvatar, Typography }   from '@m
 import { Box, Container }                                               from '@mui/system'
 import Image from 'next/image'
 import React from 'react'
+import QuantityButton from '../1atoms/QuantityButton'
 
 // ====================================
 // カート内アイテム情報
@@ -19,13 +20,14 @@ export const CartItem = () => {
                 </Typography>
 
                 <Container>
-                    <IconButton aria-label='remove' size='large'>
+                    {/* <IconButton aria-label='remove' size='large'>
                         <RemoveCircle fontSize='large' />
                     </IconButton>
                     {152}
                     <IconButton aria-label='add'>
                         <AddCircle fontSize='large' />
-                    </IconButton>
+                    </IconButton> */}
+                    <QuantityButton/>
                     合計¥1400
                 </Container>
             </Grid>
