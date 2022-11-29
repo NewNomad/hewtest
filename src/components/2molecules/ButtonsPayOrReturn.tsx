@@ -1,5 +1,5 @@
 import { Grid }                 from '@mui/material'
-import { LinkButton }           from '../1atoms/LinkButton'
+import { LinkButton }           from '../1atoms/BtnLink'
 
 export const ButtonsPayOrReturn = () =>{
     return (

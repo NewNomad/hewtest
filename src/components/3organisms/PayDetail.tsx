@@ -7,7 +7,7 @@ let change:number      = 100;
 
 export const PayDetail = () =>{
     return (
-        <Paper sx={{ margin:5, padding:10 }}>
+        <Box sx={{ margin:5, padding:10 }}>
 
             <Grid container>
                 <Grid item xs={12} textAlign="center">
@@ -15,20 +15,25 @@ export const PayDetail = () =>{
                 </Grid>
 
                 <Grid item xs={7}>
-                    <Box sx={{width: '100%', height: 400, padding: 10, backgroundColor: 'primary.main', opacity: 0.6}}>
+                    <Box sx={{width: '100%', height: 400, padding: 10, backgroundColor: 'primary.main'}}>
                         [ここに画像]
                     </Box>
                 </Grid>
 
                 <Grid item xs={5} textAlign="center">
-                    <ShowPayDetail 
-                        requestPay={requestPay}
-                        change={change}/>
-                    <ButtonsPayOrReturn />
+                    <Paper  sx={{width: '100%', height: 400}}>
+                        <Box sx={{padding: 10}}>
+                            <ShowPayDetail 
+                                requestPay={requestPay}
+                                change={change}/>
+                        </Box>
+
+                        <ButtonsPayOrReturn />
+                    </Paper>
                 </Grid>
 
             </Grid>
 
-        </Paper>
+        </Box>
     )
 }

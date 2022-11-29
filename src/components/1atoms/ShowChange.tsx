@@ -2,7 +2,7 @@ import { Grid, Typography }   from '@mui/material'
 
 export const ShowChange = ({ change=0 }) =>{
     return (
-        <Grid container textAlign="right">
+        <Grid container textAlign="center">
             <Grid item xs={5}>
                 <Typography>おつり</Typography>
             </Grid>

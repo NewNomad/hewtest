@@ -3,7 +3,7 @@ import { IconButton, Grid, Typography }   from '@mui/material'
 
 export const ShowAmount = () =>{
     return (
-        <Grid container textAlign="right">
+        <Grid container textAlign="center">
             <Grid item xs={5}>
                 <Typography>お預かり</Typography>
             </Grid>

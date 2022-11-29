@@ -11,18 +11,18 @@ export default function CheckPay(){
             <Box sx={{ flexGrow: 1 }}>
                 <Header />
 
-                <Box textAlign="center" sx={{ pt: 8 }}>
-                    <Paper sx={{ margin:5, padding:10 }}>
+                <Box textAlign="center" sx={{ margin:5, padding:10, pt: 8 }}>
                         <Typography variant="h3" color="primary">ありがとうございました！</Typography>
 
-                        <Box sx={{width: '100%', height: 400, padding: 10, backgroundColor: 'primary.main', opacity: 0.6}}>
+                        <Box sx={{width: '100%', height: 600, padding: 10, backgroundColor: 'primary.main'}}>
                                 [ここに画像]
                         </Box>
 
-                        <Link href='/'>画面タッチで商品画面に戻ります(未実装)</Link>
-                    </Paper>
-                </Box>
+                        <Paper>
+                            <Link href='/'>画面タッチで商品画面に戻ります(未実装)</Link>
+                        </Paper>
 
+                </Box>
 
             </Box>
 

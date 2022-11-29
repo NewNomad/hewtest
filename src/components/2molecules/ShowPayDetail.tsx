@@ -9,7 +9,7 @@ export const ShowPayDetail = ( props:{requestPay:number, change:number} ) =>{
 
     return (
         <>
-            <Grid container textAlign="right">
+            <Grid container textAlign="center">
                 <Grid item xs={5}>
                     <Typography>合計金額</Typography>
                 </Grid>
