@@ -4,11 +4,14 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import { Header } from '../components/2molecules/Header'
 import { ShowMordal } from '../components/1atoms/ShowModal'
+import { type } from 'os'
 
+type Props = {
+  ElProps: any,
+  QrProps: any
+}
 
-
-export const SelectPayInfo = (props) => {
-  const {ElProps,QrProps} = props
+export const SelectPayInfo = ({ ElProps, QrProps }:Props) => {
 
   const [mordalEl, setmordalEl] = useState<boolean>(false) // 購入確認画面
   const [mordalQr, setmordalQr] = useState<boolean>(false) // 購入確認画面
@@ -30,12 +33,12 @@ export const SelectPayInfo = (props) => {
       <Button variant='contained' color='secondary' onClick={OpenMEl}>電子マネー</Button>
       <Button variant='contained' color='secondary' onClick={OpenMQr}>QRコード</Button>
 
-      <Modal open={mordalEl} onClose={CloseMEl} >
+      {/* <Modal open={mordalEl} onClose={CloseMEl} >
         <ShowModalEl></ShowModalEl>
       </Modal>
       <Modal open={mordalEl} onClose={CloseMQr} >
         <ShowModalQr></ShowModalQr>
-      </Modal>
+      </Modal> */}
     </div>
   )
 }
