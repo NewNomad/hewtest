@@ -1,7 +1,14 @@
-import { Typography } from '@mui/material'
+import { Grid, Typography }   from '@mui/material'
 
-export const ShowAmountRemain = () =>{
+export const ShowAmountRemain = ({ requestPay=0 }) =>{
     return (
-        <Typography>お預かり：1100円</Typography>
+        <Grid container textAlign="right">
+            <Grid item xs={5}>
+                <Typography>残り金額</Typography>
+            </Grid>
+            <Grid item xs={7}>
+               <Typography>{ requestPay }円</Typography>
+            </Grid>
+        </Grid>
     )
 }

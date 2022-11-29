@@ -1,5 +1,9 @@
 import { Box, Button, Paper, Typography, Grid } from '@mui/material'
 import { ShowPayDetail }        from '../2molecules/ShowPayDetail'
+import { ButtonsPayOrReturn }   from '../2molecules/ButtonsPayOrReturn'
+
+let requestPay:number  = 0;
+let change:number      = 100;
 
 export const PayDetail = () =>{
     return (
@@ -17,7 +21,10 @@ export const PayDetail = () =>{
                 </Grid>
 
                 <Grid item xs={5} textAlign="center">
-                    <ShowPayDetail />
+                    <ShowPayDetail 
+                        requestPay={requestPay}
+                        change={change}/>
+                    <ButtonsPayOrReturn />
                 </Grid>
 
             </Grid>
