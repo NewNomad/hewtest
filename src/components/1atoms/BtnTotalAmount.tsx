@@ -23,7 +23,9 @@ export const BtnTotalAmount = ({ OpenMConfirm }: Props) => {
                 // padding: 5,
                 fontSize: size,
                 marginBottom: 3,
-                borderRadius:50
+                marginTop: 2,
+                borderRadius:50,
+
             }}
             endIcon={<ShoppingCartCheckout sx={{
                 width: size,
