@@ -24,7 +24,7 @@ const Home: NextPage = () => {
         <Grid container direction="column" height="100vh" sx={{ pt: 8 }}>{/* 縦並び */}
             {/* justify:horizon alighitem:vertical */}
 
-            <Grid item xs={12} container spacing={4} padding={4} justifyItems="center"> {/* 横並び */}
+            <Grid item xs={12} container spacing={2} padding={2} justifyItems="center"> {/* 横並び */}
 
                 {/* 商品 */}
                 <Grid item xs={9}>

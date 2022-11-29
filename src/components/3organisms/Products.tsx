@@ -15,10 +15,10 @@ export const Products = () => {
         // <Container>
         // <Paper>
         <>
-            <Grid container direction="column" spacing={3} padding={0}>
+            <Grid container direction="column" spacing={0.5} padding={0}>
                 {[...Array(3)].map((e, i) => (
 
-                    <Grid key={i} item xs={4} sx={{ height: "100%" }} container spacing={2} padding={0} paddingTop={2} paddingBottom={0}>
+                    <Grid key={i} item xs={4} sx={{ height: "100%" }} container spacing={0.5} padding={0} paddingTop={0} paddingBottom={0}>
                         {[...Array(12)].map((item, i) => (
                             <Grid key={i} item xs={1}>
                                 <Product
@@ -31,7 +31,7 @@ export const Products = () => {
 
                     </Grid>
                 ))}
-                <Grid item xs={1} paddingTop={3}>
+                <Grid item xs={1} marginTop={2}>
                     <ProductTabs />
                 </Grid>
             </Grid>
