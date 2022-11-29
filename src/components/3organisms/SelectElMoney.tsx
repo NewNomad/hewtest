@@ -1,7 +1,7 @@
 import { Box, Button, Container, Divider, Grid} from '@mui/material'
 import { ShowMordal }       from '../1atoms/ShowModal'
 import { LinkButton }       from '../1atoms/LinkButton'
-import Link     from 'next/link'
+// import Link     from 'next/link'
 import React    from 'react'
 
 export const SelectElMoney = () => {
