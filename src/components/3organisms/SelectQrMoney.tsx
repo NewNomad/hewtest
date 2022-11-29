@@ -1,4 +1,4 @@
-import { Box, Button, Container, Divider, Grid, Paper, Typography } from '@mui/material'
+import { Box, Button, Container, Divider, Grid } from '@mui/material'
 import Link from 'next/link'
 import React from 'react'
 import { ShowMordal } from '../1atoms/ShowModal'
