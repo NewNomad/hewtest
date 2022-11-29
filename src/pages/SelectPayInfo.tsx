@@ -11,7 +11,7 @@ type Props = {
   QrProps: any
 }
 
-export const SelectPayInfo = ({ ElProps, QrProps }:Props) => {
+export default function SelectPayInfo({ ElProps, QrProps }:Props) {
 
   const [mordalEl, setmordalEl] = useState<boolean>(false) // 購入確認画面
   const [mordalQr, setmordalQr] = useState<boolean>(false) // 購入確認画面
