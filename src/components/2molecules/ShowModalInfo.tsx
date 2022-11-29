@@ -2,6 +2,7 @@ import { Button, Container, Grid, Rating, Typography } from '@mui/material'
 import Image from 'next/image'
 import { ShowMordal } from '../1atoms/ShowModal'
 import React from 'react'
+import QuantityButton from '../1atoms/QuantityButton'
 
 export const ShowModalInfo = () => {
 
@@ -38,10 +39,11 @@ export const ShowModalInfo = () => {
 
                     <Grid item xs={8}>
 
-                        カート：2個
+                        {/* カート：2個
                         <Button>-</Button>
                         1
-                        <Button>+</Button>
+                        <Button>+</Button> */}
+                        <QuantityButton/>
 
                     </Grid>
                     <Grid item xs={4}>
