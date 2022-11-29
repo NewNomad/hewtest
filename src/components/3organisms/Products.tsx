@@ -31,7 +31,7 @@ export const Products = () => {
 
                     </Grid>
                 ))}
-                <Grid item xs={1} paddingTop={3}>
+                <Grid item xs={1} marginTop={2}>
                     <ProductTabs />
                 </Grid>
             </Grid>
