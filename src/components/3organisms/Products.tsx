@@ -38,7 +38,7 @@ export const Products = () => {
 
             {/* 商品詳細画面(モーダル) */}
             <Modal open={mordalInfo} onClose={CloseMInfo} >
-                <ShowModalInfo></ShowModalInfo>
+                <ShowModalInfo />
             </Modal>
         </>
         // </Paper>
