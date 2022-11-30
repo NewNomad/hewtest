@@ -14,7 +14,7 @@ const db = mysql({
     database: process.env.MYSQL_DATABASE,
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
-    port: 3306, //中尾専用
+    port: 3306, //小松専用
     // port: 8889, //中尾専用
   }
 })
