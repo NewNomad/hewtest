@@ -14,7 +14,8 @@ export const CartItem = () => {
             <Grid item xs={4}>
                 <Paper sx={{
                     padding: 1
-                }}>
+                }}
+                >
                     <Image src="/fanta.png" height={130} width={100} objectFit="contain"></Image>
                 </Paper>
             </Grid>
@@ -32,6 +33,7 @@ export const CartItem = () => {
                         <AddCircle fontSize='large' />
                     </IconButton> */}
                     {/* <QuantityButton/> */}
+                    
                     <ButtonGroup variant='contained' size='small'>
                         <Button>
                             <Remove />
