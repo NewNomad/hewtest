@@ -18,7 +18,7 @@ export const PayDetail = () =>{
 
     return (
 
-        <Box sx={{ padding:10 }}>
+        <Box sx={{ my:5, mx:20 }}>
 
             <Grid container spacing={3}>
                 <Grid item xs={12} textAlign="center">
@@ -39,7 +39,13 @@ export const PayDetail = () =>{
                     <Paper  sx={{width: '100%', height: 600}}>
 
                         <Box height={500} sx={{padding: 10}}>
-                            <ShowPayDetail sumPay={sumPay} costs={costs} requestPay={requestPay} change={change} ClickMinus={ClickMinus} ClickPlus={ClickPlus} />
+                            <ShowPayDetail
+                                sumPay={sumPay}
+                                costs={costs}
+                                requestPay={requestPay}
+                                change={change}
+                                ClickMinus={ClickMinus}
+                                ClickPlus={ClickPlus} />
                         </Box>
 
                     </Paper>

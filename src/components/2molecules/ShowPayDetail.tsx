@@ -31,8 +31,7 @@ export const ShowPayDetail = ( props:{sumPay:number, costs: number, requestPay:n
                     <Typography>残り金額</Typography>
                 </Grid>
                 <Grid item xs={7}  textAlign='right'>
-                    {requestPay > 0 && (<ShowPrice primary >{ requestPay }</ShowPrice>)}
-                    {requestPay == 0 && (<ShowPrice>{ requestPay }</ShowPrice>)}
+                    <ShowPrice primary={requestPay > 0} >{ requestPay }</ShowPrice>
                 </Grid>
 
                 <Grid item xs={5} height={70}>
@@ -49,8 +48,7 @@ export const ShowPayDetail = ( props:{sumPay:number, costs: number, requestPay:n
                 <LinkButton btnName="戻る" url="/SelectPayInfo" />
             </Grid>
             <Grid item xs={6}>
-                {requestPay > 0 && <LinkButton btnName="支払う" url="/CompPay" primary />}
-                {requestPay == 0 && <LinkButton btnName="支払う" url="/CompPay" primary />}
+                <LinkButton btnName="支払う" url="/CompPay" primary disabled={requestPay > 0} />
             </Grid>
         </Grid>
 

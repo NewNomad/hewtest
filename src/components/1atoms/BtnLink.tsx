@@ -6,14 +6,15 @@ import Router               from 'next/router'
 // =================================================
 const handler = (path:string) => Router.push(path)
 
-export const LinkButton = ({ btnName="", url="", primary=false }) =>{
+export const LinkButton = ({ btnName="", url="", primary=false, disabled=false }) =>{
 
     return (
         <Button
             variant='contained'
             color={primary?'primary':'secondary'}
             onClick={()=>handler(url)}
-            sx={{ width: 1, height: 1, fontSize: 20}}>
+            sx={{ width: 1, height: 1, fontSize: 20}}
+            disabled={ disabled }>
             { btnName }
         </Button>
     )
