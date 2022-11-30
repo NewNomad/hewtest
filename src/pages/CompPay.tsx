@@ -1,6 +1,7 @@
 import { Box, Typography, Paper, Button, Grid }    from '@mui/material'
 import { HeadInfo }     from '../components/2molecules/HeadInfo'
 import { Header }       from '../components/2molecules/Header'
+import { LinkButton }   from '../components/1atoms/BtnLink'
 import Link             from 'next/link'
 
 export default function CheckPay(){
@@ -18,9 +19,7 @@ export default function CheckPay(){
                                 [ここに画像]
                         </Box>
 
-                        <Paper>
-                            <Link href='/'>画面タッチで商品画面に戻ります(未実装)</Link>
-                        </Paper>
+                        <LinkButton btnName='商品一覧に戻る' url='/' />
 
                 </Box>
 

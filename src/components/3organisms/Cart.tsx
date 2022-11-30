@@ -20,11 +20,15 @@ export const Cart = () => {
                 <List>{
                         [...Array(3)].map( (e, i) => (
                             <Box key={i}>
-                                <ListItem><CartItem /></ListItem>
+                                <ListItem>
+                                    <CartItem />
+                                </ListItem>
+
                                 <Divider />
                             </Box>
                         ) )
                 }</List>
+
                 <BtnTotalAmount OpenMConfirm={OpenMConfirm} />
             </Container>
 

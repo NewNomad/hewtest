@@ -1,6 +1,7 @@
 import { Box, Grid, Modal, Paper, Button, Typography }  from '@mui/material'
 import { Container }            from '@mui/system'
 import { BtnSelectPayInfo }     from '../components/1atoms/BtnSelectPayInfo'
+import { LinkButton }              from '../components/1atoms/BtnLink'
 import { HeadInfo }             from '../components/2molecules/HeadInfo'
 import { Header }               from '../components/2molecules/Header'
 import { SelectElMoney }        from '../components/3organisms/SelectElMoney'
@@ -32,9 +33,10 @@ export default function SelectPayInfo() {
             <Header />
 
             <Container sx={{ pt: 8 }}>
+
                 <Typography variant='h4' color='primary' textAlign='center'  paddingTop={5}>お支払方法を選択してください</Typography>
 
-                <Grid container textAlign="center" height={700} paddingTop={5} spacing={1}>
+                <Grid container textAlign="center" height={700} paddingTop={5} paddingBottom={5} spacing={1}>
                     <Grid item xs={6}>
                         <BtnSelectPayInfo onClick={() => router.push("/CheckPay")} name="現金" />
                     </Grid>
@@ -47,8 +49,9 @@ export default function SelectPayInfo() {
                             <BtnSelectPayInfo onClick={OpenMQr} name="QRコード決済" />
                         </Grid>
                     </Grid>
-
                 </Grid>
+
+                <LinkButton btnName='商品一覧に戻る' url='/' />
             </Container>
 
             {/* 電子マネー決済選択 */}
