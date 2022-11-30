@@ -6,20 +6,15 @@ import React, { useState }      from "react";
 export const ShowPayDetail = ( props:{sumPay:number} ) =>{
     const { sumPay } = props
 
-    const [costs, setCosts]             = useState(1000);
-    const [requestPay, setRequestPay]   = useState(0);
-    const [change, setChange]           = useState(1000);
+    const [costs, setCosts]             = useState(0);
+    // const [requestPay, setRequestPay]   = useState(0);
+    // const [change, setChange]           = useState(1000);
 
-    const ClickMinus = () => {
-        setCosts(costs - 100);
-        setRequestPay((sumPay - costs) > 0? (sumPay - costs): 0);
-        setChange((costs - sumPay)>0? (costs - sumPay): 0);
-    };
-    const ClickPlus = () => {
-        setCosts(costs + 100);
-        setRequestPay((sumPay - costs) > 0? (sumPay - costs): 0);
-        setChange((costs - sumPay)>0? (costs - sumPay): 0);
-    };
+    const requestPay = (sumPay - costs) > 0? (sumPay - costs): 0;
+    const change = (costs - sumPay)>0? (costs - sumPay): 0;
+
+    const ClickMinus = () => { setCosts(costs - 100); };
+    const ClickPlus = () => { setCosts(costs + 100); };
 
     return (
         <>
