@@ -1,5 +1,5 @@
 import { Add, AddCircle, LocalDrink, Remove, RemoveCircle } from '@mui/icons-material'
-import { Button, Grid, IconButton, List, ListItemAvatar, Paper, Typography } from '@mui/material'
+import { Button, ButtonGroup, Grid, IconButton, List, ListItemAvatar, Paper, Typography } from '@mui/material'
 import { Box, Container } from '@mui/system'
 import Image from 'next/image'
 import React from 'react'
@@ -32,7 +32,19 @@ export const CartItem = () => {
                         <AddCircle fontSize='large' />
                     </IconButton> */}
                     {/* <QuantityButton/> */}
-                    合計¥1400
+                    <ButtonGroup variant='contained' size='small'>
+                        <Button>
+                            <Remove />
+                        </Button>
+                        <Button variant='text'>1</Button>
+                        <Button>
+                            <Add />
+                        </Button>
+                    </ButtonGroup>
+                    <Typography variant='h5' fontWeight="bold">
+                        ¥1400
+
+                    </Typography>
                 </Container>
             </Grid>
 
