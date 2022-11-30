@@ -1,20 +1,22 @@
 import { Box, Button, Paper, Typography, Grid } from '@mui/material'
+import { TextTitle }            from '../1atoms/TextTitle'
+import { LinkButton }           from '../1atoms/BtnLink'
+import { GridItem }             from '../1atoms/GridItem'
 import { ShowPayDetail }        from '../2molecules/ShowPayDetail'
-import React, { useState }      from "react";
+import React  from 'react';
 
-let sumPay:number       = 1000;
+type Props = {
+    sum: number
+    costs: number
+    request: number,
+    change: number
+    ClickMinus: () => void
+    ClickPlus: () => void
+}
 
-export const PayDetail = () =>{
+export const PayDetail = ( props:Props ) =>{
 
-    const [costs, setCosts]                 = useState(0);
-    // const [requestPay, setRequestPay]    = useState(0);
-    // const [change, setChange]            = useState(1000);
-
-    const requestPay = (sumPay - costs) > 0? (sumPay - costs): 0;
-    const change = (costs - sumPay) > 0? (costs - sumPay): 0;
-
-    const ClickMinus = () => { setCosts(costs - 100); };
-    const ClickPlus = () => { setCosts(costs + 100); };
+    const { sum, costs, request, change, ClickMinus, ClickPlus } = props
 
     return (
 
@@ -22,11 +24,7 @@ export const PayDetail = () =>{
 
             <Grid container spacing={3}>
                 <Grid item xs={12} textAlign="center">
-                    <Typography
-                        variant="h3"
-                        color='primary'
-                        textAlign="center"
-                        paddingBottom={3}>入金処理を行っています…</Typography>
+                    <TextTitle>入金処理を行っています…</TextTitle>
                 </Grid>
 
                 <Grid item xs={7}>
@@ -36,16 +34,25 @@ export const PayDetail = () =>{
                 </Grid>
 
                 <Grid item xs={5} textAlign="center">
-                    <Paper  sx={{width: '100%', height: 600}}>
+                    <Paper sx={{width: '100%', height: 600}}>
 
                         <Box height={500} sx={{padding: 10}}>
                             <ShowPayDetail
-                                sumPay={sumPay}
+                                sum={sum}
                                 costs={costs}
-                                requestPay={requestPay}
+                                request={request}
                                 change={change}
                                 ClickMinus={ClickMinus}
                                 ClickPlus={ClickPlus} />
+
+                                <Grid container textAlign="center" padding={1} spacing={1} >
+                                    <GridItem button>
+                                        <LinkButton btnName="戻る" url="/SelectPayInfo" />
+                                    </GridItem>
+                                    <GridItem button>
+                                        <LinkButton btnName="支払う" url="/CompPay" primary disabled={request > 0} />
+                                    </GridItem>
+                                </Grid>
                         </Box>
 
                     </Paper>

@@ -1,57 +1,55 @@
-import { Grid, Typography } from '@mui/material'
+import { Grid, Typography }     from '@mui/material'
+import { GridItem }             from '../1atoms/GridItem'
 import { ShowAmount }           from '../1atoms/ShowAmount'
 import { ShowPrice }            from '../1atoms/ShowPrice'
-import { LinkButton }           from '../1atoms/BtnLink'
-import React, { useState }      from "react";
+import React from "react";
 
-export const ShowPayDetail = ( props:{sumPay:number, costs: number, requestPay:number, change:number, ClickMinus, ClickPlus} ) =>{
+type Props = {
+    sum: number
+    costs: number
+    request: number,
+    change: number
+    ClickMinus: () => void
+    ClickPlus: () => void
+}
 
-    const { sumPay, costs, requestPay, change, ClickMinus, ClickPlus } = props
+export const ShowPayDetail = ( props:Props ) =>{
+
+    const { sum, costs, request, change, ClickMinus, ClickPlus } = props
 
     return (
         <>
             <Grid container textAlign="center">
-                <Grid item xs={5} height={70}>
+                <GridItem title>
                     <Typography>合計金額</Typography>
-                </Grid>
-                <Grid item xs={7} textAlign='right'>
-                    <ShowPrice>{ sumPay }</ShowPrice>
-                </Grid>
+                </GridItem>
+                <GridItem>
+                    <ShowPrice>{ sum }</ShowPrice>
+                </GridItem>
 
-                <Grid item xs={5} height={70}>
+                <GridItem title>
                     <Typography>お預かり</Typography>
-                </Grid>
-                <Grid item xs={7} textAlign='right'>
+                </GridItem>
+                <GridItem>
                     <ShowPrice>
                         <ShowAmount costs={costs} ClickMinus={ClickMinus} ClickPlus={ClickPlus} />
                     </ShowPrice>
-                </Grid>
+                </GridItem>
 
-                <Grid item xs={5} height={70}>
+                <GridItem title>
                     <Typography>残り金額</Typography>
-                </Grid>
-                <Grid item xs={7}  textAlign='right'>
-                    <ShowPrice primary={requestPay > 0} >{ requestPay }</ShowPrice>
-                </Grid>
+                </GridItem>
+                <GridItem>
+                    <ShowPrice primary={request > 0} >{ request }</ShowPrice>
+                </GridItem>
 
-                <Grid item xs={5} height={70}>
+                <GridItem title>
                     <Typography>おつり</Typography>
-                </Grid>
-                <Grid item xs={7} textAlign='right'>
+                </GridItem>
+                <GridItem>
                     <ShowPrice>{ change }</ShowPrice>
-                </Grid>
+                </GridItem>
             </Grid>
-
-
-            <Grid container textAlign="center" padding={1} spacing={1} >
-            <Grid item xs={6}>
-                <LinkButton btnName="戻る" url="/SelectPayInfo" />
-            </Grid>
-            <Grid item xs={6}>
-                <LinkButton btnName="支払う" url="/CompPay" primary disabled={requestPay > 0} />
-            </Grid>
-        </Grid>
-
         </>
     )
 }

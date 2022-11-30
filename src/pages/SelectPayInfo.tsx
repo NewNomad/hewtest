@@ -11,6 +11,9 @@ import React, { useState }      from 'react'
 
 type Props = { ElProps: any, QrProps: any }
 
+// ===================================================
+// 入金確認画面
+// ===================================================
 export default function SelectPayInfo() {
 
   const [mordalEl, setMordalEl] = useState<boolean>(false)    // 電子マネー決済選択(モーダル)
