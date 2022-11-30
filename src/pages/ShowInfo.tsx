@@ -9,7 +9,7 @@ export default function Advertisment(){
             <HeadInfo title='mopacal | 地図' />
 
             <Box sx={{ flexGrow: 1 }}>
-                <Header />
+                <Header onMap />
 
                 <Box sx={{ pt: 8 }}>
                     <Box sx={{width: '100%', height: 800, backgroundColor: 'primary.main', opacity: 0.6}}>

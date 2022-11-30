@@ -14,7 +14,7 @@ const machinePlace: string = "名古屋";
 // ===================================================
 // ヘッダー
 // ===================================================
-export const Header = () => {
+export const Header = ({onMap = false}) => {
   const router = useRouter();
 
   return (
@@ -22,9 +22,10 @@ export const Header = () => {
       <Toolbar>
         <ShowWeather place={machinePlace} />
         <ShowDate />
-        {router.pathname != "/ShowInfo"
+        {onMap && 
+          (router.pathname != "/ShowInfo"
           ? <BtnShowInfo link='/ShowInfo' name='地図を見る' />
-          : <BtnShowInfo link='/' name='メイン画面に戻る' />
+          : <BtnShowInfo link='/' name='メイン画面に戻る' />)
         }
       </Toolbar>
     </AppBar>

@@ -1,5 +1,6 @@
 import { Box, Button, Container, Grid, Paper } from '@mui/material'
 import type { NextPage }  from 'next'
+import { LinkButton }     from '../components/1atoms/BtnLink'
 import { Header }         from '../components/2molecules/Header'
 import { HeadInfo }       from '../components/2molecules/HeadInfo'
 import { Cart }           from '../components/3organisms/Cart'
@@ -13,7 +14,7 @@ const Home: NextPage = () => {
       <HeadInfo title='mopacal | インデックス' />
 
       <Box sx={{ flexGrow: 1 }}>
-        <Header />
+        <Header onMap />
 
         {/* <Container component="main" sx={{ height: "100vh",mt:10}} >1 */}
 
@@ -41,6 +42,7 @@ const Home: NextPage = () => {
         </Grid>
 
         {/* </Container> */}
+        <LinkButton btnName='一定時間放置で広告表示に移ります(未実装)' url='/ShowAdvertisment' />
 
       </Box>
 
