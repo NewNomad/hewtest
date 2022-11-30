@@ -11,5 +11,4 @@ export const cartState = atom({
         image: ""
     },
     effects_UNSTABLE: [persistAtom]
-
 })
