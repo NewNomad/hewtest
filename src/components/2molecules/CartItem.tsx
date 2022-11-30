@@ -1,6 +1,6 @@
-import { Add, AddCircle, LocalDrink, Remove, RemoveCircle }             from '@mui/icons-material'
-import { Button, Grid, IconButton, List, ListItemAvatar, Typography }   from '@mui/material'
-import { Box, Container }                                               from '@mui/system'
+import { Add, AddCircle, LocalDrink, Remove, RemoveCircle } from '@mui/icons-material'
+import { Button, Grid, IconButton, List, ListItemAvatar, Paper, Typography } from '@mui/material'
+import { Box, Container } from '@mui/system'
 import Image from 'next/image'
 import React from 'react'
 import QuantityButton from '../1atoms/QuantityButton'
@@ -12,7 +12,11 @@ export const CartItem = () => {
     return (
         <Grid container padding={3} spacing={0} alignItems="center">
             <Grid item xs={4}>
-                <Image src="/fanta.png" height={200} width={200} objectFit="contain"></Image>
+                <Paper sx={{
+                    padding: 1
+                }}>
+                    <Image src="/fanta.png" height={130} width={100} objectFit="contain"></Image>
+                </Paper>
             </Grid>
             <Grid item xs={8} textAlign="center">
                 <Typography variant='h5' fontWeight="bold">
@@ -27,7 +31,7 @@ export const CartItem = () => {
                     <IconButton aria-label='add'>
                         <AddCircle fontSize='large' />
                     </IconButton> */}
-                    <QuantityButton/>
+                    {/* <QuantityButton/> */}
                     合計¥1400
                 </Container>
             </Grid>
