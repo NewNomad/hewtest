@@ -14,7 +14,8 @@ const db = mysql({
     database: process.env.MYSQL_DATABASE,
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
-    port: 8889, //中尾専用
+    port: 3306, //中尾専用
+    // port: 8889, //中尾専用
   }
 })
 
@@ -36,6 +37,7 @@ export default async function handler(
 
   // console.log(req);
 
-  const result = await db.query(`SELECT ${req.query.name} FROM t_d_morder_handy`);
+  // const result = await db.query(`SELECT ${req.query.name} FROM t_products`);
+  const result = await db.query(`SELECT p.f_product_id, p.f_product_name, p.f_product_price, p.f_product_isice, p.f_product_stock, i.f_image_url FROM t_products as p INNER JOIN t_images as i ON p.f_product_id = i.f_product_id`);
   return res.status(200).json(result)
 }
