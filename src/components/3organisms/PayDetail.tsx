@@ -1,15 +1,26 @@
 import { Box, Button, Paper, Typography, Grid } from '@mui/material'
 import { ShowPayDetail }        from '../2molecules/ShowPayDetail'
-import { ButtonsPayOrReturn }   from '../2molecules/ButtonsPayOrReturn'
+import React, { useState }      from "react";
 
 let sumPay:number       = 1000;
 
 export const PayDetail = () =>{
 
+    const [costs, setCosts]                 = useState(0);
+    // const [requestPay, setRequestPay]    = useState(0);
+    // const [change, setChange]            = useState(1000);
+
+    const requestPay = (sumPay - costs) > 0? (sumPay - costs): 0;
+    const change = (costs - sumPay) > 0? (costs - sumPay): 0;
+
+    const ClickMinus = () => { setCosts(costs - 100); };
+    const ClickPlus = () => { setCosts(costs + 100); };
+
     return (
+
         <Box sx={{ padding:10 }}>
 
-            <Grid container>
+            <Grid container spacing={3}>
                 <Grid item xs={12} textAlign="center">
                     <Typography
                         variant="h3"
@@ -28,10 +39,9 @@ export const PayDetail = () =>{
                     <Paper  sx={{width: '100%', height: 600}}>
 
                         <Box height={500} sx={{padding: 10}}>
-                            <ShowPayDetail sumPay={sumPay}/>
+                            <ShowPayDetail sumPay={sumPay} costs={costs} requestPay={requestPay} change={change} ClickMinus={ClickMinus} ClickPlus={ClickPlus} />
                         </Box>
 
-                        <ButtonsPayOrReturn />
                     </Paper>
                 </Grid>
 

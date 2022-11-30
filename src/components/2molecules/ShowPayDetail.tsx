@@ -1,20 +1,12 @@
 import { Grid, Typography } from '@mui/material'
 import { ShowAmount }           from '../1atoms/ShowAmount'
 import { ShowPrice }            from '../1atoms/ShowPrice'
+import { LinkButton }           from '../1atoms/BtnLink'
 import React, { useState }      from "react";
 
-export const ShowPayDetail = ( props:{sumPay:number} ) =>{
-    const { sumPay } = props
+export const ShowPayDetail = ( props:{sumPay:number, costs: number, requestPay:number, change:number, ClickMinus, ClickPlus} ) =>{
 
-    const [costs, setCosts]             = useState(0);
-    // const [requestPay, setRequestPay]   = useState(0);
-    // const [change, setChange]           = useState(1000);
-
-    const requestPay = (sumPay - costs) > 0? (sumPay - costs): 0;
-    const change = (costs - sumPay)>0? (costs - sumPay): 0;
-
-    const ClickMinus = () => { setCosts(costs - 100); };
-    const ClickPlus = () => { setCosts(costs + 100); };
+    const { sumPay, costs, requestPay, change, ClickMinus, ClickPlus } = props
 
     return (
         <>
@@ -23,7 +15,7 @@ export const ShowPayDetail = ( props:{sumPay:number} ) =>{
                     <Typography>合計金額</Typography>
                 </Grid>
                 <Grid item xs={7} textAlign='right'>
-                    <ShowPrice>{sumPay}</ShowPrice>
+                    <ShowPrice>{ sumPay }</ShowPrice>
                 </Grid>
 
                 <Grid item xs={5} height={70}>
@@ -39,16 +31,28 @@ export const ShowPayDetail = ( props:{sumPay:number} ) =>{
                     <Typography>残り金額</Typography>
                 </Grid>
                 <Grid item xs={7}  textAlign='right'>
-                    <ShowPrice>{requestPay}</ShowPrice>
+                    {requestPay > 0 && (<ShowPrice primary >{ requestPay }</ShowPrice>)}
+                    {requestPay == 0 && (<ShowPrice>{ requestPay }</ShowPrice>)}
                 </Grid>
 
                 <Grid item xs={5} height={70}>
                     <Typography>おつり</Typography>
                 </Grid>
                 <Grid item xs={7} textAlign='right'>
-                    <ShowPrice>{change}</ShowPrice>
+                    <ShowPrice>{ change }</ShowPrice>
                 </Grid>
             </Grid>
+
+
+            <Grid container textAlign="center" padding={1} spacing={1} >
+            <Grid item xs={6}>
+                <LinkButton btnName="戻る" url="/SelectPayInfo" />
+            </Grid>
+            <Grid item xs={6}>
+                {requestPay > 0 && <LinkButton btnName="支払う" url="/CompPay" primary />}
+                {requestPay == 0 && <LinkButton btnName="支払う" url="/CompPay" primary />}
+            </Grid>
+        </Grid>
 
         </>
     )
