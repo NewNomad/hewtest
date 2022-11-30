@@ -6,14 +6,16 @@ import { Header } from '../components/2molecules/Header'
 import { Footer } from '../components/2molecules/Footer'
 
 export default function Advertisment() {
+
     const defaultProps = {
-        center: {
-            lat: 35.1709,
-            lng: 136.8815
+        center: {               //初期位置
+            lat: 35.1709,       //東経
+            lng: 136.8815       //西経　　名古屋
 
         },
-        zoom: 11
+        zoom: 11                //拡大
     };
+    
     return (
         <>
             <HeadInfo title='mopacal | 地図' />
@@ -26,7 +28,10 @@ export default function Advertisment() {
                         {/*Important! Always set the container height explicitly */}
                         <div style={{ height: '100vh', width: '100%' }}>
                             <GoogleMapReact
-                                bootstrapURLKeys={{ key: "AIzaSyBAzmp9Vpi5MsOnuYLSq1Ix_sq8vnuSHpU" }}
+
+                                //APIキー
+                                bootstrapURLKeys={{ key: "AIzaSyBAzmp9Vpi5MsOnuYLSq1Ix_sq8vnuSHpU" }} 
+
                                 defaultCenter={defaultProps.center}
                                 defaultZoom={defaultProps.zoom}
                             >
