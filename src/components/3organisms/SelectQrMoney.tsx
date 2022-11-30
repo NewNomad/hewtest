@@ -23,8 +23,8 @@ export const SelectQrMoney = () => {
                         <Grid item xs={6}>
                             <BtnSelectPayInfo onClick={() => router.push("/CheckPay")} name="LinePay" />
                         </Grid>
-
                     </Grid>
+
                     <Grid container item xs={4} direction="column" spacing={1}>
                         <Grid item xs={6}>
                             <BtnSelectPayInfo onClick={() => router.push("/CheckPay")} name="d払い" />
@@ -32,8 +32,8 @@ export const SelectQrMoney = () => {
                         <Grid item xs={6}>
                             <BtnSelectPayInfo onClick={() => router.push("/CheckPay")} name="auPAY" />
                         </Grid>
-
                     </Grid>
+
                     <Grid container item xs={4} direction="column"  spacing={1}>
                         <Grid item xs={6}>
                             <BtnSelectPayInfo onClick={() => router.push("/CheckPay")} name="PAY" />
@@ -41,8 +41,8 @@ export const SelectQrMoney = () => {
                         <Grid item xs={6}>
                             <BtnSelectPayInfo onClick={() => router.push("/CheckPay")} name="?" />
                         </Grid>
-
                     </Grid>
+
                 </Grid>
 
             </Container>

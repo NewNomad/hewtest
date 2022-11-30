@@ -1,10 +1,8 @@
 import { Box, Button, Container, Divider, Grid, Typography } from '@mui/material'
-import { ShowMordal } from '../1atoms/ShowModal'
-import { LinkButton } from '../1atoms/BtnLink'
-// import Link     from 'next/link'
-import React from 'react'
+import { ShowMordal }       from '../1atoms/ShowModal'
 import { BtnSelectPayInfo } from '../1atoms/BtnSelectPayInfo'
 import { useRouter } from 'next/router'
+import React from 'react'
 
 export const SelectElMoney = () => {
     const router = useRouter()
@@ -37,8 +35,6 @@ export const SelectElMoney = () => {
                     </Grid>
                     <Grid container item xs={4} direction="column" >
                         <BtnSelectPayInfo onClick={() => router.push("/CheckPay")} name="交通系電子マネー" />
-
-
                     </Grid>
                 </Grid>
 
