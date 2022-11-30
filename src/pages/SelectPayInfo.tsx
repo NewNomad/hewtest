@@ -11,6 +11,9 @@ import React, { useState }      from 'react'
 
 type Props = { ElProps: any, QrProps: any }
 
+// ===================================================
+// 入金確認画面
+// ===================================================
 export default function SelectPayInfo() {
 
   const [mordalEl, setMordalEl] = useState<boolean>(false)    // 電子マネー決済選択(モーダル)
@@ -51,7 +54,8 @@ export default function SelectPayInfo() {
                     </Grid>
                 </Grid>
 
-                <LinkButton btnName='商品一覧に戻る' url='/' />
+                <LinkButton url='/'>商品一覧に戻る</LinkButton>
+
             </Container>
 
             {/* 電子マネー決済選択 */}

@@ -1,4 +1,5 @@
 import { Box, Typography, Paper, Button, Grid }    from '@mui/material'
+import { TextTitle }    from '../components/1atoms/TextTitle'
 import { HeadInfo }     from '../components/2molecules/HeadInfo'
 import { Header }       from '../components/2molecules/Header'
 import { LinkButton }   from '../components/1atoms/BtnLink'
@@ -13,13 +14,13 @@ export default function CheckPay(){
                 <Header />
 
                 <Box textAlign="center" sx={{ margin:5, padding:10, pt: 8 }}>
-                        <Typography variant="h3" color="primary">ありがとうございました！</Typography>
+                    <TextTitle>ありがとうございました！</TextTitle>
 
-                        <Box sx={{width: '100%', height: 600, padding: 10, backgroundColor: 'primary.main'}}>
-                                [ここに画像]
-                        </Box>
+                    <Box sx={{width: '100%', height: 600, padding: 10, backgroundColor: 'primary.main'}}>
+                        [ここに画像]
+                    </Box>
 
-                        <LinkButton btnName='タップで商品一覧に戻ります(未実装)' url='/' />
+                    <LinkButton url='/'>タップ/時間経過で商品一覧に戻ります(未実装)</LinkButton>
 
                 </Box>
 
