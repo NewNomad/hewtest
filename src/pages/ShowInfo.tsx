@@ -17,9 +17,6 @@ export default function Advertisment(){
                         [ここに画像]
                     </Box>
                 </Box>
-
-                <Footer />
-
             </Box>
 
         </>

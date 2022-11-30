@@ -23,28 +23,30 @@ export const ShowPayDetail = ( props:{sumPay:number} ) =>{
                     <Typography>合計金額</Typography>
                 </Grid>
                 <Grid item xs={7} textAlign='right'>
-                    <ShowPrice price={sumPay} />
+                    <ShowPrice>{sumPay}</ShowPrice>
                 </Grid>
 
                 <Grid item xs={5} height={70}>
                     <Typography>お預かり</Typography>
                 </Grid>
                 <Grid item xs={7} textAlign='right'>
-                    <ShowAmount costs={costs} ClickMinus={ClickMinus} ClickPlus={ClickPlus} />
+                    <ShowPrice>
+                        <ShowAmount costs={costs} ClickMinus={ClickMinus} ClickPlus={ClickPlus} />
+                    </ShowPrice>
                 </Grid>
 
                 <Grid item xs={5} height={70}>
                     <Typography>残り金額</Typography>
                 </Grid>
                 <Grid item xs={7}  textAlign='right'>
-                    <ShowPrice price={requestPay} />
+                    <ShowPrice>{requestPay}</ShowPrice>
                 </Grid>
 
                 <Grid item xs={5} height={70}>
                     <Typography>おつり</Typography>
                 </Grid>
                 <Grid item xs={7} textAlign='right'>
-                    <ShowPrice price={change} />
+                    <ShowPrice>{change}</ShowPrice>
                 </Grid>
             </Grid>
 
