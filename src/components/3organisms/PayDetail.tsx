@@ -45,14 +45,14 @@ export const PayDetail = ( props:Props ) =>{
                                 ClickMinus={ClickMinus}
                                 ClickPlus={ClickPlus} />
 
-                                <Grid container textAlign="center" padding={1} spacing={1} >
-                                    <GridItem button>
-                                        <LinkButton btnName="戻る" url="/SelectPayInfo" />
-                                    </GridItem>
-                                    <GridItem button>
-                                        <LinkButton btnName="支払う" url="/CompPay" primary disabled={request > 0} />
-                                    </GridItem>
-                                </Grid>
+                            <Grid container textAlign="center" padding={1} spacing={1} >
+                                <GridItem button>
+                                    <LinkButton url="/SelectPayInfo">戻る</LinkButton>
+                                </GridItem>
+                                <GridItem button>
+                                    <LinkButton url="/CompPay" primary disabled={request > 0}>支払う</LinkButton>
+                                </GridItem>
+                            </Grid>
                         </Box>
 
                     </Paper>

@@ -54,7 +54,8 @@ export default function SelectPayInfo() {
                     </Grid>
                 </Grid>
 
-                <LinkButton btnName='商品一覧に戻る' url='/' />
+                <LinkButton url='/'>商品一覧に戻る</LinkButton>
+
             </Container>
 
             {/* 電子マネー決済選択 */}

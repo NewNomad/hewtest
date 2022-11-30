@@ -20,7 +20,7 @@ export default function CheckPay(){
                         [ここに画像]
                     </Box>
 
-                    <LinkButton btnName='タップで商品一覧に戻ります(未実装)' url='/' />
+                    <LinkButton url='/'>タップ/時間経過で商品一覧に戻ります(未実装)</LinkButton>
 
                 </Box>
 
