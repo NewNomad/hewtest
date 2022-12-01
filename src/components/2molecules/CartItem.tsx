@@ -4,11 +4,21 @@ import { Box, Container } from '@mui/system'
 import Image from 'next/image'
 import React from 'react'
 import QuantityButton from '../1atoms/QuantityButton'
+import { useCart } from '../types/TypeCart'
+import { TypeProducts } from '../types/TypeProducts'
 
 // ====================================
 // カート内アイテム情報
 // ====================================
-export const CartItem = () => {
+
+type Props = {
+    product: TypeProducts
+}
+
+
+export const CartItem = ({ product }: Props) => {
+    const { addCart, removeCart } = useCart()
+
     return (
         <Grid container padding={3} spacing={0} alignItems="center">
             <Grid item xs={4}>
@@ -16,12 +26,13 @@ export const CartItem = () => {
                     padding: 1
                 }}
                 >
-                    <Image src="/fanta.png" height={130} width={100} objectFit="contain"></Image>
+                    <Image src={"/" + product.imageURL} height={130} width={100} objectFit="contain"></Image>
                 </Paper>
             </Grid>
             <Grid item xs={8} textAlign="center">
-                <Typography variant='h5' fontWeight="bold">
-                    <LocalDrink />ファンタ
+                <Typography variant='h6' fontWeight="bold">
+                    <LocalDrink />
+                    {product.name}
                 </Typography>
 
                 <Container>
@@ -33,18 +44,24 @@ export const CartItem = () => {
                         <AddCircle fontSize='large' />
                     </IconButton> */}
                     {/* <QuantityButton/> */}
-                    
+
                     <ButtonGroup variant='contained' size='small'>
-                        <Button>
+                        <Button
+                            onClick={() => removeCart(product)}
+                        >
                             <Remove />
                         </Button>
-                        <Button variant='text'>1</Button>
-                        <Button>
+                        <Button variant='text' disableFocusRipple disableTouchRipple>
+                            {product.quantity}
+                        </Button>
+                        <Button
+                            onClick={() => addCart(product)}
+                        >
                             <Add />
                         </Button>
                     </ButtonGroup>
-                    <Typography variant='h5' fontWeight="bold">
-                        ¥1400
+                    <Typography variant='h6' fontWeight="bold">
+                        ¥{product.price} 計¥{product.price * product.quantity}
 
                     </Typography>
                 </Container>
