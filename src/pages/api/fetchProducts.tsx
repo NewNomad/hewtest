@@ -36,6 +36,18 @@ export default async function handler(
 
   // console.log(req);
 
-  const result = await db.query(`SELECT ${req.query.name} FROM t_d_morder_handy`);
+  const result = await db.query(`SELECT 
+  p.f_product_id, 
+  p.f_product_name, 
+  p.f_product_price, 
+  p.f_product_isice, 
+  p.f_product_stock, 
+  i.f_image_url 
+  FROM 
+  t_products as p 
+  JOIN 
+  t_images as i 
+  ON 
+  p.f_product_id = i.f_product_id`);
   return res.status(200).json(result)
 }

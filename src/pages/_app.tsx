@@ -17,17 +17,17 @@ function MyApp(props: MyAppProps) {
     const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
     return (
-        // <RecoilRoot>
-            <CacheProvider value={emotionCache}>
-                <Head>
-                    <meta name="viewport" content="initial-scale=1, width=device-width" />
-                </Head>
-                <ThemeProvider theme={theme}>
-                    <CssBaseline />
+        <CacheProvider value={emotionCache}>
+            <Head>
+                <meta name="viewport" content="initial-scale=1, width=device-width" />
+            </Head>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <RecoilRoot>
                     <Component {...pageProps} />
-                </ThemeProvider>
-            </CacheProvider>
-        // </RecoilRoot>
+                </RecoilRoot>
+            </ThemeProvider>
+        </CacheProvider>
     )
 }
 
