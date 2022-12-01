@@ -22,7 +22,7 @@ export const BtnTotalAmount = ({ OpenMConfirm }: Props) => {
                 width: "100%",
                 // padding: 5,
                 fontSize: size,
-                marginBottom: 3,
+                marginBottom: 1,
                 marginTop: 2,
                 borderRadius:50,
 

@@ -37,12 +37,12 @@ export default async function handler(
   // console.log(req);
 
   const result = await db.query(`SELECT 
-  p.f_product_id, 
-  p.f_product_name, 
-  p.f_product_price, 
-  p.f_product_isice, 
-  p.f_product_stock, 
-  i.f_image_url 
+  p.f_product_id as id, 
+  p.f_product_name as name, 
+  p.f_product_price as price, 
+  p.f_product_isice as isice, 
+  p.f_product_stock as stock, 
+  i.f_image_url as imageURL
   FROM 
   t_products as p 
   JOIN 

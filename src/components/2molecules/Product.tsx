@@ -1,49 +1,73 @@
-import { Button, Divider, Paper, Tooltip } from '@mui/material'
-import { AcUnit } from '@mui/icons-material'
+import { Button, Divider, Modal, Paper, Tooltip } from '@mui/material'
+import { AcUnit, Whatshot } from '@mui/icons-material'
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
+import { TypeProducts } from '../types/TypeProducts'
+import { cartState, useCart } from '../types/TypeCart'
+import { useRecoilState } from 'recoil'
+import { ShowModalInfo } from './ShowModalInfo'
 
-type Props = { OpenMInfo: () => void }
+type Props = {
+    proinfo: TypeProducts;
+}
 
-export default function Product({ OpenMInfo }: Props) {
+export default function Product({ proinfo }: Props) {
+    const { id, name, price, stock, isice, imageURL } = proinfo
+    // const TimageURL = imageURL.replace(/(\d{4})\//, "$1/$1") ///DBと名前が違ったので、暫定的におく
+
+    const [mordalInfo, setmordalInfo] = useState<boolean>(false)    // 商品詳細画面
+
+    const OpenMInfo = () => setmordalInfo(true);                    // 商品詳細画面(モーダル)開く
+    const CloseMInfo = () => setmordalInfo(false);                  // 商品詳細画面(モーダル)閉じる
+
+
+    const { addCart } = useCart()
+
     return (
-
-        // <Card key={0} 
-        //     sx={{
-        //     }}>
-        <Paper elevation={3} variant="elevation" key={0}
-            sx={{
-                backgroundColor: "#fff",
-                // border: `2px solid #ccc `,
-                borderColor: `secondary.main`,
-                textAlign: "center"
-            }}>
-            <Tooltip title="詳細" arrow>
-                <Button
-                    onClick={OpenMInfo}
-                    sx={{
-                        width: 1,
-                        borderBottomLeftRadius: 0,
-                        borderBottomRightRadius: 0,
-                    }}>
-                    <Image src="/fanta.png" height={180} width={100} objectFit="contain"></Image>
-                </Button>
-            </Tooltip>
-            <Divider />
-            <Tooltip title="カートに追加" arrow>
-                <Button color='secondary' variant="text" size='small' disableElevation startIcon={<AcUnit color="primary" />}
-                    // <Button color='secondary' variant="contained" size='small' disableElevation
-                    sx={{
-                        // borderRadius: 10,
-                        // marginBottom:0.5
-                        width: 1,
-                        borderStartEndRadius: 0,
-                        borderStartStartRadius: 0
-                    }}>
-                    ¥140
-
-                </Button>
-            </Tooltip>
-        </Paper>
+        <>
+            <Paper elevation={3} variant="elevation" key={0}
+                sx={{
+                    backgroundColor: "#fff",
+                    // border: `2px solid #ccc `,
+                    borderColor: `secondary.main`,
+                    textAlign: "center"
+                }}>
+                <Tooltip title="詳細" arrow>
+                    <Button
+                        onClick={OpenMInfo}
+                        sx={{
+                            width: 1,
+                            borderBottomLeftRadius: 0,
+                            borderBottomRightRadius: 0,
+                        }}>
+                        <Image src={"/" + imageURL} height={180} width={100} objectFit="contain"></Image>
+                    </Button>
+                </Tooltip>
+                <Divider />
+                <Tooltip title="カートに追加" arrow>
+                    <Button color='secondary' variant="text" size='small' disableElevation
+                        onClick={() => addCart(proinfo)}
+                        startIcon={
+                            isice == 1
+                                ? <AcUnit color="info" />
+                                : <Whatshot color='primary'></Whatshot>
+                        }
+                        // <Button color='secondary' variant="contained" size='small' disableElevation
+                        sx={{
+                            // borderRadius: 10,
+                            // marginBottom:0.5
+                            width: 1,
+                            borderStartEndRadius: 0,
+                            borderStartStartRadius: 0
+                        }}>
+                        {proinfo.price}
+                    </Button>
+                </Tooltip>
+            </Paper>
+            {/* 商品詳細画面(モーダル) */}
+            <Modal open={mordalInfo} onClose={CloseMInfo} >
+                <ShowModalInfo product={proinfo} />
+            </Modal>
+        </>
     )
 }
