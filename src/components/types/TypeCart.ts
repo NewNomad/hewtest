@@ -42,19 +42,52 @@ export const useCart = () => {
             setCart({
                 products: [...cart.products, product]
             })
-        }else{
+        } else {
             // カートに商品が入ってる場合
-            setCart((prevCart)=>{
-                // return{
-                //     products:prevCart.products.map((_product)=>
-                //     _product.id===selectItem.id
-                //     ?{..._product,quantity}
-                //     )
-                // }
+            setCart((prevCart) => {
+                return {
+                    products: prevCart.products.map((_product) =>
+                        _product.id === selectItem.id
+                            ? { ..._product, quantity: _product.quantity + 1 }
+                            : _product
+                    )
+                }
             })
         }
-
     }
 
+    // カートから減らす
+    const removeCart = (product: TypeProducts) => {
+        const selectItem = cart.products.find((_product) => _product.id === product.id)
+
+        if (!selectItem) {
+            console.warn("何でないんねん、バグっとるわ")
+            return
+        }
+
+        // カートからー１
+        if (selectItem.quantity > 1) {
+            setCart((prevCart) => {
+                return {
+                    products: prevCart.products.map((_product) =>
+                        _product.id === selectItem.id
+                            ? { ..._product, quantity: _product.quantity - 1 }
+                            : _product
+                    )
+                }
+            })
+        } else {
+            // カートから削除
+            const products = [...cart.products]
+            const index = products.findIndex((product) => product.id === selectItem.id);
+            if (index === -1) return
+            products.splice(index, 1)
+
+            setCart({
+                products
+            })
+        }
+    }
+    return { addCart, removeCart }
 }
 

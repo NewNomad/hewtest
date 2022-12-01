@@ -37,6 +37,7 @@ export const Products = () => {
                                         <Product
                                             OpenMInfo={OpenMInfo}
                                             proinfo={data![j + 12 * i]}
+                                            // key={data![j + 12 * i].id}
                                         />
                                     </Grid>
                                 )

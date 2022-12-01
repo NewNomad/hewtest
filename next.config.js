@@ -17,9 +17,6 @@ module.exports = {
     // MYSQL_PORT: 3306 // 小松専用
     MYSQL_PORT: 8889 // 中尾専用
   },
-  // webpack: {
-  //   target: "node"
-  // },
   webpack: {
     target: "node"
   },
