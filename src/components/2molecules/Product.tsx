@@ -3,6 +3,7 @@ import { AcUnit, Whatshot } from '@mui/icons-material'
 import Image from 'next/image'
 import React from 'react'
 import { TypeProducts } from '../types/TypeProducts'
+import { useCart } from '../types/TypeCart'
 
 type Props = {
     OpenMInfo: () => void;
@@ -11,15 +12,13 @@ type Props = {
 
 export default function Product({ OpenMInfo, proinfo }: Props) {
     const { id, name, price, stock, isice, imageURL } = proinfo
-    const TimageURL = imageURL.replace(/(\d{4})\//, "$1/$1") ///DBと名前が違ったので、暫定的におく
+    // const TimageURL = imageURL.replace(/(\d{4})\//, "$1/$1") ///DBと名前が違ったので、暫定的におく
 
-    console.log(TimageURL);
+    const { addCart } = useCart()
+console.log();
 
     return (
 
-        // <Card key={0} 
-        //     sx={{
-        //     }}>
         <Paper elevation={3} variant="elevation" key={0}
             sx={{
                 backgroundColor: "#fff",
@@ -35,16 +34,18 @@ export default function Product({ OpenMInfo, proinfo }: Props) {
                         borderBottomLeftRadius: 0,
                         borderBottomRightRadius: 0,
                     }}>
-                    <Image src={"/" + TimageURL} height={180} width={100} objectFit="contain"></Image>
+                    <Image src={"/" + imageURL} height={180} width={100} objectFit="contain"></Image>
                 </Button>
             </Tooltip>
             <Divider />
             <Tooltip title="カートに追加" arrow>
-                <Button color='secondary' variant="text" size='small' disableElevation startIcon={
-                    isice == 1
-                        ? <AcUnit color="info" />
-                        :<Whatshot color='primary'></Whatshot>
-            }
+                <Button color='secondary' variant="text" size='small' disableElevation
+                    onClick={() => addCart(proinfo)}
+                    startIcon={
+                        isice == 1
+                            ? <AcUnit color="info" />
+                            : <Whatshot color='primary'></Whatshot>
+                    }
                     // <Button color='secondary' variant="contained" size='small' disableElevation
                     sx={{
                         // borderRadius: 10,
