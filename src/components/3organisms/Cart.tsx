@@ -11,7 +11,7 @@ import { cartState } from '../globalstate/cart'
 // カート
 // ====================================
 
-type Cart = {
+export type Cart = {
     id: number,
     name: string,
     count: number,
@@ -31,9 +31,7 @@ export const Cart = () => {
         name: "aa",
         count: 1,
         image: "string",
-    }
-    
-    )
+    })
     return (
         <Paper>
 
@@ -44,7 +42,6 @@ export const Cart = () => {
                             <ListItem>
                                 <CartItem />
                             </ListItem>
-
                             <Divider />
                         </Box>
                     ))
