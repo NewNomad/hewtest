@@ -25,13 +25,13 @@ export const Cart = () => {
     const OpenMConfirm = () => setmordalConfirm(true);                  // 購入確認画面(モーダル)開く
     const CloseMConfirm = () => setmordalConfirm(false);                // 購入確認画面(モーダル)閉じる
 
-    const [cart, setCart] = useRecoilState<Cart>(cartState)
-    setCart({
-        id: 1,
-        name: "aa",
-        count: 1,
-        image: "string",
-    })
+    // const [cart, setCart] = useRecoilState<Cart>(cartState)
+    // setCart({
+    //     id: 1,
+    //     name: "aa",
+    //     count: 1,
+    //     image: "string",
+    // })
     return (
         <Paper>
 

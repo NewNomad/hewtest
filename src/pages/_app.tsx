@@ -17,7 +17,7 @@ function MyApp(props: MyAppProps) {
     const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
     return (
-        <RecoilRoot>
+        // <RecoilRoot>
             <CacheProvider value={emotionCache}>
                 <Head>
                     <meta name="viewport" content="initial-scale=1, width=device-width" />
@@ -27,7 +27,7 @@ function MyApp(props: MyAppProps) {
                     <Component {...pageProps} />
                 </ThemeProvider>
             </CacheProvider>
-        </RecoilRoot>
+        // </RecoilRoot>
     )
 }
 
