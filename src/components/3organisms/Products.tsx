@@ -1,11 +1,21 @@
-import { LocalDrink }           from '@mui/icons-material'
-import { Grid, Modal, Paper }   from '@mui/material'
-import Product                  from '../2molecules/Product'
-import { ProductTabs }          from '../2molecules/ProductTabs'
-import { ShowModalInfo }        from '../2molecules/ShowModalInfo'
-import React, { useState }      from 'react'
+import { LocalDrink } from '@mui/icons-material'
+import { Grid, Modal, Paper } from '@mui/material'
+import Product from '../2molecules/Product'
+import { ProductTabs } from '../2molecules/ProductTabs'
+import { ShowModalInfo } from '../2molecules/ShowModalInfo'
+import React, { useState } from 'react'
+import useSWR from 'swr'
+import { TypeProducts } from '../types/TypeProducts'
+
+const fetchProduct = "/api/fetchProducts"
+const fetcher = (url: string) => fetch(url).then(response => response.json());
+
 
 export const Products = () => {
+
+    const { data, error } = useSWR<TypeProducts[]>(fetchProduct, fetcher);
+    console.log(data);
+
     const [mordalInfo, setmordalInfo] = useState<boolean>(false)    // 商品詳細画面
 
     const OpenMInfo = () => setmordalInfo(true);                    // 商品詳細画面(モーダル)開く
@@ -16,21 +26,27 @@ export const Products = () => {
         // <Paper>
         <>
             <Grid container direction="column" spacing={0.5} padding={0}>
-                {[...Array(3)].map((e, i) => (
 
-                    <Grid key={i} item xs={4} sx={{ height: "100%" }} container spacing={0.5} padding={0} paddingTop={0} paddingBottom={0}>
-                        {[...Array(12)].map((item, i) => (
-                            <Grid key={i} item xs={1}>
-                                <Product
-                                    OpenMInfo={OpenMInfo}
-                                />
+                {
+                    data ?
+                        [...Array(3)].map((e, i) => (
+
+                            <Grid key={i} item xs={4} sx={{ height: "100%" }} container spacing={0.5} padding={0} paddingTop={0} paddingBottom={0}>
+                                {[...Array(12)].map((item, j) => (
+                                    <Grid key={j} item xs={1}>
+                                        <Product
+                                            OpenMInfo={OpenMInfo}
+                                            proinfo={data![j + 12 * i]}
+                                        />
+                                    </Grid>
+                                )
+
+                                )}
+
                             </Grid>
-                        )
-
-                        )}
-
-                    </Grid>
-                ))}
+                        ))
+                        : <></>
+                }
                 <Grid item xs={1} marginTop={2}>
                     <ProductTabs />
                 </Grid>

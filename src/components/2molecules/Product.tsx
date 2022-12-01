@@ -1,11 +1,20 @@
 import { Button, Divider, Paper, Tooltip } from '@mui/material'
-import { AcUnit } from '@mui/icons-material'
+import { AcUnit, Whatshot } from '@mui/icons-material'
 import Image from 'next/image'
 import React from 'react'
+import { TypeProducts } from '../types/TypeProducts'
 
-type Props = { OpenMInfo: () => void }
+type Props = {
+    OpenMInfo: () => void;
+    proinfo: TypeProducts;
+}
 
-export default function Product({ OpenMInfo }: Props) {
+export default function Product({ OpenMInfo, proinfo }: Props) {
+    const { id, name, price, stock, isice, imageURL } = proinfo
+    const TimageURL = imageURL.replace(/(\d{4})\//, "$1/$1") ///DBと名前が違ったので、暫定的におく
+
+    console.log(TimageURL);
+
     return (
 
         // <Card key={0} 
@@ -26,12 +35,16 @@ export default function Product({ OpenMInfo }: Props) {
                         borderBottomLeftRadius: 0,
                         borderBottomRightRadius: 0,
                     }}>
-                    <Image src="/fanta.png" height={180} width={100} objectFit="contain"></Image>
+                    <Image src={"/" + TimageURL} height={180} width={100} objectFit="contain"></Image>
                 </Button>
             </Tooltip>
             <Divider />
             <Tooltip title="カートに追加" arrow>
-                <Button color='secondary' variant="text" size='small' disableElevation startIcon={<AcUnit color="primary" />}
+                <Button color='secondary' variant="text" size='small' disableElevation startIcon={
+                    isice == 1
+                        ? <AcUnit color="info" />
+                        :<Whatshot color='primary'></Whatshot>
+            }
                     // <Button color='secondary' variant="contained" size='small' disableElevation
                     sx={{
                         // borderRadius: 10,
@@ -40,8 +53,7 @@ export default function Product({ OpenMInfo }: Props) {
                         borderStartEndRadius: 0,
                         borderStartStartRadius: 0
                     }}>
-                    ¥140
-
+                    {proinfo.price}
                 </Button>
             </Tooltip>
         </Paper>
