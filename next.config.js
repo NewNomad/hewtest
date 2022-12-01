@@ -10,7 +10,7 @@ module.exports = {
   env: {
     MYSQL_HOST: "127.0.0.1",
     // MYSQL_DATABASE: "hew",
-    MYSQL_DATABASE: "hue2023",
+    MYSQL_DATABASE: "hew2023",
     MYSQL_USER: "root",
     // MYSQL_PASSWORD: "", // 小松専用
     MYSQL_PASSWORD: "root", // 中尾専用

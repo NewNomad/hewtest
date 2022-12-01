@@ -1,5 +1,5 @@
 import { LocalDrink } from '@mui/icons-material'
-import { Grid, Modal, Paper } from '@mui/material'
+import { CircularProgress, Grid, Modal, Paper } from '@mui/material'
 import Product from '../2molecules/Product'
 import { ProductTabs } from '../2molecules/ProductTabs'
 import { ShowModalInfo } from '../2molecules/ShowModalInfo'
@@ -14,7 +14,7 @@ const fetcher = (url: string) => fetch(url).then(response => response.json());
 export const Products = () => {
 
     const { data, error } = useSWR<TypeProducts[]>(fetchProduct, fetcher);
-    console.log(data);
+    if (error) return (<>エラーが発生しました。管理者へ連絡してください</>)
 
     const [mordalInfo, setmordalInfo] = useState<boolean>(false)    // 商品詳細画面
 
@@ -28,25 +28,23 @@ export const Products = () => {
             <Grid container direction="column" spacing={0.5} padding={0}>
 
                 {
-                    data ?
-                        [...Array(3)].map((e, i) => (
+                    [...Array(3)].map((e, i) => (
 
-                            <Grid key={i} item xs={4} sx={{ height: "100%" }} container spacing={0.5} padding={0} paddingTop={0} paddingBottom={0}>
-                                {[...Array(12)].map((item, j) => (
-                                    <Grid key={j} item xs={1}>
+                        <Grid key={i} item xs={4} sx={{ height: "100%" }} container spacing={0.5} padding={0} paddingTop={0} paddingBottom={0}>
+                            {[...Array(12)].map((item, j) => (
+                                <Grid key={j} item xs={1}>
+                                    {data ?
+
                                         <Product
                                             OpenMInfo={OpenMInfo}
                                             proinfo={data![j + 12 * i]}
-                                            // key={data![j + 12 * i].id}
+                                        key={data![j + 12 * i].id}
                                         />
-                                    </Grid>
-                                )
-
-                                )}
-
-                            </Grid>
-                        ))
-                        : <></>
+                                        : <CircularProgress></CircularProgress>}
+                                </Grid>
+                            ))}
+                        </Grid>
+                    ))
                 }
                 <Grid item xs={1} marginTop={2}>
                     <ProductTabs />

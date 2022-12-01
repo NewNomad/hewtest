@@ -3,7 +3,8 @@ import { AcUnit, Whatshot } from '@mui/icons-material'
 import Image from 'next/image'
 import React from 'react'
 import { TypeProducts } from '../types/TypeProducts'
-import { useCart } from '../types/TypeCart'
+import { cartState, useCart } from '../types/TypeCart'
+import { useRecoilState } from 'recoil'
 
 type Props = {
     OpenMInfo: () => void;
@@ -15,7 +16,6 @@ export default function Product({ OpenMInfo, proinfo }: Props) {
     // const TimageURL = imageURL.replace(/(\d{4})\//, "$1/$1") ///DBと名前が違ったので、暫定的におく
 
     const { addCart } = useCart()
-console.log();
 
     return (
 
