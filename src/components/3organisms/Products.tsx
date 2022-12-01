@@ -16,10 +16,7 @@ export const Products = () => {
     const { data, error } = useSWR<TypeProducts[]>(fetchProduct, fetcher);
     if (error) return (<>エラーが発生しました。管理者へ連絡してください</>)
 
-    const [mordalInfo, setmordalInfo] = useState<boolean>(false)    // 商品詳細画面
 
-    const OpenMInfo = () => setmordalInfo(true);                    // 商品詳細画面(モーダル)開く
-    const CloseMInfo = () => setmordalInfo(false);                  // 商品詳細画面(モーダル)閉じる
 
     return (
         // <Container>
@@ -36,9 +33,8 @@ export const Products = () => {
                                     {data ?
 
                                         <Product
-                                            OpenMInfo={OpenMInfo}
                                             proinfo={data![j + 12 * i]}
-                                        key={data![j + 12 * i].id}
+                                            key={data![j + 12 * i].id}
                                         />
                                         : <CircularProgress></CircularProgress>}
                                 </Grid>
@@ -51,10 +47,7 @@ export const Products = () => {
                 </Grid>
             </Grid>
 
-            {/* 商品詳細画面(モーダル) */}
-            <Modal open={mordalInfo} onClose={CloseMInfo} >
-                <ShowModalInfo />
-            </Modal>
+
         </>
         // </Paper>
         // </Container>

@@ -60,8 +60,8 @@ export const CartItem = ({ product }: Props) => {
                             <Add />
                         </Button>
                     </ButtonGroup>
-                    <Typography variant='h5' fontWeight="bold">
-                        ¥{product.price}
+                    <Typography variant='h6' fontWeight="bold">
+                        ¥{product.price} 計¥{product.price * product.quantity}
 
                     </Typography>
                 </Container>
