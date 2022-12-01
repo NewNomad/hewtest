@@ -1,55 +1,55 @@
-import { Grid, Typography } from '@mui/material'
+import { Grid, Typography }     from '@mui/material'
+import { GridItem }             from '../1atoms/GridItem'
 import { ShowAmount }           from '../1atoms/ShowAmount'
 import { ShowPrice }            from '../1atoms/ShowPrice'
-import React, { useState }      from "react";
+import React from "react";
 
-export const ShowPayDetail = ( props:{sumPay:number} ) =>{
-    const { sumPay } = props
+type Props = {
+    sum: number
+    costs: number
+    request: number,
+    change: number
+    ClickMinus: () => void
+    ClickPlus: () => void
+}
 
-    const [costs, setCosts]             = useState(0);
-    // const [requestPay, setRequestPay]   = useState(0);
-    // const [change, setChange]           = useState(1000);
+export const ShowPayDetail = ( props:Props ) =>{
 
-    const requestPay = (sumPay - costs) > 0? (sumPay - costs): 0;
-    const change = (costs - sumPay)>0? (costs - sumPay): 0;
-
-    const ClickMinus = () => { setCosts(costs - 100); };
-    const ClickPlus = () => { setCosts(costs + 100); };
+    const { sum, costs, request, change, ClickMinus, ClickPlus } = props
 
     return (
         <>
             <Grid container textAlign="center">
-                <Grid item xs={5} height={70}>
+                <GridItem title>
                     <Typography>合計金額</Typography>
-                </Grid>
-                <Grid item xs={7} textAlign='right'>
-                    <ShowPrice>{sumPay}</ShowPrice>
-                </Grid>
+                </GridItem>
+                <GridItem>
+                    <ShowPrice>{ sum }</ShowPrice>
+                </GridItem>
 
-                <Grid item xs={5} height={70}>
+                <GridItem title>
                     <Typography>お預かり</Typography>
-                </Grid>
-                <Grid item xs={7} textAlign='right'>
+                </GridItem>
+                <GridItem>
                     <ShowPrice>
                         <ShowAmount costs={costs} ClickMinus={ClickMinus} ClickPlus={ClickPlus} />
                     </ShowPrice>
-                </Grid>
+                </GridItem>
 
-                <Grid item xs={5} height={70}>
+                <GridItem title>
                     <Typography>残り金額</Typography>
-                </Grid>
-                <Grid item xs={7}  textAlign='right'>
-                    <ShowPrice>{requestPay}</ShowPrice>
-                </Grid>
+                </GridItem>
+                <GridItem>
+                    <ShowPrice primary={request > 0} >{ request }</ShowPrice>
+                </GridItem>
 
-                <Grid item xs={5} height={70}>
+                <GridItem title>
                     <Typography>おつり</Typography>
-                </Grid>
-                <Grid item xs={7} textAlign='right'>
-                    <ShowPrice>{change}</ShowPrice>
-                </Grid>
+                </GridItem>
+                <GridItem>
+                    <ShowPrice>{ change }</ShowPrice>
+                </GridItem>
             </Grid>
-
         </>
     )
 }

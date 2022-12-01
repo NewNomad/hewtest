@@ -18,7 +18,8 @@ export default function ShowAdvertisment(){
                     </Box>
                 </Box>
 
-                <LinkButton btnName='タップで商品一覧表示に戻ります(未実装)' url='/' />
+                <LinkButton url='/'>タップで商品一覧表示に戻ります(未実装)</LinkButton>
+
             </Box>
 
         </>

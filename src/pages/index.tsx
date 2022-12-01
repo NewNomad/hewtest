@@ -42,7 +42,7 @@ const Home: NextPage = () => {
         </Grid>
 
         {/* </Container> */}
-        <LinkButton btnName='一定時間放置で広告表示に移ります(未実装)' url='/ShowAdvertisment' />
+        <LinkButton url='/ShowAdvertisment'>一定時間放置で広告表示に移ります(未実装)</LinkButton>
 
       </Box>
 

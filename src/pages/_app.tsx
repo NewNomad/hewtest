@@ -1,10 +1,11 @@
-import { ThemeProvider }  from '@mui/material/styles';
-import CssBaseline        from '@mui/material/CssBaseline';
-import Head               from 'next/head';
-import type { AppProps }  from 'next/app'
-import theme              from '../theme';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import Head from 'next/head';
+import type { AppProps } from 'next/app'
+import theme from '../theme';
 import createEmotionCache from '../createEmotionCache';
 import { CacheProvider, EmotionCache } from '@emotion/react';
+import { RecoilRoot } from 'recoil';
 
 const clientSideEmotionCache = createEmotionCache();
 interface MyAppProps extends AppProps {
@@ -12,17 +13,21 @@ interface MyAppProps extends AppProps {
 }
 
 function MyApp(props: MyAppProps) {
+
     const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+
     return (
-        <CacheProvider value={emotionCache}>
-            <Head>
-                <meta name="viewport" content="initial-scale=1, width=device-width" />
-            </Head>
-            <ThemeProvider theme={theme}>
-                <CssBaseline />
-                <Component {...pageProps} />
-            </ThemeProvider>
-        </CacheProvider>
+        // <RecoilRoot>
+            <CacheProvider value={emotionCache}>
+                <Head>
+                    <meta name="viewport" content="initial-scale=1, width=device-width" />
+                </Head>
+                <ThemeProvider theme={theme}>
+                    <CssBaseline />
+                    <Component {...pageProps} />
+                </ThemeProvider>
+            </CacheProvider>
+        // </RecoilRoot>
     )
 }
 
