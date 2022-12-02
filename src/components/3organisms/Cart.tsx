@@ -24,7 +24,7 @@ export const Cart = () => {
     const items = cart.products
 
     return (
-        <Paper >
+        <Paper>
 
             <Container sx={{
                 padding: 2
@@ -43,13 +43,13 @@ export const Cart = () => {
                 >{items.map((product) => (
                     <Box key={product.id}>
                         <ListItem>
-                            <CartItem product={product}/>
+                            <CartItem product={product} />
                         </ListItem>
                         <Divider />
                     </Box>
                 ))
                     }</List>
-                <Divider></Divider>
+                <Divider />
                 <BtnTotalAmount OpenMConfirm={OpenMConfirm} />
             </Container>
 

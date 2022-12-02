@@ -20,10 +20,10 @@ export const ShowWeather = (props: { place: string }) => {
     const { data, error } = useSWR(kujiraUrl, fetcher);
 
     // 読み込み失敗
-    if (error) return <Typography>読込失敗</Typography>
+    if (error) return <Typography>天気表示：読込失敗</Typography>
 
     // 読み込み中
-    if (!data) return <Typography>読込中</Typography>
+    if (!data) return <Typography>天気表示：読込中</Typography>
 
     // 読み込み成功
     return <Typography>{data[info.place][0]["forecast"]}</Typography>

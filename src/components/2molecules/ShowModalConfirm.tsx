@@ -1,6 +1,6 @@
 import { Box, Button, Container, Divider, Grid, Paper, Typography } from '@mui/material'
-import { ShowMordal } from '../1atoms/ShowModal'
-import { ModalConfirmProduct } from '../1atoms/ModalConfirmProduct'
+import { ShowMordal }           from '../1atoms/ShowModal'
+import { ModalConfirmProduct }  from '../1atoms/ModalConfirmProduct'
 import Link from 'next/link'
 import React from 'react'
 import { useRecoilValue } from 'recoil'
@@ -15,7 +15,7 @@ export const ShowModalConfirm = ({ closeModal }: Props) => {
     const total = useRecoilValue(totalPriceSelector)
 
     return (
-        <ShowMordal >
+        <ShowMordal>
             <Box height={530} sx={{
                 position: "flex",
                 overflow: "scroll",
@@ -35,6 +35,7 @@ export const ShowModalConfirm = ({ closeModal }: Props) => {
                 <Typography textAlign="right">
                     合計{total}円
                 </Typography>
+
                 <Typography textAlign="center" variant='h5' color="red">
                     以上{cart.products.length}点でよろしいですか？
                 </Typography>
@@ -49,7 +50,9 @@ export const ShowModalConfirm = ({ closeModal }: Props) => {
                         </Link>
                     </Grid>
                 </Grid>
+
             </Container>
+
         </ShowMordal>
     )
 }
