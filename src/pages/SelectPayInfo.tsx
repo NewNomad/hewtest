@@ -1,7 +1,7 @@
 import { Box, Grid, Modal, Paper, Button, Typography }  from '@mui/material'
 import { Container }            from '@mui/system'
 import { BtnSelectPayInfo }     from '../components/1atoms/BtnSelectPayInfo'
-import { LinkButton }              from '../components/1atoms/BtnLink'
+import { LinkButton }           from '../components/1atoms/BtnLink'
 import { HeadInfo }             from '../components/2molecules/HeadInfo'
 import { Header }               from '../components/2molecules/Header'
 import { SelectElMoney }        from '../components/3organisms/SelectElMoney'
