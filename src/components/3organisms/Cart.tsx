@@ -50,7 +50,7 @@ export const Cart = () => {
                 ))
                     }</List>
                 <Divider />
-                <BtnTotalAmount OpenMConfirm={OpenMConfirm} />
+                <BtnTotalAmount OpenMConfirm={OpenMConfirm} totalPrice={totalPrice}/>
             </Container>
 
             {/* 購入確認画面(モーダル) */}

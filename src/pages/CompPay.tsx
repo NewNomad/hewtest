@@ -5,20 +5,31 @@ import { Header } from '../components/2molecules/Header'
 import { LinkButton } from '../components/1atoms/BtnLink'
 import Link from 'next/link'
 import useSWR from 'swr'
+import { useRecoilState } from 'recoil'
+import { cartState } from '../components/types/TypeCart'
+import { useEffect } from 'react'
 
 const updateStock = "/api/updateStock"
 const fetcher = (url: string) => fetch(url).then(response => response.json());
 
 export default function CheckPay() {
 
-    const { data, error } = useSWR(updateStock, fetcher);
+    // const { data, error } = useSWR(updateStock, fetcher);
 
-    if (!data) return (<Backdrop
-        sx={{
-            color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1
-        }}
-        open={true}></Backdrop>)
-    if (error) return ("エラーです")
+    // if (!data) return (<Backdrop
+    //     sx={{
+    //         color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1
+    //     }}
+    //     open={true}></Backdrop>)
+    // if (error) return ("エラーです")
+
+    const [cart, setCart] = useRecoilState(cartState)
+    useEffect(() => {
+        setCart({
+            products: []
+        })
+    }, [])
+
 
     return (
         <>

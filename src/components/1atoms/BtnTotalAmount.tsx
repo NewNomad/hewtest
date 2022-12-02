@@ -2,14 +2,15 @@ import { ShoppingCartCheckout } from '@mui/icons-material'
 import { Box, Button, Container, Typography } from '@mui/material'
 import React from 'react'
 type Props = {
-    OpenMConfirm: () => void
+    OpenMConfirm: () => void;
+    totalPrice: number
 }
 
 // ======================================================
 // 会計画面遷移ボタン
 // ======================================================
 
-export const BtnTotalAmount = ({ OpenMConfirm }: Props) => {
+export const BtnTotalAmount = ({ OpenMConfirm, totalPrice }: Props) => {
     const size = 50
 
     return (
@@ -17,14 +18,14 @@ export const BtnTotalAmount = ({ OpenMConfirm }: Props) => {
         <Button
             variant="contained"
             color='primary'
-
+disabled={totalPrice>0?false:true}
             sx={{
                 width: "100%",
                 // padding: 5,
                 fontSize: size,
                 marginBottom: 1,
                 marginTop: 2,
-                borderRadius:50,
+                borderRadius: 50,
 
             }}
             endIcon={<ShoppingCartCheckout sx={{
