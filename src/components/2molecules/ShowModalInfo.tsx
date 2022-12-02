@@ -7,7 +7,7 @@ import { useCart } from '../types/TypeCart'
 import { TypeProducts } from '../types/TypeProducts'
 
 type Props = {
-    product: TypeProducts
+    product: TypeProducts;
 }
 
 
@@ -20,7 +20,7 @@ export const ShowModalInfo = ({ product }: Props) => {
                 {/* 上 */}
                 <Grid container item xs={8}>
                     <Grid item xs={4}>
-                        <Image src={"/"+product.imageURL} height={1800} width={800} objectFit="contain"></Image>
+                        <Image src={"/" + product.imageURL} height={1800} width={800} objectFit="contain"></Image>
                     </Grid>
                     <Grid item xs={8}>
                         <Container>
@@ -54,7 +54,8 @@ export const ShowModalInfo = ({ product }: Props) => {
 
                     </Grid>
                     <Grid item xs={4}>
-                        <Button color='primary' variant="contained" onClick={() => addCart(product)}>カートに追加</Button>
+                        <Button color='primary' variant="contained"
+                            onClick={() => addCart(product)}>カートに追加</Button>
                     </Grid>
                 </Grid>
             </Grid>

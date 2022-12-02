@@ -14,6 +14,7 @@ type Props = {
 export default function Product({ proinfo }: Props) {
     const { id, name, price, stock, isice, imageURL } = proinfo
     // const TimageURL = imageURL.replace(/(\d{4})\//, "$1/$1") ///DBと名前が違ったので、暫定的におく
+    const isActive: boolean = stock > 0 ? true : false
 
     const [mordalInfo, setmordalInfo] = useState<boolean>(false)    // 商品詳細画面
 
@@ -35,22 +36,31 @@ export default function Product({ proinfo }: Props) {
                 <Tooltip title="詳細" arrow>
                     <Button
                         onClick={OpenMInfo}
+                        disabled={isActive ? false : true}
                         sx={{
                             width: 1,
                             borderBottomLeftRadius: 0,
                             borderBottomRightRadius: 0,
                         }}>
-                        <Image src={"/" + imageURL} height={180} width={100} objectFit="contain"></Image>
+                        <Image src={"/" + imageURL} height={180} width={100} objectFit="contain"
+
+                            style={
+                                isActive == false
+                                    ? { filter: "grayscale(100%)" }
+                                    : {}
+                            }
+                        ></Image>
                     </Button>
                 </Tooltip>
                 <Divider />
                 <Tooltip title="カートに追加" arrow>
                     <Button color='secondary' variant="text" size='small' disableElevation
                         onClick={() => addCart(proinfo)}
+                        disabled={isActive ? false : true}
                         startIcon={
                             isice == 1
-                                ? <AcUnit color="info" />
-                                : <Whatshot color='primary'></Whatshot>
+                                ? <AcUnit color={isActive ? "info" : "secondary"} />
+                                : <Whatshot color={isActive ? 'primary' : "secondary"} ></Whatshot>
                         }
                         // <Button color='secondary' variant="contained" size='small' disableElevation
                         sx={{
@@ -66,7 +76,7 @@ export default function Product({ proinfo }: Props) {
             </Paper>
             {/* 商品詳細画面(モーダル) */}
             <Modal open={mordalInfo} onClose={CloseMInfo} >
-                <ShowModalInfo product={proinfo} />
+                <ShowModalInfo product={proinfo}/>
             </Modal>
         </>
     )

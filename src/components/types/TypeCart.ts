@@ -44,6 +44,11 @@ export const useCart = () => {
             })
         } else {
             // カートに商品が入ってる場合
+            // 在庫が足らなければだめ
+            if (selectItem.stock - selectItem.quantity <= 0) {
+                alert(product.name + "の在庫がありません！！")
+                return
+            }
             setCart((prevCart) => {
                 return {
                     products: prevCart.products.map((_product) =>
