@@ -2,6 +2,7 @@ import { Box, Typography, Button, Grid }                  from '@mui/material'
 import { HeadInfo }             from '../components/2molecules/HeadInfo'
 import { Header }               from '../components/2molecules/Header'
 import { LinkButton }           from '../components/1atoms/BtnLink'
+import React, { useRef, useEffect } from 'react'
 
 export default function ShowAdvertisment() {
     return (
