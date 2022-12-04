@@ -11,7 +11,7 @@ type Props = {
     payType: string
 }
 
-export const SelectElMoney = ( props:Props ) => {
+export const ModalPayType = ( props:Props ) => {
 
     const { children, onClick, payType } = props
 
@@ -40,22 +40,6 @@ export const SelectElMoney = ( props:Props ) => {
                             )
                         ))
                     }
-
-                    {/* <Grid item xs={4}>
-                        <BtnLink onClick={onClick} primary largeFont>WAON</BtnLink>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <BtnLink onClick={onClick} primary largeFont>ID</BtnLink>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <BtnLink onClick={onClick} primary largeFont>QUICPay</BtnLink>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <BtnLink onClick={onClick} primary largeFont>楽天Edy</BtnLink>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <BtnLink onClick={onClick} primary largeFont>交通系電子マネー</BtnLink>
-                    </Grid> */}
 
                 </Grid>
 

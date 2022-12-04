@@ -31,7 +31,7 @@ export default function ShowAdvertisment() {
                     </Box>
                 </Box>
 
-                <BtnLink onClick={() => router.push("/")}>商品一覧表示に戻りますa</BtnLink>
+                <BtnLink onClick={() => router.push("/")}>商品一覧表示に戻ります</BtnLink>
 
             </Box>
 

@@ -4,8 +4,7 @@ import { TextTitle }            from '../components/1atoms/TextTitle'
 import { BtnLink }              from '../components/1atoms/BtnLink'
 import { HeadInfo }             from '../components/2molecules/HeadInfo'
 import { Header }               from '../components/2molecules/Header'
-import { SelectElMoney }        from '../components/3organisms/SelectElMoney'
-import { SelectQrMoney }        from '../components/3organisms/SelectQrMoney'
+import { ModalPayType }         from '../components/3organisms/ModalPayType'
 import { TypePayInfos }         from '../components/types/TypePayInfos'
 import { useRouter }            from 'next/router'
 import React, { useState }      from 'react'
@@ -67,7 +66,7 @@ export default function SelectPayInfo() {
 
                     <Grid container textAlign="center" height={700} paddingBottom={5} spacing={1}>
                         <Grid item xs={6}>
-                            <BtnLink onClick={() => router.push(nextUrl)} primary largeFont>{ data[0].pay_info_name }</BtnLink>
+                            <BtnLink onClick={() => router.push(nextUrl)} primary largeFont>{ data[0].pay_info_type == 1?data[0].pay_info_name:'設定エラー' }</BtnLink>
                         </Grid>
 
                         <Grid container item xs={6} direction="column" spacing={1}>
@@ -86,12 +85,12 @@ export default function SelectPayInfo() {
 
                 {/* 電子マネー決済選択 */}
                 <Modal open={mordalEl} onClose={CloseMEl} >
-                    <SelectElMoney payType='El' onClick={() => router.push(nextUrl)}>{ data }</SelectElMoney>
+                    <ModalPayType payType='El' onClick={() => router.push(nextUrl)}>{ data }</ModalPayType>
                 </Modal>
 
                 {/* QRコード決済選択 */}
                 <Modal open={mordalQr} onClose={CloseMQr} >
-                    <SelectElMoney payType='QR' onClick={() => router.push(nextUrl)}>{ data }</SelectElMoney>
+                    <ModalPayType payType='QR' onClick={() => router.push(nextUrl)}>{ data }</ModalPayType>
                 </Modal>
 
         </Box>
