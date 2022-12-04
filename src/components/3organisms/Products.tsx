@@ -36,7 +36,7 @@ export const Products = () => {
                                             proinfo={data![j + 12 * i]}
                                             key={data![j + 12 * i].id}
                                         />
-                                        : <CircularProgress></CircularProgress>}
+                                        : <CircularProgress />}
                                 </Grid>
                             ))}
                         </Grid>
@@ -46,7 +46,6 @@ export const Products = () => {
                     <ProductTabs />
                 </Grid>
             </Grid>
-
 
         </>
         // </Paper>

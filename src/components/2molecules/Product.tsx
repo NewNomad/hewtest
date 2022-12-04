@@ -1,11 +1,11 @@
 import { Button, Divider, Modal, Paper, Tooltip } from '@mui/material'
 import { AcUnit, Whatshot } from '@mui/icons-material'
+import { ShowModalInfo }        from './ShowModalInfo'
+import { TypeProducts }         from '../types/TypeProducts'
+import { cartState, useCart }   from '../types/TypeCart'
 import Image from 'next/image'
-import React, { useState } from 'react'
-import { TypeProducts } from '../types/TypeProducts'
-import { cartState, useCart } from '../types/TypeCart'
 import { useRecoilState } from 'recoil'
-import { ShowModalInfo } from './ShowModalInfo'
+import React, { useState } from 'react'
 
 type Props = {
     proinfo: TypeProducts;
@@ -13,7 +13,9 @@ type Props = {
 
 export default function Product({ proinfo }: Props) {
     const { id, name, price, stock, isice, imageURL } = proinfo
-    // const TimageURL = imageURL.replace(/(\d{4})\//, "$1/$1") ///DBと名前が違ったので、暫定的におく
+
+    // const TimageURL = imageURL.replace(/(\d{4})\//, "$1/$1")     // DBと名前が違ったので、暫定的におく
+
     const isActive: boolean = stock > 0 ? true : false
 
     const [mordalInfo, setmordalInfo] = useState<boolean>(false)    // 商品詳細画面
@@ -42,17 +44,18 @@ export default function Product({ proinfo }: Props) {
                             borderBottomLeftRadius: 0,
                             borderBottomRightRadius: 0,
                         }}>
-                        <Image src={"/" + imageURL} height={180} width={100} objectFit="contain"
-
-                            style={
-                                isActive == false
-                                    ? { filter: "grayscale(100%)" }
-                                    : {}
-                            }
-                        ></Image>
+                        <Image
+                            src={"/" + imageURL}
+                            height={180}
+                            width={100}
+                            objectFit="contain"
+                            style={ isActive == false ? { filter: "grayscale(100%)" }: {} }
+                            alt="商品画像" />
                     </Button>
                 </Tooltip>
+
                 <Divider />
+
                 <Tooltip title="カートに追加" arrow>
                     <Button color='secondary' variant="text" size='small' disableElevation
                         onClick={() => addCart(proinfo)}
@@ -74,9 +77,10 @@ export default function Product({ proinfo }: Props) {
                     </Button>
                 </Tooltip>
             </Paper>
+
             {/* 商品詳細画面(モーダル) */}
-            <Modal open={mordalInfo} onClose={CloseMInfo} >
-                <ShowModalInfo product={proinfo}/>
+            <Modal open={mordalInfo} onClose={CloseMInfo}>
+                <ShowModalInfo product={proinfo} />
             </Modal>
         </>
     )
