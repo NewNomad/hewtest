@@ -16,7 +16,7 @@ export default function ShowAdvertisment() {
                     <Box sx={{ width: '100%', height: 800, backgroundColor: 'primary.main', opacity: 1.0 }}>
                         {/* <Typography>広告表示</Typography> */}
                         <React.StrictMode>
-                            <video controls loop autoPlay muted width="100%" height="100%">
+                            <video loop autoPlay muted width="100%" height="100%">
                                 <source src="CM.mp4" type="video/mp4" />
                                 <p>Your browser doesn't support HTML5 video.</p>
                             </video>
