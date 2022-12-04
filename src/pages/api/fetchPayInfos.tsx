@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import mysql from "serverless-mysql"
-import { log } from 'console';
+// import { log } from 'console';
 
 const db = mysql({
   config: {
@@ -34,7 +34,9 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
             f_pay_info_name     AS pay_info_name,
             f_pay_info_type     AS pay_info_type
         FROM
-            t_pay_infos;
+            t_pay_infos
+        ORDER BY pay_info_id
+        ;
     `);
 
     return res.status(200).json(result)

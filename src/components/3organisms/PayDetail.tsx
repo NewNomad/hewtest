@@ -1,10 +1,20 @@
 import { Box, Button, Paper, Typography, Grid } from '@mui/material'
 import { TextTitle }            from '../1atoms/TextTitle'
-import { LinkButton }           from '../1atoms/BtnLink'
+import { BtnLink }              from '../1atoms/BtnLink'
 import { GridItem }             from '../1atoms/GridItem'
 import { ShowPayDetail }        from '../2molecules/ShowPayDetail'
+import { useRouter }            from 'next/router'
 import React  from 'react';
 
+// ---------------------------------------------------
+// 定数
+// ---------------------------------------------------
+const nextUrl:string = "/CompPay"
+const backUrl:string = "/SelectPayInfo"
+
+// ---------------------------------------------------
+// 型宣言
+// ---------------------------------------------------
 type Props = {
     sum: number
     costs: number
@@ -18,13 +28,18 @@ export const PayDetail = ( props:Props ) =>{
 
     const { sum, costs, request, change, ClickMinus, ClickPlus } = props
 
+    // -----------------------------------------------
+    // ルーティング
+    // -----------------------------------------------
+    const router = useRouter()
+
     return (
 
         <Box sx={{ my:5, mx:20 }}>
 
             <Grid container spacing={3}>
                 <Grid item xs={12} textAlign="center">
-                    <TextTitle>入金処理を行っています…</TextTitle>
+                    <TextTitle primary>入金処理を行っています…</TextTitle>
                 </Grid>
 
                 <Grid item xs={7}>
@@ -47,10 +62,10 @@ export const PayDetail = ( props:Props ) =>{
 
                             <Grid container textAlign="center" padding={1} spacing={1} >
                                 <GridItem button>
-                                    <LinkButton url="/SelectPayInfo">戻る</LinkButton>
+                                    <BtnLink onClick={() => router.push(backUrl)}>戻る</BtnLink>
                                 </GridItem>
                                 <GridItem button>
-                                    <LinkButton url="/CompPay" primary disabled={request > 0}>支払う</LinkButton>
+                                    <BtnLink onClick={() => router.push(nextUrl)} primary disabled={request > 0}>支払う</BtnLink>
                                 </GridItem>
                             </Grid>
                         </Box>

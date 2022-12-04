@@ -3,8 +3,6 @@ import { TypeProducts } from "./TypeProducts"
 
 export type TypeCart = {
     products: TypeProducts[]
-
-
 }
 
 const initialState: TypeCart = {

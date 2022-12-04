@@ -5,6 +5,9 @@ type Props = {
     children: React.ReactNode
 }
 
+// ==================================================
+// モーダルのウィンドウ設定
+// ==================================================
 export const ShowMordal: React.FC<Props> = ({ children }) => {
     return (
         <Paper

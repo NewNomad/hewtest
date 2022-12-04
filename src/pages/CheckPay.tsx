@@ -2,8 +2,8 @@ import { Box }                  from '@mui/material'
 import { HeadInfo }             from '../components/2molecules/HeadInfo'
 import { Header }               from '../components/2molecules/Header'
 import { PayDetail }            from '../components/3organisms/PayDetail'
-import React, { useState }  from 'react';
-import { useRecoilValue } from 'recoil'
+import React, { useState }      from 'react';
+import { useRecoilValue }       from 'recoil'
 import { totalPriceSelector }   from '../components/types/TypeCart'
 
 // ===================================================

@@ -1,12 +1,10 @@
-import { AppBar, Button, Toolbar } from '@mui/material'
-import { ShowDate } from '../1atoms/ShowDate'
-import { ShowWeather } from '../1atoms/ShowWeather'
-import React from 'react'
-import { Info } from '@mui/icons-material';
+import { Info }                     from '@mui/icons-material';
+import { AppBar, Button, Toolbar }  from '@mui/material'
+import { ShowDate }       from '../1atoms/ShowDate'
+import { ShowWeather }    from '../1atoms/ShowWeather'
+import { BtnShowInfo }    from '../1atoms/BtnShowInfo';
 import { useRouter } from 'next/router';
-import { BtnShowInfo } from '../1atoms/BtnShowInfo';
-
-
+import React from 'react'
 
 // 自販機の設置場所
 const machinePlace: string = "名古屋";

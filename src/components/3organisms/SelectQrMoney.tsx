@@ -1,19 +1,23 @@
-import { Box, Button, Container, Divider, Grid, Typography } from '@mui/material'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import React from 'react'
+import { Container, Grid }  from '@mui/material'
 import { BtnSelectPayInfo } from '../1atoms/BtnSelectPayInfo'
-import { ShowMordal } from '../1atoms/ShowModal'
+import { ShowMordal }       from '../1atoms/ShowModal'
+import { TextTitle }        from '../1atoms/TextTitle'
+import { useRouter } from 'next/router'
+// import Link from 'next/link'
+import React from 'react'
 
+// ==================================================
+// QRコード選択画面
+// ==================================================
 export const SelectQrMoney = () => {
+
     const router = useRouter()
 
     return (
-        <ShowMordal >
+        <ShowMordal>
             <Container>
-                <Typography textAlign="center" variant='h3'>お支払い方法の選択</Typography>
 
-                <Divider />
+                <TextTitle>お支払い方法の選択</TextTitle>
 
                 <Grid container textAlign="center" spacing={1} height={500} width={1000} paddingTop={3}>
                     <Grid container item xs={4} direction="column" spacing={1}>

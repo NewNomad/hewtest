@@ -1,35 +1,37 @@
 import { Button }           from '@mui/material'
-import Router               from 'next/router'
 
 type Props = {
-    children: React.ReactNode
-    url: string
-    primary: boolean
+    children: React.ReactNode,
+    onClick: () => void,
+    primary: boolean,
+    largeFont: boolean,
     disabled: boolean
 }
 
 // =================================================
-// 画面遷移用ボタン(プロトタイピング用)
+// ボタン
 // =================================================
-const handler = (path:string) => Router.push(path)
+export const BtnLink = ( props:Props ) =>{
 
-export const LinkButton = ( props:Props ) =>{
+    const { children, onClick, primary, largeFont, disabled } = props
 
-    const { children, url, primary, disabled } = props
+    let setFontSize:number = largeFont? 40:20
 
     return (
         <Button
             variant='contained'
-            color={ primary?'primary':'secondary' }
-            onClick={()=>handler(url)}
-            sx={{ width: 1, height: 1, fontSize: 20}}
-            disabled={ disabled }>
+            color={ primary? 'primary':'secondary' }
+            onClick={onClick}
+            sx={{ width: 1, height: 1, fontSize: setFontSize}}
+            disabled={ disabled }
+            >
             { children }
         </Button>
     )
 }
 
-LinkButton.defaultProps = {
+BtnLink.defaultProps = {
     primary: false,
+    largeFont: false,
     disabled: false 
 }
