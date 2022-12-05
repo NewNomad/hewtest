@@ -1,4 +1,4 @@
-import { Box, Button, Paper, Typography, Grid } from '@mui/material'
+import { Box, Paper, Grid }     from '@mui/material'
 import { TextTitle }            from '../1atoms/TextTitle'
 import { BtnLink }              from '../1atoms/BtnLink'
 import { GridItem }             from '../1atoms/GridItem'
