@@ -1,4 +1,5 @@
-import { Box, Typography, Paper, Button, Grid, Backdrop } from '@mui/material'
+import { Box, Backdrop } from '@mui/material'
+import { Container }    from '@mui/system'
 import { TextTitle }    from '../components/1atoms/TextTitle'
 import { BtnLink }      from '../components/1atoms/BtnLink'
 import { HeadInfo }     from '../components/2molecules/HeadInfo'
@@ -14,6 +15,10 @@ const fetcher = (url: string) => fetch(url).then(response => response.json());
 
 export default function CheckPay() {
 
+    // -----------------------------------------------
+    // 在庫管理
+    // -----------------------------------------------
+    // ↓：一旦コメントアウトしています
     // const { data, error } = useSWR(updateStock, fetcher);
 
     // if (!data) return (<Backdrop
@@ -43,7 +48,7 @@ export default function CheckPay() {
             <Box sx={{ flexGrow: 1 }}>
                 <Header />
 
-                <Box textAlign="center" sx={{ margin: 5, padding: 10, pt: 8 }}>
+                <Container sx={{ pt: 8 }}>
                     <TextTitle primary>ありがとうございました！</TextTitle>
 
                     <Box sx={{ width: '100%', height: 600, padding: 10, backgroundColor: 'primary.main' }}>
@@ -52,7 +57,7 @@ export default function CheckPay() {
 
                     <BtnLink onClick={() => router.push("/")}>タップ/時間経過(未実装)で商品一覧に戻ります</BtnLink>
 
-                </Box>
+                </Container>
 
             </Box>
 

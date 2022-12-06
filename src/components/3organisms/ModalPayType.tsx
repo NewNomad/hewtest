@@ -15,7 +15,7 @@ export const ModalPayType = ( props:Props ) => {
 
     const { children, onClick, payType } = props
 
-    const payTypeId:number = payType == "QR"? 3: 2;
+    const payTypeId:number = payType == "QR"? 3: 2
 
     return (
         <ShowMordal>

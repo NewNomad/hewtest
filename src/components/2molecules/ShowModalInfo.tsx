@@ -20,7 +20,7 @@ export const ShowModalInfo = ({ product }: Props) => {
                 {/* 上 */}
                 <Grid container item xs={8}>
                     <Grid item xs={4}>
-                        <Image src={"/" + product.imageURL} height={1800} width={800} objectFit="contain"></Image>
+                        <Image src={"/" + product.imageURL} height={1800} width={800} objectFit="contain" alt="商品画像"></Image>
                     </Grid>
                     <Grid item xs={8}>
                         <Container>

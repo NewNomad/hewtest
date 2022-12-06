@@ -18,7 +18,7 @@ const backUrl:string = "/SelectPayInfo"
 type Props = {
     sum: number
     costs: number
-    request: number,
+    request: number
     change: number
     ClickMinus: () => void
     ClickPlus: () => void
@@ -33,15 +33,11 @@ export const PayDetail = ( props:Props ) =>{
     // -----------------------------------------------
     const router = useRouter()
 
-    return (
-
-        <Box sx={{ my:5, mx:20 }}>
+    return (                
+        <>
+            <TextTitle primary>入金処理を行っています…</TextTitle>
 
             <Grid container spacing={3}>
-                <Grid item xs={12} textAlign="center">
-                    <TextTitle primary>入金処理を行っています…</TextTitle>
-                </Grid>
-
                 <Grid item xs={7}>
                     <Box sx={{width: '100%', height: 600, padding: 10, backgroundColor: 'primary.main'}}>
                         [ここに画像]
@@ -73,8 +69,7 @@ export const PayDetail = ( props:Props ) =>{
                     </Paper>
                 </Grid>
 
-            </Grid>
-
-        </Box>
+        </Grid>
+        </>
     )
 }

@@ -1,4 +1,5 @@
 import { Box }                  from '@mui/material'
+import { Container }            from '@mui/system'
 import { HeadInfo }             from '../components/2molecules/HeadInfo'
 import { Header }               from '../components/2molecules/Header'
 import { PayDetail }            from '../components/3organisms/PayDetail'
@@ -20,7 +21,7 @@ export default function CheckPay(){
     const request = (sum - costs) > 0? (sum - costs): 0;    // 残り金額
     const change = (costs - sum) > 0? (costs - sum): 0;     // おつり
 
-    const ClickMinus = () => { setCosts(costs + 10); };
+    const ClickMinus = () => { setCosts(costs - 100); };
     const ClickPlus = () => { setCosts(costs + 100); };
 
     return (
@@ -30,7 +31,7 @@ export default function CheckPay(){
             <Box sx={{ flexGrow: 1 }}>
                 <Header />
 
-                <Box sx={{ pt: 8 }}>
+                <Container sx={{ pt: 8 }}>
                     <PayDetail
                         sum={sum}
                         costs={costs}
@@ -38,7 +39,7 @@ export default function CheckPay(){
                         change={change}
                         ClickMinus={ClickMinus}
                         ClickPlus={ClickPlus} />
-                </Box>
+                </Container>
 
             </Box>
         </>
