@@ -1,3 +1,4 @@
+import { Cancel, Close } from '@mui/icons-material'
 import { Paper } from '@mui/material'
 import React from 'react'
 
@@ -22,6 +23,14 @@ export const ShowMordal: React.FC<Props> = ({ children }) => {
                 p: 4
             }}
         >
+            <Close sx={{
+                position: "absolute",
+                right:-40,
+                top:-40,
+                fontSize:80,
+                borderRadius:50,
+                backgroundColor:"#fff"
+            }}></Close>
             {children}
         </Paper>
     )
