@@ -84,6 +84,7 @@ export default function CheckPay() {
     const [cart, setCart] = useRecoilState(cartState)
 
     useEffect(() => {
+        console.log(cart);
         setCart({ products: [], payment: 0 })
         updateStock(cart.products)
         insertReceipt(cart)
