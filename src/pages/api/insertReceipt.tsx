@@ -7,13 +7,13 @@ const portNum = process.env.MYSQL_PORT === undefined
                 : parseInt(process.env.MYSQL_PORT)
 
 const db = mysql({
-  config: {
-    host: process.env.MYSQL_HOST,
-    database: process.env.MYSQL_DATABASE,
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWORD,
-    port: portNum,
-  }
+    config: {
+        host: process.env.MYSQL_HOST,
+        database: process.env.MYSQL_DATABASE,
+        user: process.env.MYSQL_USER,
+        password: process.env.MYSQL_PASSWORD,
+        port: portNum,
+    }
 })
 
 exports.query = async (query: any) => {
@@ -29,9 +29,13 @@ exports.query = async (query: any) => {
 
 // 購入履歴登録
 // insert文のメモ
-export default async function handler( req: NextApiRequest, res: NextApiResponse,){
+export default async function handler(req: NextApiRequest, res: NextApiResponse,) {
 
     // console.log(req);
+
+    const date = new Date()
+    const receiptId = date.getFullYear() + date.getMonth() + date.getDate() + date.getHours() + date.getSeconds()
+    const buytime = `${date.getFullYear}-${date.getMonth()}-${date.getDate()}`
 
     // 領収TBL(実行1回)
     const result = await db.query(`
@@ -45,32 +49,52 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
                 f_receipt_endusedaytime,
                 f_receipt_isreserved)
             VALUES(
-                ${req.query.receipt_id},            // 書式:yyyyMMddXXXX
-                ${req.query.customer_id},           // Todo:顧客IDの取得有無
-                ${req.query.receipt_payment},
-                ${req.query.receipt_buy_time},
-                ${req.query.receipt_starttime},
+                ${receiptId},
+                1,
+                ${req.body.payment},
+                ${buytime},
                 now(),
-                0                                   // Todo:予約システム使用時は1に変更できるように改変
+                now(),
+                1
             );
     `);
 
+    //     INSERT INTO
+    //         t_receipts(
+    //             f_receipt_id,
+    //             f_customer_id,
+    //             f_receipt_payment,
+    //             f_receipt_buy_time,
+    //             f_receipt_startusedaytime,
+    //             f_receipt_endusedaytime,
+    //             f_receipt_isreserved)
+    //         VALUES(
+    //             ${receiptId},            // 書式:yyyyMMddXXXX
+    //             1,                       // Todo:顧客ID= 1(ゲスト)とする
+    //             ${req.query.receipt_payment},
+    //             ${f_receipt_buy_time},
+    //             ${req.query.receipt_buy_time},
+    //             now(),
+    //             now(),
+    //             1                        // Todo:予約システム使用時は1に変更できるように改変
+    //         );
+
     // 取引TBL(実行複数回)
     // Todo:現在考え中
-    const result_transactions = await db.query(`
-        INSERT INTO
-            t_transactions(
-                f_receipt_id,
-                f_product_id,
-                f_transaction_quantity,
-                f_transaction_amount)
-            VALUES(
-                ${req.query.receipt_id},
-                ${req.query.product_id},
-                ${req.query.transaction_quantity},
-                ${req.query.transaction_amount}
-        );
-    `);
+    // const result_transactions = await db.query(`
+    //     INSERT INTO
+    //         t_transactions(
+    //             f_receipt_id,
+    //             f_product_id,
+    //             f_transaction_quantity,
+    //             f_transaction_amount)
+    //         VALUES(
+    //             ${req.query.receipt_id},
+    //             ${req.query.product_id},
+    //             ${req.query.transaction_quantity},
+    //             ${req.query.transaction_amount}
+    //     );
+    // `);
 
     return res.status(200).json(result)
 }

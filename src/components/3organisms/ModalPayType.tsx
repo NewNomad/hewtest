@@ -8,17 +8,18 @@ import React from 'react'
 type Props = {
     children: TypePayInfos[],
     onClick: () => void,
-    payType: string
+    payType: string,
+    closeModal: () => void
 }
 
 export const ModalPayType = ( props:Props ) => {
 
-    const { children, onClick, payType } = props
+    const { children, onClick, payType, closeModal } = props
 
     const payTypeId:number = payType == "QR"? 3: 2
 
     return (
-        <ShowMordal>
+        <ShowMordal closeModal={closeModal}>
             <Container>
 
                 <TextTitle>お支払い方法の選択</TextTitle>

@@ -27,11 +27,13 @@ export const ShowMordal: React.FC<Props> = ({ children, closeModal }) => {
             <IconButton onClick={closeModal}>
                 <Close sx={{
                     position: "absolute",
-                    right: -40,
-                    top: -40,
-                    fontSize: 80,
+                    right: -950,
+                    top: -60,
+                    fontSize: 100,
                     borderRadius: 50,
-                    backgroundColor: "#fff"
+                    backgroundColor: "#fff",
+                    borderBottom:1,
+                    borderRight:1
                 }}></Close>
             </IconButton>
 

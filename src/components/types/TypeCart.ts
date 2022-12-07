@@ -2,11 +2,13 @@ import { atom, RecoilState, selector, useRecoilState } from "recoil"
 import { TypeProducts } from "./TypeProducts"
 
 export type TypeCart = {
-    products: TypeProducts[]
+    products: TypeProducts[],
+    payment?: number
 }
 
 const initialState: TypeCart = {
-    products: []
+    products: [],
+    payment: 0
 }
 
 // カートの情報
