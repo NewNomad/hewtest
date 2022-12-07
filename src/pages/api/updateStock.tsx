@@ -48,7 +48,7 @@ export default async function handler(
   })
 
 
-  console.log(req.body);
+  console.log(ids);
 
 
   // const result = await db.query(`UPDATE
