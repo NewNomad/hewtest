@@ -21,7 +21,7 @@ export const Cart = () => {
     const cart = useRecoilValue(cartState)
     const totalPrice = useRecoilValue(totalPriceSelector)
 
-    const items = cart.products
+    const items = [...cart.products].reverse()
 
     return (
         <Paper>

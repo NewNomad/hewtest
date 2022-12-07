@@ -44,6 +44,7 @@ export default async function handler(
 
   ids.map((id, index) => {
     let text = ""
+    stocks[index]
     text += `f_product_id = ${id}`
   })
 
