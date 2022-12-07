@@ -50,7 +50,7 @@ export const Cart = () => {
                 ))
                     }</List>
                 <Divider />
-                <Typography variant='h5' fontWeight="bold" textAlign="right">合計：{totalPrice}</Typography>
+                <Typography variant='h5' fontWeight="bold" textAlign="right">合計：{totalPrice}円</Typography>
                 <BtnTotalAmount OpenMConfirm={OpenMConfirm} totalPrice={totalPrice} />
             </Container>
 
