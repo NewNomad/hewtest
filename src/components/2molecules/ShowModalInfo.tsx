@@ -8,14 +8,15 @@ import { TypeProducts } from '../types/TypeProducts'
 
 type Props = {
     product: TypeProducts;
+    closeModal: () => void
 }
 
 
-export const ShowModalInfo = ({ product }: Props) => {
+export const ShowModalInfo = ({ product, closeModal }: Props) => {
     const { addCart } = useCart()
 
     return (
-        <ShowMordal>
+        <ShowMordal closeModal={closeModal}>
             <Grid container direction="column" spacing={0}>
                 {/* 上 */}
                 <Grid container item xs={8}>
@@ -55,7 +56,7 @@ export const ShowModalInfo = ({ product }: Props) => {
                     </Grid>
                     <Grid item xs={4}>
                         <Button color='primary' variant="contained"
-                            onClick={() => addCart(product)}>カートに追加</Button>
+                            onClick={()=>{addCart(product); closeModal()}} >カートに追加</Button>
                     </Grid>
                 </Grid>
             </Grid>
