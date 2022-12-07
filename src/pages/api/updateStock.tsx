@@ -12,7 +12,7 @@ const db = mysql({
     database: process.env.MYSQL_DATABASE,
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
-    port: process.env.MYSQL_PORT,
+    port: portNum,
   }
 })
 
@@ -55,5 +55,6 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
   // f_product_id = ${req.query.id}
   // `);
   // return res.status(200).json(result)
+
   return res.status(200).json({ status: "suceess" })
 }
