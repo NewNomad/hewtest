@@ -15,7 +15,7 @@ export const ShowModalConfirm = ({ closeModal }: Props) => {
     const total = useRecoilValue(totalPriceSelector)
 
     return (
-        <ShowMordal>
+        <ShowMordal closeModal={closeModal}>
             <Box height={530} sx={{
                 position: "flex",
                 overflow: "scroll",
