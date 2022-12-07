@@ -80,7 +80,7 @@ export default function Product({ proinfo }: Props) {
 
             {/* 商品詳細画面(モーダル) */}
             <Modal open={mordalInfo} onClose={CloseMInfo}>
-                <ShowModalInfo product={proinfo} />
+                <ShowModalInfo product={proinfo} closeModal={CloseMInfo}/>
             </Modal>
         </>
     )
