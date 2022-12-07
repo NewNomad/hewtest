@@ -37,6 +37,9 @@ export default function CheckPay() {
             id = id + product.id + ","
             stock = stock + (product.stock - product.quantity) + ","
         })
+        id = id.slice(0, -1)
+        stock = stock.slice(0, -1)
+
 
         axios.post(updateStockURL, {
             id: id,
@@ -44,7 +47,7 @@ export default function CheckPay() {
         }).then((res) => {
             console.log("success to update Stocks");
 
-        }).catch((e)=>{
+        }).catch((e) => {
             console.log(e);
         })
     }

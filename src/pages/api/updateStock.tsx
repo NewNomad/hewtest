@@ -44,7 +44,7 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
   })
 
 
-  console.log(req.body);
+  console.log(ids);
 
 
   // const result = await db.query(`UPDATE
