@@ -34,8 +34,30 @@ exports.query = async (query: any) => {
 
 export default async function handler( req: NextApiRequest, res: NextApiResponse, ) {
 
-    // console.log(req);
-    //   let sql = ""
+    let idreq: string = req.body.id as string;
+    let ids: string[] = idreq.split(",")
+
+    let stockreq: string = req.body.stock as string
+    let stocks: string[] = stockreq.split(",")
+
+    let sql: string = "UPDATE t_products    SET f_product_stock =  ";
+    sql += "CASE   f_product_id  "
+
+    ids.map((id, index) => {
+        sql += `WHEN ${id} THEN ${stocks[index]}    `
+    })
+
+    sql += "END     WHERE f_product_id      IN ("
+
+    ids.map((id, index) => {
+        sql += `${id}`
+
+        if(ids.length -1 > index){
+            sql += ", "
+        }
+    })
+
+    sql += ");"
 
     // デバッグ用表示
     console.log(ids);
