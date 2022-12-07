@@ -26,10 +26,10 @@ export const Cart = () => {
     return (
         <Paper>
 
-            <Container sx={{
-                padding: 2
-            }}>
+            <Container sx={{ padding: 2 }}>
+
                 <Typography variant='h3'>カート</Typography>
+
                 <List
                     sx={{
                         height: 500,
@@ -45,12 +45,17 @@ export const Cart = () => {
                         <ListItem>
                             <CartItem product={product} />
                         </ListItem>
+
                         <Divider />
+
                     </Box>
                 ))
                     }</List>
+
                 <Divider />
+
                 <BtnTotalAmount OpenMConfirm={OpenMConfirm} totalPrice={totalPrice}/>
+
             </Container>
 
             {/* 購入確認画面(モーダル) */}

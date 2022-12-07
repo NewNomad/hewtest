@@ -4,9 +4,12 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../../styles/Home.module.css'
 
-
 import mysql from "serverless-mysql"
 import { log } from 'console';
+
+const portNum = process.env.MYSQL_PORT === undefined
+                ? 3306
+                : parseInt(process.env.MYSQL_PORT)
 
 const db = mysql({
     config: {
@@ -14,8 +17,7 @@ const db = mysql({
         database: process.env.MYSQL_DATABASE,
         user: process.env.MYSQL_USER,
         password: process.env.MYSQL_PASSWORD,
-        port: process.env.MYSQL_PORT, // 中尾専用(mac)
-        // port: 3306,   // win
+        port: portNum,
     }
 })
 

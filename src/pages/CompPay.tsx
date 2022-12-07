@@ -7,7 +7,7 @@ import { Header }       from '../components/2molecules/Header'
 import { useRouter }    from 'next/router'
 import { cartState } from '../components/types/TypeCart'
 import useSWR from 'swr'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { useEffect } from 'react'
 
 const updateStock = "/api/updateStock"
@@ -16,30 +16,17 @@ const fetcher = (url: string) => fetch(url).then(response => response.json());
 export default function CheckPay() {
 
     // -----------------------------------------------
-    // 在庫管理
-    // -----------------------------------------------
-    // ↓：一旦コメントアウトしています
-    // const { data, error } = useSWR(updateStock, fetcher);
-
-    // if (!data) return (<Backdrop
-    //     sx={{
-    //         color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1
-    //     }}
-    //     open={true}></Backdrop>)
-    // if (error) return ("エラーです")
-
-    // const [cart, setCart] = useRecoilState(cartState)
-
-    // useEffect(() => {
-    //     setCart({
-    //         products: []
-    //     })
-    // }, [])
-
-    // -----------------------------------------------
     // ルーティング
     // -----------------------------------------------
     const router = useRouter()
+
+    // -----------------------------------------------
+    // 在庫管理
+    // -----------------------------------------------
+    const { data, error } = useSWR(updateStock, fetcher);
+
+    if (!data) return (<Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={true} />)
+    if (error) return ("エラーです")
 
     return (
         <>

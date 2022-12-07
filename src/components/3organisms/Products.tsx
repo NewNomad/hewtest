@@ -10,7 +10,6 @@ import { TypeProducts } from '../types/TypeProducts'
 const fetchProduct = "/api/fetchProducts"
 const fetcher = (url: string) => fetch(url).then(response => response.json());
 
-
 export const Products = () => {
 
     const { data, error } = useSWR<TypeProducts[]>(fetchProduct, fetcher);
