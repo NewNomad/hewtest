@@ -44,11 +44,12 @@ export default async function handler(
 
   ids.map((id, index) => {
     let text = ""
+    stocks[index]
     text += `f_product_id = ${id}`
   })
 
 
-  console.log(req.body);
+  console.log(ids);
 
 
   // const result = await db.query(`UPDATE
