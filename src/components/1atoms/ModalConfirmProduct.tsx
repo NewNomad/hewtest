@@ -9,19 +9,22 @@ type Props = {
 
 export const ModalConfirmProduct = ({ product }: Props) => {
     return (
-        <Paper elevation={3} sx={{ marginTop: 2 }}>
+        <Paper elevation={0} variant="outlined" sx={{ marginTop: 2,p:2 }}>
+            <Typography color="primary" fontWeight="bold">
+                {product.name}
+            </Typography>
             <Grid container alignItems="center" padding={3}>
                 <Grid item xs={4}>
                     <Image src={"/" + product.imageURL} width={200} height={200} objectFit="contain"></Image>
 
                 </Grid>
-                <Grid item xs={4}>
-                    <Typography variant='h2' color="red">
+                <Grid item xs={4} >
+                    <Typography variant='h5' color="primary">
                         ×{product.quantity}
                     </Typography>
                 </Grid>
                 <Grid item xs={4}>
-                    <Typography variant='h2'>
+                    <Typography variant='h3'>
                         ¥{product.price * product.quantity}
                     </Typography>
 

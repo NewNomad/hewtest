@@ -32,11 +32,11 @@ export const ShowModalConfirm = ({ closeModal }: Props) => {
             <Divider />
 
             <Container>
-                <Typography textAlign="right">
+                <Typography textAlign="right" variant='h5'>
                     合計{total}円
                 </Typography>
 
-                <Typography textAlign="center" variant='h5' color="red">
+                <Typography textAlign="center" variant='h5' color="primary" fontWeight="bold">
                     以上{cart.products.length}点でよろしいですか？
                 </Typography>
 
