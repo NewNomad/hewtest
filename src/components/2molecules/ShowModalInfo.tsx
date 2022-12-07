@@ -8,13 +8,12 @@ import { TypeProducts } from '../types/TypeProducts'
 
 type Props = {
     product: TypeProducts;
-    closeModal:()=>void
+    closeModal: () => void
 }
 
 
 export const ShowModalInfo = ({ product, closeModal }: Props) => {
-    const { addCart } = useCart();closeModal()
-
+    const { addCart } = useCart()
 
     return (
         <ShowMordal closeModal={closeModal}>
@@ -57,7 +56,7 @@ export const ShowModalInfo = ({ product, closeModal }: Props) => {
                     </Grid>
                     <Grid item xs={4}>
                         <Button color='primary' variant="contained"
-                            onClick={() => addCart(product)}>カートに追加</Button>
+                            onClick={()=>{addCart(product); closeModal()}} >カートに追加</Button>
                     </Grid>
                 </Grid>
             </Grid>

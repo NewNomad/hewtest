@@ -9,10 +9,9 @@ import React, { useState } from 'react'
 
 type Props = {
     proinfo: TypeProducts;
-    closeModal:()=>void
 }
 
-export default function Product({ proinfo, closeModal }: Props) {
+export default function Product({ proinfo }: Props) {
     const { id, name, price, stock, isice, imageURL } = proinfo
 
     // const TimageURL = imageURL.replace(/(\d{4})\//, "$1/$1")     // DBと名前が違ったので、暫定的におく
