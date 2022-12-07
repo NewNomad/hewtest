@@ -51,15 +51,15 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
 
         if(ids.length -1 > index){
             sql += ", "
-    stocks[index]
         }
     })
 
     sql += ");"
 
-    // console.log(ids);
-    // console.log(stocks);
-    // console.log(sql)
+    // デバッグ用表示
+    console.log(ids);
+    console.log(stocks);
+    console.log(sql)
 
     const result = await db.query(sql);
 
