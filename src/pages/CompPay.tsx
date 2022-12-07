@@ -1,16 +1,18 @@
 import { Box, Backdrop } from '@mui/material'
-import { Container }    from '@mui/system'
-import { TextTitle }    from '../components/1atoms/TextTitle'
-import { BtnLink }      from '../components/1atoms/BtnLink'
-import { HeadInfo }     from '../components/2molecules/HeadInfo'
-import { Header }       from '../components/2molecules/Header'
-import { useRouter }    from 'next/router'
+import { Container } from '@mui/system'
+import { TextTitle } from '../components/1atoms/TextTitle'
+import { BtnLink } from '../components/1atoms/BtnLink'
+import { HeadInfo } from '../components/2molecules/HeadInfo'
+import { Header } from '../components/2molecules/Header'
+import { useRouter } from 'next/router'
 import { cartState } from '../components/types/TypeCart'
 import useSWR from 'swr'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { useEffect } from 'react'
+import axios from "axios"
+import { TypeProducts } from '../components/types/TypeProducts'
 
-const updateStock = "/api/updateStock"
+const updateStockURL = "/api/updateStock"
 const fetcher = (url: string) => fetch(url).then(response => response.json());
 
 export default function CheckPay() {
@@ -18,7 +20,45 @@ export default function CheckPay() {
     // -----------------------------------------------
     // ルーティング
     // -----------------------------------------------
-    const router = useRouter()
+    // ↓：一旦コメントアウトしています
+    // const { data, error } = useSWR(updateStock, fetcher);
+
+    // if (!data) return (<Backdrop
+    //     sx={{
+    //         color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1
+    //     }}
+    //     open={true}></Backdrop>)
+    // if (error) return ("エラーです")
+
+    const updateStock = (products: TypeProducts[]) => {
+        let id = ""
+        let stock = ""
+        products.map(product => {
+            id = id + product.id + ","
+            stock = stock + (product.stock - product.quantity) + ","
+        })
+
+        axios.post(updateStockURL, {
+            id: id,
+            stock: stock
+        }).then((res) => {
+            console.log("success to update Stocks");
+
+        }).catch((e)=>{
+            console.log(e);
+        })
+    }
+
+
+
+    const [cart, setCart] = useRecoilState(cartState)
+
+    useEffect(() => {
+        setCart({
+            products: []
+        })
+        updateStock(cart.products)
+    }, [])
 
     // -----------------------------------------------
     // 在庫管理
