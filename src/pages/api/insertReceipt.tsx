@@ -2,14 +2,17 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import mysql, { Transaction } from "serverless-mysql"
 // import { log } from 'console';
 
+const portNum = process.env.MYSQL_PORT === undefined
+                ? 3306
+                : parseInt(process.env.MYSQL_PORT)
+
 const db = mysql({
   config: {
     host: process.env.MYSQL_HOST,
     database: process.env.MYSQL_DATABASE,
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
-    port: process.env.MYSQL_PORT, // 中尾専用(mac)
-    // port: 3306,   // win
+    port: portNum,
   }
 })
 

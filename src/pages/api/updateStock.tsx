@@ -1,7 +1,4 @@
-import { Identity } from '@mui/base';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { cartState } from '../../components/types/TypeCart'
-import { useRecoilState, useRecoilValue } from 'recoil'
 import mysql from "serverless-mysql"
 
 // import { log } from 'console';

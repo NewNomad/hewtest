@@ -22,16 +22,9 @@ export default function CheckPay() {
     // -----------------------------------------------
     const router = useRouter()
 
-    // ↓：一旦コメントアウトしています
-    // const { data, error } = useSWR(updateStock, fetcher);
-
-    // if (!data) return (<Backdrop
-    //     sx={{
-    //         color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1
-    //     }}
-    //     open={true}></Backdrop>)
-    // if (error) return ("エラーです")
-
+    // -----------------------------------------------
+    // 在庫管理
+    // -----------------------------------------------
     const updateStock = (products: TypeProducts[]) => {
         let id = ""
         let stock = ""
@@ -60,15 +53,6 @@ export default function CheckPay() {
         setCart({ products: [] })
         updateStock(cart.products)
     }, [])
-
-    // -----------------------------------------------
-    // 在庫管理
-    // -----------------------------------------------
-    // const { data, error } = useSWR(updateStock, fetcher);
-
-    // if (!data) return (<Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={true} />)
-    // if (error) return ("エラーです")
-    // if (!data) return (<TextTitle primary>更新処理中です</TextTitle>)
 
     return (
         <>
