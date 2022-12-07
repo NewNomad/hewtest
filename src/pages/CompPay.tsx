@@ -1,16 +1,16 @@
-import { Box, Backdrop } from '@mui/material'
-import { Container } from '@mui/system'
-import { TextTitle } from '../components/1atoms/TextTitle'
-import { BtnLink } from '../components/1atoms/BtnLink'
-import { HeadInfo } from '../components/2molecules/HeadInfo'
-import { Header } from '../components/2molecules/Header'
-import { useRouter } from 'next/router'
-import { cartState } from '../components/types/TypeCart'
-import useSWR from 'swr'
+import { Box, Backdrop }    from '@mui/material'
+import { Container }        from '@mui/system'
+import { TextTitle }        from '../components/1atoms/TextTitle'
+import { BtnLink }          from '../components/1atoms/BtnLink'
+import { HeadInfo }         from '../components/2molecules/HeadInfo'
+import { Header }           from '../components/2molecules/Header'
+import { useRouter }        from 'next/router'
+import { cartState }        from '../components/types/TypeCart'
+import { TypeProducts }     from '../components/types/TypeProducts'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { useEffect } from 'react'
+import useSWR from 'swr'
 import axios from "axios"
-import { TypeProducts } from '../components/types/TypeProducts'
+import { useEffect } from 'react'
 
 const updateStockURL = "/api/updateStock"
 const fetcher = (url: string) => fetch(url).then(response => response.json());
@@ -20,6 +20,8 @@ export default function CheckPay() {
     // -----------------------------------------------
     // ルーティング
     // -----------------------------------------------
+    const router = useRouter()
+
     // ↓：一旦コメントアウトしています
     // const { data, error } = useSWR(updateStock, fetcher);
 
@@ -33,13 +35,13 @@ export default function CheckPay() {
     const updateStock = (products: TypeProducts[]) => {
         let id = ""
         let stock = ""
+
         products.map(product => {
             id = id + product.id + ","
             stock = stock + (product.stock - product.quantity) + ","
         })
         id = id.slice(0, -1)
         stock = stock.slice(0, -1)
-
 
         axios.post(updateStockURL, {
             id: id,
@@ -52,24 +54,21 @@ export default function CheckPay() {
         })
     }
 
-
-
     const [cart, setCart] = useRecoilState(cartState)
 
     useEffect(() => {
-        setCart({
-            products: []
-        })
+        setCart({ products: [] })
         updateStock(cart.products)
     }, [])
 
     // -----------------------------------------------
     // 在庫管理
     // -----------------------------------------------
-    const { data, error } = useSWR(updateStock, fetcher);
+    // const { data, error } = useSWR(updateStock, fetcher);
 
-    if (!data) return (<Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={true} />)
-    if (error) return ("エラーです")
+    // if (!data) return (<Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={true} />)
+    // if (error) return ("エラーです")
+    // if (!data) return (<TextTitle primary>更新処理中です</TextTitle>)
 
     return (
         <>
