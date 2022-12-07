@@ -11,6 +11,8 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 import useSWR from 'swr'
 import axios from "axios"
 import { useEffect } from 'react'
+import { payState, TypePayment } from '../components/types/TypePayment'
+import { TypePayInfos } from '../components/types/TypePayInfos'
 
 const updateStockURL = "/api/updateStock"
 const insertReceipt = "/api/insertReceipt"
@@ -54,8 +56,9 @@ export default function CheckPay() {
             console.log(e);
         })
     }
-    const insertReceipt = (cart: TypeCart) => {
-        const { products, payment } = cart
+    const insertReceipt = (cart: TypeCart, pay: TypePayment) => {
+        const { products } = cart
+        const { payment } = pay
         let id = ""
         let quantity = ""
         let sell = ""
@@ -72,7 +75,8 @@ export default function CheckPay() {
         axios.post(updateStockURL, {
             id: id,
             quantity: quantity,
-            sell: sell
+            sell: sell,
+            payment: payment
         }).then((res) => {
             console.log("success to update Stocks");
 
@@ -82,12 +86,14 @@ export default function CheckPay() {
     }
 
     const [cart, setCart] = useRecoilState(cartState)
+    const [pay, setPay] = useRecoilState(payState)
 
     useEffect(() => {
         console.log(cart);
         setCart({ products: [], payment: 0 })
+        setPay({ payment: 0 })
         updateStock(cart.products)
-        insertReceipt(cart)
+        insertReceipt(cart, pay)
     }, [])
 
     // -----------------------------------------------
@@ -113,7 +119,7 @@ export default function CheckPay() {
                         [ここに画像]
                     </Box>
 
-                    <BtnLink onClick={() => router.push("/")}>タップ/時間経過(未実装)で商品一覧に戻ります</BtnLink>
+                    <BtnLink onClick={() => router.push("/")} payId={0}>タップ/時間経過(未実装)で商品一覧に戻ります</BtnLink>
 
                 </Container>
 

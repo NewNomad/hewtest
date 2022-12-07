@@ -1,6 +1,8 @@
 import { Button } from '@mui/material'
+import { useEffect } from 'react'
 import { useRecoilState } from 'recoil'
 import { cartState } from '../types/TypeCart'
+import { payState } from '../types/TypePayment'
 
 type Props = {
     children: React.ReactNode,
@@ -20,10 +22,21 @@ export const BtnLink = (props: Props) => {
 
     let setFontSize: number = largeFont ? 40 : 20
 
-    const [cart, setCart] = useRecoilState(cartState)
-    if (payId) { // payIdがあるならば
-        // setCart({ products: [...cart.products], payment: payId })
+    const [pay, setPay] = useRecoilState(payState)
+
+
+    const handleClick = () => {
+        if (payId) { // payIdがあるならば
+            setPay({ payment: payId })
+        } 
+        console.log(pay);
+
     }
+
+    useEffect(() => {
+        handleClick()
+    }, [])
+
 
     return (
         <Button
@@ -32,6 +45,7 @@ export const BtnLink = (props: Props) => {
             onClick={onClick}
             sx={{ width: 1, height: 1, fontSize: setFontSize }}
             disabled={disabled}
+
         >
             {children}
         </Button>
