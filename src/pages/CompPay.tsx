@@ -1,18 +1,19 @@
-import { Box, Backdrop }    from '@mui/material'
-import { Container }        from '@mui/system'
-import { TextTitle }        from '../components/1atoms/TextTitle'
-import { BtnLink }          from '../components/1atoms/BtnLink'
-import { HeadInfo }         from '../components/2molecules/HeadInfo'
-import { Header }           from '../components/2molecules/Header'
-import { useRouter }        from 'next/router'
-import { cartState }        from '../components/types/TypeCart'
-import { TypeProducts }     from '../components/types/TypeProducts'
+import { Box, Backdrop } from '@mui/material'
+import { Container } from '@mui/system'
+import { TextTitle } from '../components/1atoms/TextTitle'
+import { BtnLink } from '../components/1atoms/BtnLink'
+import { HeadInfo } from '../components/2molecules/HeadInfo'
+import { Header } from '../components/2molecules/Header'
+import { useRouter } from 'next/router'
+import { cartState, TypeCart } from '../components/types/TypeCart'
+import { TypeProducts } from '../components/types/TypeProducts'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import useSWR from 'swr'
 import axios from "axios"
 import { useEffect } from 'react'
 
 const updateStockURL = "/api/updateStock"
+const insertReceipt = "/api/insertReceipt"
 const fetcher = (url: string) => fetch(url).then(response => response.json());
 
 export default function CheckPay() {
@@ -53,12 +54,39 @@ export default function CheckPay() {
             console.log(e);
         })
     }
+    const insertReceipt = (cart: TypeCart) => {
+        const { products, payment } = cart
+        let id = ""
+        let quantity = ""
+        let sell = ""
+
+        products.map(product => {
+            id = id + product.id + ","
+            quantity = quantity + (product.quantity) + ","
+            sell = sell + (product.price * product.quantity) + ","
+        })
+        id = id.slice(0, -1)
+        quantity = quantity.slice(0, -1)
+        sell = sell.slice(0, -1)
+
+        axios.post(updateStockURL, {
+            id: id,
+            quantity: quantity,
+            sell: sell
+        }).then((res) => {
+            console.log("success to update Stocks");
+
+        }).catch((e) => {
+            console.log(e);
+        })
+    }
 
     const [cart, setCart] = useRecoilState(cartState)
 
     useEffect(() => {
-        setCart({ products: [] })
+        setCart({ products: [], payment: 0 })
         updateStock(cart.products)
+        insertReceipt(cart)
     }, [])
 
     // -----------------------------------------------
