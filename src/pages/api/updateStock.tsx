@@ -51,6 +51,7 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
 
         if(ids.length -1 > index){
             sql += ", "
+    stocks[index]
         }
     })
 
