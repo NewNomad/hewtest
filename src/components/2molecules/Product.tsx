@@ -9,9 +9,10 @@ import React, { useState } from 'react'
 
 type Props = {
     proinfo: TypeProducts;
+    closeModal:()=>void
 }
 
-export default function Product({ proinfo }: Props) {
+export default function Product({ proinfo, closeModal }: Props) {
     const { id, name, price, stock, isice, imageURL } = proinfo
 
     // const TimageURL = imageURL.replace(/(\d{4})\//, "$1/$1")     // DBと名前が違ったので、暫定的におく
@@ -80,7 +81,7 @@ export default function Product({ proinfo }: Props) {
 
             {/* 商品詳細画面(モーダル) */}
             <Modal open={mordalInfo} onClose={CloseMInfo}>
-                <ShowModalInfo product={proinfo} />
+                <ShowModalInfo product={proinfo} closeModal={CloseMInfo}/>
             </Modal>
         </>
     )
