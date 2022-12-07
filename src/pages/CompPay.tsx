@@ -1,12 +1,12 @@
-import { Box, Backdrop } from '@mui/material'
-import { Container } from '@mui/system'
-import { TextTitle } from '../components/1atoms/TextTitle'
-import { BtnLink } from '../components/1atoms/BtnLink'
-import { HeadInfo } from '../components/2molecules/HeadInfo'
-import { Header } from '../components/2molecules/Header'
-import { useRouter } from 'next/router'
-import { cartState, TypeCart } from '../components/types/TypeCart'
-import { TypeProducts } from '../components/types/TypeProducts'
+import { Box, Backdrop }    from '@mui/material'
+import { Container }        from '@mui/system'
+import { TextTitle }        from '../components/1atoms/TextTitle'
+import { BtnLink }          from '../components/1atoms/BtnLink'
+import { HeadInfo }         from '../components/2molecules/HeadInfo'
+import { Header }           from '../components/2molecules/Header'
+import { useRouter }            from 'next/router'
+import { cartState, TypeCart }  from '../components/types/TypeCart'
+import { TypeProducts }         from '../components/types/TypeProducts'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import useSWR from 'swr'
 import axios from "axios"
@@ -23,16 +23,9 @@ export default function CheckPay() {
     // -----------------------------------------------
     const router = useRouter()
 
-    // ↓：一旦コメントアウトしています
-    // const { data, error } = useSWR(updateStock, fetcher);
-
-    // if (!data) return (<Backdrop
-    //     sx={{
-    //         color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1
-    //     }}
-    //     open={true}></Backdrop>)
-    // if (error) return ("エラーです")
-
+    // -----------------------------------------------
+    // 在庫管理
+    // -----------------------------------------------
     const updateStock = (products: TypeProducts[]) => {
         let id = ""
         let stock = ""
@@ -49,11 +42,14 @@ export default function CheckPay() {
             stock: stock
         }).then((res) => {
             console.log("success to update Stocks");
-
         }).catch((e) => {
             console.log(e);
         })
     }
+
+    // -----------------------------------------------
+    // 購入履歴管理
+    // -----------------------------------------------
     const insertReceipt = (cart: TypeCart) => {
         const { products, payment } = cart
         let id = ""
@@ -65,6 +61,7 @@ export default function CheckPay() {
             quantity = quantity + (product.quantity) + ","
             sell = sell + (product.price * product.quantity) + ","
         })
+
         id = id.slice(0, -1)
         quantity = quantity.slice(0, -1)
         sell = sell.slice(0, -1)
@@ -75,7 +72,6 @@ export default function CheckPay() {
             sell: sell
         }).then((res) => {
             console.log("success to update Stocks");
-
         }).catch((e) => {
             console.log(e);
         })
@@ -88,15 +84,6 @@ export default function CheckPay() {
         updateStock(cart.products)
         insertReceipt(cart)
     }, [])
-
-    // -----------------------------------------------
-    // 在庫管理
-    // -----------------------------------------------
-    // const { data, error } = useSWR(updateStock, fetcher);
-
-    // if (!data) return (<Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={true} />)
-    // if (error) return ("エラーです")
-    // if (!data) return (<TextTitle primary>更新処理中です</TextTitle>)
 
     return (
         <>

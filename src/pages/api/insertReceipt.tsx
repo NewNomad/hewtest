@@ -2,14 +2,17 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import mysql, { Transaction } from "serverless-mysql"
 // import { log } from 'console';
 
+const portNum = process.env.MYSQL_PORT === undefined
+                ? 3306
+                : parseInt(process.env.MYSQL_PORT)
+
 const db = mysql({
     config: {
         host: process.env.MYSQL_HOST,
         database: process.env.MYSQL_DATABASE,
         user: process.env.MYSQL_USER,
         password: process.env.MYSQL_PASSWORD,
-        port: process.env.MYSQL_PORT, // 中尾専用(mac)
-        // port: 3306,   // win
+        port: portNum,
     }
 })
 
@@ -56,7 +59,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
             );
     `);
 
-    //     const resultback = await db.query(`
     //     INSERT INTO
     //         t_receipts(
     //             f_receipt_id,
@@ -68,31 +70,31 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
     //             f_receipt_isreserved)
     //         VALUES(
     //             ${receiptId},            // 書式:yyyyMMddXXXX
-    //             1,           // Todo:顧客IDの取得有無
+    //             1,                       // Todo:顧客ID= 1(ゲスト)とする
     //             ${req.query.receipt_payment},
+    //             ${f_receipt_buy_time},
     //             ${req.query.receipt_buy_time},
     //             now(),
     //             now(),
-    //             1                                   // Todo:予約システム使用時は1に変更できるように改変
+    //             1                        // Todo:予約システム使用時は1に変更できるように改変
     //         );
-    // `);
 
     // 取引TBL(実行複数回)
     // Todo:現在考え中
-    const result_transactions = await db.query(`
-        INSERT INTO
-            t_transactions(
-                f_receipt_id,
-                f_product_id,
-                f_transaction_quantity,
-                f_transaction_amount)
-            VALUES(
-                ${req.query.receipt_id},
-                ${req.query.product_id},
-                ${req.query.transaction_quantity},
-                ${req.query.transaction_amount}
-        );
-    `);
+    // const result_transactions = await db.query(`
+    //     INSERT INTO
+    //         t_transactions(
+    //             f_receipt_id,
+    //             f_product_id,
+    //             f_transaction_quantity,
+    //             f_transaction_amount)
+    //         VALUES(
+    //             ${req.query.receipt_id},
+    //             ${req.query.product_id},
+    //             ${req.query.transaction_quantity},
+    //             ${req.query.transaction_amount}
+    //     );
+    // `);
 
     return res.status(200).json(result)
 }
