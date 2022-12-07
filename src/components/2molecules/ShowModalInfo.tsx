@@ -1,4 +1,4 @@
-import { Button, Container, Grid, Rating, Typography } from '@mui/material'
+import { Button, Container, Grid, Rating, Typography, List, ListItemText } from '@mui/material'
 import Image from 'next/image'
 import { ShowMordal } from '../1atoms/ShowModal'
 import React from 'react'
@@ -8,14 +8,15 @@ import { TypeProducts } from '../types/TypeProducts'
 
 type Props = {
     product: TypeProducts;
+    closeModal: () => void
 }
 
 
-export const ShowModalInfo = ({ product }: Props) => {
+export const ShowModalInfo = ({ product, closeModal }: Props) => {
     const { addCart } = useCart()
 
     return (
-        <ShowMordal>
+        <ShowMordal closeModal={closeModal}>
             <Grid container direction="column" spacing={0}>
                 {/* 上 */}
                 <Grid container item xs={8}>
@@ -24,10 +25,14 @@ export const ShowModalInfo = ({ product }: Props) => {
                     </Grid>
                     <Grid item xs={8}>
                         <Container>
-                            <Typography variant='h1' >{product.name}</Typography>
+                            <Typography variant='h3' >{product.name}</Typography>
                             <Typography variant='h2'>{product.price}円</Typography>
-                            <Typography color="blue" variant='h4'>#甘い</Typography>
-                            <Typography color="blue" variant='h4'>#炭酸</Typography>
+                            <List
+                                sx={{ width: 200, borderLeft: 2, bgcolor: '#ccccff', color: 'blue', margin: 5, padding: 2 }}
+                            >
+                                <ListItemText>#甘い</ListItemText>
+                                <ListItemText>#炭酸</ListItemText>
+                            </List>
                             <Typography>アレルギー表示</Typography>
                             <Typography>なし</Typography>
                             <Rating
@@ -55,7 +60,7 @@ export const ShowModalInfo = ({ product }: Props) => {
                     </Grid>
                     <Grid item xs={4}>
                         <Button color='primary' variant="contained"
-                            onClick={() => addCart(product)}>カートに追加</Button>
+                            onClick={() => { addCart(product); closeModal() }} >カートに追加</Button>
                     </Grid>
                 </Grid>
             </Grid>

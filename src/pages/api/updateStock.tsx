@@ -1,3 +1,4 @@
+import { Identity } from '@mui/base';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { cartState } from '../../components/types/TypeCart'
 import { useRecoilState, useRecoilValue } from 'recoil'
@@ -10,13 +11,13 @@ const portNum = process.env.MYSQL_PORT === undefined
                 : parseInt(process.env.MYSQL_PORT)
 
 const db = mysql({
-    config: {
-        host: process.env.MYSQL_HOST,
-        database: process.env.MYSQL_DATABASE,
-        user: process.env.MYSQL_USER,
-        password: process.env.MYSQL_PASSWORD,
-        port: portNum,
-    }
+  config: {
+    host: process.env.MYSQL_HOST,
+    database: process.env.MYSQL_DATABASE,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    port: portNum,
+  }
 })
 
 exports.query = async (query: any) => {
@@ -32,28 +33,18 @@ exports.query = async (query: any) => {
 }
 
 export default async function handler( req: NextApiRequest, res: NextApiResponse, ) {
-    const cart = useRecoilValue(cartState)
 
     // console.log(req);
     //   let sql = ""
 
-    const stockBefore = await db.query(`
-        SELECT
-            f_product_stock
-        FROM
-            t_products
-        WHERE
-            f_product_id = ${req.query.id}
-    `);
+    // デバッグ用表示
+    console.log(ids);
+    console.log(stocks);
+    console.log(sql)
 
-    const result = await db.query(`
-        UPDATE
-            t_products
-        SET
-            f_product_stock = ${stockBefore} - ${req.query.stock}
-        WHERE
-            f_product_id = ${req.query.id}
-    `);
+    const result = await db.query(sql);
 
     return res.status(200).json(result)
+
+    // return res.status(200).json({ status: "suceess" })
 }
