@@ -5,10 +5,9 @@ import { BtnLink }      from '../components/1atoms/BtnLink'
 import { HeadInfo }     from '../components/2molecules/HeadInfo'
 import { Header }       from '../components/2molecules/Header'
 import { useRouter }    from 'next/router'
-import { cartState } from '../components/types/TypeCart'
 import useSWR from 'swr'
-import { useRecoilState, useRecoilValue } from 'recoil'
-import { useEffect } from 'react'
+
+// import { useEffect } from 'react'
 
 const updateStock = "/api/updateStock"
 const fetcher = (url: string) => fetch(url).then(response => response.json());

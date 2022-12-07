@@ -1,5 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { cartState } from '../../components/types/TypeCart'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import mysql from "serverless-mysql"
+
 // import { log } from 'console';
 
 const portNum = process.env.MYSQL_PORT === undefined
@@ -29,11 +32,12 @@ exports.query = async (query: any) => {
 }
 
 export default async function handler( req: NextApiRequest, res: NextApiResponse, ) {
+    const cart = useRecoilValue(cartState)
 
     // console.log(req);
     //   let sql = ""
 
-    const stockNumBefore = await db.query(`
+    const stockBefore = await db.query(`
         SELECT
             f_product_stock
         FROM
@@ -46,7 +50,7 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
         UPDATE
             t_products
         SET
-            f_product_stock = ${stockNumBefore} - ${req.query.stock}
+            f_product_stock = ${stockBefore} - ${req.query.stock}
         WHERE
             f_product_id = ${req.query.id}
     `);
