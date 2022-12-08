@@ -1,8 +1,8 @@
-import { Container, Grid }  from '@mui/material'
-import { ShowMordal }       from '../1atoms/ShowModal'
-import { BtnLink }          from '../1atoms/BtnLink'
-import { TextTitle }        from '../1atoms/TextTitle'
-import { TypePayInfos }     from '../types/TypePayInfos'
+import { Container, Grid } from '@mui/material'
+import { ShowMordal } from '../1atoms/ShowModal'
+import { BtnLink } from '../1atoms/BtnLink'
+import { TextTitle } from '../1atoms/TextTitle'
+import { TypePayInfos } from '../types/TypePayInfos'
 import React from 'react'
 
 type Props = {
@@ -12,11 +12,11 @@ type Props = {
     closeModal: () => void
 }
 
-export const ModalPayType = ( props:Props ) => {
+export const ModalPayType = (props: Props) => {
 
     const { children, onClick, payType, closeModal } = props
 
-    const payTypeId:number = payType == "QR"? 3: 2
+    const payTypeId: number = payType == "QR" ? 3 : 2
 
     return (
         <ShowMordal closeModal={closeModal}>
@@ -27,17 +27,19 @@ export const ModalPayType = ( props:Props ) => {
                 <Grid container textAlign="center" spacing={1} height={500} width={1000} paddingTop={3}>
 
                     {
-                        [...children].map((e, i) =>(
+                        [...children].map((e, i) => (
                             children[i].pay_info_type == payTypeId &&
                             (
                                 <Grid key={i} item xs={4}>
-                                <BtnLink
-                                    onClick={onClick}
-                                    primary
-                                    largeFont>
-                                    { children[i].pay_info_name }
-                                </BtnLink>
-                            </Grid>
+                                    <BtnLink
+                                        onClick={onClick}
+                                        primary
+                                        largeFont
+                                        payId={e.pay_info_id}
+                                    >
+                                        {children[i].pay_info_name}
+                                    </BtnLink>
+                                </Grid>
                             )
                         ))
                     }
