@@ -27,16 +27,15 @@ exports.query = async (query: any) => {
     catch (error) {
         return error
     }
-
 }
 
 export default async function handler( req: NextApiRequest, res: NextApiResponse, ) {
 
-    let idreq: string = req.body.id as string;
-    let ids: string[] = idreq.split(",")
+    let idreq: string       = req.body.id as string;
+    let stockreq: string    = req.body.stock as string
 
-    let stockreq: string = req.body.stock as string
-    let stocks: string[] = stockreq.split(",")
+    let ids: string[]       = idreq.split(",")
+    let stocks: string[]    = stockreq.split(",")
 
     let sql: string = "UPDATE t_products    SET f_product_stock =  ";
     sql += "CASE   f_product_id  "

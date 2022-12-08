@@ -22,6 +22,7 @@ export const totalPriceSelector = selector({
     key: "totalPriceSelector",
     get: ({ get }) => {
         const cart = get(cartState)
+
         return cart.products.reduce((sum, product) => {
             return sum + product.price * product.quantity;
         }, 0)
@@ -32,7 +33,9 @@ export const totalPriceSelector = selector({
 export const useCart = () => {
     const [cart, setCart] = useRecoilState(cartState)
 
+    // ----------------------------------------------------------------
     // カートへ追加
+    // ----------------------------------------------------------------
     const addCart = (product: TypeProducts): void => {
         const selectItem = cart.products.find((_product) => _product.id === product.id)
 
@@ -44,11 +47,13 @@ export const useCart = () => {
             })
         } else {
             // カートに商品が入ってる場合
-            // 在庫が足らなければだめ
+
             if (selectItem.stock - selectItem.quantity <= 0) {
+                // 在庫が足らなければだめ
                 alert(product.name + "の在庫がありません！！")
                 return
             }
+
             setCart((prevCart) => {
                 return {
                     products: prevCart.products.map((_product) =>
@@ -61,7 +66,9 @@ export const useCart = () => {
         }
     }
 
+    // ----------------------------------------------------------------
     // カートから減らす
+    // ----------------------------------------------------------------
     const removeCart = (product: TypeProducts) => {
         const selectItem = cart.products.find((_product) => _product.id === product.id)
 
@@ -84,6 +91,7 @@ export const useCart = () => {
         } else {
             // カートから削除
             const products = [...cart.products]
+
             const index = products.findIndex((product) => product.id === selectItem.id);
             if (index === -1) return
             products.splice(index, 1)

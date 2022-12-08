@@ -1,9 +1,9 @@
 export type TypeProducts = {
-    id: number;
-    name: string;
-    price: number;
-    isice: number;
-    stock: number;
-    imageURL: string;
-    quantity:number; // DBにないが、カート個数かんり
+    id: number;             // 商品ID
+    name: string;           // 商品名
+    price: number;          // 価格
+    isice: number;          // ホット/アイス
+    stock: number;          // 在庫
+    imageURL: string;       // 画像情報
+    quantity:number;        // 選択個数
 }

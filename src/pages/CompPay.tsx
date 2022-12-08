@@ -1,20 +1,20 @@
-import { Box, Backdrop }    from '@mui/material'
-import { Container }        from '@mui/system'
-import { TextTitle }        from '../components/1atoms/TextTitle'
-import { BtnLink }          from '../components/1atoms/BtnLink'
-import { HeadInfo }         from '../components/2molecules/HeadInfo'
-import { Header }           from '../components/2molecules/Header'
+import { Box }                  from '@mui/material'
+import { Container }            from '@mui/system'
+import { TextTitle }            from '../components/1atoms/TextTitle'
+import { BtnLink }              from '../components/1atoms/BtnLink'
+import { HeadInfo }             from '../components/2molecules/HeadInfo'
+import { Header }               from '../components/2molecules/Header'
 import { useRouter }            from 'next/router'
 import { cartState, TypeCart }  from '../components/types/TypeCart'
 import { TypeProducts }         from '../components/types/TypeProducts'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import useSWR from 'swr'
+// import useSWR from 'swr'
 import axios from "axios"
 import { useEffect } from 'react'
 
-const updateStockURL = "/api/updateStock"
-const insertReceipt = "/api/insertReceipt"
-const fetcher = (url: string) => fetch(url).then(response => response.json());
+const updateStockURL    = "/api/updateStock"
+const insertReceiptURL  = "/api/insertReceipt"
+// const fetcher = (url: string) => fetch(url).then(response => response.json());
 
 export default function CheckPay() {
 
@@ -27,15 +27,16 @@ export default function CheckPay() {
     // 在庫管理
     // -----------------------------------------------
     const updateStock = (products: TypeProducts[]) => {
-        let id = ""
-        let stock = ""
+        let id      = ""            // 商品ID
+        let stock   = ""            // 現在の在庫数
 
         products.map(product => {
-            id = id + product.id + ","
-            stock = stock + (product.stock - product.quantity) + ","
+            id      = id + product.id + ","                                 // 商品ID
+            stock   = stock + (product.stock - product.quantity) + ","      // 現在の在庫数
         })
-        id = id.slice(0, -1)
-        stock = stock.slice(0, -1)
+
+        id      = id.slice(0, -1)
+        stock   = stock.slice(0, -1)
 
         axios.post(updateStockURL, {
             id: id,
@@ -52,26 +53,31 @@ export default function CheckPay() {
     // -----------------------------------------------
     const insertReceipt = (cart: TypeCart) => {
         const { products, payment } = cart
-        let id = ""
-        let quantity = ""
-        let sell = ""
+
+        let product_id  = ""        // 商品ID
+        let quantity    = ""        // 取引個数
+        let pay         = ""        // 入金額
+        let amount      = ""        // 売値
 
         products.map(product => {
-            id = id + product.id + ","
-            quantity = quantity + (product.quantity) + ","
-            sell = sell + (product.price * product.quantity) + ","
+            product_id  = product_id + product.id + ","                 // 商品ID
+            quantity    = quantity + (product.quantity) + ","           // 取引個数
+            pay         = pay + payment + ","                           // 入金額
+            amount      = amount + product.price + ","                  // 売値
         })
 
-        id = id.slice(0, -1)
-        quantity = quantity.slice(0, -1)
-        sell = sell.slice(0, -1)
+        product_id  = product_id.slice(0, -1)
+        quantity    = quantity.slice(0, -1)
+        pay         = pay.slice(0, -1)
+        amount      = amount.slice(0, -1)
 
-        axios.post(updateStockURL, {
-            id: id,
+        axios.post(insertReceiptURL, {
+            product_id: product_id,
             quantity: quantity,
-            sell: sell
+            pay: pay,
+            amount: amount
         }).then((res) => {
-            console.log("success to update Stocks");
+            console.log("success to input receipt");
         }).catch((e) => {
             console.log(e);
         })
@@ -81,7 +87,7 @@ export default function CheckPay() {
 
     useEffect(() => {
         setCart({ products: [], payment: 0 })
-        updateStock(cart.products)
+        // updateStock(cart.products)
         insertReceipt(cart)
     }, [])
 
