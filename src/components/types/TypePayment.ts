@@ -1,16 +1,31 @@
-import { atom, RecoilState } from "recoil"
+import { atom, RecoilState, selector } from "recoil"
 
+// =====================================================
+// 入金情報
+// =====================================================
+// 型宣言
 export type TypePayment = {
-    payment: number
+    payment:number,                 // 入金額(ユーザーが入れた総額)
+    payInfoId: number,              // 入金手段
 }
 
+// デフォルト値
 const initialState: TypePayment = {
-    payment: 0
+    payment: 0,
+    payInfoId: 0
 }
 
-// カートの情報
-export const payState: RecoilState<TypePayment> = atom({
-    key: "payState",
+// 入金情報
+export const paymentState: RecoilState<TypePayment> = atom({
+    key: "paymentState",
     default: initialState
 })
 
+export const totalPaymentSelector = selector({
+    key: "totalPaymentSelector",
+    get: ({ get }) => {
+        const paymentInfo = get(paymentState)
+
+        return paymentInfo.payment
+    }
+})

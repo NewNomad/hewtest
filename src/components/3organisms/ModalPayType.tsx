@@ -28,7 +28,7 @@ export const ModalPayType = (props: Props) => {
 
                     {
                         [...children].map((e, i) => (
-                            children[i].pay_info_type == payTypeId &&
+                            e.pay_info_type == payTypeId &&
                             (
                                 <Grid key={i} item xs={4}>
                                     <BtnLink
@@ -37,7 +37,7 @@ export const ModalPayType = (props: Props) => {
                                         largeFont
                                         payId={e.pay_info_id}
                                     >
-                                        {children[i].pay_info_name}
+                                        {e.pay_info_name}
                                     </BtnLink>
                                 </Grid>
                             )

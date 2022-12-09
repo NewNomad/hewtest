@@ -1,14 +1,19 @@
 import { atom, RecoilState, selector, useRecoilState } from "recoil"
 import { TypeProducts } from "./TypeProducts"
 
+// =====================================================
+// カート情報
+// =====================================================
+// 型宣言
 export type TypeCart = {
-    products: TypeProducts[],
-    payment?: number
+    products: TypeProducts[],       // 商品情報
+    payInfoId?: number              // 決済方法
 }
 
+// デフォルト値
 const initialState: TypeCart = {
     products: [],
-    payment: 0
+    payInfoId: 0
 }
 
 // カートの情報
@@ -17,7 +22,9 @@ export const cartState: RecoilState<TypeCart> = atom({
     default: initialState
 })
 
+// ------------------------------------------------------
 // 合計金額の計算
+// ------------------------------------------------------
 export const totalPriceSelector = selector({
     key: "totalPriceSelector",
     get: ({ get }) => {

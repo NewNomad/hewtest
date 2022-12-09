@@ -37,12 +37,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
 
     let req_product_id: string  = req.body.product_id as string;    // 商品ID
     let req_quantity: string    = req.body.quantity as string;      // 取引個数
-    let req_pay:string          = req.body.pay as string;           // 入金額
+    let req_payment:string      = req.body.payment as string;       // 入金額
     let req_amount: string      = req.body.amount as string;        // 売値
 
     let product_id: string[]    = req_product_id.split(",")
     let quantity: string[]      = req_quantity.split(",")
-    let pay: string[]           = req_pay.split(",")
+    // let payment: string[]       = req_payment.split(",")
     let amount: string[]        = req_amount.split(",")
 
     console.log(date)
@@ -50,7 +50,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
     // console.log(buytime)
     console.log(product_id)
     console.log(quantity)
-    console.log(pay)
+    console.log(req_payment)
     console.log(amount)
 
     // 領収TBL(実行1回)

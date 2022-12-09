@@ -71,26 +71,26 @@ export default function SelectPayInfo() {
 
                         <Grid container item xs={6} direction="column" spacing={1}>
                             <Grid item xs={6}>
-                                <BtnLink onClick={OpenMEl} primary largeFont payId={0}>電子マネー</BtnLink>
+                                <BtnLink onClick={OpenMEl} primary largeFont>電子マネー</BtnLink>
                             </Grid>
                             <Grid item xs={6}>
-                                <BtnLink onClick={OpenMQr} primary largeFont payId={0}>QRコード決済</BtnLink>
+                                <BtnLink onClick={OpenMQr} primary largeFont>QRコード決済</BtnLink>
                             </Grid>
                         </Grid>
                     </Grid>
 
-                    <BtnLink onClick={() => router.push(backUrl)} payId={0}>商品一覧に戻る</BtnLink>
+                    <BtnLink onClick={() => router.push(backUrl)}>商品一覧に戻る</BtnLink>
 
                 </Container>
 
                 {/* 電子マネー決済選択 */}
                 <Modal open={mordalEl} onClose={CloseMEl} >
-                    <ModalPayType payType='El' onClick={() => router.push(nextUrl)} closeModal={CloseMEl}>{ data }</ModalPayType>
+                    <ModalPayType payType='El' onClick={() => router.push(nextUrl)} closeModal={ CloseMEl }>{ data }</ModalPayType>
                 </Modal>
 
                 {/* QRコード決済選択 */}
                 <Modal open={mordalQr} onClose={CloseMQr} >
-                    <ModalPayType payType='QR' onClick={() => router.push(nextUrl)} closeModal={CloseMQr}>{ data }</ModalPayType>
+                    <ModalPayType payType='QR' onClick={() => router.push(nextUrl)} closeModal={ CloseMQr }>{ data }</ModalPayType>
                 </Modal>
 
             </Box>

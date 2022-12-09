@@ -6,6 +6,7 @@ import { PayDetail }            from '../components/3organisms/PayDetail'
 import React, { useState }      from 'react';
 import { useRecoilValue }       from 'recoil'
 import { totalPriceSelector }   from '../components/types/TypeCart'
+import { paymentState, totalPaymentSelector } from '../components/types/TypePayment'
 
 // ===================================================
 // 入金確認画面
@@ -21,8 +22,12 @@ export default function CheckPay(){
     const request = (sum - costs) > 0? (sum - costs): 0;    // 残り金額
     const change = (costs - sum) > 0? (costs - sum): 0;     // おつり
 
+    // ここから↓の処理をTypePaymentに移す？
     const ClickMinus = () => { setCosts(costs - 100); };
     const ClickPlus = () => { setCosts(costs + 100); };
+
+    const payment = useRecoilValue(paymentState)
+    const totalPayment = useRecoilValue(totalPaymentSelector)
 
     return (
         <>

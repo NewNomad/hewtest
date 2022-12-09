@@ -1,4 +1,4 @@
-import { Box, Typography, Button, Grid }                  from '@mui/material'
+import { Box, Typography, Button, Grid } from '@mui/material'
 import { HeadInfo }             from '../components/2molecules/HeadInfo'
 import { Header }               from '../components/2molecules/Header'
 import { BtnLink }              from '../components/1atoms/BtnLink'

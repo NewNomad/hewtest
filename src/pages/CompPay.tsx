@@ -11,8 +11,8 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 // import useSWR from 'swr'
 import axios from "axios"
 import { useEffect } from 'react'
-import { payState, TypePayment } from '../components/types/TypePayment'
-import { TypePayInfos } from '../components/types/TypePayInfos'
+import { paymentState, TypePayment } from '../components/types/TypePayment'
+// import { TypePayInfos } from '../components/types/TypePayInfos'
 
 const updateStockURL    = "/api/updateStock"
 const insertReceiptURL  = "/api/insertReceipt"
@@ -53,9 +53,9 @@ export default function CheckPay() {
     // -----------------------------------------------
     // 購入履歴管理
     // -----------------------------------------------
-    const insertReceipt = (cart: TypeCart, pay: TypePayment) => {
+    const insertReceipt = (cart: TypeCart, paymentInfo: TypePayment) => {
         const { products } = cart
-        const { payment } = pay
+        const { payment, payInfoId } = paymentInfo
 
         let product_id  = ""        // 商品ID
         let quantity    = ""        // 取引個数
@@ -65,7 +65,7 @@ export default function CheckPay() {
         products.map(product => {
             product_id  = product_id + product.id + ","                 // 商品ID
             quantity    = quantity + (product.quantity) + ","           // 取引個数
-            pay_value   = pay_value + payment + ","                           // 入金額
+            pay_value   = pay_value + payment + ","                     // 入金額
             amount      = amount + product.price + ","                  // 売値
         })
 
@@ -87,14 +87,16 @@ export default function CheckPay() {
     }
 
     const [cart, setCart] = useRecoilState(cartState)
-    const [pay, setPay] = useRecoilState(payState)
+    const [payment, setPaymant] = useRecoilState(paymentState)
 
     useEffect(() => {
         console.log(cart);
-        setCart({ products: [], payment: 0 })
-        setPay({ payment: 0 })
+
+        setCart({ products: [], payInfoId: 0 })
+        setPaymant({ payment: 0, payInfoId: 0 })
+
         updateStock(cart.products)
-        insertReceipt(cart, pay)
+        insertReceipt(cart, payment)
     }, [])
 
     return (
@@ -111,7 +113,7 @@ export default function CheckPay() {
                         [ここに画像]
                     </Box>
 
-                    <BtnLink onClick={() => router.push("/")} payId={0}>タップ/時間経過(未実装)で商品一覧に戻ります</BtnLink>
+                    <BtnLink onClick={() => router.push("/")}>タップ/時間経過(未実装)で商品一覧に戻ります</BtnLink>
 
                 </Container>
 
