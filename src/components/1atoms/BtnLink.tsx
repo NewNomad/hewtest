@@ -55,5 +55,6 @@ export const BtnLink = (props: Props) => {
 BtnLink.defaultProps = {
     primary: false,
     largeFont: false,
-    disabled: false
+    disabled: false,
+    payId: 0
 }

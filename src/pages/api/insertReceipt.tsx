@@ -34,30 +34,37 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
     // console.log(req);
 
     const date = new Date()
-    const receiptId = date.getFullYear() + date.getMonth() + date.getDate() + date.getHours() + date.getSeconds()
-    const buytime = `${date.getFullYear}-${date.getMonth()}-${date.getDate()}`
+    const receiptId = date.getFullYear() + "/" + date.getMonth() + "/" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
+    const buytime = date.getFullYear + "/" + date.getMonth() + "/" + date.getDate()
 
-    // 領収TBL(実行1回)
-    const result = await db.query(`
-        INSERT INTO
-            t_receipts(
-                f_receipt_id,
-                f_customer_id,
-                f_receipt_payment,
-                f_receipt_buy_time,
-                f_receipt_startusedaytime,
-                f_receipt_endusedaytime,
-                f_receipt_isreserved)
-            VALUES(
-                ${receiptId},
-                1,
-                ${req.body.payment},
-                ${buytime},
-                now(),
-                now(),
-                1
-            );
-    `);
+    console.log(date)
+    console.log(receiptId)
+    console.log(buytime)
+
+    // ------------------------------------------------------------------------
+    // 現在調整中
+    // ------------------------------------------------------------------------
+    // // 領収TBL(実行1回)
+    // const result = await db.query(`
+    //     INSERT INTO
+    //         t_receipts(
+    //             f_receipt_id,
+    //             f_customer_id,
+    //             f_receipt_payment,
+    //             f_receipt_buy_time,
+    //             f_receipt_startusedaytime,
+    //             f_receipt_endusedaytime,
+    //             f_receipt_isreserved)
+    //         VALUES(
+    //             ${receiptId},
+    //             1,
+    //             ${req.body.payment},
+    //             ${buytime},
+    //             now(),
+    //             now(),
+    //             1
+    //         );
+    // `);
 
     //     INSERT INTO
     //         t_receipts(
@@ -96,5 +103,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
     //     );
     // `);
 
-    return res.status(200).json(result)
+    // return res.status(200).json(result)
+
+    return res.status(200).json({ status: "suceess" })
 }

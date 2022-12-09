@@ -15,7 +15,7 @@ export const ModalConfirmProduct = ({ product }: Props) => {
             </Typography>
             <Grid container alignItems="center" padding={3}>
                 <Grid item xs={4}>
-                    <Image src={"/" + product.imageURL} width={200} height={200} objectFit="contain"></Image>
+                    <Image src={"/" + product.imageURL} width={200} height={200} objectFit="contain" alt=""></Image>
 
                 </Grid>
                 <Grid item xs={4} >
