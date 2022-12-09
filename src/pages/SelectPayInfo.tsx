@@ -85,12 +85,12 @@ export default function SelectPayInfo() {
 
                 {/* 電子マネー決済選択 */}
                 <Modal open={mordalEl} onClose={CloseMEl} >
-                    <ModalPayType payType='El' onClick={() => router.push(nextUrl)} closeModal={ CloseMEl }>{ data }</ModalPayType>
+                    <ModalPayType payType='El' onClick={() => router.push(nextUrl)} closeModal={CloseMEl}>{data}</ModalPayType>
                 </Modal>
 
                 {/* QRコード決済選択 */}
                 <Modal open={mordalQr} onClose={CloseMQr} >
-                    <ModalPayType payType='QR' onClick={() => router.push(nextUrl)} closeModal={ CloseMQr }>{ data }</ModalPayType>
+                    <ModalPayType payType='QR' onClick={() => router.push(nextUrl)} closeModal={CloseMQr}>{data}</ModalPayType>
                 </Modal>
 
             </Box>

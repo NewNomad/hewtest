@@ -1,14 +1,15 @@
-import { Button, Divider, Modal, Paper, Tooltip } from '@mui/material'
+import { Badge, Button, Divider, Modal, Paper, Tooltip } from '@mui/material'
 import { AcUnit, Whatshot } from '@mui/icons-material'
-import { ShowModalInfo }        from './ShowModalInfo'
-import { TypeProducts }         from '../types/TypeProducts'
-import { cartState, useCart }   from '../types/TypeCart'
+import { ShowModalInfo } from './ShowModalInfo'
+import { TypeProducts } from '../types/TypeProducts'
+import { cartState, TypeCart, useCart } from '../types/TypeCart'
 import Image from 'next/image'
 import { useRecoilState } from 'recoil'
 import React, { useState } from 'react'
 
 type Props = {
     proinfo: TypeProducts;
+    cart: TypeCart
 }
 
 export default function Product({ proinfo }: Props) {
@@ -26,6 +27,10 @@ export default function Product({ proinfo }: Props) {
 
     const { addCart } = useCart()
 
+    const [cart] = useRecoilState(cartState)
+
+    const quantity = cart.products.find((e, i) => e.id == id)?.quantity
+
     return (
         <>
             <Paper elevation={3} variant="elevation" key={0}
@@ -35,28 +40,37 @@ export default function Product({ proinfo }: Props) {
                     borderColor: `secondary.main`,
                     textAlign: "center"
                 }}>
-                <Tooltip title="詳細" arrow>
-                    <Button
-                        onClick={OpenMInfo}
-                        disabled={isActive ? false : true}
-                        sx={{
-                            width: 1,
-                            borderBottomLeftRadius: 0,
-                            borderBottomRightRadius: 0,
-                        }}>
-                        <Image
-                            src={"/" + imageURL}
-                            height={180}
-                            width={100}
-                            objectFit="contain"
-                            style={ isActive == false ? { filter: "grayscale(100%)" }: {} }
-                            alt="商品画像" />
-                    </Button>
-                </Tooltip>
+
+                {/* <Tooltip title="詳細" arrow> */}
+
+                <Button
+                    onClick={OpenMInfo}
+                    disabled={isActive ? false : true}
+                    sx={{
+                        width: 1,
+                        borderBottomLeftRadius: 0,
+                        borderBottomRightRadius: 0,
+                    }}>
+                    <Badge badgeContent={quantity} color="primary" max={9} sx={{
+                        position: "relative",
+                        top: -65,
+                        right: -75
+                    }} />
+                    <Image
+                        src={"/" + imageURL}
+                        height={180}
+                        width={100}
+                        objectFit="contain"
+                        style={isActive == false ? { filter: "grayscale(100%)" } : {}}
+                        alt="商品画像" />
+
+                </Button>
+                {/* </Tooltip> */}
 
                 <Divider />
 
                 <Tooltip title="カートに追加" arrow>
+
                     <Button color='secondary' variant="text" size='small' disableElevation
                         onClick={() => addCart(proinfo)}
                         disabled={isActive ? false : true}
@@ -73,6 +87,7 @@ export default function Product({ proinfo }: Props) {
                             borderStartEndRadius: 0,
                             borderStartStartRadius: 0
                         }}>
+
                         {proinfo.price}
                     </Button>
                 </Tooltip>
@@ -80,7 +95,7 @@ export default function Product({ proinfo }: Props) {
 
             {/* 商品詳細画面(モーダル) */}
             <Modal open={mordalInfo} onClose={CloseMInfo}>
-                <ShowModalInfo product={proinfo} closeModal={CloseMInfo}/>
+                <ShowModalInfo product={proinfo} closeModal={CloseMInfo} />
             </Modal>
         </>
     )

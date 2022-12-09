@@ -116,4 +116,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
     // return res.status(200).json(result)
 
     return res.status(200).json({ status: "suceess" })
+    // return res.status(200).json(result)
+
+    return res.status(200).json({ status: "suceess" })
 }
