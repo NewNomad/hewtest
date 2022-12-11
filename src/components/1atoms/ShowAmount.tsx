@@ -22,7 +22,9 @@ export const ShowAmount = ( props:Props ) =>{
                 <RemoveCircle fontSize='large' />
             </IconButton>
             {costs}
-            <IconButton aria-label='add' onClick={ClickPlus}>
+            <IconButton
+                aria-label='add'
+                onClick={ClickPlus}>
                 <AddCircle fontSize='large' />
             </IconButton>
         </>

@@ -32,48 +32,58 @@ exports.query = async (query: any) => {
 export default async function handler(req: NextApiRequest, res: NextApiResponse,) {
 
     const date = new Date()
-    // const receiptId = date.getFullYear() + date.getMonth() + date.getDate() + date.getHours() + date.getSeconds()
-    // const buytime = date.getFullYear() - date.getMonth() - date.getDate()
+    const receiptId =
+        date.getMonth().toString() + 
+        date.getDate().toString() + 
+        date.getHours().toString() + 
+        date.getMinutes().toString() +
+        date.getSeconds().toString()
+
+    const buyTime =
+        date.getFullYear().toString() + "/" +
+        date.getMonth().toString() + "/" +
+        date.getDate().toString()
+
+    let req_payment:string      = req.body.payment as string;       // 入金額
+    let req_payInfoId:string    = req.body.payInfoId as string;     // 入金方法
 
     let req_product_id: string  = req.body.product_id as string;    // 商品ID
     let req_quantity: string    = req.body.quantity as string;      // 取引個数
-    let req_payment:string      = req.body.payment as string;       // 入金額
     let req_amount: string      = req.body.amount as string;        // 売値
 
     let product_id: string[]    = req_product_id.split(",")
     let quantity: string[]      = req_quantity.split(",")
-    // let payment: string[]       = req_payment.split(",")
     let amount: string[]        = req_amount.split(",")
 
     console.log(date)
-    // console.log(receiptId)
-    // console.log(buytime)
+    console.log(receiptId)
     console.log(product_id)
     console.log(quantity)
     console.log(req_payment)
+    console.log(req_payInfoId)
     console.log(amount)
 
     // 領収TBL(実行1回)
-    // const result = await db.query(`
-    //     INSERT INTO
-    //         t_receipts(
-    //             f_receipt_id,
-    //             f_customer_id,
-    //             f_receipt_payment,
-    //             f_receipt_buy_time,
-    //             f_receipt_startusedaytime,
-    //             f_receipt_endusedaytime,
-    //             f_receipt_isreserved)
-    //         VALUES(
-    //             ${receiptId},
-    //             1,
-    //             ${req.body.payment},
-    //             ${buytime},
-    //             now(),
-    //             now(),
-    //             1
-    //         );
-    // `);
+    const result = await db.query(`
+        INSERT INTO
+            t_receipts(
+                f_receipt_id,
+                f_customer_id,
+                f_receipt_payment,
+                f_receipt_buy_time,
+                f_receipt_startusedaytime,
+                f_receipt_endusedaytime,
+                f_receipt_isreserved)
+            VALUES(
+                ${receiptId},
+                1,
+                ${req_payment},
+                ${buyTime},
+                now(),
+                now(),
+                1
+            );
+    `);
 
     //     INSERT INTO
     //         t_receipts(
@@ -96,27 +106,38 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
     //         );
 
 
+    let sql = `
+        INSERT INTO
+        t_transactions(
+            f_receipt_id,
+            f_product_id,
+            f_transaction_quantity,
+            f_transaction_amount)
+        VALUES`;
+
+        product_id.map((p_id, index) => {
+            sql += `
+            (
+                ${receiptId},
+                ${p_id},
+                ${quantity[index]},
+                ${amount[index]}
+            )`
+
+            if(product_id.length -1 === index){
+                sql += `;   `
+            }
+            else{
+                sql += `,   `
+            }
+            
+        })
+    
+
     // 取引TBL(実行複数回)
     // Todo:現在考え中
-    // const result_transactions = await db.query(`
-    //     INSERT INTO
-    //         t_transactions(
-    //             f_receipt_id,
-    //             f_product_id,
-    //             f_transaction_quantity,
-    //             f_transaction_amount)
-    //         VALUES(
-    //             ${req.query.receipt_id},
-    //             ${req.query.product_id},
-    //             ${req.query.transaction_quantity},
-    //             ${req.query.transaction_amount}
-    //     );
-    // `);
+    const result_transactions = await db.query(sql);
 
-    // return res.status(200).json(result)
-
-    return res.status(200).json({ status: "suceess" })
-    // return res.status(200).json(result)
-
-    return res.status(200).json({ status: "suceess" })
+    // return res.status(200).json({ status: "suceess" })
+    return res.status(200).json(result_transactions)
 }

@@ -12,9 +12,10 @@ module.exports = {
 
     MYSQL_DATABASE: "hew2023",
     MYSQL_USER: "root",
-    MYSQL_PASSWORD: "root",
-    MYSQL_PORT: 8889
-
+    // MYSQL_PASSWORD: "root",
+    // MYSQL_PORT: 8889
+    MYSQL_PASSWORD: "",
+    MYSQL_PORT: 3306
   },
   webpack: {
     target: "node"

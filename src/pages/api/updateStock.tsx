@@ -37,14 +37,23 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
     let ids: string[]       = idreq.split(",")
     let stocks: string[]    = stockreq.split(",")
 
-    let sql: string = "UPDATE t_products    SET f_product_stock =  ";
-    sql += "CASE   f_product_id  "
+    let sql: string = `
+        UPDATE
+            t_products
+        SET
+            f_product_stock =
+        CASE
+            f_product_id  `
 
     ids.map((id, index) => {
-        sql += `WHEN ${id} THEN ${stocks[index]}    `
+        sql += `
+            WHEN ${id} THEN ${stocks[index]}    `
     })
 
-    sql += "END     WHERE f_product_id      IN ("
+    sql += `
+        END
+        WHERE
+            f_product_id IN (`
 
     ids.map((id, index) => {
         sql += `${id}`

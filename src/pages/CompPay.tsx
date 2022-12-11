@@ -59,25 +59,23 @@ export default function CheckPay() {
 
         let product_id  = ""        // 商品ID
         let quantity    = ""        // 取引個数
-        let pay_value   = ""        // 入金額
         let amount      = ""        // 売値
 
         products.map(product => {
             product_id  = product_id + product.id + ","                 // 商品ID
             quantity    = quantity + (product.quantity) + ","           // 取引個数
-            pay_value   = pay_value + payment + ","                     // 入金額
             amount      = amount + product.price + ","                  // 売値
         })
 
         product_id  = product_id.slice(0, -1)
         quantity    = quantity.slice(0, -1)
-        pay_value   = pay_value.slice(0, -1)
         amount      = amount.slice(0, -1)
 
         axios.post(insertReceiptURL, {
             product_id: product_id,
             quantity: quantity,
-            pay_value: pay_value,
+            payment: payment,
+            payInfoId: payInfoId,
             amount: amount
         }).then((res) => {
             console.log("success to input receipt");

@@ -20,12 +20,3 @@ export const paymentState: RecoilState<TypePayment> = atom({
     key: "paymentState",
     default: initialState
 })
-
-export const totalPaymentSelector = selector({
-    key: "totalPaymentSelector",
-    get: ({ get }) => {
-        const paymentInfo = get(paymentState)
-
-        return paymentInfo.payment
-    }
-})

@@ -26,7 +26,7 @@ export const CartItem = ({ product }: Props) => {
                     padding: 1
                 }}
                 >
-                    <Image src={"/" + product.imageURL} height={130} width={100} objectFit="contain"></Image>
+                    <Image src={"/" + product.imageURL} height={130} width={100} objectFit="contain" alt="" />
                 </Paper>
             </Grid>
             <Grid item xs={8} textAlign="center">
