@@ -71,7 +71,7 @@ export default function Product({ proinfo }: Props) {
 
                 <Tooltip title="カートに追加" arrow>
 
-                    <Button color='secondary' variant="text" size='small' disableElevation
+                    <Button color='inherit' variant="contained" size='small' disableElevation
                         onClick={() => addCart(proinfo)}
                         disabled={isActive ? false : true}
                         startIcon={
@@ -85,7 +85,8 @@ export default function Product({ proinfo }: Props) {
                             // marginBottom:0.5
                             width: 1,
                             borderStartEndRadius: 0,
-                            borderStartStartRadius: 0
+                            borderStartStartRadius: 0,
+                            fontSize:18
                         }}>
 
                         {proinfo.price}
