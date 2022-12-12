@@ -1,8 +1,4 @@
 import { Button } from '@mui/material'
-import { useEffect } from 'react'
-import { useRecoilState } from 'recoil'
-// import { cartState } from '../types/TypeCart'
-import { paymentState } from '../types/TypePayment'
 
 type Props = {
     children: React.ReactNode,
@@ -10,7 +6,6 @@ type Props = {
     primary: boolean,
     largeFont: boolean,
     disabled: boolean,
-    payId: number
 }
 
 // =================================================
@@ -18,26 +13,9 @@ type Props = {
 // =================================================
 export const BtnLink = (props: Props) => {
 
-    const { children, onClick, primary, largeFont, disabled, payId } = props
+    const { children, onClick, primary, largeFont, disabled } = props
 
     let setFontSize: number = largeFont ? 40 : 20
-
-    const [pay, setPay] = useRecoilState(paymentState)
-
-    const handleClick = () => {
-        if (payId != 0) {
-            // payIdを取得
-            // ToDo:payment取得については後で直す
-            setPay({ payment: 0, payInfoId: payId })
-        } 
-        console.log(pay);
-
-    }
-
-    useEffect(() => {
-        handleClick()
-    }, [])
-
 
     return (
         <Button
@@ -56,5 +34,4 @@ BtnLink.defaultProps = {
     primary: false,
     largeFont: false,
     disabled: false,
-    payId: 0
 }

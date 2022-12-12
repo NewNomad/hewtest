@@ -13,19 +13,15 @@ import { paymentState } from '../components/types/TypePayment'
 // ===================================================
 export default function CheckPay(){
 
-    const sum = useRecoilValue(totalPriceSelector)          // 合計金額
+    // 値取得
+    const sum                   = useRecoilValue(totalPriceSelector)            // 合計金額
+    const [costs, setCosts]     = useRecoilState(paymentState)                  // お預かり(投入金額, 支払方法)
+    const request   = (sum - costs.payment ) > 0? (sum - costs.payment): 0      // 残り金額
+    const change    = (costs.payment - sum) > 0? (costs.payment - sum): 0       // おつり
 
-    // const [costs, setCosts]              = useState(0);  // お預かり
-    // const [requestPay, setRequestPay]    = useState(0);
-    // const [change, setChange]            = useState(1000);
-    
-    const [costs, setCosts]                 = useRecoilState(paymentState);  // お預かり
-
-    const request = (sum - costs.payment ) > 0? (sum - costs.payment): 0;    // 残り金額
-    const change = (costs.payment - sum) > 0? (costs.payment - sum): 0;     // おつり
-
-    const ClickMinus = () => { setCosts({ payment: costs.payment - 100, payInfoId: costs.payInfoId }); };
-    const ClickPlus = () => { setCosts({ payment: costs.payment + 100, payInfoId: costs.payInfoId }); };
+    // イベント
+    const ClickMinus    = () => { setCosts({ payment: costs.payment - 100, payInfoId: costs.payInfoId }); };
+    const ClickPlus     = () => { setCosts({ payment: costs.payment + 100, payInfoId: costs.payInfoId }); };
 
     return (
         <>

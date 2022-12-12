@@ -1,4 +1,4 @@
-import { atom, RecoilState, selector } from "recoil"
+import { atom, RecoilState } from "recoil"
 
 // =====================================================
 // 入金情報

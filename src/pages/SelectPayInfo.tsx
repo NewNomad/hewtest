@@ -1,13 +1,15 @@
-import { Box, Grid, Modal } from '@mui/material'
-import { Container } from '@mui/system'
-import { TextTitle } from '../components/1atoms/TextTitle'
-import { BtnLink } from '../components/1atoms/BtnLink'
-import { HeadInfo } from '../components/2molecules/HeadInfo'
-import { Header } from '../components/2molecules/Header'
-import { ModalPayType } from '../components/3organisms/ModalPayType'
-import { TypePayInfos } from '../components/types/TypePayInfos'
-import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import { Box, Grid, Modal }     from '@mui/material'
+import { Container }            from '@mui/system'
+import { TextTitle }            from '../components/1atoms/TextTitle'
+import { BtnLink }              from '../components/1atoms/BtnLink'
+import { HeadInfo }             from '../components/2molecules/HeadInfo'
+import { Header }               from '../components/2molecules/Header'
+import { ModalPayType }         from '../components/3organisms/ModalPayType'
+import { TypePayInfos }         from '../components/types/TypePayInfos'
+import { paymentState }         from '../components/types/TypePayment'
+import { useRouter }        from 'next/router'
+import { useRecoilState }   from 'recoil'
+import React, { useState }  from 'react'
 import useSWR from 'swr'
 
 type Props = { ElProps: any, QrProps: any }
@@ -15,9 +17,9 @@ type Props = { ElProps: any, QrProps: any }
 // ---------------------------------------------------
 // 定数
 // ---------------------------------------------------
-const nextUrl: string = "/CheckPay"
-const backUrl: string = "/"
-const fetchPayInfos = "/api/fetchPayInfos"
+const nextUrl: string = "/CheckPay"                 // 決済確認画面
+const backUrl: string = "/"                         // 商品一覧画面
+const fetchPayInfos = "/api/fetchPayInfos"          // 決済方法一覧取得
 
 const fetcher = (url: string) => fetch(url).then(response => response.json());
 
@@ -39,6 +41,15 @@ export default function SelectPayInfo() {
     const [mordalQr, setMordalQr] = useState<boolean>(false)
     const OpenMQr = () => setMordalQr(true);                    // 開く
     const CloseMQr = () => setMordalQr(false);                  // 閉じる
+
+    // -----------------------------------------------
+    // 決済方法選択
+    // -----------------------------------------------
+    const [pay, setPay] = useRecoilState(paymentState)
+    const getPayInfoId = (value:number) => {
+        setPay({ payment: 0, payInfoId: value });
+        router.push(nextUrl)
+    }
 
     // -----------------------------------------------
     // ルーティング
@@ -66,7 +77,9 @@ export default function SelectPayInfo() {
 
                     <Grid container textAlign="center" height={700} paddingBottom={5} spacing={1}>
                         <Grid item xs={6}>
-                            <BtnLink onClick={() => router.push(nextUrl)} primary largeFont payId={data[0].pay_info_id}>{data[0].pay_info_type == 1 ? data[0].pay_info_name : '設定エラー'}</BtnLink>
+                            <BtnLink onClick={ () => getPayInfoId(data[0].pay_info_id) } primary largeFont>
+                                {data[0].pay_info_type == 1 ? data[0].pay_info_name : '設定エラー'}
+                            </BtnLink>
                         </Grid>
 
                         <Grid container item xs={6} direction="column" spacing={1}>
@@ -85,12 +98,12 @@ export default function SelectPayInfo() {
 
                 {/* 電子マネー決済選択 */}
                 <Modal open={mordalEl} onClose={CloseMEl} >
-                    <ModalPayType payType='El' onClick={() => router.push(nextUrl)} closeModal={CloseMEl}>{data}</ModalPayType>
+                    <ModalPayType payType='El' nextUrl={ nextUrl } closeModal={ CloseMEl }>{ data }</ModalPayType>
                 </Modal>
 
                 {/* QRコード決済選択 */}
                 <Modal open={mordalQr} onClose={CloseMQr} >
-                    <ModalPayType payType='QR' onClick={() => router.push(nextUrl)} closeModal={CloseMQr}>{data}</ModalPayType>
+                    <ModalPayType payType='QR' nextUrl={ nextUrl } closeModal={ CloseMQr }>{ data }</ModalPayType>
                 </Modal>
 
             </Box>

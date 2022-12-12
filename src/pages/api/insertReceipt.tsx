@@ -1,4 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { TypeProducts } from '../../components/types/TypeProducts'
+
 import mysql, { Transaction } from "serverless-mysql"
 // import { log } from 'console';
 
@@ -28,7 +30,6 @@ exports.query = async (query: any) => {
 }
 
 // 購入履歴登録
-// insert文のメモ
 export default async function handler(req: NextApiRequest, res: NextApiResponse,) {
 
     const date = new Date()
@@ -37,76 +38,73 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
         date.getDate().toString() + 
         date.getHours().toString() + 
         date.getMinutes().toString() +
-        date.getSeconds().toString()
+        date.getSeconds().toString()                                // 領収ID
 
     const buyTime =
-        date.getFullYear().toString() + "/" +
-        date.getMonth().toString() + "/" +
-        date.getDate().toString()
-
-    let req_payment:string      = req.body.payment as string;       // 入金額
-    let req_payInfoId:string    = req.body.payInfoId as string;     // 入金方法
-
-    let req_product_id: string  = req.body.product_id as string;    // 商品ID
-    let req_quantity: string    = req.body.quantity as string;      // 取引個数
-    let req_amount: string      = req.body.amount as string;        // 売値
-
-    let product_id: string[]    = req_product_id.split(",")
-    let quantity: string[]      = req_quantity.split(",")
-    let amount: string[]        = req_amount.split(",")
-
-    console.log(date)
-    console.log(receiptId)
-    console.log(product_id)
-    console.log(quantity)
-    console.log(req_payment)
-    console.log(req_payInfoId)
-    console.log(amount)
-
-    // 領収TBL(実行1回)
-    const result = await db.query(`
-        INSERT INTO
-            t_receipts(
-                f_receipt_id,
-                f_customer_id,
-                f_receipt_payment,
-                f_receipt_buy_time,
-                f_receipt_startusedaytime,
-                f_receipt_endusedaytime,
-                f_receipt_isreserved)
-            VALUES(
-                ${receiptId},
-                1,
-                ${req_payment},
-                ${buyTime},
-                now(),
-                now(),
-                1
-            );
-    `);
-
-    //     INSERT INTO
-    //         t_receipts(
-    //             f_receipt_id,
-    //             f_customer_id,
-    //             f_receipt_payment,
-    //             f_receipt_buy_time,
-    //             f_receipt_startusedaytime,
-    //             f_receipt_endusedaytime,
-    //             f_receipt_isreserved)
-    //         VALUES(
-    //             ${receiptId},            // 書式:yyyyMMddXXXX
-    //             1,                       // Todo:顧客ID= 1(ゲスト)とする
-    //             ${req.query.receipt_payment},
-    //             ${f_receipt_buy_time},
-    //             ${req.query.receipt_buy_time},
-    //             now(),
-    //             now(),
-    //             1                        // Todo:予約システム使用時は1に変更できるように改変
-    //         );
+        date.getFullYear().toString() + "-" +
+        date.getMonth().toString() + "-" +
+        date.getDate().toString()                                   // 購入日
 
 
-    let sql = `
+    let product: TypeProducts[] = req.body.products as TypeProducts[]       // カート内商品情報
+    let payment:string          = req.body.payment as string                // 入金額
+    let payInfoId:string        = req.body.payInfoId as string              // 入金方法
+
+    // ----------------------------------------------------
+    // SQL:商品TBL
+    // ----------------------------------------------------
+    let sql_products: string = `
+        UPDATE
+            t_products
+        SET
+            f_product_stock =
+        CASE
+            f_product_id  `
+
+    product.map((e, index) => {
+        sql_products += `
+            WHEN ${e.id} THEN ${e.stock - e.quantity}    `
+    })
+
+    sql_products += `
+        END
+        WHERE
+            f_product_id IN (`
+
+    product.map((e, index) => {
+        sql_products += `${e.id}, `
+    })
+
+    sql_products = sql_products.slice(0, -2)
+    sql_products += ");"
+
+    // -------------------------------------------------------
+    // SQL:領収TBL
+    // -------------------------------------------------------
+    let sql_receipts = `
+    INSERT INTO
+        t_receipts(
+            f_receipt_id,
+            f_customer_id,
+            f_receipt_payment,
+            f_receipt_buy_time,
+            f_receipt_startusedaytime,
+            f_receipt_endusedaytime,
+            f_receipt_isreserved)
+        VALUES(
+            ${receiptId},
+            1,
+            ${payment},
+            ${buyTime},
+            now(),
+            now(),
+            1
+        );`
+
+    // ---------------------------------------------------
+    // SQL:取引TBL
+    // ---------------------------------------------------
+    let sql_transactions = `
         INSERT INTO
         t_transactions(
             f_receipt_id,
@@ -115,29 +113,29 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
             f_transaction_amount)
         VALUES`;
 
-        product_id.map((p_id, index) => {
-            sql += `
-            (
-                ${receiptId},
-                ${p_id},
-                ${quantity[index]},
-                ${amount[index]}
-            )`
+    product.map((e, index) => {
+        sql_transactions += `
+        (
+            ${receiptId},
+            ${e.id},
+            ${e.quantity},
+            ${e.price}
+        ), `
+    })
 
-            if(product_id.length -1 === index){
-                sql += `;   `
-            }
-            else{
-                sql += `,   `
-            }
-            
-        })
-    
+    sql_transactions = sql_transactions.slice(0, -2)
+    sql_receipts += `;  `
 
-    // 取引TBL(実行複数回)
-    // Todo:現在考え中
-    const result_transactions = await db.query(sql);
+    // デバッグ用表示
+    console.log(`領収TBL:${sql_receipts}`)
+    console.log(`取引TBL:${sql_transactions}`)
+    console.log(`商品TBL:${sql_products}`)
 
+    // SQL実行
+    let result = await db.query(sql_receipts);
+    if(result) result = await db.query(sql_transactions);
+    if(result) result = await db.query(sql_products);
+
+    return res.status(200).json(result)
     // return res.status(200).json({ status: "suceess" })
-    return res.status(200).json(result_transactions)
 }
