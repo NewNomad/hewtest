@@ -15,8 +15,9 @@ const fetcher = (url: string) => fetch(url).then(response => response.json());
 export const Products = () => {
 
     const { data, error } = useSWR<TypeProducts[]>(fetchProduct, fetcher);
-    if (error) return (<>商品表示：エラーが発生しました。管理者へ連絡してください</>)
     const [cart] = useRecoilState(cartState)
+
+    if (error) return (<>商品表示：エラーが発生しました。管理者へ連絡してください</>)
 
     return (
         // <Container>
