@@ -1,11 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../../styles/Home.module.css'
+// import type { NextPage } from 'next'
+// import Head from 'next/head'
+// import Image from 'next/image'
+// import styles from '../../styles/Home.module.css'
 
 import mysql from "serverless-mysql"
-import { log } from 'console';
+// import { log } from 'console';
 
 const portNum = process.env.MYSQL_PORT === undefined
                 ? 3306

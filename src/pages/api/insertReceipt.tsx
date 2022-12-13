@@ -38,12 +38,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
         date.getDate().toString() + 
         date.getHours().toString() + 
         date.getMinutes().toString() +
-        date.getSeconds().toString()                                // 領収ID
+        date.getSeconds().toString()                                        // 領収ID
 
     const buyTime =
         date.getFullYear().toString() + "-" +
         date.getMonth().toString() + "-" +
-        date.getDate().toString()                                   // 購入日
+        date.getDate().toString()                                           // 購入日
 
 
     let product: TypeProducts[] = req.body.products as TypeProducts[]       // カート内商品情報
@@ -95,7 +95,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
             ${receiptId},
             1,
             ${payment},
-            ${buyTime},
+            \"${buyTime}\",
             now(),
             now(),
             1

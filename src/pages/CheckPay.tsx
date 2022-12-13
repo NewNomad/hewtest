@@ -3,10 +3,10 @@ import { Container }            from '@mui/system'
 import { HeadInfo }             from '../components/2molecules/HeadInfo'
 import { Header }               from '../components/2molecules/Header'
 import { PayDetail }            from '../components/3organisms/PayDetail'
-import React, { useState }      from 'react';
-import { useRecoilValue, useRecoilState }       from 'recoil'
 import { totalPriceSelector }   from '../components/types/TypeCart'
-import { paymentState } from '../components/types/TypePayment'
+import { paymentState }         from '../components/types/TypePayment'
+import { useRecoilValue, useRecoilState } from 'recoil'
+import React from 'react';
 
 // ===================================================
 // 入金確認画面

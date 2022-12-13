@@ -8,9 +8,8 @@ import { cartState, TypeCart }          from '../components/types/TypeCart'
 import { paymentState, TypePayment }    from '../components/types/TypePayment'
 import { useRouter }        from 'next/router'
 import { useRecoilState }   from 'recoil'
-import axios from "axios"
-// import useSWR from 'swr'
-import { useEffect } from 'react'
+import axios                from "axios"
+import { useEffect }        from 'react'
 
 // DB操作系
 const insertReceiptURL  = "/api/insertReceipt"

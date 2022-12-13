@@ -18,7 +18,7 @@ export const BtnTotalAmount = ({ OpenMConfirm, totalPrice }: Props) => {
         <Button
             variant="contained"
             color='primary'
-disabled={totalPrice>0?false:true}
+            disabled={totalPrice>0?false:true}
             sx={{
                 width: "100%",
                 // padding: 5,
