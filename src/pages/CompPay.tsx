@@ -45,7 +45,7 @@ export default function CheckPay() {
     useEffect(() => {
         // 初期化
         setCart({ products: [], payInfoId: 0 })
-        setPaymant({ payment: 0, payInfoId: 0 })
+        setPaymant({ payment: 0, payInfoId: 0, payInfoType: 0 })
 
         insertReceipt(cart, payment)
     }, [])

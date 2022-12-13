@@ -40,7 +40,7 @@ export const ShowPayDetail = ( props:Props ) =>{
                     <Typography>残り金額</Typography>
                 </GridItem>
                 <GridItem>
-                    <ShowPrice primary={request > 0} >{ request }</ShowPrice>
+                    <ShowPrice primary={ request > 0 } >{ request }</ShowPrice>
                 </GridItem>
 
                 <GridItem title>

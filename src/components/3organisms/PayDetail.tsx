@@ -1,5 +1,4 @@
 import { Box, Paper, Grid }     from '@mui/material'
-import { TextTitle }            from '../1atoms/TextTitle'
 import { BtnLink }              from '../1atoms/BtnLink'
 import { GridItem }             from '../1atoms/GridItem'
 import { ShowPayDetail }        from '../2molecules/ShowPayDetail'
@@ -35,8 +34,6 @@ export const PayDetail = ( props:Props ) =>{
 
     return (                
         <>
-            <TextTitle primary>入金処理を行っています…</TextTitle>
-
             <Grid container spacing={3}>
                 <Grid item xs={7}>
                     <Box sx={{width: '100%', height: 600, padding: 10, backgroundColor: 'primary.main'}}>

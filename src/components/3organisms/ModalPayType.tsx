@@ -1,11 +1,12 @@
-import { Container, Grid } from '@mui/material'
-import { ShowMordal } from '../1atoms/ShowModal'
-import { BtnLink } from '../1atoms/BtnLink'
-import { TextTitle } from '../1atoms/TextTitle'
-import { TypePayInfos } from '../types/TypePayInfos'
+import { Container, Grid }      from '@mui/material'
+import { ShowMordal }           from '../1atoms/ShowModal'
+import { BtnLink }              from '../1atoms/BtnLink'
+import { TextTitle }            from '../1atoms/TextTitle'
+import { TypePayInfos }         from '../types/TypePayInfos'
 import { paymentState }         from '../types/TypePayment'
-import { useRouter }        from 'next/router'
-import { useRecoilState }   from 'recoil'
+import { totalPriceSelector }   from '../types/TypeCart'
+import { useRouter }            from 'next/router'
+import { useRecoilState, useRecoilValue }   from 'recoil'
 import React from 'react'
 
 type Props = {
@@ -20,6 +21,8 @@ export const ModalPayType = (props: Props) => {
 
     const payTypeId: number = payType == "QR" ? 3 : 2
 
+    const sum = useRecoilValue(totalPriceSelector)
+
     // -----------------------------------------------
     // ルーティング
     // -----------------------------------------------
@@ -30,7 +33,7 @@ export const ModalPayType = (props: Props) => {
     // -----------------------------------------------
     const [pay, setPay] = useRecoilState(paymentState)
     const getPayInfoId = (value:number) => {
-        setPay({ payment: 0, payInfoId: value });
+        setPay({ payment: sum, payInfoId: value });
         router.push(nextUrl)
     }
 

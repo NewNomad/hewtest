@@ -124,7 +124,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
     })
 
     sql_transactions = sql_transactions.slice(0, -2)
-    sql_receipts += `;  `
+    sql_transactions += `;  `
 
     // デバッグ用表示
     console.log(`領収TBL:${sql_receipts}`)

@@ -17,6 +17,7 @@ type Props = { ElProps: any, QrProps: any }
 // ---------------------------------------------------
 // 定数
 // ---------------------------------------------------
+const payTypeCoins: number = 1
 const nextUrl: string = "/CheckPay"                 // 決済確認画面
 const backUrl: string = "/"                         // 商品一覧画面
 const fetchPayInfos = "/api/fetchPayInfos"          // 決済方法一覧取得
@@ -46,8 +47,8 @@ export default function SelectPayInfo() {
     // 決済方法選択
     // -----------------------------------------------
     const [pay, setPay] = useRecoilState(paymentState)
-    const getPayInfoId = (value:number) => {
-        setPay({ payment: 0, payInfoId: value });
+    const getPayInfoId = ( id:number, type:number ) => {
+        setPay({ payment: 0, payInfoId: id, payInfoType:type });
         router.push(nextUrl)
     }
 
@@ -77,8 +78,8 @@ export default function SelectPayInfo() {
 
                     <Grid container textAlign="center" height={700} paddingBottom={5} spacing={1}>
                         <Grid item xs={6}>
-                            <BtnLink onClick={ () => getPayInfoId(data[0].pay_info_id) } primary largeFont>
-                                {data[0].pay_info_type == 1 ? data[0].pay_info_name : '設定エラー'}
+                            <BtnLink onClick={ () => getPayInfoId(data[0].pay_info_id, data[0].pay_info_type) } primary largeFont>
+                                {data[0].pay_info_type == payTypeCoins ? data[0].pay_info_name : '設定エラー'}
                             </BtnLink>
                         </Grid>
 

@@ -18,10 +18,10 @@ export const ShowAmount = ( props:Props ) =>{
                 aria-label='remove'
                 size='large'
                 onClick={ClickMinus}
-                disabled={costs <= 0}>
+                disabled={ costs <= 0 }>
                 <RemoveCircle fontSize='large' />
             </IconButton>
-            {costs}
+            { costs }
             <IconButton
                 aria-label='add'
                 onClick={ClickPlus}>
