@@ -49,10 +49,10 @@ export const useCart = () => {
         const selectItem = cart.products.find((_product) => _product.id === product.id)
 
         if (!selectItem) {
-            // カートに商品が入っていない場合
-            // console.log(product.quantity)
-            if(!product.quantity) product.quantity = 1
-            setCart({ products: [...cart.products, product] })
+            // product.quantity = 1;
+            setCart({
+                products: [...cart.products, { ...product, quantity: 1 }]
+            })
         } else {
             // カートに商品が入ってる場合
 
