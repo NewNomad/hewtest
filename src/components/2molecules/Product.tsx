@@ -3,9 +3,9 @@ import { Badge, Button, Divider, Modal, Paper, Tooltip }    from '@mui/material'
 import { ShowModalInfo }                                    from './ShowModalInfo'
 import { TypeProducts }                                     from '../types/TypeProducts'
 import { cartState, TypeCart, useCart }                     from '../types/TypeCart'
-import Image from 'next/image'
-import { useRecoilState } from 'recoil'
-import React, { useState } from 'react'
+import Image                from 'next/image'
+import { useRecoilState }   from 'recoil'
+import React, { useState }  from 'react'
 
 type Props = {
     proinfo: TypeProducts;

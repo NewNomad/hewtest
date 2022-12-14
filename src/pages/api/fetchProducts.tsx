@@ -35,6 +35,7 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
 
     // console.log(req);
 
+    // 商品情報
     const result = await db.query(`
     SELECT 
         p.f_product_id as id, 
@@ -49,6 +50,32 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
         t_images as i 
     ON 
         p.f_product_id = i.f_product_id`);
+
+    // アレルギー情報
+    // SELECT
+    //     ap.f_product_id      AS id,
+    //     a.f_allergen_name    AS allergen_name
+    // FROM
+    //     t_allergens_product  AS ap
+    // JOIN
+    //     t_allergens          AS a
+    // ON
+    //     ap.f_allergen_id = a.f_allergen_id
+    // WHERE
+    //     ap.f_product_id = {対象となる商品ID};
+
+    // タグ情報
+    // SELECT
+	//     tp.f_product_id		AS id,
+	//     t.f_tag_name			AS tag_name
+    // FROM
+    //     t_tags_products		AS tp
+    // JOIN
+    //     t_tags				AS t
+    // ON
+    //     tp.f_tag_id = t.f_tag_id
+    // WHERE
+    //     tp.f_product_id = {対象となる商品ID};
 
     return res.status(200).json(result)
 }

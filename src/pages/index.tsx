@@ -1,10 +1,10 @@
 import { Box, Button, Container, Grid, Paper } from '@mui/material'
-import type { NextPage }  from 'next'
 import { BtnLink }        from '../components/1atoms/BtnLink'
 import { Header }         from '../components/2molecules/Header'
 import { HeadInfo }       from '../components/2molecules/HeadInfo'
 import { Cart }           from '../components/3organisms/Cart'
 import { Products }       from '../components/3organisms/Products'
+import type { NextPage }  from 'next'
 import { useRouter }      from 'next/router'
 import { BgParticle }     from '../components/libs/BgParticle'      // パーティクル
 

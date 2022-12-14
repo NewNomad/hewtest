@@ -1,13 +1,13 @@
-import { LocalDrink } from '@mui/icons-material'
+import { LocalDrink }                           from '@mui/icons-material'
 import { CircularProgress, Grid, Modal, Paper } from '@mui/material'
-import Product from '../2molecules/Product'
-import { ProductTabs } from '../2molecules/ProductTabs'
-import { ShowModalInfo } from '../2molecules/ShowModalInfo'
-import React, { useState } from 'react'
+import Product              from '../2molecules/Product'
+import { ProductTabs }      from '../2molecules/ProductTabs'
+import { ShowModalInfo }    from '../2molecules/ShowModalInfo'
+import { TypeProducts }     from '../types/TypeProducts'
+import { cartState }        from '../types/TypeCart'
+import { useRecoilState }   from 'recoil'
+import React, { useState }  from 'react'
 import useSWR from 'swr'
-import { TypeProducts } from '../types/TypeProducts'
-import { useRecoilState } from 'recoil'
-import { cartState } from '../types/TypeCart'
 
 const fetchProduct = "/api/fetchProducts"
 const fetcher = (url: string) => fetch(url).then(response => response.json());

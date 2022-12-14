@@ -7,9 +7,9 @@ import { Header }               from '../components/2molecules/Header'
 import { ModalPayType }         from '../components/3organisms/ModalPayType'
 import { TypePayInfos }         from '../components/types/TypePayInfos'
 import { paymentState }         from '../components/types/TypePayment'
-import { useRouter }        from 'next/router'
-import { useRecoilState }   from 'recoil'
-import React, { useState }  from 'react'
+import { useRouter }            from 'next/router'
+import { useRecoilState }       from 'recoil'
+import React, { useState }      from 'react'
 import useSWR from 'swr'
 
 type Props = { ElProps: any, QrProps: any }

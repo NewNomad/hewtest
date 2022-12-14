@@ -1,10 +1,10 @@
 import { Box, Button, Container, Divider, Grid, Paper, Typography } from '@mui/material'
-import { ShowMordal }           from '../1atoms/ShowModal'
-import { ModalConfirmProduct }  from '../1atoms/ModalConfirmProduct'
-import Link from 'next/link'
-import React from 'react'
-import { useRecoilValue } from 'recoil'
-import { cartState, totalPriceSelector } from '../types/TypeCart'
+import { ShowMordal }                       from '../1atoms/ShowModal'
+import { ModalConfirmProduct }              from '../1atoms/ModalConfirmProduct'
+import { cartState, totalPriceSelector }    from '../types/TypeCart'
+import { useRecoilValue }   from 'recoil'
+import Link                 from 'next/link'
+import React                from 'react'
 
 type Props = {
     closeModal: () => void

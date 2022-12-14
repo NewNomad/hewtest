@@ -1,5 +1,5 @@
-import { Cancel, Close } from '@mui/icons-material'
-import { IconButton, Paper } from '@mui/material'
+import { Cancel, Close }        from '@mui/icons-material'
+import { IconButton, Paper }    from '@mui/material'
 import React from 'react'
 
 type Props = {
@@ -36,7 +36,7 @@ export const ShowMordal: React.FC<Props> = ({ children, closeModal }) => {
                     backgroundColor: "#fff",
                     borderBottom: 1,
                     borderRight: 1
-                }}></Close>
+                }} />
             </IconButton>
 
             {children}

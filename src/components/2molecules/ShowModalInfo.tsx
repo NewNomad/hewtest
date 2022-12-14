@@ -1,10 +1,10 @@
 import { Button, Container, Grid, Rating, Typography, List, ListItemText } from '@mui/material'
-import Image from 'next/image'
-import { ShowMordal } from '../1atoms/ShowModal'
-import React from 'react'
-import QuantityButton from '../1atoms/QuantityButton'
-import { useCart } from '../types/TypeCart'
+import { ShowMordal }   from '../1atoms/ShowModal'
+import QuantityButton   from '../1atoms/QuantityButton'
+import { useCart }      from '../types/TypeCart'
 import { TypeProducts } from '../types/TypeProducts'
+import Image            from 'next/image'
+import React            from 'react'
 
 type Props = {
     product: TypeProducts;
