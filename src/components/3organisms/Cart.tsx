@@ -1,9 +1,9 @@
 import { Box, Divider, List, ListItem, Modal, Paper, Typography } from '@mui/material'
-import { Container } from '@mui/system'
-import { BtnTotalAmount }   from '../1atoms/BtnTotalAmount'
-import { CartItem }         from '../2molecules/CartItem'
-import { ShowModalConfirm } from '../2molecules/ShowModalConfirm'
-import { cartState, totalPriceSelector } from '../types/TypeCart'
+import { Container }                        from '@mui/system'
+import { BtnTotalAmount }                   from '../1atoms/BtnTotalAmount'
+import { CartItem }                         from '../2molecules/CartItem'
+import { ShowModalConfirm }                 from '../2molecules/ShowModalConfirm'
+import { cartState, totalPriceSelector }    from '../types/TypeCart'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import React, { useState } from 'react'
 
@@ -53,8 +53,11 @@ export const Cart = () => {
                     }</List>
 
                 <Divider />
+
                 <Typography variant='h5' fontWeight="bold" textAlign="right">合計：{totalPrice}円</Typography>
+
                 <BtnTotalAmount OpenMConfirm={OpenMConfirm} totalPrice={totalPrice} />
+
             </Container>
 
             {/* 購入確認画面(モーダル) */}

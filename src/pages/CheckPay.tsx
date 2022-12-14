@@ -17,10 +17,10 @@ const payTypeCoins: number = 1
 export default function CheckPay(){
 
     // 値取得
-    const sum                   = useRecoilValue(totalPriceSelector)                // 合計金額
+    const sum:number            = useRecoilValue(totalPriceSelector)                // 合計金額
     const [costs, setCosts]     = useRecoilState(paymentState)                      // お預かり(投入金額, 支払方法)
-    const request   = ( sum - costs.payment ) > 0? (sum - costs.payment): 0         // 残り金額
-    const change    = ( costs.payment - sum ) > 0? (costs.payment - sum): 0         // おつり
+    const request   = ( sum - costs.payment ) > 0? ( sum - costs.payment ): 0       // 残り金額
+    const change    = ( costs.payment - sum ) > 0? ( costs.payment - sum ): 0       // おつり
 
     const strTitle = costs.payInfoType == payTypeCoins ? 'お金を投入してください': '入金処理を行っています…';
 
@@ -39,7 +39,7 @@ export default function CheckPay(){
                     <TextTitle primary>{ strTitle }</TextTitle>
 
                     <PayDetail
-                        sum={sum}
+                        sum={ sum }
                         costs={ costs.payment }
                         request={ request }
                         change={ change }

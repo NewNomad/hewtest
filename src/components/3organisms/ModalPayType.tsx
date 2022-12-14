@@ -32,8 +32,8 @@ export const ModalPayType = (props: Props) => {
     // 決済方法選択
     // -----------------------------------------------
     const [pay, setPay] = useRecoilState(paymentState)
-    const getPayInfoId = (value:number) => {
-        setPay({ payment: sum, payInfoId: value });
+    const getPayInfoId = ( id:number, type:number ) => {
+        setPay({ payment: sum, payInfoId: id, payInfoType: type });
         router.push(nextUrl)
     }
 
@@ -51,7 +51,7 @@ export const ModalPayType = (props: Props) => {
                             (
                                 <Grid key={i} item xs={4}>
                                     <BtnLink
-                                        onClick={ () => getPayInfoId(e.pay_info_id) }
+                                        onClick={ () => getPayInfoId(e.pay_info_id, e.pay_info_type) }
                                         primary
                                         largeFont
                                     >

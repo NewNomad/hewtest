@@ -1,5 +1,6 @@
 import { atom, RecoilState, selector, useRecoilState } from "recoil"
 import { TypeProducts } from "./TypeProducts"
+import { useState } from "react"
 
 // =====================================================
 // カート情報
@@ -7,13 +8,13 @@ import { TypeProducts } from "./TypeProducts"
 // 型宣言
 export type TypeCart = {
     products: TypeProducts[],       // 商品情報
-    payInfoId?: number              // 決済方法
+    // payInfoId?: number              // 決済方法
 }
 
 // デフォルト値
 const initialState: TypeCart = {
     products: [],
-    payInfoId: 0
+    // payInfoId: 0
 }
 
 // カートの情報
@@ -43,25 +44,27 @@ export const useCart = () => {
     // ----------------------------------------------------------------
     // カートへ追加
     // ----------------------------------------------------------------
-    const addCart = (product: TypeProducts): void => {
+    const addCart = ( product: TypeProducts ): void => {
+        // カート内から選択商品の検索
         const selectItem = cart.products.find((_product) => _product.id === product.id)
 
-        // カートに商品が入っていない場合
         if (!selectItem) {
-            product.quantity = 1;
-            setCart({
-                products: [...cart.products, product]
-            })
+            // カートに商品が入っていない場合
+            // console.log(product.quantity)
+            if(!product.quantity) product.quantity = 1
+            setCart({ products: [...cart.products, product] })
         } else {
             // カートに商品が入ってる場合
 
+            // 在庫が足らなければだめ
             if (selectItem.stock - selectItem.quantity <= 0) {
-                // 在庫が足らなければだめ
                 alert(product.name + "の在庫がありません！！")
                 return
             }
 
+            // 在庫あり
             setCart((prevCart) => {
+                // 商品の購入個数+1
                 return {
                     products: prevCart.products.map((_product) =>
                         _product.id === selectItem.id
@@ -79,13 +82,17 @@ export const useCart = () => {
     const removeCart = (product: TypeProducts) => {
         const selectItem = cart.products.find((_product) => _product.id === product.id)
 
+        // カート内に商品がない
         if (!selectItem) {
             console.warn("何でないんねん、バグっとるわ")
             return
         }
 
-        // カートからー１
+        // カート内に商品あり
         if (selectItem.quantity > 1) {
+            // 購入個数の数を減らす
+
+            // 商品の購入個数-1
             setCart((prevCart) => {
                 return {
                     products: prevCart.products.map((_product) =>
@@ -97,15 +104,16 @@ export const useCart = () => {
             })
         } else {
             // カートから削除
+
             const products = [...cart.products]
 
             const index = products.findIndex((product) => product.id === selectItem.id);
             if (index === -1) return
+
+
             products.splice(index, 1)
 
-            setCart({
-                products
-            })
+            setCart({ products })
         }
     }
     return { addCart, removeCart }
