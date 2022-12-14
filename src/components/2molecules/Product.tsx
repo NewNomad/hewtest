@@ -41,6 +41,7 @@ export default function Product({ proinfo }: Props) {
                     textAlign: "center"
                 }}>
 
+                {/* 画像部 */}
                 {/* <Tooltip title="詳細" arrow> */}
 
                 <Button
@@ -65,19 +66,25 @@ export default function Product({ proinfo }: Props) {
                         alt="商品画像" />
 
                 </Button>
+
                 {/* </Tooltip> */}
 
                 <Divider />
 
+                {/* 値段部 */}
                 <Tooltip title="カートに追加" arrow>
 
-                    <Button color='inherit' variant="contained" size='small' disableElevation
+                    <Button
+                        color='inherit'
+                        variant="contained"
+                        size='small'
+                        disableElevation
                         onClick={() => addCart(proinfo)}
                         disabled={isActive ? false : true}
                         startIcon={
                             isice == 1
                                 ? <AcUnit color={isActive ? "info" : "secondary"} />
-                                : <Whatshot color={isActive ? 'primary' : "secondary"} ></Whatshot>
+                                : <Whatshot color={isActive ? 'primary' : "secondary"} />
                         }
                         // <Button color='secondary' variant="contained" size='small' disableElevation
                         sx={{
@@ -88,10 +95,11 @@ export default function Product({ proinfo }: Props) {
                             borderStartStartRadius: 0,
                             fontSize:18
                         }}>
-
                         {proinfo.price}
                     </Button>
+
                 </Tooltip>
+
             </Paper>
 
             {/* 商品詳細画面(モーダル) */}

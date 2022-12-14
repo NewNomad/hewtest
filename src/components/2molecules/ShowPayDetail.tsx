@@ -32,7 +32,7 @@ export const ShowPayDetail = ( props:Props ) =>{
                 </GridItem>
                 <GridItem>
                     <ShowPrice>
-                        <ShowAmount costs={costs} ClickMinus={ClickMinus} ClickPlus={ClickPlus} />
+                        <ShowAmount costs={ costs } ClickMinus={ ClickMinus } ClickPlus={ ClickPlus } />
                     </ShowPrice>
                 </GridItem>
 
