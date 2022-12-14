@@ -48,9 +48,10 @@ export const useCart = () => {
 
         // カートに商品が入っていない場合
         if (!selectItem) {
-            product.quantity = 1;
+
+            // product.quantity = 1;
             setCart({
-                products: [...cart.products, product]
+                products: [...cart.products, { ...product, quantity: 1 }]
             })
         } else {
             // カートに商品が入ってる場合
