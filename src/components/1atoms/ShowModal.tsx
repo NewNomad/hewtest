@@ -1,18 +1,19 @@
-import { Cancel, Close }        from '@mui/icons-material'
-import { IconButton, Paper }    from '@mui/material'
+import { Cancel, Close } from '@mui/icons-material'
+import { IconButton, Paper, Modal } from '@mui/material'
 import React from 'react'
 
 type Props = {
     children: React.ReactNode
     closeModal: () => void
 }
+const ref = React.createRef();
 
 // ==================================================
 // モーダルのウィンドウ設定
 // ==================================================
-export const ShowMordal: React.FC<Props> = ({ children, closeModal }) => {
-    return (
-        <Paper
+export const ShowMordal: React.FC<Props> = React.forwardRef(({ children, closeModal }, ref) => {
+    const Body = (
+        <Paper ref={ref}
             sx={{
                 position: "absolute",
                 top: "50%",
@@ -24,7 +25,7 @@ export const ShowMordal: React.FC<Props> = ({ children, closeModal }) => {
                 p: 4
             }}
         >
-            <IconButton onClick={closeModal} sx={{
+            <IconButton  onClick={closeModal} sx={{
                 position: "absolute",
                 right: -60,
                 top: -60,
@@ -39,7 +40,13 @@ export const ShowMordal: React.FC<Props> = ({ children, closeModal }) => {
                 }} />
             </IconButton>
 
-            {children}
+            {/* {children} */}
+        </Paper>
+
+    )
+    return (
+        <Paper>
+            {Body}
         </Paper>
     )
-}
+})
