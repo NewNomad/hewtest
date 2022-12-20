@@ -13,6 +13,8 @@ export type TypeProductInfo = {
     isice: number;          // ホット/アイス
     stock: number;          // 在庫数
     imageURL: string;       // 画像URL
+    Allergens:string[];     //
+    tags:string[];          //
 }
 
 export type TypeAllergenInfo = {
@@ -103,10 +105,17 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
     const result_allergens: TypeAllergenInfo[]    = await db.query(sql_allergens)
     const result_tags:TypeTagInfo[]               = await db.query(sql_tags)
 
-    const result = [...result_items].map( (product, i) => (
-        result_allergens.find( (allergen, j ) => product.id === allergen.product_id ? [...result_items, allergen.name]:"")
+    const arr_allergens = [...result_items].map( (product, i) => (
+        result_allergens.filter((allergen, j ) => product.id === allergen.product_id)
     ) )
 
+    const arr_tags = [...result_items].map( (product, i) => (
+        result_tags.filter((tag, j ) => product.id === tag.product_id)
+    ) )
+
+    const result = [...result_items, arr_allergens, arr_tags]
+
+    console.log(result)
 
     return res.status(200).json(result)
 }
