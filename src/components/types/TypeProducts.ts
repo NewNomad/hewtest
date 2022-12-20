@@ -10,4 +10,6 @@ export type TypeProducts = {
     stock: number;          // 在庫数
     imageURL: string;       // 画像URL
     quantity:number;        // 選択個数
+    allergens: string[];    // アレルギー情報群
+    tags: string[];         // タグ情報群
 }

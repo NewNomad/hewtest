@@ -37,45 +37,55 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
 
     // 商品情報
     const result = await db.query(`
-    SELECT 
-        p.f_product_id as id, 
-        p.f_product_name as name, 
-        p.f_product_price as price, 
-        p.f_product_isice as isice, 
-        p.f_product_stock as stock, 
-        i.f_image_url as imageURL
-    FROM 
-        t_products as p 
-    JOIN 
-        t_images as i 
-    ON 
-        p.f_product_id = i.f_product_id`);
+        SELECT 
+            p.f_product_id as id, 
+            p.f_product_name as name, 
+            p.f_product_price as price, 
+            p.f_product_isice as isice, 
+            p.f_product_stock as stock, 
+            i.f_image_url as imageURL
+        FROM 
+            t_products as p 
+        JOIN 
+            t_images as i 
+        ON 
+            p.f_product_id = i.f_product_id`);
+
+    let result_json = JSON.stringify(result, null, ' ')
 
     // アレルギー情報
-    // SELECT
-    //     ap.f_product_id      AS id,
-    //     a.f_allergen_name    AS allergen_name
-    // FROM
-    //     t_allergens_product  AS ap
-    // JOIN
-    //     t_allergens          AS a
-    // ON
-    //     ap.f_allergen_id = a.f_allergen_id
+    const result_allergens = await db.query(`
+        SELECT
+            ap.f_product_id      AS id,
+            a.f_allergen_name    AS allergen_name
+        FROM
+            t_allergens_product  AS ap
+        JOIN
+            t_allergens          AS a
+        ON
+            ap.f_allergen_id = a.f_allergen_id
+        ORDER BY id;`);
     // WHERE
     //     ap.f_product_id = {対象となる商品ID};
 
     // タグ情報
-    // SELECT
-	//     tp.f_product_id		AS id,
-	//     t.f_tag_name			AS tag_name
-    // FROM
-    //     t_tags_products		AS tp
-    // JOIN
-    //     t_tags				AS t
-    // ON
-    //     tp.f_tag_id = t.f_tag_id
+    const result_tags = await db.query(`
+        SELECT
+            tp.f_product_id		AS id,
+            t.f_tag_name		AS tag_name
+        FROM
+            t_tags_products		AS tp
+        JOIN
+            t_tags				AS t
+        ON
+            tp.f_tag_id = t.f_tag_id
+       ORDER BY id `);
     // WHERE
     //     tp.f_product_id = {対象となる商品ID};
 
-    return res.status(200).json(result)
+    console.log(JSON.stringify(result, null, ' '))
+    console.log(result_allergens)
+    console.log(result_tags)
+
+    return res.status(200).send(JSON.stringify(result, null, ' '))
 }

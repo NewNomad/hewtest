@@ -16,14 +16,11 @@ export default function Product({ proinfo }: Props) {
     const { id, name, price, stock, isice, imageURL } = proinfo
 
     // const TimageURL = imageURL.replace(/(\d{4})\//, "$1/$1")     // DBと名前が違ったので、暫定的におく
-
-    const isActive: boolean = stock > 0 ? true : false
+    const isActive: boolean = stock > 0                             // 在庫なしは選択できないようにする
 
     const [mordalInfo, setmordalInfo] = useState<boolean>(false)    // 商品詳細画面
-
-    const OpenMInfo = () => setmordalInfo(true);                    // 商品詳細画面(モーダル)開く
-    const CloseMInfo = () => setmordalInfo(false);                  // 商品詳細画面(モーダル)閉じる
-
+    const OpenMInfo     = () => setmordalInfo(true);                    // 商品詳細画面(モーダル)開く
+    const CloseMInfo    = () => setmordalInfo(false);                  // 商品詳細画面(モーダル)閉じる
 
     const { addCart } = useCart()
 
@@ -46,7 +43,7 @@ export default function Product({ proinfo }: Props) {
 
                 <Button
                     onClick={OpenMInfo}
-                    disabled={isActive ? false : true}
+                    disabled={ !isActive }
                     sx={{
                         width: 1,
                         borderBottomLeftRadius: 0,
@@ -80,7 +77,7 @@ export default function Product({ proinfo }: Props) {
                         size='small'
                         disableElevation
                         onClick={() => addCart(proinfo)}
-                        disabled={isActive ? false : true}
+                        disabled={ !isActive }
                         startIcon={
                             isice == 1
                                 ? <AcUnit color={isActive ? "info" : "secondary"} />
