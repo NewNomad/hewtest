@@ -19,8 +19,8 @@ export default function Product({ proinfo }: Props) {
     const isActive: boolean = stock > 0                             // 在庫なしは選択できないようにする
 
     const [mordalInfo, setmordalInfo] = useState<boolean>(false)    // 商品詳細画面
-    const OpenMInfo     = () => setmordalInfo(true);                    // 商品詳細画面(モーダル)開く
-    const CloseMInfo    = () => setmordalInfo(false);                  // 商品詳細画面(モーダル)閉じる
+    const OpenMInfo     = () => setmordalInfo(true);                // 商品詳細画面(モーダル)開く
+    const CloseMInfo    = () => setmordalInfo(false);               // 商品詳細画面(モーダル)閉じる
 
     const { addCart } = useCart()
 
