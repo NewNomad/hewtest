@@ -59,7 +59,7 @@ export default function Product({ proinfo }: Props) {
                         height={180}
                         width={100}
                         objectFit="contain"
-                        style={isActive == false ? { filter: "grayscale(100%)" } : {}}
+                        style={ !isActive ? { filter: "grayscale(100%)" } : {}}
                         alt="商品画像" />
 
                 </Button>
@@ -92,7 +92,7 @@ export default function Product({ proinfo }: Props) {
                             borderStartStartRadius: 0,
                             fontSize:18
                         }}>
-                        {proinfo.price}
+                        { price }
                     </Button>
 
                 </Tooltip>

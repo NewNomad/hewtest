@@ -18,10 +18,11 @@ export const ShowModalInfo = ({ product, closeModal }: Props) => {
     return (
         <ShowMordal closeModal={closeModal}>
             <Grid container direction="column" spacing={0}>
+
                 {/* 上 */}
                 <Grid container item xs={8}>
                     <Grid item xs={4}>
-                        <Image src={"/" + product.imageURL} height={1800} width={800} objectFit="contain" alt="商品画像"></Image>
+                        <Image src={"/" + product.imageURL} height={1800} width={800} objectFit="contain" alt="商品画像" />
                     </Grid>
                     <Grid item xs={8}>
                         <Container>
@@ -32,9 +33,20 @@ export const ShowModalInfo = ({ product, closeModal }: Props) => {
                             >
                                 <ListItemText>#甘い</ListItemText>
                                 <ListItemText>#炭酸</ListItemText>
+                                <ListItemText>{ product.allergens.length }</ListItemText>
+                                {
+                                    product.allergens.length >= 0 && [...product.allergens].map((allergen, i:number) => (
+                                        <ListItemText key={i}>{ allergen }</ListItemText>
+                                    ))
+                                }
                             </List>
                             <Typography>アレルギー表示</Typography>
                             <Typography>なし</Typography>
+                            {
+                                product.tags.length > 0 && [...product.tags].map((tag, i:number) => (
+                                    <Typography key={i}>{ tag }</Typography>
+                                ))
+                            }
                             <Rating
                                 name='rate'
                                 value={3}
@@ -44,9 +56,9 @@ export const ShowModalInfo = ({ product, closeModal }: Props) => {
                             />
                         </Container>
                     </Grid>
-
                 </Grid>
-                {/* した */}
+
+                {/* 下 */}
                 <Grid container item xs={4} paddingTop={2} sx={{ width: "100%" }} textAlign="center">
 
                     <Grid item xs={8}>
@@ -64,6 +76,7 @@ export const ShowModalInfo = ({ product, closeModal }: Props) => {
                     </Grid>
                 </Grid>
             </Grid>
+
         </ShowMordal>
     )
 }

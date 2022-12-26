@@ -110,11 +110,11 @@ export const useCart = () => {
             const index = products.findIndex((product) => product.id === selectItem.id);
             if (index === -1) return
 
-
             products.splice(index, 1)
 
             setCart({ products })
         }
+
     }
     return { addCart, removeCart }
 }
