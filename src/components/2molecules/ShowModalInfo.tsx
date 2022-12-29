@@ -22,7 +22,8 @@ export const ShowModalInfo = ({ product, closeModal }: Props) => {
     const { addCart } = useCart()
 
     return (
-        <ShowMordal closeModal={closeModal}>
+        <ShowMordal closeModal={ closeModal }>
+
             <Grid container direction="column" spacing={0}>
 
                 {/* 上 */}
@@ -40,17 +41,21 @@ export const ShowModalInfo = ({ product, closeModal }: Props) => {
                                 sx={{ width: 200, borderLeft: 2, bgcolor: '#ccccff', color: 'blue', margin: 5, padding: 2 }}
                             >
                                 {
-                                    [...product.allergens].map((allergen, i:number) => (
-                                        <ListItemText key={i}>{ allergen }</ListItemText>
+                                    product.tags.length <= 0?
+                                        <ListItemText>{ `タグはまだ設定されていません` }</ListItemText>
+                                    :[...product.tags].map((tag, i:number) => (
+                                        <ListItemText key={i}>{ `# ${tag}` }</ListItemText>
+                                    ))
+                                }   
+                            </List>
+                            <Typography variant='h6'>アレルギー表示</Typography>
+                                {
+                                   product.tags.length <= 0?
+                                        <Typography>{ `ありません` }</Typography> 
+                                    :[...product.allergens].map((allergen, i:number) => (
+                                        <Typography key={i}>{ allergen }</Typography>
                                     ))
                                 }
-                            </List>
-                            <Typography>アレルギー表示</Typography>
-                            {
-                                [...product.tags].map((tag, i:number) => (
-                                    <Typography key={i}>{ tag }</Typography>
-                                ))
-                            }
                             <Rating
                                 name='rate'
                                 value={3}
