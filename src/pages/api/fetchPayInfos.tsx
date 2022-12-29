@@ -2,17 +2,16 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import mysql from "serverless-mysql"
 // import { log } from 'console';
 
-const portNum = process.env.MYSQL_PORT === undefined
-                ? 3306
-                : parseInt(process.env.MYSQL_PORT)
-
+// ----------------------------------------------------
+// DB接続
+// ----------------------------------------------------
 const db = mysql({
   config: {
     host: process.env.MYSQL_HOST,
     database: process.env.MYSQL_DATABASE,
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
-    port: portNum,
+    port: parseInt(process.env.MYSQL_PORT ?? "3306"),
   }
 })
 
@@ -27,10 +26,14 @@ exports.query = async (query: any) => {
     }
 }
 
+// ===================================================
+// 決済方法取得
+// ===================================================-
 export default async function handler( req: NextApiRequest, res: NextApiResponse,){
 
-    // console.log(req);
-
+    // ----------------------------------------------------
+    // SQLの実行
+    // ----------------------------------------------------
     const result = await db.query(`
         SELECT 
             f_pay_info_id       AS pay_info_id,
@@ -43,5 +46,8 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
         ;
     `);
 
+    // ----------------------------------------------------
+    // 処理情報の返却(json)
+    // ----------------------------------------------------
     return res.status(200).json(result)
 }

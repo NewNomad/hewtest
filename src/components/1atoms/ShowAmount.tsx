@@ -1,7 +1,6 @@
 import { AddCircle, RemoveCircle }  from '@mui/icons-material'
 import { IconButton }               from '@mui/material'
 
-
 type Props = {
     costs: number
     ClickMinus: () => void

@@ -9,6 +9,9 @@ import { useRouter }            from 'next/router'
 import { useRecoilState, useRecoilValue }   from 'recoil'
 import React from 'react'
 
+// -----------------------------------------------------------
+// 型宣言
+// -----------------------------------------------------------
 type Props = {
     children: TypePayInfos[],
     payType: string,
@@ -16,12 +19,15 @@ type Props = {
     closeModal: () => void
 }
 
+// ==========================================================
+// 電子マネー決済選択画面/QRコード決済選択画面
+// ==========================================================
 export const ModalPayType = (props: Props) => {
+
     const { children, nextUrl, payType, closeModal } = props
 
-    const payTypeId: number = payType == "QR" ? 3 : 2
-
-    const sum = useRecoilValue(totalPriceSelector)
+    const payTypeId: number = payType == "QR" ? 3 : 2   // 決済方法 (2:電子マネー、3:QRコード)
+    const sum = useRecoilValue(totalPriceSelector)      // 合計金額
 
     // -----------------------------------------------
     // ルーティング
@@ -29,7 +35,7 @@ export const ModalPayType = (props: Props) => {
     const router = useRouter()
 
     // -----------------------------------------------
-    // 決済方法選択
+    // 決済方法選択の処理
     // -----------------------------------------------
     const [pay, setPay] = useRecoilState(paymentState)
     const getPayInfoId = ( id:number, type:number ) => {

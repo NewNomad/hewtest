@@ -6,13 +6,19 @@ import { TypeProducts } from '../types/TypeProducts'
 import Image            from 'next/image'
 import React            from 'react'
 
+// ----------------------------------------------------
+// 型宣言
+// ----------------------------------------------------
 type Props = {
     product: TypeProducts;
     closeModal: () => void
 }
 
-
+// ===================================================
+// 商品詳細画面
+// ===================================================-
 export const ShowModalInfo = ({ product, closeModal }: Props) => {
+
     const { addCart } = useCart()
 
     return (
@@ -21,9 +27,11 @@ export const ShowModalInfo = ({ product, closeModal }: Props) => {
 
                 {/* 上 */}
                 <Grid container item xs={8}>
+
                     <Grid item xs={4}>
-                        <Image src={"/" + product.imageURL} height={1800} width={800} objectFit="contain" alt="商品画像" />
+                        <Image src={"/" + product.imageURL} height={1800} width={800} objectFit="contain" alt="" />
                     </Grid>
+
                     <Grid item xs={8}>
                         <Container>
                             <Typography variant='h3' >{product.name}</Typography>
@@ -31,19 +39,15 @@ export const ShowModalInfo = ({ product, closeModal }: Props) => {
                             <List
                                 sx={{ width: 200, borderLeft: 2, bgcolor: '#ccccff', color: 'blue', margin: 5, padding: 2 }}
                             >
-                                <ListItemText>#甘い</ListItemText>
-                                <ListItemText>#炭酸</ListItemText>
-                                <ListItemText>{ product.allergens.length }</ListItemText>
                                 {
-                                    product.allergens.length >= 0 && [...product.allergens].map((allergen, i:number) => (
+                                    [...product.allergens].map((allergen, i:number) => (
                                         <ListItemText key={i}>{ allergen }</ListItemText>
                                     ))
                                 }
                             </List>
                             <Typography>アレルギー表示</Typography>
-                            <Typography>なし</Typography>
                             {
-                                product.tags.length > 0 && [...product.tags].map((tag, i:number) => (
+                                [...product.tags].map((tag, i:number) => (
                                     <Typography key={i}>{ tag }</Typography>
                                 ))
                             }
@@ -71,8 +75,12 @@ export const ShowModalInfo = ({ product, closeModal }: Props) => {
 
                     </Grid>
                     <Grid item xs={4}>
-                        <Button color='primary' variant="contained"
-                            onClick={() => { addCart(product); closeModal() }} >カートに追加</Button>
+                        <Button
+                            color='primary'
+                            variant="contained"
+                            onClick={() => { addCart(product); closeModal() }} >
+                            カートに追加
+                        </Button>
                     </Grid>
                 </Grid>
             </Grid>
