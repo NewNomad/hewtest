@@ -6,6 +6,7 @@ import { TypePayInfos }         from '../types/TypePayInfos'
 import { paymentState }         from '../types/TypePayment'
 import { totalPriceSelector }   from '../types/TypeCart'
 import { useRouter }            from 'next/router'
+import Image                    from 'next/image'
 import { useRecoilState, useRecoilValue }   from 'recoil'
 import React from 'react'
 
@@ -59,9 +60,21 @@ export const ModalPayType = (props: Props) => {
                                     <BtnLink
                                         onClick={ () => getPayInfoId(e.pay_info_id, e.pay_info_type) }
                                         primary
-                                        largeFont
                                     >
-                                        {e.pay_info_name}
+                                        {/* ↓ 決済方法名 */}
+                                        { e.pay_info_name }
+
+                                        {/* ↓ 画像：画像URLが取得できた時だけ表示 */}
+                                        { e.pay_info_image && (
+                                                <figure>
+                                                    <Image
+                                                    src={"/pay_logo/"+ e.pay_info_image}
+                                                    alt=""
+                                                    width={130}
+                                                    height={100} />
+                                                </figure>
+                                            ) 
+                                        }
                                     </BtnLink>
                                 </Grid>
                             )

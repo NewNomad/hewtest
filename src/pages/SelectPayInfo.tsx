@@ -33,15 +33,15 @@ export default function SelectPayInfo() {
     // 電子マネー決済選択(モーダル)
     // -----------------------------------------------
     const [mordalEl, setMordalEl] = useState<boolean>(false)
-    const OpenMEl = () => setMordalEl(true);                    // 開く
-    const CloseMEl = () => setMordalEl(false);                  // 閉じる
+    const OpenMEl = () => setMordalEl(true)                     // 開く
+    const CloseMEl = () => setMordalEl(false)                   // 閉じる
 
     // -----------------------------------------------
     // QRコード決済選択(モーダル)
     // -----------------------------------------------
     const [mordalQr, setMordalQr] = useState<boolean>(false)
-    const OpenMQr = () => setMordalQr(true);                    // 開く
-    const CloseMQr = () => setMordalQr(false);                  // 閉じる
+    const OpenMQr = () => setMordalQr(true)                     // 開く
+    const CloseMQr = () => setMordalQr(false)                   // 閉じる
 
     // -----------------------------------------------
     // 決済方法選択
@@ -78,17 +78,17 @@ export default function SelectPayInfo() {
 
                     <Grid container textAlign="center" height={700} paddingBottom={5} spacing={1}>
                         <Grid item xs={6}>
-                            <BtnLink onClick={ () => getPayInfoId(data[0].pay_info_id, data[0].pay_info_type) } primary largeFont>
+                            <BtnLink onClick={ () => getPayInfoId(data[0].pay_info_id, data[0].pay_info_type) } primary>
                                 {data[0].pay_info_type == payTypeCoins ? data[0].pay_info_name : '設定エラー'}
                             </BtnLink>
                         </Grid>
 
                         <Grid container item xs={6} direction="column" spacing={1}>
                             <Grid item xs={6}>
-                                <BtnLink onClick={OpenMEl} primary largeFont>電子マネー</BtnLink>
+                                <BtnLink onClick={OpenMEl} primary>電子マネー</BtnLink>
                             </Grid>
                             <Grid item xs={6}>
-                                <BtnLink onClick={OpenMQr} primary largeFont>QRコード決済</BtnLink>
+                                <BtnLink onClick={OpenMQr} primary>QRコード決済</BtnLink>
                             </Grid>
                         </Grid>
                     </Grid>

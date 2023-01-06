@@ -9,7 +9,13 @@ import { paymentState }         from '../components/types/TypePayment'
 import { useRecoilValue, useRecoilState } from 'recoil'
 import React from 'react';
 
-const payTypeCoins: number = 1
+// ---------------------------------------------------
+// 定数
+// ---------------------------------------------------
+const nextUrl:string = "/CompPay"           // 次ページURL
+const backUrl:string = "/SelectPayInfo"     // 前ページURL
+const payTypeCoins: number = 1              // 決済方法区分(入金 = 1)
+const cardBalance: number = 1000;           // 電子マネー/QRコードのカード残高(1000円と仮定)
 
 // ===================================================
 // 入金確認画面
@@ -19,8 +25,18 @@ export default function CheckPay(){
     // 値取得
     const sum:number            = useRecoilValue(totalPriceSelector)                // 合計金額
     const [costs, setCosts]     = useRecoilState(paymentState)                      // お預かり(投入金額, 支払方法)
-    const request   = ( sum - costs.payment ) > 0? ( sum - costs.payment ): 0       // 残り金額
-    const change    = ( costs.payment - sum ) > 0? ( costs.payment - sum ): 0       // おつり
+    const cost = costs.payInfoType == payTypeCoins? costs.payment: cardBalance;
+    const request   = ( sum - cost ) > 0? ( sum - cost ): 0       // 残り金額
+    const change    = ( cost - sum ) > 0? ( cost - sum ): 0       // おつり
+
+    const infoPrice = { 
+        payType: costs.payInfoType,
+        sum: sum,
+        costs: cost,
+        request: request,
+        change: change
+    }
+    const infoUrl = { next: nextUrl, back: backUrl }
 
     const strTitle = costs.payInfoType == payTypeCoins ? 'お金を投入してください': '入金処理を行っています…';
 
@@ -39,10 +55,8 @@ export default function CheckPay(){
                     <TextTitle primary>{ strTitle }</TextTitle>
 
                     <PayDetail
-                        sum={ sum }
-                        costs={ costs.payment }
-                        request={ request }
-                        change={ change }
+                        price = { infoPrice }
+                        url={ infoUrl }
                         ClickMinus={ ClickMinus }
                         ClickPlus={ ClickPlus } />
                 </Container>

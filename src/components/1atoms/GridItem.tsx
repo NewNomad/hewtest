@@ -14,15 +14,8 @@ export const GridItem = ( props: Props ) =>{
 
     const { children, title, button } = props
 
-    // ----------------------------------------------
-    // 比率設定
-    // ----------------------------------------------
-    let setXs:number = 7
-    if(title) setXs = 5             // title:item = 5:7
-    else if(button) setXs = 6;      // button:button = 6:6
-
     return (
-        <Grid item xs={ setXs } height={70}>
+        <Grid item xs={ title? 5: 7 } height={80}>
             { children }
         </Grid>
     )

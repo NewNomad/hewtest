@@ -111,7 +111,6 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
     // ----------------------------------------------------
     // 情報の結合
     // ----------------------------------------------------
-    // TODO: [アレルギー/タグ]アレルギーとタグが引っ張ってこれない / map,filter部について調査
     const result = result_products.map(( product, j ) => (
         {
             ...product,

@@ -5,9 +5,10 @@ import { ShowPrice }            from '../1atoms/ShowPrice'
 import React from "react";
 
 type Props = {
+    payType: number             // 支払方法区分
     sum: number                 // 合計金額
     costs: number               // 預かり金額
-    request: number,            // 不足額
+    request: number             // 不足額
     change: number              // おつり
     ClickMinus: () => void      // クリックイベント(マイナスボタン押下時)
     ClickPlus: () => void       // クリックイベント(プラスボタン押下時)
@@ -18,7 +19,7 @@ type Props = {
 // ===================================================-
 export const ShowPayDetail = ( props:Props ) =>{
 
-    const { sum, costs, request, change, ClickMinus, ClickPlus } = props
+    const { payType, sum, costs, request, change, ClickMinus, ClickPlus } = props
 
     return (
         <>
@@ -31,11 +32,11 @@ export const ShowPayDetail = ( props:Props ) =>{
                 </GridItem>
 
                 <GridItem title>
-                    <Typography>お預かり</Typography>
+                    <Typography>{ payType == 1? 'お預かり': '残高' }</Typography>
                 </GridItem>
                 <GridItem>
                     <ShowPrice>
-                        <ShowAmount costs={ costs } ClickMinus={ ClickMinus } ClickPlus={ ClickPlus } />
+                        { payType == 1? (<ShowAmount costs={ costs } ClickMinus={ ClickMinus } ClickPlus={ ClickPlus } />): costs }
                     </ShowPrice>
                 </GridItem>
 
@@ -46,13 +47,25 @@ export const ShowPayDetail = ( props:Props ) =>{
                     <ShowPrice primary={ request > 0 } >{ request }</ShowPrice>
                 </GridItem>
 
-                <GridItem title>
-                    <Typography>おつり</Typography>
-                </GridItem>
-                <GridItem>
-                    <ShowPrice>{ change }</ShowPrice>
-                </GridItem>
+                { payType == 1 && (
+                    <>
+                        <GridItem title>
+                            <Typography>おつり</Typography>
+                        </GridItem>
+                        <GridItem>
+                            <ShowPrice>{ change }</ShowPrice>
+                        </GridItem>
+                    </>
+                       
+                    )
+                }
+
+                <Grid item xs={12} height={40}>
+                    { payType != 1 && request > 0 && (<Typography color="primary" textAlign="center">残高が不足しています。</Typography>)}
+                </Grid> 
             </Grid>
+
+           
         </>
     )
 }

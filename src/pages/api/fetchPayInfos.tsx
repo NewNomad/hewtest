@@ -38,7 +38,8 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
         SELECT 
             f_pay_info_id       AS pay_info_id,
             f_pay_info_name     AS pay_info_name,
-            f_pay_info_type     AS pay_info_type
+            f_pay_info_type     AS pay_info_type,
+            f_pay_info_image    As pay_info_image
         FROM
             t_pay_infos
         ORDER BY
