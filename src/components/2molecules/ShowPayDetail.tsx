@@ -5,14 +5,17 @@ import { ShowPrice }            from '../1atoms/ShowPrice'
 import React from "react";
 
 type Props = {
-    sum: number
-    costs: number
-    request: number,
-    change: number
-    ClickMinus: () => void
-    ClickPlus: () => void
+    sum: number                 // 合計金額
+    costs: number               // 預かり金額
+    request: number,            // 不足額
+    change: number              // おつり
+    ClickMinus: () => void      // クリックイベント(マイナスボタン押下時)
+    ClickPlus: () => void       // クリックイベント(プラスボタン押下時)
 }
 
+// ===================================================
+// 入金確認画面 金額表示
+// ===================================================-
 export const ShowPayDetail = ( props:Props ) =>{
 
     const { sum, costs, request, change, ClickMinus, ClickPlus } = props

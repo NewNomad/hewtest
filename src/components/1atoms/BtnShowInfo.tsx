@@ -7,6 +7,9 @@ type Props = {
     name: string
 }
 
+// =================================================
+// 地図ボタン
+// =================================================
 export const BtnShowInfo = ({ link, name }: Props) => {
     return (
         <Button

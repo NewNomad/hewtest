@@ -7,15 +7,13 @@ import { TypeProducts }     from '../types/TypeProducts'
 import Image                from 'next/image'
 import React                from 'react'
 
-// ====================================
-// カート内アイテム情報
-// ====================================
-
 type Props = {
     product: TypeProducts
 }
 
-
+// ====================================
+// カート内アイテム情報
+// ====================================
 export const CartItem = ({ product }: Props) => {
     const { addCart, removeCart } = useCart()
 

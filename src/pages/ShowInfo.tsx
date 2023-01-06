@@ -5,7 +5,7 @@ import { HeadInfo }     from '../components/2molecules/HeadInfo'
 import { Header }       from '../components/2molecules/Header'
 import { Footer }       from '../components/2molecules/Footer'
 
-export default function Advertisment() {
+export default function ShowInfo() {
 
     const defaultProps = {
         center: {               //初期位置

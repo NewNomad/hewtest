@@ -1,6 +1,7 @@
 import { ShoppingCartCheckout } from '@mui/icons-material'
 import { Box, Button, Container, Typography } from '@mui/material'
 import React from 'react'
+
 type Props = {
     OpenMConfirm: () => void;
     totalPrice: number
@@ -9,7 +10,6 @@ type Props = {
 // ======================================================
 // 会計画面遷移ボタン
 // ======================================================
-
 export const BtnTotalAmount = ({ OpenMConfirm, totalPrice }: Props) => {
     const size = 50
 

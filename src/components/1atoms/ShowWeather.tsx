@@ -26,5 +26,6 @@ export const ShowWeather = (props: { place: string }) => {
     if (!data) return <Typography>天気表示：読込中</Typography>
 
     // 読み込み成功
+    // TODO: [天気の絵文字] 余力があれば表示方法を考える
     return <Typography>{data[info.place][0]["forecast"]}</Typography>
 }

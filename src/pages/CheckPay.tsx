@@ -43,8 +43,8 @@ export default function CheckPay(){
                         costs={ costs.payment }
                         request={ request }
                         change={ change }
-                        ClickMinus={ClickMinus}
-                        ClickPlus={ClickPlus} />
+                        ClickMinus={ ClickMinus }
+                        ClickPlus={ ClickPlus } />
                 </Container>
 
             </Box>

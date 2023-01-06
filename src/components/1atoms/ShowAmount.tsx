@@ -2,11 +2,14 @@ import { AddCircle, RemoveCircle }  from '@mui/icons-material'
 import { IconButton }               from '@mui/material'
 
 type Props = {
-    costs: number
-    ClickMinus: () => void
-    ClickPlus: () => void
+    costs: number                   // 入金額
+    ClickMinus: () => void          // クリックイベント(マイナスボタン押下時)
+    ClickPlus: () => void           // クリックイベント(プラスボタン押下時)
 }
 
+// =================================================
+// 入金額(増減操作用ボタン付き)の表示
+// =================================================
 export const ShowAmount = ( props:Props ) =>{
 
     const { costs, ClickMinus, ClickPlus } = props

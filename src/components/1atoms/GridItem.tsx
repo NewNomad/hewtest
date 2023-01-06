@@ -7,6 +7,9 @@ type Props = {
     button: boolean
 }
 
+// =================================================
+// グリッドの子要素
+// =================================================
 export const GridItem = ( props: Props ) =>{
 
     const { children, title, button } = props
