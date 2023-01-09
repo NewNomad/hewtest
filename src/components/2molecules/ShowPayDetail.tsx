@@ -47,18 +47,12 @@ export const ShowPayDetail = ( props:Props ) =>{
                     <ShowPrice primary={ request > 0 } >{ request }</ShowPrice>
                 </GridItem>
 
-                { payType == 1 && (
-                    <>
-                        <GridItem title>
-                            <Typography>おつり</Typography>
-                        </GridItem>
-                        <GridItem>
-                            <ShowPrice>{ change }</ShowPrice>
-                        </GridItem>
-                    </>
-                       
-                    )
-                }
+                <GridItem title>
+                    <Typography>{payType == 1? 'おつり': '支払後残高'}</Typography>
+                </GridItem>
+                <GridItem>
+                    <ShowPrice>{ change }</ShowPrice>
+                </GridItem>
 
                 <Grid item xs={12} height={40}>
                     { payType != 1 && request > 0 && (<Typography color="primary" textAlign="center">残高が不足しています。</Typography>)}

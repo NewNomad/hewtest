@@ -25,9 +25,10 @@ export default function CheckPay(){
     // 値取得
     const sum:number            = useRecoilValue(totalPriceSelector)                // 合計金額
     const [costs, setCosts]     = useRecoilState(paymentState)                      // お預かり(投入金額, 支払方法)
-    const cost = costs.payInfoType == payTypeCoins? costs.payment: cardBalance;
-    const request   = ( sum - cost ) > 0? ( sum - cost ): 0       // 残り金額
-    const change    = ( cost - sum ) > 0? ( cost - sum ): 0       // おつり
+
+    const cost = costs.payInfoType == payTypeCoins? costs.payment: cardBalance;     // お預かり(現金)
+    const request   = ( sum - cost ) > 0? ( sum - cost ): 0                         // 残り金額
+    const change    = ( cost - sum ) > 0? ( cost - sum ): 0                         // おつり
 
     const infoPrice = { 
         payType: costs.payInfoType,

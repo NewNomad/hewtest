@@ -52,11 +52,13 @@ export const PayDetail = ( props:Props ) =>{
                                 <GridItem>sample</GridItem>
                             </Grid> */}
 
+                            {/* 諸金額 */}
                             <ShowPayDetail
                                 {...price}
                                 ClickMinus={ClickMinus}
                                 ClickPlus={ClickPlus} />
 
+                            {/* 戻る/支払 ボタン */}
                             <Grid container textAlign="center" spacing={1} >
                                 <GridItem title>
                                     <BtnLink onClick={() => router.push(url.back)}>戻る</BtnLink>
