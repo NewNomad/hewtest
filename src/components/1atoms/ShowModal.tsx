@@ -40,7 +40,7 @@ export const ShowMordal: React.FC<Props> = React.forwardRef(({ children, closeMo
                 }} />
             </IconButton>
 
-            {/* {children} */}
+            {children}
         </Paper>
 
     )
