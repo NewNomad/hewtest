@@ -11,7 +11,7 @@ import React, { useState } from 'react'
 // カート
 // ====================================
 // TODO: カート商品の一斉解放ボタンがあると便利だろうか？
-export const Cart = () => {
+ const Cart = () => {
 
     const [mordalConfirm, setmordalConfirm] = useState<boolean>(false)  // 購入確認画面(モーダル)
 
@@ -24,7 +24,6 @@ export const Cart = () => {
 
     const items = [...cart.products].reverse()
 
-    console.log(useRecoilValue(cartState));
     return (
         <Paper>
             
@@ -72,3 +71,5 @@ export const Cart = () => {
         </Paper>
     )
 }
+
+export default Cart

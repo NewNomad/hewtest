@@ -1,6 +1,7 @@
 import { atom, RecoilState, selector, useRecoilState } from "recoil"
 import { TypeProducts } from "./TypeProducts"
-import { useState }     from "react"
+import { useState } from "react"
+import { recoilPersist } from "recoil-persist"
 
 // =====================================================
 // カート情報
@@ -10,6 +11,10 @@ export type TypeCart = {
     products: TypeProducts[],       // 商品情報
     // payInfoId?: number              // 決済方法
 }
+const { persistAtom } = recoilPersist({
+    key: "recoil-persisit",
+    storage: typeof window === "undefined" ? undefined : sessionStorage
+})
 
 // デフォルト値
 const initialState: TypeCart = {
@@ -20,7 +25,8 @@ const initialState: TypeCart = {
 // カートの情報
 export const cartState: RecoilState<TypeCart> = atom({
     key: "cartState",
-    default: initialState
+    default: initialState,
+    effects_UNSTABLE: [persistAtom]
 })
 
 // ------------------------------------------------------
@@ -44,7 +50,7 @@ export const useCart = () => {
     // ----------------------------------------------------------------
     // カートへ追加
     // ----------------------------------------------------------------
-    const addCart = ( product: TypeProducts ): void => {
+    const addCart = (product: TypeProducts): void => {
         // カート内から選択商品の検索
         const selectItem = cart.products.find((_product) => _product.id === product.id)
 
@@ -116,9 +122,9 @@ export const useCart = () => {
         }
 
     }//カートから全削除
-    const removeAllCart=()=>{
+    const removeAllCart = () => {
         setCart(initialState)
     }
-    return { addCart, removeCart,removeAllCart }
+    return { addCart, removeCart, removeAllCart }
 }
 

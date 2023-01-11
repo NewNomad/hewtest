@@ -2,12 +2,14 @@ import { Box, Button, Container, Grid, Paper } from '@mui/material'
 import { BtnLink } from '../components/1atoms/BtnLink'
 import { Header } from '../components/2molecules/Header'
 import { HeadInfo } from '../components/2molecules/HeadInfo'
-import { Cart } from '../components/3organisms/Cart'
+// import { Cart } from '../components/3organisms/Cart'
+const Cart = dynamic(() => import("../components/3organisms/Cart"), { ssr: false })
 import { Products } from '../components/3organisms/Products'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { BgParticle } from '../components/libs/BgParticle'      // パーティクル
 import { useEffect } from 'react'
+import dynamic from 'next/dynamic'
 
 // ---------------------------------------------------
 // 定数
@@ -25,11 +27,11 @@ const Home: NextPage = () => {
     const router = useRouter()
 
     //30秒経過で広告画面へ
-    useEffect(() => {
-        setTimeout(() => {
-            homejump()
-        }, 30000);
-    }, [])
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         homejump()
+    //     }, 30000);
+    // }, [])
     const homejump = () => {
         router.push("/ShowAdvertisment")
     }
