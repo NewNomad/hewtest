@@ -128,7 +128,7 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
     ))
 
     // REVIEW: デバッグ用表示
-    console.log(result)
+    // console.log(result)
 
     // ----------------------------------------------------
     // 処理情報の返却(json)
