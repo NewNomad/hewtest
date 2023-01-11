@@ -1,11 +1,11 @@
-import { Add, AddCircle, LocalDrink, Remove, RemoveCircle }                                 from '@mui/icons-material'
-import { Button, ButtonGroup, Grid, IconButton, List, ListItemAvatar, Paper, Typography }   from '@mui/material'
-import { Box, Container }   from '@mui/system'
-import QuantityButton       from '../1atoms/QuantityButton'
-import { useCart }          from '../types/TypeCart'
-import { TypeProducts }     from '../types/TypeProducts'
-import Image                from 'next/image'
-import React                from 'react'
+import { AcUnit, Add, AddCircle, LocalDrink, Remove, RemoveCircle, Whatshot } from '@mui/icons-material'
+import { Button, ButtonGroup, Grid, IconButton, List, ListItemAvatar, Paper, Typography } from '@mui/material'
+import { Box, Container } from '@mui/system'
+import QuantityButton from '../1atoms/QuantityButton'
+import { useCart } from '../types/TypeCart'
+import { TypeProducts } from '../types/TypeProducts'
+import Image from 'next/image'
+import React from 'react'
 
 type Props = {
     product: TypeProducts
@@ -29,7 +29,10 @@ export const CartItem = ({ product }: Props) => {
             </Grid>
             <Grid item xs={8} textAlign="center">
                 <Typography variant='h6' fontWeight="bold">
-                    <LocalDrink />
+                    {/* カート内のホット・アイスアイコン */}
+                    {product.isice == 1
+                            ? <AcUnit color="info" />
+                            : <Whatshot color='primary' />}
                     {product.name}
                 </Typography>
 

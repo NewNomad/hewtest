@@ -1,17 +1,18 @@
 import { Box, Button, Container, Grid, Paper } from '@mui/material'
-import { BtnLink }        from '../components/1atoms/BtnLink'
-import { Header }         from '../components/2molecules/Header'
-import { HeadInfo }       from '../components/2molecules/HeadInfo'
-import { Cart }           from '../components/3organisms/Cart'
-import { Products }       from '../components/3organisms/Products'
-import type { NextPage }  from 'next'
-import { useRouter }      from 'next/router'
-import { BgParticle }     from '../components/libs/BgParticle'      // パーティクル
+import { BtnLink } from '../components/1atoms/BtnLink'
+import { Header } from '../components/2molecules/Header'
+import { HeadInfo } from '../components/2molecules/HeadInfo'
+import { Cart } from '../components/3organisms/Cart'
+import { Products } from '../components/3organisms/Products'
+import type { NextPage } from 'next'
+import { useRouter } from 'next/router'
+import { BgParticle } from '../components/libs/BgParticle'      // パーティクル
+import { useEffect } from 'react'
 
 // ---------------------------------------------------
 // 定数
 // ---------------------------------------------------
-const mapUrl:string = "/ShowAdvertisment"
+const mapUrl: string = "/ShowAdvertisment"
 
 // ===================================================
 // 商品一覧画面
@@ -22,6 +23,16 @@ const Home: NextPage = () => {
     // ルーティング
     // -----------------------------------------------
     const router = useRouter()
+
+    //30秒経過で広告画面へ
+    useEffect(() => {
+        setTimeout(() => {
+            homejump()
+        }, 30000);
+    }, [])
+    const homejump = () => {
+        router.push("/ShowAdvertisment")
+    }
 
     return (
         <Box>
@@ -39,9 +50,9 @@ const Home: NextPage = () => {
 
                         {/* 商品 */}
                         <Grid item xs={9}>
-                        {/* <Paper elevation={10} sx={{bgcolor:"#fff"}}> */}
+                            {/* <Paper elevation={10} sx={{bgcolor:"#fff"}}> */}
                             <Products />
-                        {/* </Paper> */}
+                            {/* </Paper> */}
                         </Grid>
 
                         {/* カート */}
@@ -56,7 +67,7 @@ const Home: NextPage = () => {
                 </Grid>
 
                 {/* </Container> */}
-                <BtnLink onClick={() => router.push(mapUrl)}>一定時間未操作(未実装)で広告表示に移ります</BtnLink>
+                {/* <BtnLink onClick={() => router.push(mapUrl)}>一定時間未操作(未実装)で広告表示に移ります</BtnLink> */}
 
             </Box>
 

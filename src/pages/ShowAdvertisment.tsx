@@ -3,7 +3,7 @@ import { HeadInfo }             from '../components/2molecules/HeadInfo'
 import { Header }               from '../components/2molecules/Header'
 import { BtnLink }              from '../components/1atoms/BtnLink'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export default function ShowAdvertisment() {
 
@@ -11,6 +11,14 @@ export default function ShowAdvertisment() {
     // ルーティング
     // -----------------------------------------------
     const router = useRouter()
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         homejump()
+    //     }, 3000);
+    // }, [])
+    // const homejump=()=>{
+    //     router.push("/")
+    // }
 
     return (
         <>

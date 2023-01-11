@@ -115,7 +115,10 @@ export const useCart = () => {
             setCart({ products })
         }
 
+    }//カートから全削除
+    const removeAllCart=()=>{
+        setCart(initialState)
     }
-    return { addCart, removeCart }
+    return { addCart, removeCart,removeAllCart }
 }
 

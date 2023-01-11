@@ -19,7 +19,17 @@ export default function CheckPay() {
     // -----------------------------------------------
     // ルーティング
     // -----------------------------------------------
+
+    //5秒後に商品一覧画面へ
     const router = useRouter()
+    useEffect(() => {
+        setTimeout(() => {
+            homejump()
+        }, 5000);
+    }, [])
+    const homejump=()=>{
+        router.push("/")
+    }
 
     // -----------------------------------------------
     // 購入履歴管理
@@ -64,7 +74,7 @@ export default function CheckPay() {
                         [ここに画像]
                     </Box>
 
-                    <BtnLink onClick={() => router.push("/")}>タップ/時間経過(未実装)で商品一覧に戻ります</BtnLink>
+                    {/* <BtnLink onClick={() => router.push("/")}>時間経過(未実装)で商品一覧に戻ります</BtnLink> */}
 
                 </Container>
 

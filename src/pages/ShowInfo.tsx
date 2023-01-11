@@ -13,7 +13,7 @@ export default function ShowInfo() {
             lng: 136.8815       //西経　　名古屋
 
         },
-        zoom: 11                //拡大
+        zoom: 20                //拡大率
     };
     
     return (
@@ -24,13 +24,13 @@ export default function ShowInfo() {
                 <Header onMap />
 
                 <Box sx={{ pt: 8 }}>
-                    <Box sx={{ width: '100%', height: 800, backgroundColor: 'primary.main', opacity: 0.6 }}>
+                    <Box sx={{ width: '100%', height: 800, backgroundColor: 'primary.main', opacity: 1 }}>
                         {/*Important! Always set the container height explicitly */}
                         <div style={{ height: '100vh', width: '100%' }}>
                             <GoogleMapReact
 
                                 //APIキー
-                                bootstrapURLKeys={{ key: "AIzaSyBAzmp9Vpi5MsOnuYLSq1Ix_sq8vnuSHpU" }} 
+                                bootstrapURLKeys={{ key: process.env.MAP_API! }} 
 
                                 defaultCenter={defaultProps.center}
                                 defaultZoom={defaultProps.zoom}

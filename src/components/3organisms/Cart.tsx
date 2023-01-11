@@ -1,9 +1,9 @@
-import { Box, Divider, List, ListItem, Modal, Paper, Typography }   from '@mui/material'
+import { Box, Button, Divider, List, ListItem, Modal, Paper, Typography }   from '@mui/material'
 import { Container }                                                from '@mui/system'
 import { BtnTotalAmount }                   from '../1atoms/BtnTotalAmount'
 import { CartItem }                         from '../2molecules/CartItem'
 import { ShowModalConfirm }                 from '../2molecules/ShowModalConfirm'
-import { cartState, totalPriceSelector }    from '../types/TypeCart'
+import { cartState, totalPriceSelector, useCart }    from '../types/TypeCart'
 import { useRecoilState, useRecoilValue }   from 'recoil'
 import React, { useState } from 'react'
 
@@ -20,11 +20,15 @@ export const Cart = () => {
 
     const cart = useRecoilValue(cartState)
     const totalPrice = useRecoilValue(totalPriceSelector)
+    const {removeAllCart}=useCart()
 
     const items = [...cart.products].reverse()
 
+    console.log(useRecoilValue(cartState));
     return (
         <Paper>
+            
+            <Button onClick={removeAllCart}>カート内全削除</Button>
 
             <Container sx={{ padding: 2 }}>
 
