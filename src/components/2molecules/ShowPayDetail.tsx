@@ -1,4 +1,4 @@
-import { Grid, Typography }     from '@mui/material'
+import { Alert, Grid, Typography }     from '@mui/material'
 import { GridItem }             from '../1atoms/GridItem'
 import { ShowAmount }           from '../1atoms/ShowAmount'
 import { ShowPrice }            from '../1atoms/ShowPrice'
@@ -23,7 +23,7 @@ export const ShowPayDetail = ( props:Props ) =>{
 
     return (
         <>
-            <Grid container textAlign="center">
+            <Grid container sx={{ marginBottom: 5, textAlign: "center" }}>
                 <GridItem title>
                     <Typography>合計金額</Typography>
                 </GridItem>
@@ -47,16 +47,19 @@ export const ShowPayDetail = ( props:Props ) =>{
                     <ShowPrice primary={ request > 0 } >{ request }</ShowPrice>
                 </GridItem>
 
-                <GridItem title>
-                    <Typography>{payType == 1? 'おつり': '支払後残高'}</Typography>
-                </GridItem>
-                <GridItem>
-                    <ShowPrice>{ change }</ShowPrice>
-                </GridItem>
+                {
+                    payType != 1 && request > 0 ? 
+                        ( <Grid item xs={12}><Alert severity='warning'>残高が不足しています。</Alert></Grid> ):
+                        ( <>
+                            <GridItem title>
+                                <Typography>{ payType == 1? 'おつり': '支払後残高' }</Typography>
+                            </GridItem>
+                            <GridItem>
+                                <ShowPrice>{ change }</ShowPrice>
+                            </GridItem>
+                        </>)
+                }
 
-                <Grid item xs={12} height={40}>
-                    { payType != 1 && request > 0 && (<Typography color="primary" textAlign="center">残高が不足しています。</Typography>)}
-                </Grid> 
             </Grid>
 
            
