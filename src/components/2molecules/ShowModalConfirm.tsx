@@ -1,10 +1,10 @@
 import { Box, Button, Container, Divider, Grid, Paper, Typography } from '@mui/material'
-import { ShowMordal }                       from '../1atoms/ShowModal'
-import { ModalConfirmProduct }              from '../1atoms/ModalConfirmProduct'
-import { cartState, totalPriceSelector }    from '../types/TypeCart'
-import { useRecoilValue }   from 'recoil'
-import Link                 from 'next/link'
-import React                from 'react'
+import { ShowMordal } from '../1atoms/ShowModal'
+import { ModalConfirmProduct } from '../1atoms/ModalConfirmProduct'
+import { cartState, totalPriceSelector } from '../types/TypeCart'
+import { useRecoilValue } from 'recoil'
+import Link from 'next/link'
+import React from 'react'
 
 type Props = {
     closeModal: () => void
@@ -13,6 +13,10 @@ type Props = {
 export const ShowModalConfirm = ({ closeModal }: Props) => {
     const cart = useRecoilValue(cartState)
     const total = useRecoilValue(totalPriceSelector)
+    const totalProducts: number = cart.products.reduce((result: number, product) => {
+        return result + product.quantity
+    }, 0)
+
 
     return (
         <ShowMordal closeModal={closeModal}>
@@ -38,7 +42,7 @@ export const ShowModalConfirm = ({ closeModal }: Props) => {
 
                 <Typography textAlign="center" variant='h5' color="primary" fontWeight="bold">
                     {/* FIXME: [合計数] 商品種類数でなく購入層系の表示にする */}
-                    以上{cart.products.length}点でよろしいですか？
+                    以上{totalProducts}点でよろしいですか？
                 </Typography>
 
                 <Grid container textAlign="center">
