@@ -24,7 +24,7 @@ export default function ShowAdvertisment() {
         <>
             <HeadInfo title='mopacal | 広告' />
 
-            <Box sx={{ flexGrow: 1 }}>
+            <Box sx={{ flexGrow: 1 }} onClick={() => router.push("/")}>
                 <Header onMap/>
 
                 <Box sx={{ pt: 8 }}>

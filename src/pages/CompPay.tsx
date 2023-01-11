@@ -25,7 +25,7 @@ export default function CheckPay() {
     useEffect(() => {
         setTimeout(() => {
             homejump()
-        }, 5000);
+        }, 8000);
     }, [])
     const homejump=()=>{
         router.push("/")
@@ -64,7 +64,7 @@ export default function CheckPay() {
         <>
             <HeadInfo title='mopacal | 入金完了' />
 
-            <Box sx={{ flexGrow: 1 }}>
+            <Box sx={{ flexGrow: 1 }} onClick={() => router.push("/")}>
                 <Header />
 
                 <Container sx={{ pt: 8 }}>
