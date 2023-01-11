@@ -20,7 +20,7 @@ export const ShowModalConfirm = ({ closeModal }: Props) => {
 
     return (
         <ShowMordal closeModal={closeModal}>
-            <Box height={530} sx={{
+            <Box height={520} width={720} sx={{
                 position: "flex",
                 overflow: "scroll",
                 overflowY: "scroll",
@@ -36,22 +36,26 @@ export const ShowModalConfirm = ({ closeModal }: Props) => {
             <Divider />
 
             <Container>
-                <Typography textAlign="right" variant='h5'>
+                <Typography textAlign="right" variant='h4' marginTop={2}>
                     合計{total}円
                 </Typography>
 
-                <Typography textAlign="center" variant='h5' color="primary" fontWeight="bold">
+                <Typography textAlign="center" variant='h5' color="primary" fontWeight="bold" marginBottom={1}>
                     {/* FIXME: [合計数] 商品種類数でなく購入層系の表示にする */}
                     以上{totalProducts}点でよろしいですか？
                 </Typography>
 
                 <Grid container textAlign="center">
                     <Grid item xs={6}>
-                        <Button variant='contained' color='secondary' onClick={closeModal}>戻る</Button>
+                        <Button variant='contained' color='secondary' onClick={closeModal}>
+                            <Typography variant='h2' padding={1}>戻る</Typography>
+                        </Button>
                     </Grid>
                     <Grid item xs={6}>
                         <Link href="/SelectPayInfo">
-                            <Button variant='contained' color='primary'>決定</Button>
+                            <Button variant='contained' color='primary'>
+                                <Typography variant='h2' padding={1}>決定</Typography>
+                            </Button>
                         </Link>
                     </Grid>
                 </Grid>
