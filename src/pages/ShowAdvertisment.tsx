@@ -11,14 +11,14 @@ export default function ShowAdvertisment() {
     // ルーティング
     // -----------------------------------------------
     const router = useRouter()
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         homejump()
-    //     }, 3000);
-    // }, [])
-    // const homejump=()=>{
-    //     router.push("/")
-    // }
+    useEffect(() => {
+        setTimeout(() => {
+            homejump()
+        }, 3000);
+    }, [])
+    const homejump=()=>{
+        router.push("/")
+    }
 
     return (
         <>
