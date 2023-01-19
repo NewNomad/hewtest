@@ -57,7 +57,7 @@ export const ShowPayDetail = ( props:Props ) =>{
                             <GridItem>
                                 <ShowPrice>{ change }</ShowPrice>
                             </GridItem>
-                        </>)
+                        </> )
                 }
 
             </Grid>

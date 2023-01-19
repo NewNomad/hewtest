@@ -1,5 +1,5 @@
 import { AddCircle, RemoveCircle }  from '@mui/icons-material'
-import { IconButton }               from '@mui/material'
+import { IconButton, TextField }               from '@mui/material'
 
 type Props = {
     costs: number                   // 入金額
@@ -16,7 +16,7 @@ export const ShowAmount = ( props:Props ) =>{
 
     return (
         <>
-            <IconButton 
+            {/* <IconButton 
                 aria-label='remove'
                 size='large'
                 onClick={ClickMinus}
@@ -28,7 +28,12 @@ export const ShowAmount = ( props:Props ) =>{
                 aria-label='add'
                 onClick={ClickPlus}>
                 <AddCircle fontSize='large' />
-            </IconButton>
+            </IconButton> */}
+
+            <TextField
+                type="number"
+                inputProps={{ inputMode: "numeric", pattern: "[0-9]*"
+            }}/>
         </>
     )
 }
