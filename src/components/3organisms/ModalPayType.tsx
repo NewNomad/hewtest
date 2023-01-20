@@ -57,6 +57,8 @@ export const ModalPayType = (props: Props) => {
                             e.pay_info_type == payTypeId &&
                             (
                                 <Grid key={i} item xs={4}>
+
+                                    {/* FIXME: [モーダル追加] 読み取り要求を表示する */}
                                     <BtnLink
                                         onClick={ () => getPayInfoId(e.pay_info_id, e.pay_info_type) }
                                         primary
@@ -76,6 +78,7 @@ export const ModalPayType = (props: Props) => {
                                             ) 
                                         }
                                     </BtnLink>
+
                                 </Grid>
                             )
                         ))

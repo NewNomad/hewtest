@@ -3,8 +3,7 @@ import { IconButton, TextField }               from '@mui/material'
 
 type Props = {
     costs: number                   // 入金額
-    ClickMinus: () => void          // クリックイベント(マイナスボタン押下時)
-    ClickPlus: () => void           // クリックイベント(プラスボタン押下時)
+    onChange: (event:any) => void
 }
 
 // =================================================
@@ -12,28 +11,14 @@ type Props = {
 // =================================================
 export const ShowAmount = ( props:Props ) =>{
 
-    const { costs, ClickMinus, ClickPlus } = props
+    const { costs, onChange } = props
 
     return (
-        <>
-            {/* <IconButton 
-                aria-label='remove'
-                size='large'
-                onClick={ClickMinus}
-                disabled={ costs <= 0 }>
-                <RemoveCircle fontSize='large' />
-            </IconButton>
-            { costs }
-            <IconButton
-                aria-label='add'
-                onClick={ClickPlus}>
-                <AddCircle fontSize='large' />
-            </IconButton> */}
-
             <TextField
                 type="number"
-                inputProps={{ inputMode: "numeric", pattern: "[0-9]*"
-            }}/>
-        </>
+                inputProps={{ inputMode: "numeric", pattern: "[0-9]*"}}
+                defaultValue={ costs }
+                onChange={ onChange }
+            />
     )
 }

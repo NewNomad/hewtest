@@ -37,13 +37,16 @@ export default function CheckPay(){
         request: request,
         change: change
     }
-    const infoUrl = { next: nextUrl, back: backUrl }
-
-    const strTitle = costs.payInfoType == payTypeCoins ? 'お金を投入してください': '入金処理を行っています…';
+    const infoUrl = {
+        next: nextUrl,
+        back: backUrl
+    }
 
     // イベント
-    const ClickMinus    = () => { setCosts({ payment: costs.payment - 100, payInfoId: costs.payInfoId, payInfoType: costs.payInfoType }); };
-    const ClickPlus     = () => { setCosts({ payment: costs.payment + 100, payInfoId: costs.payInfoId, payInfoType: costs.payInfoType }); };
+    // const ClickMinus    = () => { setCosts({ payment: costs.payment - 100, payInfoId: costs.payInfoId, payInfoType: costs.payInfoType }); };
+    // const ClickPlus     = () => { setCosts({ payment: costs.payment + 100, payInfoId: costs.payInfoId, payInfoType: costs.payInfoType }); };
+    // const ChangePrice  = (event:any) => setCosts({ payment: event.target.value, payInfoId: costs.payInfoId, payInfoType: costs.payInfoType });
+    const ChangePrice  = (event:any) => console.log("test")
 
     return (
         <>
@@ -53,13 +56,12 @@ export default function CheckPay(){
                 <Header />
 
                 <Container sx={{ pt: 8 }}>
-                    <TextTitle primary>{ strTitle }</TextTitle>
 
-                    <PayDetail
-                        price = { infoPrice }
-                        url={ infoUrl }
-                        ClickMinus={ ClickMinus }
-                        ClickPlus={ ClickPlus } />
+                    <TextTitle primary>{ costs.payInfoType == payTypeCoins ? 'お金を投入してください': '入金処理を行っています…' }</TextTitle>
+
+                    {/* FIXME: [お預かり] 入金額をテキストボックスで指定できるようにする */}
+                    <PayDetail price={ infoPrice } url={ infoUrl } onChange={ ChangePrice } />
+
                 </Container>
 
             </Box>

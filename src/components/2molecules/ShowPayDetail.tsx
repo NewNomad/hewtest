@@ -10,8 +10,7 @@ type Props = {
     costs: number               // 預かり金額
     request: number             // 不足額
     change: number              // おつり
-    ClickMinus: () => void      // クリックイベント(マイナスボタン押下時)
-    ClickPlus: () => void       // クリックイベント(プラスボタン押下時)
+    onChange: (event:any) => void
 }
 
 // ===================================================
@@ -19,7 +18,7 @@ type Props = {
 // ===================================================-
 export const ShowPayDetail = ( props:Props ) =>{
 
-    const { payType, sum, costs, request, change, ClickMinus, ClickPlus } = props
+    const { payType, sum, costs, request, change, onChange } = props
 
     return (
         <>
@@ -36,7 +35,7 @@ export const ShowPayDetail = ( props:Props ) =>{
                 </GridItem>
                 <GridItem>
                     <ShowPrice>
-                        { payType == 1? (<ShowAmount costs={ costs } ClickMinus={ ClickMinus } ClickPlus={ ClickPlus } />): costs }
+                        { payType == 1? (<ShowAmount costs={ costs } onChange={ onChange } />): costs }
                     </ShowPrice>
                 </GridItem>
 
