@@ -1,5 +1,5 @@
-import { LocalDrink } from '@mui/icons-material'
-import { CircularProgress, Grid, Modal, Paper, Tab, Tabs } from '@mui/material'
+import { LocalDrink} from '@mui/icons-material'
+import { CircularProgress, Container, Grid, Modal, Paper, Tab, Tabs } from '@mui/material'
 import Product from '../2molecules/Product'
 import { ProductTabs } from '../2molecules/ProductTabs'
 import { ShowModalInfo } from '../2molecules/ShowModalInfo'
@@ -8,6 +8,7 @@ import { cartState } from '../types/TypeCart'
 import { useRecoilState } from 'recoil'
 import React, { useState } from 'react'
 import useSWR from 'swr'
+import { Recommend } from './Recommend'
 
 const fetchProduct = "/api/fetchProducts"
 const fetcher = (url: string) => fetch(url).then(response => response.json());
@@ -26,8 +27,8 @@ export const Products = () => {
     if (error) return (<>商品表示：エラーが発生しました。管理者へ連絡してください</>)
 
     return (
-        // <Container>
-        // <Paper>
+        //<Container>
+        //<Paper>
         <>
             <Grid container direction="column" spacing={0.5} padding={0}>
                 {tabval == 0 ?
@@ -48,25 +49,12 @@ export const Products = () => {
                             ))}
                         </Grid>
                     ))
-                    :
-                    [...Array(1)].map((e, i) => (
 
-                        <Grid key={i} item xs={4} sx={{ height: "100%" }} container spacing={0.5} padding={0} paddingTop={0} paddingBottom={0}>
-                            {[...Array(4)].map((item, j) => (
-                                <Grid key={j} item xs={3}>
-                                    {data ?
+                    // -----------------------------------------------
+                    // おすすめタブ
+                    // -----------------------------------------------
+                    :<Paper><Recommend /></Paper>
 
-                                        <Product
-                                            proinfo={data![j + 12 * i]}
-                                            cart={cart}
-                                            key={data![j + 12 * i].id}
-                                        />
-                                        : 
-                                        <CircularProgress />}
-                                </Grid>
-                            ))}
-                        </Grid>
-                    ))
                 }
                 <Grid item xs={1} marginTop={2}>
                     {/* <ProductTabs />
@@ -74,7 +62,7 @@ export const Products = () => {
                     <Paper>
                         <Tabs value={tabval} onChange={handleTabVal} centered variant='fullWidth' sx={{ bgColor: "secondary" }}>
                             <Tab icon={<LocalDrink />} label="商品一覧" iconPosition='start' />
-                            <Tab value='1' icon={<LocalDrink />} label="おすすめ" iconPosition='start' />
+                            <Tab icon={<LocalDrink />} label="おすすめ" iconPosition='start' />
                             {/* <Tab icon={<LocalDrink />} label="商品3" iconPosition='start' /> */}
                         </Tabs>
                     </Paper>
@@ -82,7 +70,7 @@ export const Products = () => {
             </Grid>
 
         </>
-        // </Paper>
-        // </Container>
+        //</Paper>
+        //</Container>
     )
 }
