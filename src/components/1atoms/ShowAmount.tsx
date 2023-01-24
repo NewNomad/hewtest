@@ -1,8 +1,10 @@
 import { AddCircle, RemoveCircle }  from '@mui/icons-material'
 import { IconButton, TextField }               from '@mui/material'
+import { FormControl, OutlinedInput, InputAdornment }    from    '@mui/material'
 
 type Props = {
     costs: number                   // 入金額
+    error: boolean
     onChange: (event:any) => void
 }
 
@@ -11,14 +13,16 @@ type Props = {
 // =================================================
 export const ShowAmount = ( props:Props ) =>{
 
-    const { costs, onChange } = props
+    const { costs, error, onChange } = props
 
     return (
-            <TextField
-                type="number"
-                inputProps={{ inputMode: "numeric", pattern: "[0-9]*"}}
-                defaultValue={ costs }
-                onChange={ onChange }
-            />
+        <TextField
+            error={ error }
+            helperText = { error && '整数のみ入力可'}
+            type="number"
+            sx={{ width: '120px' }}
+            defaultValue={ costs }
+            onChange={ onChange }
+        />
     )
 }

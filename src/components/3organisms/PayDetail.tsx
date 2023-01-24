@@ -15,6 +15,7 @@ type Props = {
         costs: number               // 預かり金額
         request: number             // 不足額
         change: number              // おつり
+        isNumeric: boolean
     }
     url:{
         next: string                // 次ページURL
@@ -53,7 +54,7 @@ export const PayDetail = ( props:Props ) =>{
                         </Grid> */}
 
                         {/* 諸金額 */}
-                        <ShowPayDetail {...price} onChange={onChange} />
+                        <ShowPayDetail price={price} onChange={onChange} />
 
                         {/* 戻る/支払 ボタン */}
                         <Grid container textAlign="center" spacing={1} >

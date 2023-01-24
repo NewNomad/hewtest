@@ -5,11 +5,14 @@ import { ShowPrice }            from '../1atoms/ShowPrice'
 import React from "react";
 
 type Props = {
-    payType: number             // 支払方法区分
-    sum: number                 // 合計金額
-    costs: number               // 預かり金額
-    request: number             // 不足額
-    change: number              // おつり
+    price: {
+        payType: number             // 支払方法区分
+        sum: number                 // 合計金額
+        costs: number               // 預かり金額
+        request: number             // 不足額
+        change: number              // おつり
+        isNumeric: boolean
+    }
     onChange: (event:any) => void
 }
 
@@ -18,7 +21,7 @@ type Props = {
 // ===================================================-
 export const ShowPayDetail = ( props:Props ) =>{
 
-    const { payType, sum, costs, request, change, onChange } = props
+    const { price, onChange } = props
 
     return (
         <>
@@ -27,15 +30,15 @@ export const ShowPayDetail = ( props:Props ) =>{
                     <Typography>合計金額</Typography>
                 </GridItem>
                 <GridItem>
-                    <ShowPrice>{ sum }</ShowPrice>
+                    <ShowPrice>{ price.sum }</ShowPrice>
                 </GridItem>
 
                 <GridItem title>
-                    <Typography>{ payType == 1? 'お預かり': '残高' }</Typography>
+                    <Typography>{ price.payType == 1? 'お預かり': '残高' }</Typography>
                 </GridItem>
                 <GridItem>
                     <ShowPrice>
-                        { payType == 1? (<ShowAmount costs={ costs } onChange={ onChange } />): costs }
+                        { price.payType == 1? (<ShowAmount costs={ price.costs } onChange={ onChange } error={ !price.isNumeric } />): price.costs }
                     </ShowPrice>
                 </GridItem>
 
@@ -43,18 +46,18 @@ export const ShowPayDetail = ( props:Props ) =>{
                     <Typography>残り金額</Typography>
                 </GridItem>
                 <GridItem>
-                    <ShowPrice primary={ request > 0 } >{ request }</ShowPrice>
+                    <ShowPrice primary={ price.request > 0 } >{ price.request }</ShowPrice>
                 </GridItem>
 
                 {
-                    payType != 1 && request > 0 ? 
+                    price.payType != 1 && price.request > 0 ? 
                         ( <Grid item xs={12}><Alert severity='warning'>残高が不足しています。</Alert></Grid> ):
                         ( <>
                             <GridItem title>
-                                <Typography>{ payType == 1? 'おつり': '支払後残高' }</Typography>
+                                <Typography>{ price.payType == 1? 'おつり': '支払後残高' }</Typography>
                             </GridItem>
                             <GridItem>
-                                <ShowPrice>{ change }</ShowPrice>
+                                <ShowPrice>{ price.change }</ShowPrice>
                             </GridItem>
                         </> )
                 }
