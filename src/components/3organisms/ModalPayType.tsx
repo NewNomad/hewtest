@@ -1,4 +1,4 @@
-import { Container, Grid, Modal } from '@mui/material'
+import { Container, Grid, Modal, Alert } from '@mui/material'
 import { ShowMordal }           from '../1atoms/ShowModal'
 import { BtnLink }              from '../1atoms/BtnLink'
 import { TextTitle }            from '../1atoms/TextTitle'
@@ -9,6 +9,7 @@ import { useRouter }            from 'next/router'
 import Image                    from 'next/image'
 import { useRecoilState, useRecoilValue }   from 'recoil'
 import React, { useState } from 'react'
+import { margin } from '@mui/system'
 
 // -----------------------------------------------------------
 // 型宣言
@@ -95,8 +96,8 @@ export const ModalPayType = (props: Props) => {
                             width={130}
                             height={100} />
                         </figure>
-                        <p>読み取り機にかざしてください</p>
-                        <BtnLink onClick={ () => router.push(nextUrl) }primary>決定</BtnLink>
+                        <Alert severity='info' sx={{ marginBottom: '20px' }}>読み取り機にかざしてください</Alert>
+                        <BtnLink onClick={ () => router.push(nextUrl) } primary>決定</BtnLink>
                     </Container>
                 </ShowMordal>
             </Modal>

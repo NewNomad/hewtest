@@ -33,8 +33,7 @@ export default function CheckPay(){
 
     // イベント
     const ChangePrice  = (event:any) => {
-        const regex = new RegExp(/^[1-9]+\d*$/);
-        if( regex.test(event.target.value) ) {
+        if( RegExp(/^[1-9]+\d*$/).test(event.target.value) ) {
             setIsNumeric(true)
         }
         else {

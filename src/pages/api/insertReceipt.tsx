@@ -48,7 +48,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
     let payment: string          = req.body.payment as string               // 入金額
 
     // TODO: [入金方法]領収TBLに登録する場所がない
-    // let payInfo              = req.body.payInfo as typePayment[]              // 入金方法
+    // let payInfo              = req.body.payInfo as TypePayment[]              // 入金方法
 
     // ----------------------------------------------------
     // SQL
