@@ -53,7 +53,7 @@ export const Products = () => {
                     // -----------------------------------------------
                     // おすすめタブ
                     // -----------------------------------------------
-                    :<Paper><Recommend /></Paper>
+                    :<Recommend />
 
                 }
                 <Grid item xs={1} marginTop={2}>

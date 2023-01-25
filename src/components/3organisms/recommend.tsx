@@ -8,6 +8,7 @@ import { cartState } from '../types/TypeCart'
 import { useRecoilState } from 'recoil'
 import React, { useState } from 'react'
 import useSWR from 'swr'
+import RecommendProduct from '../2molecules/RecommendProduct'
 
 const fetchProduct = "/api/fetchProducts"
 const fetcher = (url: string) => fetch(url).then(response => response.json());
@@ -27,23 +28,21 @@ export const Recommend = () => {
 
     return (
         <>
-            <Grid container direction="column" spacing={0.5} padding={0} sx={{backgroundColor:"#000"}}>
+            <Grid container direction="column" spacing={0.5} padding={3} sx={{backgroundColor:"#FFA00"}}>
                 {tabval == 0 ?
                     [...Array(1)].map((e, i) => (
 
                         <Grid key={i} item xs={4} sx={{ height: "100%" }} container spacing={0.5} padding={0} paddingTop={0} paddingBottom={0}>
 
                             {[...Array(4)].map((item, j) => (
-                                <Grid key={j} item xs={6}>
+                                <Grid key={j} item xs={3}>
                                     {data ?
-                                        <Paper variant='outlined'>
-                                            <RecommendOutlined />
-                                            <Product
+                                            <RecommendProduct
                                                 proinfo={data![j + 12 * i]}
                                                 cart={cart}
                                                 key={data![j + 12 * i].id}
+                                                rank={j+1}
                                             />
-                                        </Paper>
                                         :
                                         <CircularProgress />
                                     }
