@@ -9,6 +9,7 @@ import React  from 'react';
 // 型宣言
 // ---------------------------------------------------
 type Props = {
+    payInfoName: string
     price: {
         payType: number             // 支払方法区分
         sum: number                 // 合計金額
@@ -26,7 +27,7 @@ type Props = {
 
 export const PayDetail = ( props:Props ) =>{
 
-    const { price, url, onChange } = props
+    const { payInfoName, price, url, onChange } = props
 
     // -----------------------------------------------
     // ルーティング
@@ -47,11 +48,10 @@ export const PayDetail = ( props:Props ) =>{
 
                     <Box height={500} sx={{padding: 10}}>
 
-                        {/* TODO: [入金方法] 決済方法の明記がある方が親切かもしれない */}
-                        {/* <Grid container textAlign="center" spacing={1} >
+                        <Grid container textAlign="center" spacing={1} >
                             <GridItem title>決済方法</GridItem>
-                            <GridItem>sample</GridItem>
-                        </Grid> */}
+                            <GridItem>{ payInfoName }</GridItem>
+                        </Grid>
 
                         {/* 諸金額 */}
                         <ShowPayDetail price={price} onChange={onChange} />

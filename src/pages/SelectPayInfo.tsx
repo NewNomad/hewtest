@@ -47,8 +47,8 @@ export default function SelectPayInfo() {
     // 決済方法選択
     // -----------------------------------------------
     const [pay, setPay] = useRecoilState(paymentState)
-    const getPayInfoId = ( id:number, type:number ) => {
-        setPay({ payment: 0, payInfoId: id, payInfoType:type });
+    const getPayInfoId = ( e:TypePayInfos ) => {
+        setPay({ payment: 0, payInfo: {...e} });
         router.push(nextUrl)
     }
 
@@ -78,8 +78,8 @@ export default function SelectPayInfo() {
 
                     <Grid container textAlign="center" height={700} paddingBottom={5} spacing={1}>
                         <Grid item xs={6}>
-                            <BtnLink onClick={ () => getPayInfoId(data[0].pay_info_id, data[0].pay_info_type) } primary>
-                                {data[0].pay_info_type == payTypeCoins ? data[0].pay_info_name : '設定エラー'}
+                            <BtnLink onClick={ () => getPayInfoId(data[0]) } primary>
+                                {data[0].type == payTypeCoins ? data[0].name : '設定エラー'}
                             </BtnLink>
                         </Grid>
 

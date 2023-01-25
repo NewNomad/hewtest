@@ -27,7 +27,7 @@ export default function CheckPay(){
     const [costs, setCosts]     = useRecoilState(paymentState)                      // お預かり(投入金額, 支払方法)
     const [isNumeric, setIsNumeric] = useState(true);                              // お預かり入力の整合性チェック
 
-    const cost = costs.payInfoType == payTypeCoins? costs.payment: cardBalance      // お預かり(現金)
+    const cost = costs.payInfo.type == payTypeCoins? costs.payment: cardBalance      // お預かり(現金)
     const request   = ( sum - cost ) > 0? ( sum - cost ): 0                         // 残り金額
     const change    = ( cost - sum ) > 0? ( cost - sum ): 0                         // おつり
 
@@ -42,11 +42,11 @@ export default function CheckPay(){
             setIsNumeric(false)
             return
         }
-        setCosts({ payment: event.target.value, payInfoId: costs.payInfoId, payInfoType: costs.payInfoType });
+        setCosts({ payment: event.target.value, payInfo: costs.payInfo });
     }
 
     const infoPrice = { 
-        payType: costs.payInfoType,
+        payType: costs.payInfo.type,
         sum: sum,
         costs: cost,
         request: request,
@@ -67,10 +67,13 @@ export default function CheckPay(){
 
                 <Container sx={{ pt: 8 }}>
 
-                    <TextTitle primary>{ costs.payInfoType == payTypeCoins ? 'お金を投入してください': '入金処理を行っています…' }</TextTitle>
+                    <TextTitle primary>{ costs.payInfo.type == payTypeCoins ? 'お金を投入してください': '入金処理を行っています…' }</TextTitle>
 
-                    {/* FIXME: [お預かり] 入金額をテキストボックスで指定できるようにする */}
-                    <PayDetail price={ infoPrice } url={ infoUrl } onChange={ ChangePrice } />
+                    <PayDetail
+                        payInfoName={ costs.payInfo.name }
+                        price={ infoPrice }
+                        url={ infoUrl }
+                        onChange={ ChangePrice } />
 
                 </Container>
 

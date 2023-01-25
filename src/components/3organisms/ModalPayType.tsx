@@ -1,4 +1,4 @@
-import { Container, Grid }      from '@mui/material'
+import { Container, Grid, Modal } from '@mui/material'
 import { ShowMordal }           from '../1atoms/ShowModal'
 import { BtnLink }              from '../1atoms/BtnLink'
 import { TextTitle }            from '../1atoms/TextTitle'
@@ -8,7 +8,7 @@ import { totalPriceSelector }   from '../types/TypeCart'
 import { useRouter }            from 'next/router'
 import Image                    from 'next/image'
 import { useRecoilState, useRecoilValue }   from 'recoil'
-import React from 'react'
+import React, { useState } from 'react'
 
 // -----------------------------------------------------------
 // 型宣言
@@ -27,6 +27,10 @@ export const ModalPayType = (props: Props) => {
 
     const { children, nextUrl, payType, closeModal } = props
 
+    const [mordal, setMordal] = useState<boolean>(false)
+    const Open = () => setMordal(true)                     // 開く
+    const Close = () => setMordal(false)                   // 閉じる
+
     const payTypeId: number = payType == "QR" ? 3 : 2   // 決済方法 (2:電子マネー、3:QRコード)
     const sum = useRecoilValue(totalPriceSelector)      // 合計金額
 
@@ -39,9 +43,10 @@ export const ModalPayType = (props: Props) => {
     // 決済方法選択の処理
     // -----------------------------------------------
     const [pay, setPay] = useRecoilState(paymentState)
-    const getPayInfoId = ( id:number, type:number ) => {
-        setPay({ payment: sum, payInfoId: id, payInfoType: type });
-        router.push(nextUrl)
+    const getPayInfoId = ( e:TypePayInfos ) => {
+        setPay({ payment: sum, payInfo: {...e} });
+        // router.push(nextUrl)
+        setMordal(true)
     }
 
     return (
@@ -54,39 +59,48 @@ export const ModalPayType = (props: Props) => {
 
                     {
                         [...children].map((e, i) => (
-                            e.pay_info_type == payTypeId &&
-                            (
-                                <Grid key={i} item xs={4}>
+                            e.type == payTypeId &&
+                            (<Grid key={i} item xs={4}>
+                                <BtnLink onClick={ () => getPayInfoId(e) } primary>
+                                    {/* ↓ 決済方法名 */}
+                                    { e.name }
 
-                                    {/* FIXME: [モーダル追加] 読み取り要求を表示する */}
-                                    <BtnLink
-                                        onClick={ () => getPayInfoId(e.pay_info_id, e.pay_info_type) }
-                                        primary
-                                    >
-                                        {/* ↓ 決済方法名 */}
-                                        { e.pay_info_name }
-
-                                        {/* ↓ 画像：画像URLが取得できた時だけ表示 */}
-                                        { e.pay_info_image && (
-                                                <figure>
-                                                    <Image
-                                                    src={"/pay_logo/"+ e.pay_info_image}
-                                                    alt=""
-                                                    width={130}
-                                                    height={100} />
-                                                </figure>
-                                            ) 
-                                        }
-                                    </BtnLink>
-
-                                </Grid>
-                            )
+                                    {/* ↓ 画像：画像URLが取得できた時だけ表示 */}
+                                    { e.image && (
+                                        <figure>
+                                            <Image
+                                                src={"/pay_logo/"+ e.image}
+                                                alt=""
+                                                width={230}
+                                                height={200} />
+                                        </figure>) 
+                                    }
+                                </BtnLink>
+                            </Grid>)
                         ))
                     }
 
                 </Grid>
 
             </Container>
+
+            <Modal open={mordal} onClose={Close} >
+                <ShowMordal closeModal={Close}>
+                    <Container>
+                        <TextTitle>お支払方法：{pay.payInfo.name}</TextTitle>
+                        <figure>
+                            <Image
+                            src={"/pay_logo/"+ pay.payInfo.image}
+                            alt=""
+                            width={130}
+                            height={100} />
+                        </figure>
+                        <p>読み取り機にかざしてください</p>
+                        <BtnLink onClick={ () => router.push(nextUrl) }primary>決定</BtnLink>
+                    </Container>
+                </ShowMordal>
+            </Modal>
+
         </ShowMordal >
     )
 }
