@@ -45,7 +45,7 @@ export default function RecommendProduct({ proinfo, rank }: Props) {
                             border: `2px solid #ccc `,
                             borderColor: `secondary.main`,
                             textAlign: "center",
-                            width: 350,
+                            width: 300,
                             paddingTop: 5,
                             marginRight: 20,
                         }
@@ -55,7 +55,7 @@ export default function RecommendProduct({ proinfo, rank }: Props) {
                                 border: `2px solid #ccc `,
                                 borderColor: `secondary.main`,
                                 textAlign: "center",
-                                width: 300,
+                                width: 250,
                                 position: 'relative',
                                 top: 168,
                                 left: 55,
