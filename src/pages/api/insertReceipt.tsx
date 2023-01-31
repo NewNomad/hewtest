@@ -45,10 +45,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
         date.getDate().toString()                                           // 購入日
 
     let product: TypeProducts[] = req.body.products as TypeProducts[]       // カート内商品情報
-    let payment:string          = req.body.payment as string                // 入金額
+    let payment: string          = req.body.payment as string               // 入金額
 
     // TODO: [入金方法]領収TBLに登録する場所がない
-    // let payInfoId:string        = req.body.payInfoId as string              // 入金方法
+    // let payInfo              = req.body.payInfo as TypePayment[]              // 入金方法
 
     // ----------------------------------------------------
     // SQL

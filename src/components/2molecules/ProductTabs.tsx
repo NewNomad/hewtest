@@ -2,7 +2,6 @@ import { LocalDrink }       from '@mui/icons-material'
 import { Paper,Tab, Tabs }  from '@mui/material'
 import React from 'react'
 
-// TODO: [タブ] 未実装
 // TODO: [顔認証/おすすめ表示] 未実装
 export const ProductTabs = () => {
     return (

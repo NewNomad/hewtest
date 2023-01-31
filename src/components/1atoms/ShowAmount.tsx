@@ -1,10 +1,11 @@
 import { AddCircle, RemoveCircle }  from '@mui/icons-material'
 import { IconButton, TextField }               from '@mui/material'
+import { FormControl, OutlinedInput, InputAdornment }    from    '@mui/material'
 
 type Props = {
     costs: number                   // 入金額
-    ClickMinus: () => void          // クリックイベント(マイナスボタン押下時)
-    ClickPlus: () => void           // クリックイベント(プラスボタン押下時)
+    error: boolean
+    onChange: (event:any) => void
 }
 
 // =================================================
@@ -12,28 +13,16 @@ type Props = {
 // =================================================
 export const ShowAmount = ( props:Props ) =>{
 
-    const { costs, ClickMinus, ClickPlus } = props
+    const { costs, error, onChange } = props
 
     return (
-        <>
-            {/* <IconButton 
-                aria-label='remove'
-                size='large'
-                onClick={ClickMinus}
-                disabled={ costs <= 0 }>
-                <RemoveCircle fontSize='large' />
-            </IconButton>
-            { costs }
-            <IconButton
-                aria-label='add'
-                onClick={ClickPlus}>
-                <AddCircle fontSize='large' />
-            </IconButton> */}
-
-            <TextField
-                type="number"
-                inputProps={{ inputMode: "numeric", pattern: "[0-9]*"
-            }}/>
-        </>
+        <TextField
+            error={ error }
+            helperText = { error && '整数のみ入力可'}
+            type="number"
+            sx={{ width: '120px' }}
+            defaultValue={ costs }
+            onChange={ onChange }
+        />
     )
 }

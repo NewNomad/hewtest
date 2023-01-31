@@ -36,12 +36,12 @@ export default function CheckPay() {
     // -----------------------------------------------
     const insertReceipt = (cart: TypeCart, paymentInfo: TypePayment) => {
         const { products } = cart
-        const { payment, payInfoId } = paymentInfo
+        const { payment, payInfo } = paymentInfo
 
         axios.post(insertReceiptURL, {
             products: products,
             payment: payment,
-            payInfoId: payInfoId,
+            payInfo: payInfo,
         }).then((res) => {
             console.log("success to input receipt");
         }).catch((e) => {
@@ -55,7 +55,7 @@ export default function CheckPay() {
     useEffect(() => {
         // 初期化
         setCart({ products: [] })
-        setPaymant({ payment: 0, payInfoId: 0, payInfoType: 0 })
+        setPaymant({ payment: 0, payInfo: { id: 0, name: "", type: 0, image: "" } })
 
         insertReceipt(cart, payment)
     }, [])

@@ -1,4 +1,4 @@
-// import { WbSunny, WbCloudy, Umbrella, ElectricBolt, AcUnit } from '@mui/icons-material'
+import { WbSunny, WbCloudy, Umbrella, ElectricBolt, AcUnit } from '@mui/icons-material'
 import { Typography }       from '@mui/material'
 // import { Container }        from '@mui/system'
 import useSWR   from 'swr'
@@ -10,6 +10,7 @@ import React    from 'react'
 const kujiraUrl: string = 'https://api.aoikujira.com/tenki/week.php?fmt=json';      // クジラWeb API
 
 const fetcher = (url: string) => fetch(url).then(response => response.json());
+
 
 // ===================================================
 // 天気表示
@@ -25,7 +26,22 @@ export const ShowWeather = (props: { place: string }) => {
     // 読み込み中
     if (!data) return <Typography>天気表示：読込中</Typography>
 
+    const weather:string = data[info.place][1]["forecast"];
+
+    const iconWeather: string[] = weather.split("")
+
     // 読み込み成功
-    // TODO: [天気の絵文字] 余力があれば表示方法を考える
-    return <Typography>{data[info.place][0]["forecast"]}</Typography>
+    // return <Typography>{data[info.place][0]["forecast"]}</Typography>
+    return <>
+            {/* <Typography> {weather} </Typography> */}
+            { 
+                [...iconWeather].map( (e, i) => (
+                    e == "晴" ? ( <WbSunny key={i} /> ):
+                    e == "曇" ? ( <WbCloudy key={i} /> ):
+                    e == "雨" ? ( <Umbrella key={i} /> ):
+                    e == "雪" ? ( <AcUnit key={i} /> ):
+                    e
+                ) )
+            }
+           </>
 }

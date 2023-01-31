@@ -36,14 +36,14 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
     // ----------------------------------------------------
     const result = await db.query(`
         SELECT 
-            f_pay_info_id       AS pay_info_id,
-            f_pay_info_name     AS pay_info_name,
-            f_pay_info_type     AS pay_info_type,
-            f_pay_info_image    As pay_info_image
+            f_pay_info_id       AS id,
+            f_pay_info_name     AS name,
+            f_pay_info_type     AS type,
+            f_pay_info_image    As image
         FROM
             t_pay_infos
         ORDER BY
-            pay_info_id
+            id
         ;
     `);
 

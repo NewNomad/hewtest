@@ -41,7 +41,6 @@ export const ShowModalConfirm = ({ closeModal }: Props) => {
                 </Typography>
 
                 <Typography textAlign="center" variant='h5' color="primary" fontWeight="bold" marginBottom={1}>
-                    {/* FIXME: [合計数] 商品種類数でなく購入層系の表示にする */}
                     以上{totalProducts}点でよろしいですか？
                 </Typography>
 

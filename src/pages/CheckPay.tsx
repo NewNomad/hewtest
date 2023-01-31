@@ -7,7 +7,7 @@ import { PayDetail }            from '../components/3organisms/PayDetail'
 import { totalPriceSelector }   from '../components/types/TypeCart'
 import { paymentState }         from '../components/types/TypePayment'
 import { useRecoilValue, useRecoilState } from 'recoil'
-import React from 'react';
+import React, { useState } from 'react';
 
 // ---------------------------------------------------
 // 定数
@@ -25,25 +25,37 @@ export default function CheckPay(){
     // 値取得
     const sum:number            = useRecoilValue(totalPriceSelector)                // 合計金額
     const [costs, setCosts]     = useRecoilState(paymentState)                      // お預かり(投入金額, 支払方法)
+    const [isNumeric, setIsNumeric] = useState(true);                              // お預かり入力の整合性チェック
 
-    const cost = costs.payInfoType == payTypeCoins? costs.payment: cardBalance;     // お預かり(現金)
+    const cost = costs.payInfo.type == payTypeCoins? costs.payment: cardBalance      // お預かり(現金)
     const request   = ( sum - cost ) > 0? ( sum - cost ): 0                         // 残り金額
     const change    = ( cost - sum ) > 0? ( cost - sum ): 0                         // おつり
 
+    // イベント
+    const ChangePrice  = (event:any) => {
+        if( RegExp(/^[1-9]+\d*$/).test(event.target.value) ) {
+            setIsNumeric(true)
+        }
+        else {
+            // 数字以外は入力不可
+            setIsNumeric(false)
+            return
+        }
+        setCosts({ payment: event.target.value, payInfo: costs.payInfo });
+    }
+
     const infoPrice = { 
-        payType: costs.payInfoType,
+        payType: costs.payInfo.type,
         sum: sum,
         costs: cost,
         request: request,
-        change: change
+        change: change,
+        isNumeric: isNumeric
     }
-    const infoUrl = { next: nextUrl, back: backUrl }
-
-    const strTitle = costs.payInfoType == payTypeCoins ? 'お金を投入してください': '入金処理を行っています…';
-
-    // イベント
-    const ClickMinus    = () => { setCosts({ payment: costs.payment - 100, payInfoId: costs.payInfoId, payInfoType: costs.payInfoType }); };
-    const ClickPlus     = () => { setCosts({ payment: costs.payment + 100, payInfoId: costs.payInfoId, payInfoType: costs.payInfoType }); };
+    const infoUrl = {
+        next: nextUrl,
+        back: backUrl
+    }
 
     return (
         <>
@@ -53,13 +65,15 @@ export default function CheckPay(){
                 <Header />
 
                 <Container sx={{ pt: 8 }}>
-                    <TextTitle primary>{ strTitle }</TextTitle>
+
+                    <TextTitle primary>{ costs.payInfo.type == payTypeCoins ? 'お金を投入してください': '入金処理を行っています…' }</TextTitle>
 
                     <PayDetail
-                        price = { infoPrice }
+                        payInfoName={ costs.payInfo.name }
+                        price={ infoPrice }
                         url={ infoUrl }
-                        ClickMinus={ ClickMinus }
-                        ClickPlus={ ClickPlus } />
+                        onChange={ ChangePrice } />
+
                 </Container>
 
             </Box>
