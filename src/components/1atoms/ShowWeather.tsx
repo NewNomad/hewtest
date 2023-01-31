@@ -28,29 +28,19 @@ export const ShowWeather = (props: { place: string }) => {
 
     const weather:string = data[info.place][1]["forecast"];
 
-    let strWeather = weather.replace("時々", "/");
-    strWeather = strWeather.replace("一時", "|");
-
-    const iconWeather: string[] = strWeather.split("")
+    const iconWeather: string[] = weather.split("")
 
     // 読み込み成功
-    // TODO: [天気の絵文字] 余力があれば表示方法を考える
     // return <Typography>{data[info.place][0]["forecast"]}</Typography>
     return <>
-            <Typography>
-                {weather}
-            </Typography>
+            {/* <Typography> {weather} </Typography> */}
             { 
                 [...iconWeather].map( (e, i) => (
-                    if(RegExp("晴").test(e)){
-                        (<WbSunny key={i} />)
-                    }
-                    elseif(RegExp("曇").test(e)){
-
-                    }
-                     && ( <WbSunny key={i} /> ) 
-                    RegExp("雨").test(e) && ( <WbSunny key={i} /> ) 
-                    RegExp("雪").test(e) && ( <WbSunny key={i} /> ) 
+                    e == "晴" ? ( <WbSunny key={i} /> ):
+                    e == "曇" ? ( <WbCloudy key={i} /> ):
+                    e == "雨" ? ( <Umbrella key={i} /> ):
+                    e == "雪" ? ( <AcUnit key={i} /> ):
+                    e
                 ) )
             }
            </>
