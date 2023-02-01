@@ -25,7 +25,7 @@ export const ShowPayDetail = ( props:Props ) =>{
 
     return (
         <>
-            <Grid container sx={{ marginBottom: 5, textAlign: "center" }}>
+            <Grid container sx={{ marginBottom: 0, textAlign: "center" }}>
                 <GridItem title>
                     <Typography>合計金額</Typography>
                 </GridItem>

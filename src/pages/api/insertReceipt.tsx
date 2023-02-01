@@ -3,6 +3,11 @@ import { TypeProducts }         from '../../components/types/TypeProducts'
 import mysql, { Transaction }   from "serverless-mysql"
 // import { log }               from 'console';
 
+function compDigit(value:number, digit:number){ return ("00"+ value).slice( digit * -1 ) }
+
+// ----------------------------------------------------
+// DB接続
+// ----------------------------------------------------
 const db = mysql({
     config: {
         host: process.env.MYSQL_HOST,
@@ -25,33 +30,38 @@ exports.query = async (query: any) => {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse,) {
-
     // ----------------------------------------------------
     // 値の取得
     // ----------------------------------------------------
-    const date = new Date()
+    const product: TypeProducts[] = req.body.products as TypeProducts[]         // 商品情報
+    
+    const date  = new Date()
+    const year  = date.getFullYear().toString()
+    const month = compDigit((date.getMonth() + 1), 2).toString()
+    const day   = compDigit(date.getDate(), 2).toString()
+    
+    const buyDate = year.slice(-2) + month + day                    // 領収ID(YYmmdd)
+    const buyId:{ cnt:number }[] = await db.query(`
+        SELECT
+            count(*)    AS cnt
+        FROM
+            t_receipts
+        WHERE
+            f_receipt_id LIKE \"${buyDate}%\";`)
 
-    // FIXME: [領収ID]14桁入らなかったため、MMddHHmmssの形式で登録中。1年後の重複があり得るためコード設計の見直しかDBの修正がいる
-    const receiptId =
-        date.getMonth().toString() + 
-        date.getDate().toString() + 
-        date.getHours().toString() + 
-        date.getMinutes().toString() +
-        date.getSeconds().toString()                                        // 領収ID
+    const receiptId     = buyDate + compDigit(buyId[0].cnt, 3)      // 領収ID(YYmmddXXX)
+    const customerId    = 1                                         // 顧客ID(1:ゲストユーザー)
+    const payment       = req.body.payment as string                // 領収入金金額
+    const buyTime       = year + "-" + month + "-" + day            // 領収購入日(YYYY-MM-dd)
+    // const payInfo    = req.body.payInfo as TypePayment[]         // 領収入金方法             // TODO: [入金方法]領収TBLに登録する場所がない
 
-    const buyTime =
-        date.getFullYear().toString() + "-" +
-        date.getMonth().toString() + "-" +
-        date.getDate().toString()                                           // 購入日
+    // TODO: [操作開始時間]取得していない
+    // TODO: [気温]取得してない
+    // TODO: [湿度]取得してない
 
-    let product: TypeProducts[] = req.body.products as TypeProducts[]       // カート内商品情報
-    let payment: string          = req.body.payment as string               // 入金額
-
-    // TODO: [入金方法]領収TBLに登録する場所がない
-    // let payInfo              = req.body.payInfo as TypePayment[]              // 入金方法
 
     // ----------------------------------------------------
-    // SQL
+    // 更新SQL
     // ----------------------------------------------------
     // 商品TBL
     let sql_products: string = `
@@ -89,15 +99,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
             f_receipt_buy_time,
             f_receipt_startusedaytime,
             f_receipt_endusedaytime,
-            f_receipt_isreserved)
+            f_receipt_isreserved,
+            f_receipt_temperature,
+            f_receipt_humidity)
         VALUES(
             ${receiptId},
-            1,
+            ${customerId},
             ${payment},
             \"${buyTime}\",
             now(),
             now(),
-            1
+            1,
+            null,
+            null
         );`
 
     // 取引TBL
@@ -123,14 +137,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
     sql_transactions = sql_transactions.slice(0, -2)
     sql_transactions += `;  `
 
+    // ----------------------------------------------------
+    // SQL実行
+    // ----------------------------------------------------
     // REVIEW: デバッグ用表示
     console.log(`領収TBL:${sql_receipts}`)
     console.log(`取引TBL:${sql_transactions}`)
     console.log(`商品TBL:${sql_products}`)
 
-    // ----------------------------------------------------
-    // SQL実行
-    // ----------------------------------------------------
     let result = await db.query(sql_receipts);              // 領収TBLにレコード(1件)追加
     if(result) result = await db.query(sql_transactions);   // 取引TBLにレコード(複数)追加
     if(result) result = await db.query(sql_products);       // 商品TBL.在庫個数の更新
