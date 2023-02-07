@@ -3,8 +3,8 @@ import { BtnLink }              from '../1atoms/BtnLink'
 import { GridItem }             from '../1atoms/GridItem'
 import { ShowPayDetail }        from '../2molecules/ShowPayDetail'
 import { useRouter }            from 'next/router'
-import { LogoImage }            from './LogoImage'
 import React  from 'react';
+import Image from 'next/image'
 
 // ---------------------------------------------------
 // 型宣言
@@ -39,9 +39,13 @@ export const PayDetail = ( props:Props ) =>{
         <Grid container spacing={3}>
 
             <Grid item xs={7}>
-                <Box sx={{width: '100%', height: 600, padding: 10, backgroundColor: 'primary.main'}}>
-                    {/* <LogoImage/> */}
-                    {/* <img src="public\mopacal.png"/> */}
+                <Box sx={{width: '100%', height: 600, padding: 10, backgroundColor: 'rgba(0,0,0,0)'}}>      
+                <Image
+                            src={"/mopacalwhite.png"}
+                            height={500}
+                            width={500}
+                            objectFit="contain"
+                            alt="logo" />
                 </Box>
             </Grid>
 
