@@ -37,7 +37,10 @@ export default function RecommendProduct({ proinfo, rank }: Props) {
     const quantity = cart.products.find((e, i) => e.id == id)?.quantity
 
     return (
-        <Grid container spacing={0} padding={1} direction="row" >
+        <Grid container spacing={0} padding={1} direction="row"
+        sx={{
+            position:"relative",
+        }} >
             <Grid item key={0} spacing={0} padding={0} direction="column" md={
                 rank == 1 ?
 
@@ -70,6 +73,10 @@ export default function RecommendProduct({ proinfo, rank }: Props) {
                                     // display:"flex",
                                     // justifyContent:"right",
                                     // alignItems:"flex-end",
+                                    // position:"relative",
+                                    // position:"absolute",
+                                    // bottom:0,
+                                    // right:0,
                                     position:"relative",
                                     top:75,
                                     left:50,
