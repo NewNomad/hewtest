@@ -10,6 +10,7 @@ import { useRouter } from 'next/router'
 import { BgParticle } from '../components/libs/BgParticle'      // パーティクル
 import { useEffect } from 'react'
 import dynamic from 'next/dynamic'
+import { ThreeBackground } from '../components/3organisms/threebackground'
 
 // ---------------------------------------------------
 // 定数
@@ -39,7 +40,7 @@ const Home: NextPage = () => {
     return (
         <Box>
             <HeadInfo title='mopacal | インデックス' />
-
+            <ThreeBackground />
             <Box sx={{ flexGrow: 1 }}>
                 <Header onMap />
 
