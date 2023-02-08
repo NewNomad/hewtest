@@ -1,4 +1,4 @@
-import { WbSunny, WbCloudy, Umbrella, ElectricBolt, AcUnit } from '@mui/icons-material'
+import { WbSunny, WbCloudy, Umbrella, AcUnit } from '@mui/icons-material'
 import { Typography }       from '@mui/material'
 // import { Container }        from '@mui/system'
 import useSWR   from 'swr'
