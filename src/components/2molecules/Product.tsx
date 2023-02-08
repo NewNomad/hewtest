@@ -1,11 +1,11 @@
-import { AcUnit, Whatshot }                                 from '@mui/icons-material'
-import { Badge, Button, Divider, Modal, Paper, Tooltip }    from '@mui/material'
-import { ShowModalInfo }                                    from './ShowModalInfo'
-import { TypeProducts }                                     from '../types/TypeProducts'
-import { cartState, TypeCart, useCart }                     from '../types/TypeCart'
-import Image                from 'next/image'
-import { useRecoilState }   from 'recoil'
-import React, { useState }  from 'react'
+import { AcUnit, Whatshot } from '@mui/icons-material'
+import { Badge, Button, Divider, Modal, Paper, Tooltip } from '@mui/material'
+import { ShowModalInfo } from './ShowModalInfo'
+import { TypeProducts } from '../types/TypeProducts'
+import { cartState, TypeCart, useCart } from '../types/TypeCart'
+import Image from 'next/image'
+import { useRecoilState } from 'recoil'
+import React, { useState } from 'react'
 
 // ----------------------------------------------------
 // 型宣言
@@ -24,8 +24,8 @@ export default function Product({ proinfo }: Props) {
 
     // 商品詳細画面(モーダル)の処理
     const [mordalInfo, setmordalInfo] = useState<boolean>(false)
-    const OpenMInfo     = () => setmordalInfo(true);                // 商品詳細画面(モーダル)開く
-    const CloseMInfo    = () => setmordalInfo(false);               // 商品詳細画面(モーダル)閉じる
+    const OpenMInfo = () => setmordalInfo(true);                // 商品詳細画面(モーダル)開く
+    const CloseMInfo = () => setmordalInfo(false);               // 商品詳細画面(モーダル)閉じる
 
     const { addCart } = useCart()
 
@@ -41,7 +41,9 @@ export default function Product({ proinfo }: Props) {
                     backgroundColor: "#fff",
                     // border: `2px solid #ccc `,
                     borderColor: `secondary.main`,
-                    textAlign: "center"
+                    textAlign: "center",
+                    opacity: 0.8
+
                 }}>
 
                 {/* 画像部 */}
@@ -49,7 +51,7 @@ export default function Product({ proinfo }: Props) {
                 <Tooltip title="この商品の詳細を見る" arrow>
                     <Button
                         onClick={OpenMInfo}
-                        disabled={ !isActive }
+                        disabled={!isActive}
                         sx={{
                             width: 1,
                             borderBottomLeftRadius: 0,
@@ -65,7 +67,7 @@ export default function Product({ proinfo }: Props) {
                             height={180}
                             width={100}
                             objectFit="contain"
-                            style={ !isActive ? { filter: "grayscale(100%)" } : {}}
+                            style={!isActive ? { filter: "grayscale(100%)" } : {}}
                             alt="" />
 
                     </Button>
@@ -83,7 +85,7 @@ export default function Product({ proinfo }: Props) {
                         size='small'
                         disableElevation
                         onClick={() => addCart(proinfo)}
-                        disabled={ !isActive }
+                        disabled={!isActive}
                         startIcon={
                             isice == 1
                                 ? <AcUnit color={isActive ? "info" : "secondary"} />
@@ -96,9 +98,9 @@ export default function Product({ proinfo }: Props) {
                             width: 1,
                             borderStartEndRadius: 0,
                             borderStartStartRadius: 0,
-                            fontSize:18
+                            fontSize: 18
                         }}>
-                        { price }
+                        {price}
                     </Button>
 
                 </Tooltip>
