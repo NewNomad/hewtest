@@ -28,12 +28,16 @@ export const ThreeBackground = () => {
     return (
         <Canvas style={{
             position: "fixed",
-            zIndex: 100,
+            zIndex: -100,
             left: 0,
             top: 0,
             width: "100%",
             height: "100%"
         }}>
+            <ambientLight intensity={0.5} />
+            <pointLight position={[-10, -10, -10]} />
+            <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+            <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
             <Box position={[-1.2, 0, 0]} />
         </Canvas>
     )
