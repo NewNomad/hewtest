@@ -1,4 +1,4 @@
-import { Container, Grid, Modal, Alert } from '@mui/material'
+import { Container, Grid, Modal, ListItem, ListItemText, Alert } from '@mui/material'
 import { ShowMordal }           from '../1atoms/ShowModal'
 import { BtnLink }              from '../1atoms/BtnLink'
 import { TextTitle }            from '../1atoms/TextTitle'
@@ -10,6 +10,7 @@ import Image                    from 'next/image'
 import { useRecoilState, useRecoilValue }   from 'recoil'
 import React, { useState } from 'react'
 import { margin } from '@mui/system'
+import { relative } from 'path'
 
 // -----------------------------------------------------------
 // 型宣言
@@ -57,30 +58,27 @@ export const ModalPayType = (props: Props) => {
                 <TextTitle>お支払い方法の選択</TextTitle>
 
                 <Grid container textAlign="center" spacing={1} height={500} width={1000} paddingTop={3}>
-
                     {
                         [...children].map((e, i) => (
                             e.type == payTypeId &&
                             (<Grid key={i} item xs={4}>
                                 <BtnLink onClick={ () => getPayInfoId(e) } primary>
-                                    {/* ↓ 決済方法名 */}
-                                    { e.name }
-
-                                    {/* ↓ 画像：画像URLが取得できた時だけ表示 */}
+                                    <ListItem sx={{ display:'block' }}>
+                                        <ListItemText>
+                                            <p style={{ fontSize: 25, fontWeight: 'bold', textAlign:'center' }}>{ e.name }</p>
+                                        </ListItemText>
                                     { e.image && (
-                                        <figure>
-                                            <Image
-                                                src={"/pay_logo/"+ e.image}
-                                                alt=""
-                                                width={230}
-                                                height={200} />
-                                        </figure>) 
+                                        <ListItemText>
+                                            <figure style={{ width: '100px', height: '100px', position: 'relative', left:'15%' }}>
+                                                <Image src={"/pay_logo/"+ e.image} alt="" width={100} height={100}/>
+                                            </figure>
+                                        </ListItemText>)
                                     }
+                                    </ListItem>
                                 </BtnLink>
                             </Grid>)
                         ))
                     }
-
                 </Grid>
 
             </Container>
@@ -89,12 +87,12 @@ export const ModalPayType = (props: Props) => {
                 <ShowMordal closeModal={Close}>
                     <Container>
                         <TextTitle>お支払方法：{pay.payInfo.name}</TextTitle>
-                        <figure>
+                        <figure style={{ width: '100px', height: '100px', position: 'relative', left:'20%' }}>
                             <Image
                             src={"/pay_logo/"+ pay.payInfo.image}
                             alt=""
-                            width={130}
-                            height={100} />
+                            width={100}
+                            height={100}/>
                         </figure>
                         <Alert severity='info' sx={{ marginBottom: '20px' }}>読み取り機にかざしてください</Alert>
                         <BtnLink onClick={ () => router.push(nextUrl) } primary>決定</BtnLink>
