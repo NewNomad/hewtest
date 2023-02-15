@@ -30,7 +30,7 @@ import React, { useState } from 'react'
 
             <Container sx={{ padding: 2 }}>
 
-                <Typography variant='h4'>
+                <Typography variant='h4' fontWeight={"bold"}>
                     <ShoppingCart />
                     カート</Typography>
 
