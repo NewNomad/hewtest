@@ -6,14 +6,15 @@ type Props = {
     children: React.ReactNode
     closeModal: () => void
 }
-const ref = React.createRef();
+// const ref = React.createRef();
 
 // ==================================================
 // モーダルのウィンドウ設定
 // ==================================================
-export const ShowMordal: React.FC<Props> = React.forwardRef(({ children, closeModal }, ref) => {
+export const ShowMordal: React.FC<Props> = React.forwardRef( function showModalBase({ children, closeModal }, ref) {
     const Body = (
-        <Paper ref={ref}
+        <Paper 
+            // ref={ref}
             sx={{
                 position: "absolute",
                 top: "50%",
@@ -25,13 +26,10 @@ export const ShowMordal: React.FC<Props> = React.forwardRef(({ children, closeMo
                 p: 4
             }}
         >
-            <IconButton  onClick={closeModal} sx={{
-                position: "absolute",
-                right: -60,
-                top: -60,
-            }}>
+            <IconButton
+                onClick={closeModal}
+                sx={{ position: "absolute", right: -60, top: -60, }}>
                 <Close sx={{
-
                     fontSize: 100,
                     borderRadius: 50,
                     backgroundColor: "#fff",
@@ -39,14 +37,14 @@ export const ShowMordal: React.FC<Props> = React.forwardRef(({ children, closeMo
                     borderRight: 1
                 }} />
             </IconButton>
-
             {children}
         </Paper>
-
     )
+
     return (
         <Paper>
             {Body}
         </Paper>
     )
+
 })
