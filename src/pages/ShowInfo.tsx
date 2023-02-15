@@ -53,7 +53,8 @@ const ShowInfo: React.FC<Props> = ({ onMap }) => {
     //     });
     //     setZoom(20);
     //     console.log(data);
-    // };const ShowInfo: React.FC<Props> = ({ onMap }) => {
+    // };
+    // const ShowInfo: React.FC<Props> = ({ onMap }) => {
     // ...
 
 
