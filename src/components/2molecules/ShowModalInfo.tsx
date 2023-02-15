@@ -51,19 +51,9 @@ export const ShowModalInfo = ({ product, closeModal }: Props) => {
                                 <ListItemText>
                                         {
                                             [...arrName].map(( proName, i:number) => (
-                                                <Typography variant='h4' sx={{display: 'inline-block', whiteSpace: 'nowrap', marginRight: 1}} key={i}>{ proName }</Typography>
+                                                <Typography variant='h4' sx={{display: 'inline-block', whiteSpace: 'nowrap', marginRight: 1,fontWeight:"bold"}} key={i}>{ proName }</Typography>
                                             ))
                                         }
-                                </ListItemText>
-                            </ListItem>
-
-                            {/* 商品金額 */}
-                            <ListItem sx={{borderBottom: 1, marginBottom: 5}}>
-                                <ListItemIcon>
-                                    <CurrencyYen />
-                                </ListItemIcon>
-                                <ListItemText>
-                                    <Typography variant='h3'>{ product.price }円</Typography>
                                 </ListItemText>
                             </ListItem>
 
@@ -74,7 +64,7 @@ export const ShowModalInfo = ({ product, closeModal }: Props) => {
                                 </ListItemIcon>
                                 <List
                                     // sx={{ width: 300, borderLeft: 2, bgcolor: '#ccccff', color: 'blue', margin: 5, padding: 2 }}
-                                    sx={{ borderLeft: 2, bgcolor: '#ccccff', color: 'blue', padding: 2 }}
+                                    sx={{ borderLeft: 2, bgcolor: '#ddd', color: 'gray', padding: 2 }}
                                 >
                                     {
                                         product.tags.length <= 0?
@@ -102,6 +92,16 @@ export const ShowModalInfo = ({ product, closeModal }: Props) => {
                                                 <Chip key={i} sx={{ marginRight: 1 }} label={ allergen } />
                                             ))
                                     } />
+                            </ListItem>
+
+                            {/* 商品金額 */}
+                            <ListItem sx={{borderBottom: 1, marginBottom: 5,marginTop:3,}}>
+                                <ListItemIcon>
+                                    <CurrencyYen />
+                                </ListItemIcon>
+                                <ListItemText>
+                                    <Typography variant='h3'>{ product.price }円</Typography>
+                                </ListItemText>
                             </ListItem>
 
                             {/* <ListItem>
