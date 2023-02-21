@@ -82,7 +82,7 @@ export default function CheckPay() {
                         justifyContent: 'center'
                     }}>
                         <Image
-                            src={"/mopacalwhite.png"}
+                            src={"/movemopa.gif"}
                             height={500}
                             width={500}
                             objectFit="contain"

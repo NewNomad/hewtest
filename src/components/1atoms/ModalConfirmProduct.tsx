@@ -1,3 +1,4 @@
+import { AcUnit, Whatshot } from '@mui/icons-material'
 import { Grid, Paper, Typography } from '@mui/material'
 import Image from 'next/image'
 import React from 'react'
@@ -9,8 +10,12 @@ type Props = {
 
 export const ModalConfirmProduct = ({ product }: Props) => {
     return (
-        <Paper elevation={0} variant="outlined" sx={{ marginTop: 2,p:2 }}>
+        <Paper elevation={0} variant="outlined" sx={{ marginTop: 2, p: 2 }}>
             <Typography color="primary" fontWeight="bold">
+                {/* カート内のホット・アイスアイコン */}
+                {product.isice == 1
+                    ? <AcUnit color="info" />
+                    : <Whatshot color='primary' />}
                 {product.name}
             </Typography>
             <Grid container alignItems="center" padding={3}>
