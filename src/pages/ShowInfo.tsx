@@ -22,7 +22,7 @@ interface MarkerData {
     name: string;
 }
 
-const ShowInfo: React.FC<Props> = ({ onMap }) => {
+const ShowInfo: React.FC<Props> = () => {
 
     const defaultCenter = {
         lat: 35.1709,  // 東経
@@ -55,7 +55,7 @@ const ShowInfo: React.FC<Props> = ({ onMap }) => {
             <HeadInfo title='mopacal | 地図' />
 
             <Box sx={{ flexGrow: 1 }}>
-                <Header onMap={onMap} />
+                <Header onMap />
 
                 <Box sx={{ pt: 8 }}>
                     <Box sx={{ width: '100%', height: 800, backgroundColor: 'primary.main', opacity: 1 }}>

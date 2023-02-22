@@ -9,7 +9,7 @@ import React from 'react'
 // ===================================================
 // ヘッダー
 // ===================================================
-export const Header = ({onMap = false}) => {
+export const Header = ({ onMap = false }) => {
   const router = useRouter();
 
   return (
@@ -17,7 +17,7 @@ export const Header = ({onMap = false}) => {
       <Toolbar>
         <ShowWeather />
         <ShowDate />
-        {onMap && 
+        { onMap && 
           (router.pathname != "/ShowInfo"
           ? <BtnShowInfo link='/ShowInfo' name='地図を見る' />
           : <BtnShowInfo link='/' name='メイン画面に戻る' />)
