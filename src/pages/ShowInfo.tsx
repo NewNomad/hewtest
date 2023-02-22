@@ -16,8 +16,6 @@ interface Props {
 }
 
 const ShowInfo: React.FC<Props> = ({ onMap }) => {
-    const { data, error } = useSWR(url,fetcher);
-    console.log(data);
 
     const defaultProps = {
         center: {               //初期位置
@@ -58,19 +56,28 @@ const ShowInfo: React.FC<Props> = ({ onMap }) => {
     // ...
 
 
-    const handleClick = () => {
-        if (error) return <div>Failed to load</div>;
-        if (!data) return <div>Loading...</div>;
+    // const handleClick = () => {
+    //     if (error) return <div>Failed to load</div>;
+    //     if (!data) return <div>Loading...</div>;
 
-        setCenter({
-            lat: data.results[0].geometry.location.lat,
-            lng: data.results[0].geometry.location.lng
-        });
-        setZoom(20);
+    //     setCenter({
+    //         lat: data.results[0].geometry.location.lat,
+    //         lng: data.results[0].geometry.location.lng
+    //     });
+    //     setZoom(20);
+    //     console.log(data);
+    // };
+
+    const handleClick = async () => {
+        const location = '-33.8670522,151.1957362';
+        const radius = '1500';
+        const type = 'restaurant';
+
+        const response = await fetch(`/api/places?location=${location}&radius=${radius}&type=${type}`);
+        const data = await response.json();
         console.log(data);
-    };
-
-
+        
+    }
 
 
 
