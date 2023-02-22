@@ -11,12 +11,12 @@ import React    from 'react'
 const kujiraUrl: string = 'https://api.aoikujira.com/tenki/week.php?fmt=json';
 
 // 天気情報をアイコンに変換
-function iconWeather(value:string){
+function iconWeather(value:string, i:number){
     switch(value){
-        case "晴":  return <WbSunny />
-        case "曇":  return <WbCloudy />
-        case "雨":  return <Umbrella />
-        case "雪":  return <AcUnit />
+        case "晴":  return <WbSunny key={i} />
+        case "曇":  return <WbCloudy key={i} />
+        case "雨":  return <Umbrella key={i} />
+        case "雪":  return <AcUnit key={i} />
         default:    return value
     }
 }
@@ -51,6 +51,6 @@ export const ShowWeather = (props: { place: string }) => {
     const weather:string = data[info.place][1]["forecast"];
 
     return <>
-            { [...weather.split("")].map( (e, i) => iconWeather(e) )}
+            { [...weather.split("")].map( (e, i) => iconWeather(e, i) )}
            </>
 }
