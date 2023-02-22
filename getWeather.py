@@ -58,7 +58,7 @@ latest_humidity = confirm_aqc(amedas_data[latest_key]["humidity"]) # 最新の�
 latest_precipitation10m = confirm_aqc(amedas_data[latest_key]["precipitation10m"]) # 最新の降水量データを取得, 品質情報を確認
 
 dict = {
-    "precipitation" : f"{latest_temp}",
+    "temperature" : f"{latest_temp}",
     "precipitation" : f"{latest_precipitation10m}",
     "humidity" : f"{latest_humidity}",
     "weather" : f"{weathers}",

@@ -1,11 +1,12 @@
-import { Box } from '@mui/material'
-import { Container } from '@mui/system'
-import { TextTitle } from '../components/1atoms/TextTitle'
-import { BtnLink } from '../components/1atoms/BtnLink'
-import { HeadInfo } from '../components/2molecules/HeadInfo'
-import { Header } from '../components/2molecules/Header'
-import { cartState, TypeCart } from '../components/types/TypeCart'
-import { paymentState, TypePayment } from '../components/types/TypePayment'
+import { Box }          from '@mui/material'
+import { Container }    from '@mui/system'
+import { TextTitle }    from '../components/1atoms/TextTitle'
+import { BtnLink }      from '../components/1atoms/BtnLink'
+import { HeadInfo }     from '../components/2molecules/HeadInfo'
+import { Header }       from '../components/2molecules/Header'
+import { cartState, TypeCart }                      from '../components/types/TypeCart'
+import { paymentState, TypePayment }                from '../components/types/TypePayment'
+import { TypeMarketingData, marketingDataState }    from '../components/types/TypeMarketingData'
 import { useRouter } from 'next/router'
 import { useRecoilState } from 'recoil'
 import axios from "axios"
@@ -35,7 +36,7 @@ export default function CheckPay() {
     // -----------------------------------------------
     // 購入履歴管理
     // -----------------------------------------------
-    const insertReceipt = (cart: TypeCart, paymentInfo: TypePayment) => {
+    const insertReceipt = (cart: TypeCart, paymentInfo: TypePayment, marketingData: TypeMarketingData) => {
         const { products } = cart
         const { payment, payInfo } = paymentInfo
 
@@ -43,6 +44,7 @@ export default function CheckPay() {
             products: products,
             payment: payment,
             payInfo: payInfo.id,
+            marketing: marketingData
         }).then((res) => {
             console.log("success to input receipt");
         }).catch((e) => {
@@ -50,15 +52,17 @@ export default function CheckPay() {
         })
     }
 
-    const [cart, setCart] = useRecoilState(cartState)
-    const [payment, setPaymant] = useRecoilState(paymentState)
+    const [cart, setCart]                   = useRecoilState(cartState)
+    const [payment, setPaymant]             = useRecoilState(paymentState)
+    const [marketingData, setMarketingData] = useRecoilState(marketingDataState)
 
     useEffect(() => {
         // 初期化
         setCart({ products: [] })
         setPaymant({ payment: 0, payInfo: { id: 0, name: "", type: 0, image: "" } })
+        setMarketingData({ customerId: 1, temperature: 0, humidity: 0, getDataDt: "" })
 
-        insertReceipt(cart, payment)
+        insertReceipt(cart, payment, marketingData)
     }, [])
 
     return (

@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { TypeProducts }         from '../../components/types/TypeProducts'
+import { TypeMarketingData }    from '../../components/types/TypeMarketingData'
 import mysql, { Transaction }   from "serverless-mysql"
 // import { log }               from 'console';
 
@@ -33,32 +34,33 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
     // ----------------------------------------------------
     // 値の取得
     // ----------------------------------------------------
-    const product: TypeProducts[] = req.body.products as TypeProducts[]         // 商品情報
+    const product: TypeProducts[]       = req.body.products as TypeProducts[]       // 商品情報
+    const marketing: TypeMarketingData  = req.body.marketing as TypeMarketingData   // マーケティング用情報
     
     const date  = new Date()
     const year  = date.getFullYear().toString()
     const month = compDigit((date.getMonth() + 1), 2).toString()
     const day   = compDigit(date.getDate(), 2).toString()
-    
-    const buyDate = year.slice(-2) + month + day                    // 領収ID(YYmmdd)
+
+    // 領収ID
+    const buyDate = year.slice(-2) + month + day                // 領収ID(YYmmdd)
     const buyId:{ cnt:number }[] = await db.query(`
         SELECT
             count(*)    AS cnt
         FROM
             t_receipts
         WHERE
-            f_receipt_id LIKE \"${buyDate}%\";`)
+            f_receipt_id LIKE \"${buyDate}%\";`)                // 領収ID(XXX)
+    const receiptId     = buyDate + compDigit(buyId[0].cnt, 3)  // 領収ID(YYmmddXXX)
 
-    const receiptId     = buyDate + compDigit(buyId[0].cnt, 3)      // 領収ID(YYmmddXXX)
-    const customerId    = 1                                         // 顧客ID(1:ゲストユーザー)
-    const payment       = req.body.payment as string                // 領収入金金額
-    const buyTime       = year + "-" + month + "-" + day            // 領収購入日(YYYY-MM-dd)
-    const payInfo       = req.body.payInfo as number                // 領収入金方法
+    const customerId    = marketing.customerId                  // 顧客ID
+    const payment       = req.body.payment as string            // 領収入金金額
+    const buyTime       = year + "-" + month + "-" + day        // 領収購入日(YYYY-MM-dd)
+    const payInfo       = req.body.payInfo as number            // 領収入金方法
 
-    // TODO: [操作開始時間]取得していない
-    // TODO: [気温]取得してない
-    // TODO: [湿度]取得してない
-
+    const startTime     = marketing.getDataDt                   // 操作開始時間
+    const temperature   = marketing.temperature                 // 気温
+    const humidity      = marketing.humidity                    // 湿度
 
     // ----------------------------------------------------
     // 更新SQL
@@ -108,11 +110,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
             ${customerId},
             ${payment},
             \"${buyTime}\",
-            now(),
+            \"${startTime}\",
             now(),
             1,
-            null,
-            null,
+            ${temperature},
+            ${humidity},
             ${payInfo}
         );`
 
