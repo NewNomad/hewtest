@@ -6,6 +6,7 @@ import { Header } from '../components/2molecules/Header'
 import { Footer } from '../components/2molecules/Footer'
 import axios from 'axios';
 import useSWR from "swr";
+import { MapMarker } from "../components/3organisms/MapMarker";
 
 const fetcher = (url: string) => fetch(url).then(response => response.json());
 
@@ -15,58 +16,22 @@ interface Props {
     onMap: boolean;
 }
 
+interface MarkerData {
+    lat: number;
+    lng: number;
+    name: string;
+}
+
 const ShowInfo: React.FC<Props> = ({ onMap }) => {
 
-    const defaultProps = {
-        center: {               //初期位置
-            lat: 35.1709,       //東経
-            lng: 136.8815       //西経　　名古屋
-
-        },
-        zoom: 20                //拡大率
+    const defaultCenter = {
+        lat: 35.1709,  // 東経
+        lng: 136.8815  // 西経　名古屋
     };
-
-    const [center, setCenter] = useState(defaultProps.center);
-    const [zoom, setZoom] = useState(defaultProps.zoom);
-
-    // const handleClick = async () => {
-    //     const data = await(await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522%2C151.1957362&radius=1500&type=restaurant&key=${process.env.NEAR_API!}`)).json()
-    //     setCenter({
-    //         lat: data.results[0].geometry.location.lat,
-    //         lng: data.results[0].geometry.location.lng
-    //     });
-    //     setZoom(20);
-    //     console.log(data);
-    // };
-
-    // const handleClick = () => {
-    //     const { data, error } = useSWR(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522%2C151.1957362&radius=1500&type=restaurant&key=${process.env.NEAR_API!}`, fetcher);
-
-    //     if (error) return <div>Failed to load</div>
-    //     if (!data) return <div>Loading...</div>
-
-    //     setCenter({
-    //         lat: data.results[0].geometry.location.lat,
-    //         lng: data.results[0].geometry.location.lng
-    //     });
-    //     setZoom(20);
-    //     console.log(data);
-    // };
-    // const ShowInfo: React.FC<Props> = ({ onMap }) => {
-    // ...
-
-
-    // const handleClick = () => {
-    //     if (error) return <div>Failed to load</div>;
-    //     if (!data) return <div>Loading...</div>;
-
-    //     setCenter({
-    //         lat: data.results[0].geometry.location.lat,
-    //         lng: data.results[0].geometry.location.lng
-    //     });
-    //     setZoom(20);
-    //     console.log(data);
-    // };
+    const defaultZoom = 20;
+    const [center, setCenter] = useState(defaultCenter);
+    const [zoom, setZoom] = useState(defaultZoom);
+    const [markers, setMarkers] = useState<MarkerData[]>([]);
 
     const handleClick = async () => {
         const location = '-33.8670522,151.1957362';
@@ -76,10 +41,14 @@ const ShowInfo: React.FC<Props> = ({ onMap }) => {
         const response = await fetch(`/api/places?location=${location}&radius=${radius}&type=${type}`);
         const data = await response.json();
         console.log(data);
-        
+
+        const places: MarkerData[] = data.results.map((result: any) => ({
+            lat: result.geometry.location.lat,
+            lng: result.geometry.location.lng,
+            name: result.name
+        }));
+        setMarkers(places);
     }
-
-
 
     return (
         <>
@@ -92,10 +61,19 @@ const ShowInfo: React.FC<Props> = ({ onMap }) => {
                     <Box sx={{ width: '100%', height: 800, backgroundColor: 'primary.main', opacity: 1 }}>
                         <div style={{ height: '100vh', width: '100%' }}>
                             <GoogleMapReact
-                                bootstrapURLKeys={{ key: process.env.MAP_API! }}
+                                bootstrapURLKeys={{ key: process.env.NEAR_API! }}
                                 center={center}
                                 zoom={zoom}
-                            />
+                            >
+                                {markers.map((marker) => (
+                                    <MapMarker
+                                        key={marker.name}
+                                        lat={marker.lat}
+                                        lng={marker.lng}
+                                        text={marker.name}
+                                    />
+                                ))}
+                            </GoogleMapReact>
                         </div>
                     </Box>
                 </Box>
