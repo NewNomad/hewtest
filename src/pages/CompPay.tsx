@@ -42,7 +42,7 @@ export default function CheckPay() {
         axios.post(insertReceiptURL, {
             products: products,
             payment: payment,
-            payInfo: payInfo,
+            payInfo: payInfo.id,
         }).then((res) => {
             console.log("success to input receipt");
         }).catch((e) => {

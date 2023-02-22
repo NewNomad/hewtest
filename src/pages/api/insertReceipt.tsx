@@ -53,7 +53,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
     const customerId    = 1                                         // 顧客ID(1:ゲストユーザー)
     const payment       = req.body.payment as string                // 領収入金金額
     const buyTime       = year + "-" + month + "-" + day            // 領収購入日(YYYY-MM-dd)
-    // const payInfo    = req.body.payInfo as TypePayment[]         // 領収入金方法             // TODO: [入金方法]領収TBLに登録する場所がない
+    const payInfo       = req.body.payInfo as number                // 領収入金方法
 
     // TODO: [操作開始時間]取得していない
     // TODO: [気温]取得してない
@@ -101,7 +101,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
             f_receipt_endusedaytime,
             f_receipt_isreserved,
             f_receipt_temperature,
-            f_receipt_humidity)
+            f_receipt_humidity,
+            f_pay_info_id)
         VALUES(
             ${receiptId},
             ${customerId},
@@ -111,7 +112,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
             now(),
             1,
             null,
-            null
+            null,
+            ${payInfo}
         );`
 
     // 取引TBL
