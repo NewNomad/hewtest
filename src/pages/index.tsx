@@ -8,7 +8,7 @@ import { Products } from '../components/3organisms/Products'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { BgParticle } from '../components/libs/BgParticle'      // パーティクル
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import { ThreeBackground } from '../components/3organisms/ThreeBackground'
 import { motion } from 'framer-motion'

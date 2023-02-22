@@ -12,143 +12,147 @@ import React            from 'react'
 type Props = {
     product: TypeProducts;
     closeModal: () => void
+    ref?: React.RefObject<HTMLDivElement>
 }
 
 // ===================================================
 // 商品詳細画面
 // ===================================================-
-export const ShowModalInfo = ({ product, closeModal }: Props) => {
+// export const ShowModalInfo = ({ product, closeModal, ref }: Props) => {
+export const ShowModalInfo = React.forwardRef<HTMLDivElement, Props>(
+    function ShowModalInfo ( { product, closeModal, ref }: Props) {
 
-    const { addCart } = useCart()
+        const { addCart } = useCart()
 
-    const arrName = product.name.split(' ')
+        const arrName = product.name.split(' ')
 
-    return (
-        <ShowMordal closeModal={ closeModal }>
+        return (
+            <ShowMordal closeModal={ closeModal } ref={ ref }>
 
-            <Grid container spacing={1} padding={5}>
+                <Grid container spacing={1} padding={5}>
 
-                {/* 商品画像 */}
-                <Grid item xs={4}>
-                    <Image
-                        src={"/" + product.imageURL}
-                        height={1800}
-                        width={800}
-                        objectFit="contain"
-                        alt="" />
-                </Grid>
+                    {/* 商品画像 */}
+                    <Grid item xs={4}>
+                        <Image
+                            src={"/" + product.imageURL}
+                            height={1800}
+                            width={800}
+                            objectFit="contain"
+                            alt="" />
+                    </Grid>
 
-                <Grid item xs={8}>
+                    <Grid item xs={8}>
 
-                    {/* 商品詳細情報 */}
-                    <Container sx={{height: 430, marginTop: 10}}> 
-                        <List>
-                            {/* 商品名 */}
-                            <ListItem>
-                                <ListItemIcon>
-                                    { product.isice == 1 ? <AcUnit color="info" /> : <Whatshot color='primary'/>}
-                                </ListItemIcon>
-                                <ListItemText>
+                        {/* 商品詳細情報 */}
+                        <Container sx={{height: 430, marginTop: 10}}> 
+                            <List>
+                                {/* 商品名 */}
+                                <ListItem>
+                                    <ListItemIcon>
+                                        { product.isice == 1 ? <AcUnit color="info" /> : <Whatshot color='primary'/>}
+                                    </ListItemIcon>
+                                    <ListItemText>
+                                            {
+                                                [...arrName].map(( proName, i:number) => (
+                                                    <Typography variant='h4' sx={{display: 'inline-block', whiteSpace: 'nowrap', marginRight: 1}} key={i}>{ proName }</Typography>
+                                                ))
+                                            }
+                                    </ListItemText>
+                                </ListItem>
+
+                                {/* 商品金額 */}
+                                <ListItem sx={{borderBottom: 1, marginBottom: 5}}>
+                                    <ListItemIcon>
+                                        <CurrencyYen />
+                                    </ListItemIcon>
+                                    <ListItemText>
+                                        <Typography variant='h3'>{ product.price }円</Typography>
+                                    </ListItemText>
+                                </ListItem>
+
+                                {/* タグ */}
+                                <ListItem>
+                                    <ListItemIcon>
+                                        <LocalOffer />
+                                    </ListItemIcon>
+                                    <List
+                                        // sx={{ width: 300, borderLeft: 2, bgcolor: '#ccccff', color: 'blue', margin: 5, padding: 2 }}
+                                        sx={{ borderLeft: 2, bgcolor: '#ccccff', color: 'blue', padding: 2 }}
+                                    >
                                         {
-                                            [...arrName].map(( proName, i:number) => (
-                                                <Typography variant='h4' sx={{display: 'inline-block', whiteSpace: 'nowrap', marginRight: 1}} key={i}>{ proName }</Typography>
-                                            ))
-                                        }
-                                </ListItemText>
-                            </ListItem>
-
-                            {/* 商品金額 */}
-                            <ListItem sx={{borderBottom: 1, marginBottom: 5}}>
-                                <ListItemIcon>
-                                    <CurrencyYen />
-                                </ListItemIcon>
-                                <ListItemText>
-                                    <Typography variant='h3'>{ product.price }円</Typography>
-                                </ListItemText>
-                            </ListItem>
-
-                            {/* タグ */}
-                            <ListItem>
-                                <ListItemIcon>
-                                    <LocalOffer />
-                                </ListItemIcon>
-                                <List
-                                    // sx={{ width: 300, borderLeft: 2, bgcolor: '#ccccff', color: 'blue', margin: 5, padding: 2 }}
-                                    sx={{ borderLeft: 2, bgcolor: '#ccccff', color: 'blue', padding: 2 }}
-                                >
-                                    {
-                                        product.tags.length <= 0?
-                                            <ListItemText>{ `タグはまだ設定されていません` }</ListItemText>
-                                            :[...product.tags].map((tag, i:number) => (
-                                                <ListItemText key={i} sx={{display: 'inline-block', marginRight: 1}}>
-                                                    { `#${tag}` }
-                                                </ListItemText>
-                                            ))
-                                    }   
-                                </List>
-                            </ListItem>
-
-                            {/* アレルギー表示 */}
-                            <ListItem  alignItems="flex-start">
-                                <ListItemIcon>
-                                    <Announcement />
-                                </ListItemIcon>
-                                <ListItemText
-                                    primary={"原材料に含まれるアレルギー物質"}
-                                    secondary={
                                             product.tags.length <= 0?
-                                                <ListItemText>{ `ありません` }</ListItemText>
-                                            :[...product.allergens].map((allergen, i:number) => (
-                                                <Chip key={i} sx={{ marginRight: 1 }} label={ allergen } />
-                                            ))
-                                    } />
-                            </ListItem>
+                                                <ListItemText>{ `タグはまだ設定されていません` }</ListItemText>
+                                                :[...product.tags].map((tag, i:number) => (
+                                                    <ListItemText key={i} sx={{display: 'inline-block', marginRight: 1}}>
+                                                        { `#${tag}` }
+                                                    </ListItemText>
+                                                ))
+                                        }   
+                                    </List>
+                                </ListItem>
 
-                            {/* <ListItem>
-                                <Rating name='rate' value={3} readOnly precision={0.5} size="large" />
-                            </ListItem> */}
+                                {/* アレルギー表示 */}
+                                <ListItem  alignItems="flex-start">
+                                    <ListItemIcon>
+                                        <Announcement />
+                                    </ListItemIcon>
+                                    <ListItemText
+                                        primary={"原材料に含まれるアレルギー物質"}
+                                        secondary={
+                                                product.tags.length <= 0?
+                                                    <ListItemText>{ `ありません` }</ListItemText>
+                                                :[...product.allergens].map((allergen, i:number) => (
+                                                    <Chip key={i} sx={{ marginRight: 1 }} label={ allergen } />
+                                                ))
+                                        } />
+                                </ListItem>
 
-                        </List>
+                                {/* <ListItem>
+                                    <Rating name='rate' value={3} readOnly precision={0.5} size="large" />
+                                </ListItem> */}
 
-                    </Container>
+                            </List>
 
-                    {/* 購入操作 */}
-                    <Grid container item sx={{ width: "100", paddingRight: 5, textAlign: "center" }}>
+                        </Container>
 
-                        <Grid item xs={6}>
-                            {/* 購入 */}
-                            {/* <Button>-</Button>
-                            2
-                            <Button>+</Button> */}
-                            {/* <QuantityButton /> */}
-                            {/* 個 */}
-                        </Grid>
+                        {/* 購入操作 */}
+                        <Grid container item sx={{ width: "100", paddingRight: 5, textAlign: "center" }}>
 
-                        <Grid item xs={6}>
-                            <Button
-                                color='primary'
-                                variant="contained"
-                                sx={{
-                                    width: "100%",
-                                    fontSize: 20,
-                                    padding: 2,
-                                    borderRadius: 20,
-                                }}
-                                startIcon={<AddShoppingCart sx={{
-                                    width: 50,
-                                    height: 50
-                                }} />}
-                                onClick={() => { addCart(product); closeModal() }} >
-                                カートに追加
-                            </Button>
+                            <Grid item xs={6}>
+                                {/* 購入 */}
+                                {/* <Button>-</Button>
+                                2
+                                <Button>+</Button> */}
+                                {/* <QuantityButton /> */}
+                                {/* 個 */}
+                            </Grid>
+
+                            <Grid item xs={6}>
+                                <Button
+                                    color='primary'
+                                    variant="contained"
+                                    sx={{
+                                        width: "100%",
+                                        fontSize: 20,
+                                        padding: 2,
+                                        borderRadius: 20,
+                                    }}
+                                    startIcon={<AddShoppingCart sx={{
+                                        width: 50,
+                                        height: 50
+                                    }} />}
+                                    onClick={() => { addCart(product); closeModal() }} >
+                                    カートに追加
+                                </Button>
+                            </Grid>
+
                         </Grid>
 
                     </Grid>
 
                 </Grid>
 
-            </Grid>
-
-        </ShowMordal>
-    )
-}
+            </ShowMordal>
+        )
+    }
+)

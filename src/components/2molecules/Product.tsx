@@ -5,7 +5,7 @@ import { TypeProducts } from '../types/TypeProducts'
 import { cartState, TypeCart, useCart } from '../types/TypeCart'
 import Image from 'next/image'
 import { useRecoilState } from 'recoil'
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 
 // ----------------------------------------------------
 // 型宣言
@@ -32,7 +32,9 @@ export default function Product({ proinfo }: Props) {
     const [cart] = useRecoilState(cartState)
 
     const quantity = cart.products.find((e, i) => e.id == id)?.quantity
-
+    
+    const ref = useRef<HTMLDivElement>(null)
+    
     return (
         <>
             {/* 商品一覧画面 - 商品(一つ分)の表示 */}
@@ -109,7 +111,7 @@ export default function Product({ proinfo }: Props) {
 
             {/* 商品詳細画面(モーダル) */}
             <Modal open={mordalInfo} onClose={CloseMInfo}>
-                <ShowModalInfo product={proinfo} closeModal={CloseMInfo} />
+                <ShowModalInfo product={proinfo} closeModal={CloseMInfo} ref={ref}/>
             </Modal>
         </>
     )

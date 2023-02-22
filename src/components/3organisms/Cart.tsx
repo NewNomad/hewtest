@@ -6,7 +6,7 @@ import { CartItem } from '../2molecules/CartItem'
 import { ShowModalConfirm } from '../2molecules/ShowModalConfirm'
 import { cartState, totalPriceSelector, useCart } from '../types/TypeCart'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 
 // ====================================
 // カート
@@ -23,6 +23,8 @@ import React, { useState } from 'react'
     const { removeAllCart } = useCart()
 
     const items = [...cart.products].reverse()
+
+    const ref = useRef<HTMLDivElement>(null)
 
     return (
         <Paper>
@@ -73,7 +75,7 @@ import React, { useState } from 'react'
 
             {/* 購入確認画面(モーダル) */}
             <Modal open={mordalConfirm} onClose={CloseMConfirm}>
-                <ShowModalConfirm closeModal={CloseMConfirm} />
+                <ShowModalConfirm closeModal={CloseMConfirm} ref={ref} />
             </Modal>
 
         </Paper>
