@@ -27,7 +27,7 @@ export const ShowModalInfo = React.forwardRef<HTMLDivElement, Props>(
         const arrName = product.name.split(' ')
 
         return (
-            <ShowMordal closeModal={ closeModal } ref={ ref }>
+            <ShowMordal closeModal={closeModal} ref={ref}>
 
                 <Grid container spacing={1} padding={5}>
 
