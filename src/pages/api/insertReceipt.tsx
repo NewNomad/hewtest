@@ -103,8 +103,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
             f_receipt_endusedaytime,
             f_receipt_isreserved,
             f_receipt_temperature,
-            f_receipt_humidity,
-            f_pay_info_id)
+            f_receipt_humidity)
         VALUES(
             ${receiptId},
             ${customerId},
@@ -114,8 +113,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
             now(),
             1,
             ${temperature},
-            ${humidity},
-            ${payInfo}
+            ${humidity}
         );`
 
     // 取引TBL
