@@ -6,7 +6,7 @@ import { CartItem } from '../2molecules/CartItem'
 import { ShowModalConfirm } from '../2molecules/ShowModalConfirm'
 import { cartState, totalPriceSelector, useCart } from '../types/TypeCart'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 
 // ====================================
 // カート

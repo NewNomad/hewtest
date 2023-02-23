@@ -6,13 +6,12 @@ import { ShowModalInfo } from '../2molecules/ShowModalInfo'
 import { TypeProducts } from '../types/TypeProducts'
 import { cartState } from '../types/TypeCart'
 import { useRecoilState } from 'recoil'
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import useSWR from 'swr'
 import { Recommend } from './recommend'
 
 const fetchProduct = "/api/fetchProducts"
 const fetcher = (url: string) => fetch(url).then(response => response.json());
-
 
 export const Products = () => {
 

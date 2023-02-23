@@ -5,7 +5,7 @@ import { TypeProducts } from '../types/TypeProducts'
 import { cartState, TypeCart, useCart } from '../types/TypeCart'
 import Image from 'next/image'
 import { useRecoilState } from 'recoil'
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 
 // ----------------------------------------------------
 // 型宣言

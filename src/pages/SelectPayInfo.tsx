@@ -9,7 +9,7 @@ import { TypePayInfos }         from '../components/types/TypePayInfos'
 import { paymentState }         from '../components/types/TypePayment'
 import { useRouter }            from 'next/router'
 import { useRecoilState }       from 'recoil'
-import React, { useState }      from 'react'
+import React, { useState, useRef } from 'react'
 import useSWR from 'swr'
 
 type Props = { ElProps: any, QrProps: any }
@@ -28,6 +28,8 @@ const fetcher = (url: string) => fetch(url).then(response => response.json());
 // 入金確認画面
 // ===================================================
 export default function SelectPayInfo() {
+
+    const ref = useRef<HTMLDivElement>(null)
 
     // -----------------------------------------------
     // 電子マネー決済選択(モーダル)
@@ -99,12 +101,12 @@ export default function SelectPayInfo() {
 
                 {/* 電子マネー決済選択 */}
                 <Modal open={mordalEl} onClose={CloseMEl} >
-                    <ModalPayType payType='El' nextUrl={ nextUrl } closeModal={ CloseMEl }>{ data }</ModalPayType>
+                    <ModalPayType payType='El' nextUrl={ nextUrl } closeModal={ CloseMEl } ref={ref}>{ data }</ModalPayType>
                 </Modal>
 
                 {/* QRコード決済選択 */}
                 <Modal open={mordalQr} onClose={CloseMQr} >
-                    <ModalPayType payType='QR' nextUrl={ nextUrl } closeModal={ CloseMQr }>{ data }</ModalPayType>
+                    <ModalPayType payType='QR' nextUrl={ nextUrl } closeModal={ CloseMQr } ref={ref}>{ data }</ModalPayType>
                 </Modal>
 
             </Box>
