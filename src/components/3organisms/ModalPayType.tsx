@@ -1,5 +1,5 @@
 import { Container, Grid, Modal, ListItem, ListItemText, Alert } from '@mui/material'
-import { ShowMordal }           from '../1atoms/ShowModal'
+import { ShowModal }            from '../1atoms/ShowModal'
 import { BtnLink }              from '../1atoms/BtnLink'
 import { TextTitle }            from '../1atoms/TextTitle'
 import { TypePayInfos }         from '../types/TypePayInfos'
@@ -8,9 +8,7 @@ import { totalPriceSelector }   from '../types/TypeCart'
 import { useRouter }            from 'next/router'
 import Image                    from 'next/image'
 import { useRecoilState, useRecoilValue }   from 'recoil'
-import React, { useState, useRef } from 'react'
-import { margin } from '@mui/system'
-import { relative } from 'path'
+import React, { useState, ComponentPropsWithoutRef } from 'react'
 
 // -----------------------------------------------------------
 // 型宣言
@@ -20,26 +18,25 @@ type Props = {
     payType: string,
     nextUrl: string,
     closeModal: () => void
-    ref?: React.RefObject<HTMLDivElement>
 }
+
+type refProps = ComponentPropsWithoutRef<'div'> & Props
 
 // ==========================================================
 // 電子マネー決済選択画面/QRコード決済選択画面
 // ==========================================================
-// export const ModalPayType = (props: Props) => {
-export const ModalPayType = React.forwardRef<HTMLDivElement, Props>(
-    function ModalPayType(props: Props){
+export const ModalPayType = React.forwardRef<HTMLDivElement, refProps>(
 
-        const { children, nextUrl, payType, closeModal, ref } = props
+    function ModalPayType( props:Props, ref ){
 
-        const selectRef = useRef<HTMLDivElement>(null)
+        const { children, nextUrl, payType, closeModal } = props
 
         const [mordal, setMordal] = useState<boolean>(false)
-        const Open = () => setMordal(true)                     // 開く
-        const Close = () => setMordal(false)                   // 閉じる
+        const Open = () => setMordal(true)                      // 開く
+        const Close = () => setMordal(false)                    // 閉じる
 
-        const payTypeId: number = payType == "QR" ? 3 : 2   // 決済方法 (2:電子マネー、3:QRコード)
-        const sum = useRecoilValue(totalPriceSelector)      // 合計金額
+        const payTypeId: number = payType == "QR" ? 3 : 2       // 決済方法 (2:電子マネー、3:QRコード)
+        const sum = useRecoilValue(totalPriceSelector)          // 合計金額
 
         // -----------------------------------------------
         // ルーティング
@@ -57,7 +54,7 @@ export const ModalPayType = React.forwardRef<HTMLDivElement, Props>(
         }
 
         return (
-            <ShowMordal closeModal={closeModal} ref={ref}>
+            <ShowModal closeModal={closeModal} ref={ref}>
                 <Container>
 
                     <TextTitle>お支払い方法の選択</TextTitle>
@@ -89,7 +86,7 @@ export const ModalPayType = React.forwardRef<HTMLDivElement, Props>(
                 </Container>
 
                 <Modal open={mordal} onClose={Close} >
-                    <ShowMordal closeModal={Close} ref={selectRef}>
+                    <ShowModal closeModal={Close} ref={ref}>
                         <Container>
                             <TextTitle>お支払方法：{pay.payInfo.name}</TextTitle>
                             <figure style={{ width: '100px', height: '100px', position: 'relative', left:'20%' }}>
@@ -102,10 +99,10 @@ export const ModalPayType = React.forwardRef<HTMLDivElement, Props>(
                             <Alert severity='info' sx={{ marginBottom: '20px' }}>読み取り機にかざしてください</Alert>
                             <BtnLink onClick={ () => router.push(nextUrl) } primary>決定</BtnLink>
                         </Container>
-                    </ShowMordal>
+                    </ShowModal>
                 </Modal>
 
-            </ShowMordal >
+            </ShowModal >
         )
     }
 )

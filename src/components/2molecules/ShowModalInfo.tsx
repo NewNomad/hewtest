@@ -1,33 +1,34 @@
 import { AddShoppingCart, AcUnit, Whatshot, CurrencyYen, LocalOffer, Announcement} from '@mui/icons-material'
-import { Button, Container, Grid, Rating, Typography, Chip, List, ListItem, ListItemText, ListItemIcon } from '@mui/material'
-import { ShowMordal }   from '../1atoms/ShowModal'
+import { Button, Container, Grid, Rating, Typography, Chip, List, ListItem, ListItemText, ListItemIcon, Stack } from '@mui/material'
+import { ShowModal }    from '../1atoms/ShowModal'
 import { useCart }      from '../types/TypeCart'
 import { TypeProducts } from '../types/TypeProducts'
 import Image            from 'next/image'
-import React            from 'react'
+import React, { ComponentPropsWithRef }            from 'react'
 
 // ----------------------------------------------------
 // 型宣言
 // ----------------------------------------------------
 type Props = {
-    product: TypeProducts;
+    product: TypeProducts
     closeModal: () => void
-    ref?: React.RefObject<HTMLDivElement>
 }
+
+type refProps = ComponentPropsWithRef<'div'> & Props
 
 // ===================================================
 // 商品詳細画面
 // ===================================================-
-// export const ShowModalInfo = ({ product, closeModal, ref }: Props) => {
-export const ShowModalInfo = React.forwardRef<HTMLDivElement, Props>(
-    function ShowModalInfo ( { product, closeModal, ref }: Props) {
+export const ShowModalInfo = React.forwardRef<HTMLDivElement, refProps>(
+
+    function ShowModalInfo ( { product, closeModal }, ref ) {
 
         const { addCart } = useCart()
 
         const arrName = product.name.split(' ')
 
         return (
-            <ShowMordal closeModal={closeModal} ref={ref}>
+            <ShowModal closeModal={closeModal} ref={ref} >
 
                 <Grid container spacing={1} padding={5}>
 
@@ -92,19 +93,21 @@ export const ShowModalInfo = React.forwardRef<HTMLDivElement, Props>(
                                 </ListItem>
 
                                 {/* アレルギー表示 */}
-                                <ListItem  alignItems="flex-start">
+                                <ListItem alignItems="flex-start">
                                     <ListItemIcon>
                                         <Announcement />
                                     </ListItemIcon>
-                                    <ListItemText
-                                        primary={"原材料に含まれるアレルギー物質"}
-                                        secondary={
-                                                product.tags.length <= 0?
-                                                    <ListItemText>{ `ありません` }</ListItemText>
-                                                :[...product.allergens].map((allergen, i:number) => (
-                                                    <Chip key={i} sx={{ marginRight: 1 }} label={ allergen } />
-                                                ))
-                                        } />
+                                    <Stack>
+                                        <ListItemText>{ "原材料に含まれるアレルギー物質" }</ListItemText>
+                                        <div>
+                                        {
+                                            product.tags.length <= 0
+                                                ? <Typography variant='body1'>{ `ありません` }</Typography>
+                                                : [...product.allergens].map((allergen, i:number) => ( <Chip key={i} sx={{ marginRight: 1 }} label={ allergen } />))
+                                        }
+                                        </div>
+                                    </Stack>
+                                    
                                 </ListItem>
 
                                 {/* <ListItem>
@@ -152,7 +155,7 @@ export const ShowModalInfo = React.forwardRef<HTMLDivElement, Props>(
 
                 </Grid>
 
-            </ShowMordal>
+            </ShowModal>
         )
     }
 )

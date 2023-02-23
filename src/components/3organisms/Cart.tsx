@@ -24,8 +24,6 @@ import React, { useState, useRef } from 'react'
 
     const items = [...cart.products].reverse()
 
-    const ref = useRef<HTMLDivElement>(null)
-
     return (
         <Paper>
 
@@ -75,7 +73,7 @@ import React, { useState, useRef } from 'react'
 
             {/* 購入確認画面(モーダル) */}
             <Modal open={mordalConfirm} onClose={CloseMConfirm}>
-                <ShowModalConfirm closeModal={CloseMConfirm} ref={ref} />
+                <ShowModalConfirm closeModal={CloseMConfirm} />
             </Modal>
 
         </Paper>

@@ -1,20 +1,25 @@
 import { Box, Button, Container, Divider, Grid, Paper, Typography } from '@mui/material'
-import { ShowMordal } from '../1atoms/ShowModal'
+import { ShowModal } from '../1atoms/ShowModal'
 import { ModalConfirmProduct } from '../1atoms/ModalConfirmProduct'
 import { cartState, totalPriceSelector } from '../types/TypeCart'
 import { useRecoilValue } from 'recoil'
 import Link from 'next/link'
-import React from 'react'
+import React, { ComponentPropsWithRef } from 'react'
 
-
+// ----------------------------------------------------
+// 型宣言
+// ----------------------------------------------------
 type Props = {
     closeModal: () => void
-    ref?: React.RefObject<HTMLDivElement>
 }
+type refProps = ComponentPropsWithRef<'div'> & Props
 
-// export const ShowModalConfirm = ({ closeModal, ref }: Props) => {
-export const ShowModalConfirm = React.forwardRef<HTMLDivElement, Props>(
-    function ShowModalConfirm ({ closeModal, ref }: Props) {
+// ==================================================
+// 購入確認モーダル
+// ==================================================
+export const ShowModalConfirm = React.forwardRef<HTMLDivElement, refProps>(
+
+    function ShowModalConfirm ( { closeModal }, ref ) {
 
         const cart = useRecoilValue(cartState)
         const total = useRecoilValue(totalPriceSelector)
@@ -23,7 +28,7 @@ export const ShowModalConfirm = React.forwardRef<HTMLDivElement, Props>(
         }, 0)
 
         return (
-            <ShowMordal closeModal={closeModal} ref={ref}>
+            <ShowModal closeModal={closeModal} ref={ref}>
                 <Box height={520} width={720} sx={{
                     position: "flex",
                     overflow: "scroll",
@@ -65,7 +70,7 @@ export const ShowModalConfirm = React.forwardRef<HTMLDivElement, Props>(
 
                 </Container>
 
-            </ShowMordal>
+            </ShowModal>
         )
     }
 )

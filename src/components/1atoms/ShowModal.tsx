@@ -1,23 +1,27 @@
 import { Close }                from '@mui/icons-material'
 import { IconButton, Paper }    from '@mui/material'
-import React from 'react'
+import React, { ComponentPropsWithoutRef } from 'react'
 
+// ----------------------------------------------------
+// 型宣言
+// ----------------------------------------------------
 type Props = {
     children: React.ReactNode
     closeModal: () => void
-    ref?: React.RefObject<HTMLDivElement>
 }
-// const ref = React.createRef<HTMLDivElement>();
+
+type refProps = ComponentPropsWithoutRef<'div'> & Props
 
 // ==================================================
 // モーダルのウィンドウ設定
 // ==================================================
-// export function ShowMordal( { children, closeModal , ref }: Props ): React.ReactElement {
-export const ShowMordal = React.forwardRef<HTMLDivElement, Props>(
-    function showModal ( { children, closeModal , ref }: Props ) {
+export const ShowModal = React.forwardRef<HTMLDivElement, refProps>(
+
+    function showModal ( { children, closeModal }, ref ) {
         return (
             <Paper
-                ref={ ref }
+                ref={ref}
+                tabIndex={0}
                 sx={{
                     position: "absolute",
                     top: "50%",
@@ -44,10 +48,6 @@ export const ShowMordal = React.forwardRef<HTMLDivElement, Props>(
             </Paper>  
         )
     }
+
 )
 
-// export const ShowMordal = React.forwardRef<HTMLDivElement, Props>(
-//     function showModal ( { children, closeModal , ref }: Props ) {
-//         return ( <ShowModalBase closeMordal={closeModal} ref={ref}>{ children }</ShowMordalBase> )
-//     }
-// );
