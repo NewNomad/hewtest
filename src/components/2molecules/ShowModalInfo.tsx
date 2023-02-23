@@ -44,22 +44,32 @@ export const ShowModalInfo = React.forwardRef<HTMLDivElement, refProps>(
 
                     <Grid item xs={8}>
 
-                    {/* 商品詳細情報 */}
-                    <Container sx={{height: 430, marginTop: 10}}> 
-                        <List>
-                            {/* 商品名 */}
-                            <ListItem>
-                                <ListItemIcon>
-                                    { product.isice == 1 ? <AcUnit color="info" /> : <Whatshot color='primary'/>}
-                                </ListItemIcon>
-                                <ListItemText>
-                                        {
-                                            [...arrName].map(( proName, i:number) => (
-                                                <Typography variant='h4' sx={{display: 'inline-block', whiteSpace: 'nowrap', marginRight: 1,fontWeight:"bold"}} key={i}>{ proName }</Typography>
-                                            ))
-                                        }
-                                </ListItemText>
-                            </ListItem>
+                        {/* 商品詳細情報 */}
+                        <Container sx={{height: 430, marginTop: 10}}> 
+                            <List>
+                                {/* 商品名 */}
+                                <ListItem>
+                                    <ListItemIcon>
+                                        { product.isice == 1 ? <AcUnit color="info" /> : <Whatshot color='primary'/>}
+                                    </ListItemIcon>
+                                    <ListItemText>
+                                            {
+                                                [...arrName].map(( proName, i:number) => (
+                                                    <Typography variant='h4' sx={{display: 'inline-block', whiteSpace: 'nowrap', marginRight: 1,fontWeight:"bold"}} key={i}>{ proName }</Typography>
+                                                ))
+                                            }
+                                    </ListItemText>
+                                </ListItem>
+
+                                {/* 商品金額 */}
+                                <ListItem sx={{borderBottom: 1, marginBottom: 5}}>
+                                    <ListItemIcon>
+                                        <CurrencyYen />
+                                    </ListItemIcon>
+                                    <ListItemText>
+                                        <Typography variant='h3'>{ product.price }円</Typography>
+                                    </ListItemText>
+                                </ListItem>
 
                                 {/* タグ */}
                                 <ListItem>
