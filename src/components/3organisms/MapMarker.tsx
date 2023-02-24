@@ -8,7 +8,7 @@ interface MapMarkerProps {
 
 export const MapMarker: React.FC<MapMarkerProps> = ({ text }) => {
     return (
-        <Box sx={{ position: 'absolute', width: 50, height: 50, color: 'white', background: 'red', textAlign: 'center', }}>
+        <Box sx={{ position: 'absolute', width: 50, height: 50, color: 'white', background: 'red', textAlign: 'center',borderRadius:50, }}>
             {text}
         </Box>
     );
