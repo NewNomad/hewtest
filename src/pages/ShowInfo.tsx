@@ -7,6 +7,7 @@ import { Footer } from '../components/2molecules/Footer'
 import axios from 'axios';
 import useSWR from "swr";
 import { MapMarker } from "../components/3organisms/MapMarker";
+import { AccountBalance, LocalCafe, Restaurant } from "@mui/icons-material";
 
 const fetcher = (url: string) => fetch(url).then(response => response.json());
 
@@ -14,15 +15,6 @@ const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?locati
 
 interface Props {
     onMap: boolean;
-
-}interface Result {
-    geometry: {
-        location: {
-            lat: number;
-            lng: number;
-        }
-    };
-    name: string;
 }
 
 const ShowInfo: React.FC<Props> = ({ onMap }) => {
@@ -39,24 +31,40 @@ const ShowInfo: React.FC<Props> = ({ onMap }) => {
     const [center, setCenter] = useState(defaultProps.center);
     const [zoom, setZoom] = useState(defaultProps.zoom);
 
-    const [data, setData] = useState<Result[]>([]); // 配列であることを示すため、型アノテーションを追加
+    const [data, setData] = useState<any[]>([]); // 配列であることを示すため、型アノテーションを追加
 
-    const handleClick = async () => {
-        const location = '-33.8670522,151.1957362';
+    const typeRestaurant = async () => {
+        const location = '35.1709,136.8815';
         const radius = '1500';
-        const type = 'restaurant';
+        let type = 'restaurant';
 
         const response = await fetch(`/api/places?location=${location}&radius=${radius}&type=${type}`);
         const data = await response.json();
         setData(data.results); // resultsのみを取り出すように修正
         console.log(data);
 
-        // console.log(data.geometry.location.lat)
-        // console.log(data.geometry.location.lng)
-        //                   ↑
-        // Uncaught (in promise) TypeError: 
-        // Cannot read properties of undefined
-        //  (reading 'location')　というエラーが出た
+    };
+    const typeCafe = async () => {
+        const location = '35.1709,136.8815';
+        const radius = '1500';
+        let type = 'cafe';
+
+        const response = await fetch(`/api/places?location=${location}&radius=${radius}&type=${type}`);
+        const data = await response.json();
+        setData(data.results); // resultsのみを取り出すように修正
+        console.log(data);
+
+    };
+    const typeBank = async () => {
+        const location = '35.1709,136.8815';
+        const radius = '1500';
+        let type = 'bank';
+
+        const response = await fetch(`/api/places?location=${location}&radius=${radius}&type=${type}`);
+        const data = await response.json();
+        setData(data.results); // resultsのみを取り出すように修正
+        console.log(data);
+
     };
 
     return (
@@ -65,32 +73,37 @@ const ShowInfo: React.FC<Props> = ({ onMap }) => {
 
             <Box sx={{ flexGrow: 1 }}>
                 <Header onMap={onMap} />
-
-                <Box sx={{ pt: 8 }}>
-                    <Box sx={{ width: '100%', height: 800, backgroundColor: 'primary.main', opacity: 1 }}>
-                        <div style={{ height: '100vh', width: '100%' }}>
-                            {data && (
-                                <GoogleMapReact
-                                    bootstrapURLKeys={{ key: process.env.NEAR_API! }}
-                                    center={center}
-                                    zoom={zoom}
-                                >
-                                    {data.map((item, index) => (
-                                        <MapMarker
-                                            key={index}
-                                            lat={item.geometry.location.lat}
-                                            lng={item.geometry.location.lng}
-                                            text={item.name}
-                                        />
-                                    ))}
-                                </GoogleMapReact>
-                            )}
-                        </div>
-                    </Box>
+                <Box sx={{height:16,pt: 10, backgroundColor: '000',position:'sticky',}}>
+                    <Button onClick={typeRestaurant}><Restaurant /></Button>
+                    <Button onClick={typeCafe}><LocalCafe /></Button>
+                    <Button onClick={typeBank}><AccountBalance /></Button>
                 </Box>
 
                 <Box sx={{ pt: 8 }}>
-                    <Button onClick={handleClick}>レストランを検索</Button>
+                    <Box sx={{ width: '100%', height: 800, backgroundColor: 'primary.main', opacity: 1 }}>
+                        <div style={{ height: '100%', width: '100%' }}>
+                            <GoogleMapReact
+                                bootstrapURLKeys={{ key: process.env.MAP_API! }}
+                                center={center}
+                                zoom={zoom}
+                            >
+
+                                {data.map((item, index) => {
+                                    console.log(item.geometry.location.lat);
+                                    console.log(item.geometry.location.lng);
+
+                                    return (<MapMarker
+                                        key={index}
+                                        lat={item.geometry.location.lat}
+                                        lng={item.geometry.location.lng}
+                                        text={item.name}
+                                    />
+                                    )
+                                })}
+                            </GoogleMapReact>
+                        </div>
+
+                    </Box>
                 </Box>
             </Box>
 
