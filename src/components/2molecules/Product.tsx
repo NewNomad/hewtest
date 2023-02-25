@@ -41,8 +41,9 @@ export default function Product({ proinfo }: Props) {
             <div style={{ position: "relative" }}>
                 <motion.div
                     whileHover={{ scale: 1.3 }}
-                    whileTap={{ scale: 0.9 }}
-                    whileDrag={{ scale: 0.3 }}
+                    whileTap={{ scale: 0.8 }}
+                    whileDrag={{ scale: 0.5 }}
+
                     dragElastic={0.5}
                     drag
                     dragSnapToOrigin
