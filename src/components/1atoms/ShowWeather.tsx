@@ -26,7 +26,6 @@ function iconWeather(value:string, key:number){
 
 // 情報の取得
 // const fetcher = (url: string) => fetch(url).then(response => response.json());
-function compDigit(value:number, digit:number){ return ("00"+ value).slice( digit * -1 ) }
 
 // ===================================================
 // 天気表示
@@ -36,18 +35,12 @@ export const ShowWeather = () => {
     const [marketingData, setMarketingData] = useRecoilState(marketingDataState)
 
     useEffect(() => {
-        
-        const date      = new Date()
-        const year      = date.getFullYear().toString()
-        const month     = compDigit((date.getMonth() + 1), 2).toString()
-        const day       = compDigit(date.getDate(), 2).toString()
-        const hour      = compDigit(date.getHours() , 2).toString()
-        const min       = compDigit(date.getMinutes(), 2).toString()
-        const sec       = compDigit(date.getSeconds(), 2).toString()
-        const startTime = year + "-" + month + "-" + day + " " + hour + ":" + min + ":" + sec
-
-        setMarketingData({ customerId: 1, temperature: parseInt(Weather.temperature), humidity: parseInt(Weather.humidity), getDataDt: startTime } );
-        console.log("【取得】天気/気温/湿度")
+        setMarketingData({
+            customerId: marketingData.customerId,
+            temperature: Weather.temperature,
+            humidity: Weather.humidity,
+            getDataDt: marketingData.getDataDt } );
+        console.log(`【取得】気温/湿度:${Weather.temperature}/${Weather.humidity}`)
     },[])
 
     return <Stack spacing={0}>

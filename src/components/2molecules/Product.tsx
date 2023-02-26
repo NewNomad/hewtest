@@ -49,28 +49,30 @@ export default function Product({ proinfo }: Props) {
                 {/* 画像部 */}
                 {/* TODO: [hoverアクション] 選択してるかどうか分からない。画像の透明度を下げるとか色を追加するとか追加する */}
                 <Tooltip title="この商品の詳細を見る" arrow>
-                    <Button
-                        onClick={OpenMInfo}
-                        disabled={!isActive}
-                        sx={{
-                            width: 1,
-                            borderBottomLeftRadius: 0,
-                            borderBottomRightRadius: 0,
-                        }}>
-                        <Badge badgeContent={quantity} color="primary" max={9} sx={{
-                            position: "relative",
-                            top: -65,
-                            right: -75
-                        }} />
-                        <Image
-                            src={"/" + imageURL}
-                            height={180}
-                            width={100}
-                            objectFit="contain"
-                            style={!isActive ? { filter: "grayscale(100%)" } : {}}
-                            alt="" />
+                    <span style={!isActive ? { pointerEvents: "none" } : {}}>
+                        <Button
+                            onClick={OpenMInfo}
+                            disabled={!isActive}
+                            sx={{
+                                width: 1,
+                                borderBottomLeftRadius: 0,
+                                borderBottomRightRadius: 0,
+                            }}>
+                            <Badge badgeContent={quantity} color="primary" max={9} sx={{
+                                position: "relative",
+                                top: -65,
+                                right: -75
+                            }} />
+                            <Image
+                                src={"/" + imageURL}
+                                height={180}
+                                width={100}
+                                objectFit="contain"
+                                style={!isActive ? { filter: "grayscale(100%)" } : {}}
+                                alt="" />
 
-                    </Button>
+                        </Button>
+                    </span>
                 </Tooltip>
 
                 <Divider />
@@ -78,31 +80,31 @@ export default function Product({ proinfo }: Props) {
                 {/* 値段部 */}
                 {/* TODO: [hoverアクション] 選択してるかどうか分からない。画像部まで含めて変化 もしくｈｓ */}
                 <Tooltip title="この商品をカートに追加する" arrow>
-
-                    <Button
-                        color='inherit'
-                        variant="contained"
-                        size='small'
-                        disableElevation
-                        onClick={() => addCart(proinfo)}
-                        disabled={!isActive}
-                        startIcon={
-                            isice == 1
-                                ? <AcUnit color={isActive ? "info" : "secondary"} />
-                                : <Whatshot color={isActive ? 'primary' : "secondary"} />
-                        }
-                        // <Button color='secondary' variant="contained" size='small' disableElevation
-                        sx={{
-                            // borderRadius: 10,
-                            // marginBottom:0.5
-                            width: 1,
-                            borderStartEndRadius: 0,
-                            borderStartStartRadius: 0,
-                            fontSize: 18
-                        }}>
-                        {price}
-                    </Button>
-
+                    <span style={!isActive ? { pointerEvents: "none" } : {}}>
+                        <Button
+                            color='inherit'
+                            variant="contained"
+                            size='small'
+                            disableElevation
+                            onClick={() => addCart(proinfo)}
+                            disabled={!isActive}
+                            startIcon={
+                                isice == 1
+                                    ? <AcUnit color={isActive ? "info" : "secondary"} />
+                                    : <Whatshot color={isActive ? 'primary' : "secondary"} />
+                            }
+                            // <Button color='secondary' variant="contained" size='small' disableElevation
+                            sx={{
+                                // borderRadius: 10,
+                                // marginBottom:0.5
+                                width: 1,
+                                borderStartEndRadius: 0,
+                                borderStartStartRadius: 0,
+                                fontSize: 18
+                            }}>
+                            {price}
+                        </Button>
+                    </span>
                 </Tooltip>
 
             </Paper>

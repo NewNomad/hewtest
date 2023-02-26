@@ -17,7 +17,7 @@ interface Props {
     onMap: boolean;
 }
 
-const ShowInfo: React.FC<Props> = ({ onMap }) => {
+const ShowInfo: React.FC<Props> = () => {
 
     const defaultProps = {
         center: {               //初期位置
@@ -72,7 +72,7 @@ const ShowInfo: React.FC<Props> = ({ onMap }) => {
             <HeadInfo title='mopacal | 地図' />
 
             <Box sx={{ flexGrow: 1 }}>
-                <Header onMap={onMap} />
+                <Header onMap />
                 <Box sx={{height:16,pt: 10, backgroundColor: '000',position:'sticky',}}>
                     <Button onClick={typeRestaurant}><Restaurant /></Button>
                     <Button onClick={typeCafe}><LocalCafe /></Button>

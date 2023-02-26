@@ -4,7 +4,7 @@ import { TypeMarketingData }    from '../../components/types/TypeMarketingData'
 import mysql, { Transaction }   from "serverless-mysql"
 // import { log }               from 'console';
 
-function compDigit(value:number, digit:number){ return ("00"+ value).slice( digit * -1 ) }
+function compDigit(value:number, digit:number){ return ("000"+ value).slice( digit * -1 ) }
 
 // ----------------------------------------------------
 // DB接続
@@ -50,8 +50,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
         FROM
             t_receipts
         WHERE
-            f_receipt_id LIKE \"${buyDate}%\";`)                // 領収ID(XXX)
-    const receiptId     = buyDate + compDigit(buyId[0].cnt, 3)  // 領収ID(YYmmddXXX)
+            f_receipt_id LIKE \"0${buyDate}%\";`)               // 領収ID(XXX)
+    const receiptId     = buyDate + compDigit(buyId[0].cnt, 4)  // 領収ID(YYmmddXXX)
 
     const customerId    = marketing.customerId                  // 顧客ID
     const payment       = req.body.payment as string            // 領収入金金額
@@ -99,21 +99,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
             f_customer_id,
             f_receipt_payment,
             f_receipt_buy_time,
+            f_receipt_temperature,
+            f_receipt_humidity,
+            f_pay_info_id,
             f_receipt_startusedaytime,
             f_receipt_endusedaytime,
-            f_receipt_isreserved,
-            f_receipt_temperature,
-            f_receipt_humidity)
+            f_receipt_isreserved)
         VALUES(
             ${receiptId},
             ${customerId},
             ${payment},
             \"${buyTime}\",
+            \"${temperature}\",
+            ${humidity},
+            ${payInfo},
             \"${startTime}\",
             now(),
-            1,
-            ${temperature},
-            ${humidity}
+            0
         );`
 
     // 取引TBL

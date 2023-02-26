@@ -29,8 +29,6 @@ const fetcher = (url: string) => fetch(url).then(response => response.json());
 // ===================================================
 export default function SelectPayInfo() {
 
-    const ref = useRef<HTMLDivElement>(null)
-
     // -----------------------------------------------
     // 電子マネー決済選択(モーダル)
     // -----------------------------------------------
@@ -101,12 +99,12 @@ export default function SelectPayInfo() {
 
                 {/* 電子マネー決済選択 */}
                 <Modal open={mordalEl} onClose={CloseMEl} >
-                    <ModalPayType payType='El' nextUrl={ nextUrl } closeModal={ CloseMEl } ref={ref}>{ data }</ModalPayType>
+                    <ModalPayType payType='El' nextUrl={ nextUrl } closeModal={ CloseMEl } paytypeInfo={ data } />
                 </Modal>
 
                 {/* QRコード決済選択 */}
                 <Modal open={mordalQr} onClose={CloseMQr} >
-                    <ModalPayType payType='QR' nextUrl={ nextUrl } closeModal={ CloseMQr } ref={ref}>{ data }</ModalPayType>
+                    <ModalPayType payType='QR' nextUrl={ nextUrl } closeModal={ CloseMQr } paytypeInfo={ data } />
                 </Modal>
 
             </Box>

@@ -14,7 +14,7 @@ import React, { useState, ComponentPropsWithoutRef } from 'react'
 // 型宣言
 // -----------------------------------------------------------
 type Props = {
-    children: TypePayInfos[],
+    paytypeInfo: TypePayInfos[],
     payType: string,
     nextUrl: string,
     closeModal: () => void
@@ -27,9 +27,9 @@ type refProps = ComponentPropsWithoutRef<'div'> & Props
 // ==========================================================
 export const ModalPayType = React.forwardRef<HTMLDivElement, refProps>(
 
-    function ModalPayType( props:Props, ref ){
+    function ModalPayType( props:Props , ref ){
 
-        const { children, nextUrl, payType, closeModal } = props
+        const { paytypeInfo, nextUrl, payType, closeModal } = props
 
         const [mordal, setMordal] = useState<boolean>(false)
         const Open = () => setMordal(true)                      // 開く
@@ -61,7 +61,7 @@ export const ModalPayType = React.forwardRef<HTMLDivElement, refProps>(
 
                     <Grid container textAlign="center" spacing={1} height={500} width={1000} paddingTop={3}>
                         {
-                            [...children].map((e, i) => (
+                            [...paytypeInfo].map((e, i) => (
                                 e.type == payTypeId &&
                                 (<Grid key={i} item xs={4}>
                                     <BtnLink onClick={ () => getPayInfoId(e) } primary>

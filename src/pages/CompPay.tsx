@@ -60,7 +60,7 @@ export default function CheckPay() {
         // 初期化
         setCart({ products: [] })
         setPaymant({ payment: 0, payInfo: { id: 0, name: "", type: 0, image: "" } })
-        setMarketingData({ customerId: 1, temperature: 0, humidity: 0, getDataDt: "" })
+        setMarketingData({ customerId: 1, temperature: "", humidity: "", getDataDt: "" })
 
         insertReceipt(cart, payment, marketingData)
     }, [])

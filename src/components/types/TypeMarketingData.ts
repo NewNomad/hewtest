@@ -7,8 +7,8 @@ import { recoilPersist }        from "recoil-persist"
 // 型宣言
 export type TypeMarketingData = {
     customerId: number,         // 顧客ID
-    temperature: number,        // 温度
-    humidity: number,           // 湿度
+    temperature: string,        // 温度
+    humidity: string,           // 湿度
     getDataDt: string,          // 操作開始時間
 }
 
@@ -20,8 +20,8 @@ const { persistAtom } = recoilPersist({
 // デフォルト値
 const initialState: TypeMarketingData = {
     customerId: 1,              // 顧客ID(ゲストユーザー)
-    temperature: 0,             // 温度
-    humidity: 0,                // 湿度
+    temperature: "0.0",         // 温度
+    humidity: "0",              // 湿度
     getDataDt: "",              // 操作開始時間
 }
 
