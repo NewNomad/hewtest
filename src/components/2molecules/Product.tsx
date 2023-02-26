@@ -38,89 +38,93 @@ export default function Product({ proinfo }: Props) {
 
     return (
         <>
-            <div style={{ position: "relative" }}>
-                <motion.div
-                    whileHover={{ scale: 1.3 }}
-                    whileTap={{ scale: 0.8 }}
-                    whileDrag={{ scale: 0.5 }}
+            {/* <div style={{ position: "relative" }}> */}
+            <motion.div
+                style={{
+                    position: "relative"
+                }}
+                initial={{ zIndex: 1 }}
+                whileHover={{ scale: 1.2, zIndex: 999 }}
+                whileTap={{ scale: 0.8 }}
+                whileDrag={{ scale: 0.5, zIndex: 1000 }}
+                onTap={OpenMInfo}
+                // dragElastic={0.1}
+                drag
+                dragSnapToOrigin
+            >
+                {/* 商品一覧画面 - 商品(一つ分)の表示 */}
+                <Paper elevation={3} variant="elevation" key={0}
+                    sx={{
+                        backgroundColor: "#fff",
+                        // border: `2px solid #ccc `,
+                        borderColor: `secondary.main`,
+                        textAlign: "center",
+                        // opacity: 0.8
+                    }}>
 
-                    dragElastic={0.5}
-                    drag
-                    dragSnapToOrigin
-                >
-                    {/* 商品一覧画面 - 商品(一つ分)の表示 */}
-                    <Paper elevation={3} variant="elevation" key={0}
+                    {/* 画像部 */}
+                    {/* TODO: [hoverアクション] 選択してるかどうか分からない。画像の透明度を下げるとか色を追加するとか追加する */}
+                    {/* <Tooltip title="この商品の詳細を見る" arrow> */}
+                    <Button
+                        // onClick={OpenMInfo}
+                        disabled={!isActive}
                         sx={{
-                            backgroundColor: "#fff",
-                            // border: `2px solid #ccc `,
-                            borderColor: `secondary.main`,
-                            textAlign: "center",
-                            opacity: 0.8
-
+                            width: 1,
+                            borderBottomLeftRadius: 0,
+                            borderBottomRightRadius: 0,
                         }}>
+                        <Badge badgeContent={quantity} color="primary" max={9} sx={{
+                            position: "relative",
+                            top: -65,
+                            right: -75
+                        }} />
+                        <Image
+                            src={"/" + imageURL}
+                            height={180}
+                            width={100}
+                            objectFit="contain"
+                            style={!isActive ? { filter: "grayscale(100%)" } : {}}
+                            draggable={false}
+                            alt="" />
+                    </Button>
+                    {/* </Tooltip> */}
 
-                        {/* 画像部 */}
-                        {/* TODO: [hoverアクション] 選択してるかどうか分からない。画像の透明度を下げるとか色を追加するとか追加する */}
-                        {/* <Tooltip title="この商品の詳細を見る" arrow> */}
-                        <Button
-                            onClick={OpenMInfo}
-                            disabled={!isActive}
-                            sx={{
-                                width: 1,
-                                borderBottomLeftRadius: 0,
-                                borderBottomRightRadius: 0,
-                            }}>
-                            <Badge badgeContent={quantity} color="primary" max={9} sx={{
-                                position: "relative",
-                                top: -65,
-                                right: -75
-                            }} />
-                            <Image
-                                src={"/" + imageURL}
-                                height={180}
-                                width={100}
-                                objectFit="contain"
-                                style={!isActive ? { filter: "grayscale(100%)" } : {}}
-                                draggable={false}
-                                alt="" />
+                    {/* <Divider /> */}
 
-                        </Button>
-                        {/* </Tooltip> */}
+                    {/* 値段部 */}
+                    {/* TODO: [hoverアクション] 選択してるかどうか分からない。画像部まで含めて変化 もしくｈｓ */}
+                    {/* <Tooltip title="この商品をカートに追加する" arrow> */}
 
-                        <Divider />
+                    <Button
+                        // color='inherit'
+                        color="secondary"
+                        variant="contained"
+                        size='small'
+                        disableElevation
+                        onClick={() => addCart(proinfo)}
+                        disabled={!isActive}
+                        startIcon={
+                            isice == 1
+                                ? <AcUnit color={isActive ? "info" : "secondary"} />
+                                : <Whatshot color={isActive ? 'primary' : "secondary"} />
+                        }
+                        // <Button color='secondary' variant="contained" size='small' disableElevation
+                        sx={{
+                            // borderRadius: 10,
+                            // marginBottom:0.5
+                            width: 1,
+                            borderStartEndRadius: 0,
+                            borderStartStartRadius: 0,
+                            fontSize: 18,
+                            opacity: 0.8
+                        }}>
+                        {price}
+                    </Button>
 
-                        {/* 値段部 */}
-                        {/* TODO: [hoverアクション] 選択してるかどうか分からない。画像部まで含めて変化 もしくｈｓ */}
-                        {/* <Tooltip title="この商品をカートに追加する" arrow> */}
-
-                        <Button
-                            color='inherit'
-                            variant="contained"
-                            size='small'
-                            disableElevation
-                            onClick={() => addCart(proinfo)}
-                            disabled={!isActive}
-                            startIcon={
-                                isice == 1
-                                    ? <AcUnit color={isActive ? "info" : "secondary"} />
-                                    : <Whatshot color={isActive ? 'primary' : "secondary"} />
-                            }
-                            // <Button color='secondary' variant="contained" size='small' disableElevation
-                            sx={{
-                                // borderRadius: 10,
-                                // marginBottom:0.5
-                                width: 1,
-                                borderStartEndRadius: 0,
-                                borderStartStartRadius: 0,
-                                fontSize: 18
-                            }}>
-                            {price}
-                        </Button>
-
-                        {/* </Tooltip> */}
-                    </Paper>
-                </motion.div>
-            </div>
+                    {/* </Tooltip> */}
+                </Paper>
+            </motion.div>
+            {/* </div> */}
             {/* 商品詳細画面(モーダル) */}
             <Modal open={mordalInfo} onClose={CloseMInfo}>
                 <ShowModalInfo product={proinfo} closeModal={CloseMInfo} />
