@@ -40,7 +40,7 @@ export const ShowWeather = () => {
             temperature: Weather.temperature,
             humidity: Weather.humidity,
             getDataDt: marketingData.getDataDt } );
-        console.log(`【取得】気温/湿度:${Weather.temperature}/${Weather.humidity}`)
+        console.log(`【取得】気温:${Weather.temperature}/湿度:${Weather.humidity}`)
     },[])
 
     return <Stack spacing={0}>

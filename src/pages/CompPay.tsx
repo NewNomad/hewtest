@@ -1,17 +1,17 @@
-import { Box }          from '@mui/material'
-import { Container }    from '@mui/system'
-import { TextTitle }    from '../components/1atoms/TextTitle'
-import { BtnLink }      from '../components/1atoms/BtnLink'
-import { HeadInfo }     from '../components/2molecules/HeadInfo'
-import { Header }       from '../components/2molecules/Header'
+import { Box }                                      from '@mui/material'
+import { Container }                                from '@mui/system'
+import { TextTitle }                                from '../components/1atoms/TextTitle'
+import { BtnLink }                                  from '../components/1atoms/BtnLink'
+import { HeadInfo }                                 from '../components/2molecules/HeadInfo'
+import { Header }                                   from '../components/2molecules/Header'
 import { cartState, TypeCart }                      from '../components/types/TypeCart'
 import { paymentState, TypePayment }                from '../components/types/TypePayment'
 import { TypeMarketingData, marketingDataState }    from '../components/types/TypeMarketingData'
-import { useRouter } from 'next/router'
-import { useRecoilState } from 'recoil'
-import axios from "axios"
-import { useEffect } from 'react'
-import Image from 'next/image'
+import { useRouter }        from 'next/router'
+import { useRecoilState }   from 'recoil'
+import axios                from "axios"
+import { useEffect }        from 'react'
+import Image                from 'next/image'
 
 // DB操作系
 const insertReceiptURL = "/api/insertReceipt"
@@ -46,9 +46,9 @@ export default function CheckPay() {
             payInfo: payInfo.id,
             marketing: marketingData
         }).then((res) => {
-            console.log("success to input receipt");
+            console.log(`【登録成功】`);
         }).catch((e) => {
-            console.log(e);
+            console.log(`【登録失敗】${e}`);
         })
     }
 
@@ -57,12 +57,12 @@ export default function CheckPay() {
     const [marketingData, setMarketingData] = useRecoilState(marketingDataState)
 
     useEffect(() => {
+        insertReceipt(cart, payment, marketingData)
+
         // 初期化
         setCart({ products: [] })
         setPaymant({ payment: 0, payInfo: { id: 0, name: "", type: 0, image: "" } })
         setMarketingData({ customerId: 1, temperature: "", humidity: "", getDataDt: "" })
-
-        insertReceipt(cart, payment, marketingData)
     }, [])
 
     return (

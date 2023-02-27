@@ -48,7 +48,6 @@ const Home: NextPage = () => {
     const [marketingData, setMarketingData] = useRecoilState(marketingDataState)
 
     useEffect(() => {
-        
         const date      = new Date()
         const year      = date.getFullYear().toString()
         const month     = compDigit((date.getMonth() + 1), 2).toString()
@@ -63,7 +62,7 @@ const Home: NextPage = () => {
             temperature: marketingData.temperature, 
             humidity: marketingData.humidity, 
             getDataDt: startTime } );
-        console.log(`【取得】顧客/開始時間:1/${startTime}`)
+        console.log(`【取得】顧客:1/開始時間:${startTime}`)
     },[])
 
     return (

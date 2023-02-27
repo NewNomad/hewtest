@@ -1,35 +1,18 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { TypeProducts }         from '../../components/types/TypeProducts'
-import { TypeMarketingData }    from '../../components/types/TypeMarketingData'
-import mysql, { Transaction }   from "serverless-mysql"
+import { TypeProducts }                         from '../../components/types/TypeProducts'
+import { TypeMarketingData }                    from '../../components/types/TypeMarketingData'
+import { db }                                   from './connectDB'
 // import { log }               from 'console';
 
+// ===================================================
+// 関数
+// ===================================================
+// 数値整形(任意の桁数で0埋め)
 function compDigit(value:number, digit:number){ return ("000"+ value).slice( digit * -1 ) }
 
-// ----------------------------------------------------
-// DB接続
-// ----------------------------------------------------
-const db = mysql({
-    config: {
-        host: process.env.MYSQL_HOST,
-        database: process.env.MYSQL_DATABASE,
-        user: process.env.MYSQL_USER,
-        password: process.env.MYSQL_PASSWORD,
-        port: parseInt(process.env.MYSQL_PORT ?? "3306"),
-    }
-})
-
-exports.query = async (query: any) => {
-    try {
-        const results = await db.query(query)
-        await db.end()
-        return results
-    }
-    catch (error) {
-        return error
-    }
-}
-
+// ===================================================
+// 決済情報登録
+// ===================================================-
 export default async function handler(req: NextApiRequest, res: NextApiResponse,) {
     // ----------------------------------------------------
     // 値の取得
@@ -149,9 +132,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
     console.log(`取引TBL:${sql_transactions}`)
     console.log(`商品TBL:${sql_products}`)
 
-    let result = await db.query(sql_receipts);              // 領収TBLにレコード(1件)追加
-    if(result) result = await db.query(sql_transactions);   // 取引TBLにレコード(複数)追加
-    if(result) result = await db.query(sql_products);       // 商品TBL.在庫個数の更新
+    let result = await db.transaction()
+        .query(sql_receipts)                // 領収TBLにレコード(1件)追加
+        .query(sql_transactions)            // 取引TBLにレコード(複数)追加
+        .query(sql_products)                // 商品TBL.在庫個数の更新
+        .rollback( (e:any) => { return res.status(400).json(result) } )
+        .commit()
 
     // ----------------------------------------------------
     // 処理情報の返却(json)

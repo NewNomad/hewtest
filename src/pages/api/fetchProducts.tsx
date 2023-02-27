@@ -1,9 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-// import type { NextPage } from 'next'
-// import Head              from 'next/head'
-// import Image             from 'next/image'
-// import styles            from '../../styles/Home.module.css'
-import mysql                from "serverless-mysql"
+import { db }                                   from './connectDB'
+// import mysql             from "serverless-mysql"
 // import { log }           from 'console';
 // import { TypeProducts }     from '../../components/types/TypeProducts'
 
@@ -31,29 +28,9 @@ export type TypeTagInfo = {
     tag_name: string;       // タグ名
 }
 
-// ----------------------------------------------------
-// DB接続
-// ----------------------------------------------------
-const db = mysql({
-    config: {
-        host: process.env.MYSQL_HOST,
-        database: process.env.MYSQL_DATABASE,
-        user: process.env.MYSQL_USER,
-        password: process.env.MYSQL_PASSWORD,
-        port: parseInt(process.env.MYSQL_PORT ?? "3306"),
-    }
-})
-
-exports.query = async (query: any) => {
-    try {
-        const results = await db.query(query)
-        await db.end()
-        return results
-    } catch (error) {
-        return error
-    }
-}
-
+// ===================================================
+// 商品情報取得
+// ===================================================-
 export default async function handler( req: NextApiRequest, res: NextApiResponse, ) {
 
     // ----------------------------------------------------
