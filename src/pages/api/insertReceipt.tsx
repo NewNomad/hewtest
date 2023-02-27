@@ -136,7 +136,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
         .query(sql_receipts)                // 領収TBLにレコード(1件)追加
         .query(sql_transactions)            // 取引TBLにレコード(複数)追加
         .query(sql_products)                // 商品TBL.在庫個数の更新
-        .rollback( (e:any) => { return res.status(400).json(result) } )
+        .rollback( (e:any) => { return res.status(400).json(e) } )
         .commit()
 
     // ----------------------------------------------------
