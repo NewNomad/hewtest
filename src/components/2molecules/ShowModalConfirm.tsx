@@ -1,25 +1,35 @@
 import { Box, Button, Container, Divider, Grid, Paper, Typography } from '@mui/material'
-import { ShowMordal } from '../1atoms/ShowModal'
+import { ShowModal } from '../1atoms/ShowModal'
 import { ModalConfirmProduct } from '../1atoms/ModalConfirmProduct'
 import { cartState, totalPriceSelector } from '../types/TypeCart'
 import { useRecoilValue } from 'recoil'
 import Link from 'next/link'
-import React from 'react'
+import React, { ComponentPropsWithRef } from 'react'
 
+// ----------------------------------------------------
+// 型宣言
+// ----------------------------------------------------
 type Props = {
     closeModal: () => void
 }
+type refProps = ComponentPropsWithRef<'div'> & Props
 
-export const ShowModalConfirm = ({ closeModal }: Props) => {
-    const cart = useRecoilValue(cartState)
-    const total = useRecoilValue(totalPriceSelector)
-    const totalProducts: number = cart.products.reduce((result: number, product) => {
-        return result + product.quantity
-    }, 0)
+// ==================================================
+// 購入確認モーダル
+// ==================================================
+export const ShowModalConfirm = React.forwardRef<HTMLDivElement, refProps>(
+
+    function ShowModalConfirm ( { closeModal }, ref ) {
+
+        const cart = useRecoilValue(cartState)
+        const total = useRecoilValue(totalPriceSelector)
+        const totalProducts: number = cart.products.reduce((result: number, product) => {
+            return result + product.quantity
+        }, 0)
 
 
     return (
-        <ShowMordal closeModal={closeModal}>
+        <ShowModal closeModal={closeModal} ref={ref}>
             <Box height={450} width={720} sx={{
                 position: "flex",
                 overflow: "scroll",
@@ -32,8 +42,8 @@ export const ShowModalConfirm = ({ closeModal }: Props) => {
                 ))}
             </Box>
 
-            {/* 仕切り線 */}
-            <Divider />
+                {/* 仕切り線 */}
+                <Divider />
 
             <Container>
                 <Typography textAlign="right" variant='h3' marginTop={4} marginBottom={2}>
@@ -59,8 +69,9 @@ export const ShowModalConfirm = ({ closeModal }: Props) => {
                     </Grid>
                 </Grid>
 
-            </Container>
+                </Container>
 
-        </ShowMordal>
-    )
-}
+            </ShowModal>
+        )
+    }
+)

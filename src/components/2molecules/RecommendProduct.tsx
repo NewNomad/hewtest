@@ -41,7 +41,7 @@ export default function RecommendProduct({ proinfo, rank }: Props) {
         sx={{
             position:"relative",
         }} >
-            <Grid item key={0} spacing={0} padding={0} direction="column" md={
+            <Grid container item key={0} spacing={0} padding={0} direction="column" md={
                 rank == 1 ?
 
                     12

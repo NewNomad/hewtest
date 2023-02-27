@@ -105,7 +105,6 @@ export default function Product({ proinfo }: Props) {
                     {/* </Tooltip> */}
 
                     {/* <Divider /> */}
-
                     {/* 値段部 */}
                     {/* TODO: [hoverアクション] 選択してるかどうか分からない。画像部まで含めて変化 もしくｈｓ */}
                     {/* <Tooltip title="この商品をカートに追加する" arrow> */}
@@ -140,6 +139,7 @@ export default function Product({ proinfo }: Props) {
                 </Paper>
             </motion.div>
             {/* </div> */}
+
             {/* 商品詳細画面(モーダル) */}
             <Modal open={mordalInfo} onClose={CloseMInfo}>
                 <ShowModalInfo product={proinfo} closeModal={CloseMInfo} />
