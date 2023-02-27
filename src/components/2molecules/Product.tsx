@@ -24,11 +24,17 @@ export default function Product({ proinfo }: Props) {
 
     // const TimageURL = imageURL.replace(/(\d{4})\//, "$1/$1")     // DBと名前が違ったので、暫定的におく
     const isActive: boolean = stock > 0                             // 在庫なしは選択できないようにする
-
     // 商品詳細画面(モーダル)の処理
     const [mordalInfo, setmordalInfo] = useState<boolean>(false)
-    const OpenMInfo = () => setmordalInfo(true);                // 商品詳細画面(モーダル)開く
+    const OpenMInfo = () => {
+        !isDragging && setmordalInfo(true);
+    }
+    // 商品詳細画面(モーダル)開く
     const CloseMInfo = () => setmordalInfo(false);               // 商品詳細画面(モーダル)閉じる
+
+    const [isDragging, setisDragging] = useState<boolean>(false)
+
+
 
     const { addCart } = useCart()
 
@@ -47,8 +53,17 @@ export default function Product({ proinfo }: Props) {
                 whileHover={{ scale: 1.2, zIndex: 999 }}
                 whileTap={{ scale: 0.8 }}
                 whileDrag={{ scale: 0.5, zIndex: 1000 }}
+
+                onDragStart={() => setisDragging(true)}
+                onDragEnd={() => setisDragging(false)}
                 onTap={OpenMInfo}
-                // dragElastic={0.1}
+                // dragConstraints={{
+                //     top: 0,
+                //     left: 0,
+                //     right: 0,
+                //     bottom: 0
+                // }}
+                // dragElastic={1}
                 drag
                 dragSnapToOrigin
             >
