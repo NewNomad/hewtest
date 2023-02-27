@@ -73,8 +73,10 @@ const Home: NextPage = () => {
                 <HeadInfo title='mopacal | インデックス' />
                 <ThreeBackground />
                 <Box sx={{ flexGrow: 1 }}>
-                    <Header onMap />
-
+                    <motion.div
+                    >
+                        <Header onMap />
+                    </motion.div>
                     {/* <Container component="main" sx={{ height: "100vh",mt:10}} >1 */}
 
                     <Grid container direction="column" height="100vh" sx={{ pt: 8 }}>{/* 縦並び */}
