@@ -1,5 +1,5 @@
 import { LocalDrink, RecommendOutlined } from '@mui/icons-material'
-import { Button, CircularProgress, Container, Grid, Modal, Paper, Tab, Tabs, Typography } from '@mui/material'
+import { Button, CircularProgress, Container, Grid, Modal, Paper, Tab, Tabs, Typography, colors } from '@mui/material'
 import Product from '../2molecules/Product'
 import { ProductTabs } from '../2molecules/ProductTabs'
 import { ShowModalInfo } from '../2molecules/ShowModalInfo'
@@ -13,12 +13,12 @@ import Webcam from 'react-webcam'
 import * as faceapi from "face-api.js"
 import Weather from '../../pages/api/weather.json'
 import { log } from 'console'
+import { motion } from 'framer-motion'
 
 
 const fetchProduct = "/api/fetchProducts"
 const fetcher = (url: string) => fetch(url).then(response => response.json());
-const { data, error } = useSWR<TypeProducts[]>(fetchProduct, fetcher);
-const [cart] = useRecoilState(cartState)
+
 
 type User = {
     age: number
@@ -29,9 +29,15 @@ const undefinedUser: User = {
     gendar: faceapi.Gender.FEMALE
 }
 
-export const Recommend = () => {
-    const [user, setuser] = useState<User>(undefinedUser)
+type RecommendIds = {
+    f_product_ids: Array<number>
+}
 
+export const Recommend = () => {
+    const [user, setuser] = useState<User>(undefinedUser) // ユーザーの年齢や性別
+    const { data, error } = useSWR<TypeProducts[]>(fetchProduct, fetcher);
+    const [cart] = useRecoilState(cartState)
+    const [recommend, setrecommend] = useState<TypeProducts[]>()
 
     // face-api
     const webcamRef = useRef<Webcam>(null)
@@ -63,9 +69,14 @@ export const Recommend = () => {
         const gender = user.gendar == faceapi.Gender.FEMALE ? 0 : 1
         const temp = 27
         const humidity = 50
-        const result = await (await fetch(`api/pythonAI?age=${age}&gender=${gender}&temp=${temp}&humidity=${humidity}`)).json()
-        console.log(result);
-
+        const result: RecommendIds = await (await fetch(`api/pythonAI?age=${age}&gender=${gender}&temp=${temp}&humidity=${humidity}`)).json()
+        // console.log(result);
+        // おすすめ商品のproduct情報
+        const recommend = data?.filter(product => {
+            return result.f_product_ids.includes(product.id)
+        })
+        // console.log(recommend);
+        setrecommend(recommend)
     }
 
     useEffect(() => {
@@ -83,6 +94,7 @@ export const Recommend = () => {
                 fetchRecommend()
             } else { // 存在しないなら
                 setuser(undefinedUser)
+                setrecommend(undefined)
             }
 
         }, 5000)
@@ -94,13 +106,49 @@ export const Recommend = () => {
 
     return (
         <>
-            <Webcam
-                audio={false}
-                ref={webcamRef}
-            />
-            <Typography>
-                {user?.age + user?.gendar}
-            </Typography>
+            <Paper
+                sx={{
+                    width: 500,
+                    position: "absolute"
+                }}
+                component={motion.div}
+                drag
+                dragSnapToOrigin
+            >
+                <Webcam
+                    style={{
+                        width: "100%",
+                        borderRadius: 4
+                    }}
+                    audio={false}
+                    ref={webcamRef}
+                />
+                <Typography variant="h5" textAlign="center" color={colors.amber[900]} fontWeight="bold">
+                    {"推定年齢:" + user?.age + ", 性別:" + user?.gendar}
+                </Typography>
+            </Paper>
+
+            {recommend &&
+                <Grid container spacing={1}>
+                    <Grid container item direction="row" spacing={1}>
+                        <Grid item>
+                            <Product proinfo={recommend![0]} cart={cart} />
+                        </Grid>
+                        <Grid item>
+                            <Product proinfo={recommend![1]} cart={cart} />
+                        </Grid>
+                    </Grid>
+                    <Grid container item direction="row" spacing={1}>
+                        <Grid item>
+                            <Product proinfo={recommend![0]} cart={cart} />
+                        </Grid>
+                        <Grid item>
+                            <Product proinfo={recommend![1]} cart={cart} />
+                        </Grid>
+                    </Grid>
+                </Grid>
+            }
+
         </>
     )
 }
