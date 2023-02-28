@@ -15,10 +15,17 @@ import * as faceapi from "face-api.js"
 const fetchProduct = "/api/fetchProducts"
 const fetcher = (url: string) => fetch(url).then(response => response.json());
 
+type User = {
+    age: number
+    gendar: faceapi.Gender
+}
 
 export const Recommend = () => {
-    const webcamRef = useRef<Webcam>(null)
+    const [user, setuser] = useState<User>()
 
+
+    // face-api
+    const webcamRef = useRef<Webcam>(null)
     const loadModels = async () => {
         const MODEL_URL = "/weights"
         await Promise.all([
@@ -43,12 +50,26 @@ export const Recommend = () => {
 
     useEffect(() => {
         const timer = setInterval(async () => {
-            const detectionsWithGenderNet = await faceDetectHandler()
-            console.log(detectionsWithGenderNet);
+            const detectionsWithGenderNet = (await faceDetectHandler()) as
+                faceapi.WithAge<faceapi.WithGender<{ detection: faceapi.FaceDetection; }>>[]
+
+            // 存在するなら
+            if (detectionsWithGenderNet?.length > 0) {
+                const user: User = {
+                    age: detectionsWithGenderNet[0]!.age,
+                    gendar: detectionsWithGenderNet[0].gender
+                }
+                setuser(user)
+
+            } else { // 存在しないなら
+                setuser({ age: 0, gendar: faceapi.Gender.FEMALE })
+            }
+
         }, 1000)
         return () => clearInterval(timer)
     }, [])
 
+    console.log(user);
 
 
     return (
