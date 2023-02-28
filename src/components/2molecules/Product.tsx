@@ -73,7 +73,13 @@ export default function Product({ proinfo }: Props) {
                 style={{
                     position: "relative"
                 }}
-                initial={{ zIndex: 1 }}
+                initial={{ zIndex: 1, opacity: 0 }}
+                animate={{
+                    opacity: 1, transition: {
+                        delay: Math.random()
+                    }
+                }}
+                exit={{ opacity: 0 }}
                 whileHover={{ scale: 1.2, zIndex: 999 }}
                 whileTap={{ scale: 0.9 }}
                 whileDrag={{ scale: 1.2, zIndex: 1000 }}

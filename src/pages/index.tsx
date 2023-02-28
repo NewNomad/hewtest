@@ -66,11 +66,11 @@ const Home: NextPage = () => {
 
     return (
         <Box>
+                <ThreeBackground />
             <motion.div
                 {...indexTransition}
             >
                 <HeadInfo title='mopacal | インデックス' />
-                <ThreeBackground />
                 <Box sx={{ flexGrow: 1 }}>
                     <motion.div
                     >

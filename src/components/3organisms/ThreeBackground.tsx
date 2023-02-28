@@ -1,5 +1,7 @@
 import { Canvas, useFrame } from '@react-three/fiber'
 import React, { useRef, useState } from 'react'
+import { useLoader } from "@react-three/fiber"
+import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader"
 
 function Box(props: any) {
     // This reference will give us direct access to the mesh
@@ -24,6 +26,15 @@ function Box(props: any) {
         </mesh>
     )
 }
+
+const Bottle = () => {
+    const ref = useRef()
+    const fbx = useLoader(FBXLoader, "./bottle.fbx")
+    let fbxClone = fbx.clone()
+    return (
+        <primitive object={fbxClone} scale={1} position={[-1.2, 0, 0]} />
+    )
+}
 export const ThreeBackground = () => {
     return (
         <Canvas style={{
@@ -38,7 +49,8 @@ export const ThreeBackground = () => {
             <pointLight position={[-10, -10, -10]} />
             <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
             <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-            <Box position={[-1.2, 0, 0]} />
+            {/* <Box position={[-1.2, 0, 0]} /> */}
+            <Bottle />
         </Canvas>
     )
 }

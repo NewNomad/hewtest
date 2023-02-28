@@ -24,7 +24,6 @@ const Cart = () => {
     const { removeAllCart } = useCart()
 
     const items = [...cart.products].reverse()
-
     return (
         <Paper
             component={motion.div}
@@ -35,7 +34,7 @@ const Cart = () => {
                     exit: { y: -1000, opacity: 0.5 },
                 }
             }
-            whileHover={{ scale: 1.01 }}
+            whileHover={{ scale: 1. }}
             id='cart'
         >
             <Container sx={{ padding: 2 }}>
@@ -56,9 +55,12 @@ const Cart = () => {
                 >{items.map((product) => (
                     <Box key={product.id}>
                         <ListItem>
-                            <CartItem product={product} />
+                            <motion.div
+               
+                            >
+                                <CartItem product={product} />
+                            </motion.div>
                         </ListItem>
-
                         <Divider />
 
                     </Box>

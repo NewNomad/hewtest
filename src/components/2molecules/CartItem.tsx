@@ -20,12 +20,7 @@ export const CartItem = ({ product }: Props) => {
 
     return (
         <Grid container padding={3} spacing={0} alignItems="center"
-            component={motion.div}
-            variants={{
-                initial: { y: -1000, opacity: 0.5 },
-                animate: { y: 0, opacity: 1 },
-                exit: { y: -1000, opacity: 0.5 },
-            }}
+    
         >
             <Grid item xs={4}>
                 <Paper sx={{
