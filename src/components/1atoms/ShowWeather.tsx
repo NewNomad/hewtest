@@ -48,6 +48,7 @@ export const ShowWeather = () => {
                     {
                         [...Weather.weather .split("　")].map( (e, i) => iconWeather(e, i))
                     }
+                    { Weather.weather }
                 </Typography> 
                 <Stack direction="row" spacing={2}>
                     <Typography><DeviceThermostat />気温:{ Weather.temperature }℃</Typography>
