@@ -33,84 +33,13 @@ const ShowInfo: React.FC<Props> = () => {
 
     const [data, setData] = useState<any[]>([]); // 配列であることを示すため、型アノテーションを追加
 
-    const typeRestaurant = async () => {
+    const fetchData = async (type: string) => {
         const location = '35.1709,136.8815';
         const radius = '1500';
-        let type = 'restaurant';
 
         const response = await fetch(`/api/places?location=${location}&radius=${radius}&type=${type}`);
         const data = await response.json();
-        setData(data.results); // resultsのみを取り出すように修正
-        console.log(data);
-    };
-    const typeCafe = async () => {
-        const location = '35.1709,136.8815';
-        const radius = '1500';
-        let type = 'cafe';
-
-        const response = await fetch(`/api/places?location=${location}&radius=${radius}&type=${type}`);
-        const data = await response.json();
-        setData(data.results); // resultsのみを取り出すように修正
-        console.log(data);
-    };
-    const typeBank = async () => {
-        const location = '35.1709,136.8815';
-        const radius = '1500';
-        let type = 'bank';
-
-        const response = await fetch(`/api/places?location=${location}&radius=${radius}&type=${type}`);
-        const data = await response.json();
-        setData(data.results); // resultsのみを取り出すように修正
-        console.log(data);
-    };
-    const typePark = async () => {
-        const location = '35.1709,136.8815';
-        const radius = '1500';
-        let type = 'park';
-
-        const response = await fetch(`/api/places?location=${location}&radius=${radius}&type=${type}`);
-        const data = await response.json();
-        setData(data.results); // resultsのみを取り出すように修正
-        console.log(data);
-    };
-    const typePolice = async () => {
-        const location = '35.1709,136.8815';
-        const radius = '1500';
-        let type = 'police';
-
-        const response = await fetch(`/api/places?location=${location}&radius=${radius}&type=${type}`);
-        const data = await response.json();
-        setData(data.results); // resultsのみを取り出すように修正
-        console.log(data);
-    };
-    const typePost = async () => {
-        const location = '35.1709,136.8815';
-        const radius = '1500';
-        let type = 'post_office';
-
-        const response = await fetch(`/api/places?location=${location}&radius=${radius}&type=${type}`);
-        const data = await response.json();
-        setData(data.results); // resultsのみを取り出すように修正
-        console.log(data);
-    };
-    const typeParking = async () => {
-        const location = '35.1709,136.8815';
-        const radius = '1500';
-        let type = 'parking';
-
-        const response = await fetch(`/api/places?location=${location}&radius=${radius}&type=${type}`);
-        const data = await response.json();
-        setData(data.results); // resultsのみを取り出すように修正
-        console.log(data);
-    };
-    const typeDoctor = async () => {
-        const location = '35.1709,136.8815';
-        const radius = '1500';
-        let type = 'doctor';
-
-        const response = await fetch(`/api/places?location=${location}&radius=${radius}&type=${type}`);
-        const data = await response.json();
-        setData(data.results); // resultsのみを取り出すように修正
+        setData(data.results);
         console.log(data);
     };
 
@@ -120,15 +49,15 @@ const ShowInfo: React.FC<Props> = () => {
 
             <Box sx={{ flexGrow: 1 }}>
                 <Header onMap />
-                <Box sx={{height:16,pt: 10, backgroundColor: '000',position:'sticky',}}>
-                    <Button onClick={typeRestaurant}><Restaurant /></Button>
-                    <Button onClick={typeCafe}><LocalCafe /></Button>
-                    <Button onClick={typeBank}><AccountBalance /></Button>
-                    <Button onClick={typePark}><Park /></Button>
-                    <Button onClick={typePolice}><LocalPolice /></Button>
-                    <Button onClick={typePost}><LocalPostOffice /></Button>
-                    <Button onClick={typeParking}><LocalParking /></Button>
-                    <Button onClick={typeDoctor}><LocalHospital /></Button>
+                <Box sx={{ height: 16, pt: 10, backgroundColor: '000', position: 'sticky', }}>
+                    <Button onClick={() => fetchData('restaurant')}><Tooltip title="レストラン" style={{ fontSize: 40 }}><Restaurant /></Tooltip></Button>
+                    <Button onClick={() => fetchData('cafe')}><Tooltip title="カフェ" style={{ fontSize: 40 }}><LocalCafe /></Tooltip></Button>
+                    <Button onClick={() => fetchData('bank')}><Tooltip title="銀行" style={{ fontSize: 40 }}><AccountBalance /></Tooltip></Button>
+                    <Button onClick={() => fetchData('park')}><Tooltip title="公園" style={{ fontSize: 40 }}><Park /></Tooltip></Button>
+                    <Button onClick={() => fetchData('police')}><Tooltip title="交番" style={{ fontSize: 40 }}><LocalPolice /></Tooltip></Button>
+                    <Button onClick={() => fetchData('post_office')}><Tooltip title="郵便局" style={{ fontSize: 40 }}><LocalPostOffice /></Tooltip></Button>
+                    <Button onClick={() => fetchData('parking')}><Tooltip title="駐車場" style={{ fontSize: 40 }}><LocalParking /></Tooltip></Button>
+                    <Button onClick={() => fetchData('doctor')}><Tooltip title="病院" style={{ fontSize: 40 }}><LocalHospital /></Tooltip></Button>
                 </Box>
 
                 <Box sx={{ pt: 8 }}>
