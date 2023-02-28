@@ -138,7 +138,7 @@ export const ShowModalInfo = React.forwardRef<HTMLDivElement, refProps>(
                                         width: "100%",
                                         fontSize: 20,
                                         padding: 2,
-                                        borderRadius: 20,
+                                        // borderRadius: 20,
                                     }}
                                     startIcon={<AddShoppingCart sx={{
                                         width: 50,

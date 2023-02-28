@@ -7,11 +7,12 @@ import { ShowModalConfirm } from '../2molecules/ShowModalConfirm'
 import { cartState, totalPriceSelector, useCart } from '../types/TypeCart'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import React, { useState, useRef } from 'react'
+import { motion }from "framer-motion"
 
 // ====================================
 // カート
 // ====================================
- const Cart = () => {
+const Cart = () => {
 
     const [mordalConfirm, setmordalConfirm] = useState<boolean>(false)  // 購入確認画面(モーダル)
 
@@ -59,13 +60,17 @@ import React, { useState, useRef } from 'react'
                 <Divider />
 
                 <ListItem>
-                    <Button onClick={removeAllCart}>
+                    <Button onClick={removeAllCart}
+                        variant="outlined"
+                    >
                         <Delete />
                         <Typography variant='h6'>すべて削除</Typography>
                     </Button>
                 </ListItem>
 
-                <Typography variant='h4' fontWeight="bold" textAlign="right">合計：{totalPrice}円</Typography>
+                <Typography variant='h4' fontWeight="bold" textAlign="right"
+                    // component={motion}
+                >合計：{totalPrice}円</Typography>
 
                 <BtnTotalAmount OpenMConfirm={OpenMConfirm} totalPrice={totalPrice} />
 

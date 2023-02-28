@@ -1,6 +1,7 @@
 import { ShoppingCartCheckout } from '@mui/icons-material'
 import { Box, Button, Container, Typography } from '@mui/material'
 import React from 'react'
+import { motion } from "framer-motion"
 
 type Props = {
     OpenMConfirm: () => void;
@@ -18,20 +19,24 @@ export const BtnTotalAmount = ({ OpenMConfirm, totalPrice }: Props) => {
         <Button
             variant="contained"
             color='primary'
-            disabled={totalPrice>0?false:true}
+            disabled={totalPrice > 0 ? false : true}
             sx={{
                 width: "100%",
                 // padding: 5,
                 fontSize: size,
                 marginBottom: 1,
                 marginTop: 2,
-                borderRadius: 50,
-
+                // borderRadius: 50,
             }}
+
+            component={motion.div}
+            whileHover={{ scale: 1.2 }}
+           
             endIcon={<ShoppingCartCheckout sx={{
                 width: size,
                 height: size
-            }} />}
+            }}
+            />}
             onClick={OpenMConfirm}
         >
             会計

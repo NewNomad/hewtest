@@ -63,7 +63,7 @@ export default function Product({ proinfo }: Props) {
                 initial={{ zIndex: 1 }}
                 whileHover={{ scale: 1.2, zIndex: 999 }}
                 whileTap={{ scale: 0.9 }}
-                whileDrag={{ scale: 0.5, zIndex: 1000 }}
+                whileDrag={{ scale: 1.2, zIndex: 1000 }}
                 // onTap={OpenMInfo}
 
                 onDragStart={() => setisDragging(true)}

@@ -1,5 +1,4 @@
 import { Box, Button, Grid }    from '@mui/material'
-import { BgParticle }           from '../components/libs/BgParticle'      // パーティクル
 import { BtnLink }              from '../components/1atoms/BtnLink'
 import { Header }               from '../components/2molecules/Header'
 import { HeadInfo }             from '../components/2molecules/HeadInfo'
