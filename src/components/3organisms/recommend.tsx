@@ -11,6 +11,9 @@ import useSWR from 'swr'
 import RecommendProduct from '../2molecules/RecommendProduct'
 import Webcam from 'react-webcam'
 import * as faceapi from "face-api.js"
+import Weather from '../../pages/api/weather.json'
+import { log } from 'console'
+
 
 const fetchProduct = "/api/fetchProducts"
 const fetcher = (url: string) => fetch(url).then(response => response.json());
@@ -52,6 +55,17 @@ export const Recommend = () => {
         }
     }
 
+    // おすすめのidをpythonからとってくる
+    const fetchRecommend = async () => {
+        const age = user.age
+        const gender = user.gendar == faceapi.Gender.FEMALE ? 0 : 1
+        const temp = 27
+        const humidity = 50
+        const result = await (await fetch(`api/pythonAI?age=${age}&gender=${gender}&temp=${temp}&humidity=${humidity}`)).json()
+        console.log(result);
+
+    }
+
     useEffect(() => {
         const timer = setInterval(async () => {
             const detectionsWithGenderNet = (await faceDetectHandler()) as
@@ -64,12 +78,12 @@ export const Recommend = () => {
                     gendar: detectionsWithGenderNet[0].gender
                 }
                 setuser(user)
-
+                fetchRecommend()
             } else { // 存在しないなら
                 setuser(undefinedUser)
             }
 
-        }, 1000)
+        }, 5000)
         return () => clearInterval(timer)
     }, [])
 

@@ -37,7 +37,7 @@ const Cart = () => {
 
                 <List
                     sx={{
-                        height: 500,
+                        height: 435,
                         position: "flex",
                         overflow: "scroll",
                         overflowY: "scroll",
