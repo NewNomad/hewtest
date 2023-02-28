@@ -19,9 +19,13 @@ type User = {
     age: number
     gendar: faceapi.Gender
 }
+const undefinedUser: User = {
+    age: 9999,
+    gendar: faceapi.Gender.FEMALE
+}
 
 export const Recommend = () => {
-    const [user, setuser] = useState<User>()
+    const [user, setuser] = useState<User>(undefinedUser)
 
 
     // face-api
@@ -56,13 +60,13 @@ export const Recommend = () => {
             // 存在するなら
             if (detectionsWithGenderNet?.length > 0) {
                 const user: User = {
-                    age: detectionsWithGenderNet[0]!.age,
+                    age: Math.round(detectionsWithGenderNet[0]!.age),
                     gendar: detectionsWithGenderNet[0].gender
                 }
                 setuser(user)
 
             } else { // 存在しないなら
-                setuser({ age: 0, gendar: faceapi.Gender.FEMALE })
+                setuser(undefinedUser)
             }
 
         }, 1000)
@@ -78,6 +82,9 @@ export const Recommend = () => {
                 audio={false}
                 ref={webcamRef}
             />
+            <Typography>
+                {user?.age + user?.gendar}
+            </Typography>
         </>
     )
 }
