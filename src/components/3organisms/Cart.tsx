@@ -7,7 +7,7 @@ import { ShowModalConfirm } from '../2molecules/ShowModalConfirm'
 import { cartState, totalPriceSelector, useCart } from '../types/TypeCart'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import React, { useState, useRef } from 'react'
-import { motion }from "framer-motion"
+import { motion } from "framer-motion"
 
 // ====================================
 // カート
@@ -26,11 +26,19 @@ const Cart = () => {
     const items = [...cart.products].reverse()
 
     return (
-        <Paper>
-
-
+        <Paper
+            component={motion.div}
+            variants={
+                {
+                    initial: { y: -1000, opacity: 0.5 },
+                    animate: { y: 0, opacity: 1 },
+                    exit: { y: -1000, opacity: 0.5 },
+                }
+            }
+            whileHover={{ scale: 1.01 }}
+            id='cart'
+        >
             <Container sx={{ padding: 2 }}>
-
                 <Typography variant='h4' fontWeight={"bold"}>
                     <ShoppingCart />
                     カート</Typography>
@@ -44,7 +52,7 @@ const Cart = () => {
                         // padding: 3,
                         overflowX: "hidden"
                     }}
-
+                    component={motion.div}
                 >{items.map((product) => (
                     <Box key={product.id}>
                         <ListItem>
@@ -60,20 +68,27 @@ const Cart = () => {
                 <Divider />
 
                 <ListItem>
-                    <Button onClick={removeAllCart}
-                        variant="outlined"
+                    <motion.div
+                        whileHover={{ scale: 1.2 }}
                     >
-                        <Delete />
-                        <Typography variant='h6'>すべて削除</Typography>
-                    </Button>
+                        <Button onClick={removeAllCart}
+                            variant="outlined"
+                        >
+                            <Delete />
+                            <Typography variant='h6'>すべて削除</Typography>
+                        </Button>
+                    </motion.div>
                 </ListItem>
 
                 <Typography variant='h4' fontWeight="bold" textAlign="right"
-                    // component={motion}
+                // component={motion}
                 >合計：{totalPrice}円</Typography>
 
-                <BtnTotalAmount OpenMConfirm={OpenMConfirm} totalPrice={totalPrice} />
-
+                <motion.div
+                    whileHover={{ scale: 1.0 }}
+                >
+                    <BtnTotalAmount OpenMConfirm={OpenMConfirm} totalPrice={totalPrice} />
+                </motion.div>
             </Container>
 
             {/* 購入確認画面(モーダル) */}

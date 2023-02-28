@@ -94,7 +94,7 @@ export const Recommend = () => {
                 fetchRecommend()
             } else { // 存在しないなら
                 setuser(undefinedUser)
-                setrecommend(undefined)
+                // setrecommend(undefined)
             }
 
         }, 5000)
@@ -114,6 +114,7 @@ export const Recommend = () => {
                 component={motion.div}
                 drag
                 dragSnapToOrigin
+                whileHover={{ scale: 1.1 }}
             >
                 <Webcam
                     style={{
@@ -124,28 +125,40 @@ export const Recommend = () => {
                     ref={webcamRef}
                 />
                 <Typography variant="h5" textAlign="center" color={colors.amber[900]} fontWeight="bold">
-                    {"推定年齢:" + user?.age + ", 性別:" + user?.gendar}
+                    {
+                        user != undefinedUser ?
+                            "推定年齢:" + user?.age + ", 性別:" + user?.gendar
+                            : "顔をかざしてね"
+                    }
                 </Typography>
             </Paper>
 
             {recommend &&
-                <Grid container spacing={1}>
-                    <Grid container item direction="row" spacing={1}>
-                        <Grid item>
+                <Grid container spacing={1}
+                    sx={{
+                        position: "relative",
+                        left: 700,
+                        // top: 0,
+                        width: 500
+                    }}
+                >
+                    <Grid container item direction="row" spacing={1} >
+                        <Grid item xs={6}>
                             <Product proinfo={recommend![0]} cart={cart} />
                         </Grid>
-                        <Grid item>
+                        <Grid item xs={6}>
                             <Product proinfo={recommend![1]} cart={cart} />
                         </Grid>
                     </Grid>
                     <Grid container item direction="row" spacing={1}>
-                        <Grid item>
+                        <Grid item xs={6}>
                             <Product proinfo={recommend![0]} cart={cart} />
                         </Grid>
-                        <Grid item>
+                        <Grid item xs={6}>
                             <Product proinfo={recommend![1]} cart={cart} />
                         </Grid>
                     </Grid>
+                    <Typography color={colors.amber[900]} textAlign="center" variant='h4' fontWeight="bold">おすすめ</Typography>
                 </Grid>
             }
 

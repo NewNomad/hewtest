@@ -6,7 +6,7 @@ import { cartState, TypeCart, useCart } from '../types/TypeCart'
 import Image from 'next/image'
 import { useRecoilState } from 'recoil'
 import React, { useState } from 'react'
-import { motion } from 'framer-motion'
+import { PanInfo, motion } from 'framer-motion'
 
 
 
@@ -33,7 +33,7 @@ export default function Product({ proinfo }: Props) {
     // 商品詳細画面(モーダル)開く
     const CloseMInfo = () => setmordalInfo(false);               // 商品詳細画面(モーダル)閉じる
 
-    console.log(isDragging);
+    // console.log(isDragging);
 
 
 
@@ -43,6 +43,19 @@ export default function Product({ proinfo }: Props) {
 
     const quantity = cart.products.find((e, i) => e.id == id)?.quantity
 
+
+    const handleDragEnd = (event: MouseEvent, info: PanInfo) => {
+        setTimeout(() => { setisDragging(false) }, 150);
+        const cartEle = document.getElementById("cart")
+        if (cartEle) {
+            const isOver = info.point.x > cartEle.offsetLeft &&
+                info.point.x < cartEle.offsetLeft + cartEle.offsetWidth &&
+                info.point.y > cartEle.offsetTop &&
+                info.point.y < cartEle.offsetTop + cartEle.offsetHeight
+            console.log(isOver);
+            if (isOver) addCart(proinfo)
+        }
+    }
     return (
         <>
 
@@ -67,9 +80,7 @@ export default function Product({ proinfo }: Props) {
                 // onTap={OpenMInfo}
 
                 onDragStart={() => setisDragging(true)}
-                onDragEnd={() => {
-                    setTimeout(() => { setisDragging(false) }, 150);
-                }}
+                onDragEnd={handleDragEnd}
                 // dragConstraints={{
                 //     top: 0,
                 //     left: 0,
@@ -119,7 +130,7 @@ export default function Product({ proinfo }: Props) {
                     variant="contained"
                     size='small'
                     disableElevation
-                    onClick={() => addCart(proinfo)}
+                    // onClick={() => addCart(proinfo)}
                     disabled={!isActive}
                     startIcon={
                         isice == 1
