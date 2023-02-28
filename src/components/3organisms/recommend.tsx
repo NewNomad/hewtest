@@ -94,7 +94,7 @@ export const Recommend = () => {
                 fetchRecommend()
             } else { // 存在しないなら
                 setuser(undefinedUser)
-                // setrecommend(undefined)
+                setrecommend(undefined)
             }
 
         }, 5000)
@@ -152,10 +152,10 @@ export const Recommend = () => {
                     </Grid>
                     <Grid container item direction="row" spacing={1}>
                         <Grid item xs={6}>
-                            <Product proinfo={recommend![0]} cart={cart} />
+                            <Product proinfo={recommend![2]} cart={cart} />
                         </Grid>
                         <Grid item xs={6}>
-                            <Product proinfo={recommend![1]} cart={cart} />
+                            <Product proinfo={recommend![3]} cart={cart} />
                         </Grid>
                     </Grid>
                     <Typography color={colors.amber[900]} textAlign="center" variant='h4' fontWeight="bold">おすすめ</Typography>
