@@ -15,6 +15,7 @@
     "@react-three/drei": "^9.56.19",
     "@react-three/fiber": "^8.11.0",
     "axios": "^1.2.1",
+    "child_process": "^1.0.2",
     "date-utils": "^1.2.21",
     "face-api.js": "^0.22.2",
     "google-map-react": "^2.2.0",

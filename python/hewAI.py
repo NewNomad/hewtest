@@ -3,7 +3,14 @@ import mysql.connector
 from datetime import datetime
 import pandas as pd
 import os
+import sys
 
+args = sys.argv
+
+age = args[1]
+gender = args[2]
+temp = args[3]
+humidity = args[4]
 # pd.options.display.max_rows = None
 # pd.options.display.max_columns = None
 
@@ -28,10 +35,10 @@ y_train = data['f_product_id']
 
 # 予測対象データ
 X_test = pd.DataFrame({
-    'age': [20],
-    'temp': [5.6],
-    'humidity': [60],
-    'gender': [0]
+    'age': [age],
+    'temp': [temp],
+    'humidity': [humidity],
+    'gender': [gender]
 })
 
 from sklearn.ensemble import RandomForestClassifier
