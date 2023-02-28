@@ -17,6 +17,8 @@ import { log } from 'console'
 
 const fetchProduct = "/api/fetchProducts"
 const fetcher = (url: string) => fetch(url).then(response => response.json());
+const { data, error } = useSWR<TypeProducts[]>(fetchProduct, fetcher);
+const [cart] = useRecoilState(cartState)
 
 type User = {
     age: number
