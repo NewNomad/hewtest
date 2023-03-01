@@ -8,7 +8,7 @@ import { cartState } from '../types/TypeCart'
 import { useRecoilState } from 'recoil'
 import React, { useState, useRef } from 'react'
 import useSWR from 'swr'
-import { Recommend } from './Recommend'
+import { Recommend } from './recommend'
 
 const fetchProduct = "/api/fetchProducts"
 const fetcher = (url: string) => fetch(url).then(response => response.json());

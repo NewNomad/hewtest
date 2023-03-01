@@ -54,30 +54,24 @@ const Cart = () => {
                         overflowX: "hidden"
                     }}
                     component={motion.div}
-                >{items.map((product) => (
-                    <Box key={product.id}>
-                        <ListItem>
-                            <motion.div
-               
-                            >
-                                <CartItem product={product} />
-                            </motion.div>
-                        </ListItem>
-                        <Divider />
-
-                    </Box>
-                ))
-                    }</List>
+                >
+                    { items.map((product) => (
+                        <Box key={product.id}>
+                            <ListItem>
+                                <motion.div>
+                                    <CartItem product={product} />
+                                </motion.div>
+                            </ListItem>
+                            <Divider />
+                        </Box>
+                    ))}
+                </List>
 
                 <Divider />
 
                 <ListItem>
-                    <motion.div
-                        whileHover={{ scale: 1.2 }}
-                    >
-                        <Button onClick={removeAllCart}
-                            variant="outlined"
-                        >
+                    <motion.div whileHover={{ scale: 1.2 }} >
+                        <Button onClick={removeAllCart} variant="outlined">
                             <Delete />
                             <Typography variant='h6'>すべて削除</Typography>
                         </Button>
@@ -88,9 +82,7 @@ const Cart = () => {
                 // component={motion}
                 >合計：{totalPrice}円</Typography>
 
-                <motion.div
-                    whileHover={{ scale: 1.0 }}
-                >
+                <motion.div whileHover={{ scale: 1.0 }} >
                     <BtnTotalAmount OpenMConfirm={OpenMConfirm} totalPrice={totalPrice} />
                 </motion.div>
             </Container>

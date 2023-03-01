@@ -136,6 +136,7 @@ export const Recommend = () => {
                     </Typography>
                 </Paper>
             </motion.div>
+
             {recommend &&
                 <Grid container spacing={1}
                     sx={{

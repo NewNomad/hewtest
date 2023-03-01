@@ -7,7 +7,8 @@ import os
 cnx = mysql.connector.connect(
     host='127.0.0.1',  # ホスト名(ローカルならlocalhostでOK）
     database='hew2023', # データベース名
-    port='8889',
+    # port='8889',
+    port='3306',
     user='root',  # ユーザー名
     password='root'  # パスワード
 )

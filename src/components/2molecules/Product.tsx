@@ -35,8 +35,6 @@ export default function Product({ proinfo }: Props) {
 
     // console.log(isDragging);
 
-
-
     const { addCart } = useCart()
 
     const [cart] = useRecoilState(cartState)
@@ -100,7 +98,6 @@ export default function Product({ proinfo }: Props) {
             >
 
                 {/* 画像部 */}
-                {/* TODO: [hoverアクション] 選択してるかどうか分からない。画像の透明度を下げるとか色を追加するとか追加する */}
                 {/* <Tooltip title="この商品の詳細を見る" arrow> */}
                 <Button
                     onClick={OpenMInfo}
@@ -127,10 +124,9 @@ export default function Product({ proinfo }: Props) {
                 {/* </Tooltip> */}
 
                 {/* <Divider /> */}
-                {/* 値段部 */}
-                {/* TODO: [hoverアクション] 選択してるかどうか分からない。画像部まで含めて変化 もしくｈｓ */}
-                {/* <Tooltip title="この商品をカートに追加する" arrow> */}
 
+                {/* 値段部 */}
+                {/* <Tooltip title="この商品をカートに追加する" arrow> */}
                 <Button
                     // color='inherit'
                     color="secondary"

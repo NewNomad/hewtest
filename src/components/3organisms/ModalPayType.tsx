@@ -59,7 +59,7 @@ export const ModalPayType = React.forwardRef<HTMLDivElement, refProps>(
 
                     <TextTitle>お支払い方法の選択</TextTitle>
 
-                    <Grid container textAlign="center" spacing={1} height={500} width={1000} paddingTop={3}>
+                    <Grid container textAlign="center" spacing={3} height={550} width={1000} paddingTop={3}>
                         {
                             [...paytypeInfo].map((e, i) => (
                                 e.type == payTypeId &&
@@ -91,10 +91,10 @@ export const ModalPayType = React.forwardRef<HTMLDivElement, refProps>(
                             <TextTitle>お支払方法：{pay.payInfo.name}</TextTitle>
                             <figure style={{ width: '100px', height: '100px', position: 'relative', left:'20%' }}>
                                 <Image
-                                src={"/pay_logo/"+ pay.payInfo.image}
-                                alt=""
-                                width={100}
-                                height={100}/>
+                                    src={"/pay_logo/"+ pay.payInfo.image}
+                                    alt=""
+                                    width={100}
+                                    height={100}/>
                             </figure>
                             <Alert severity='info' sx={{ marginBottom: '20px' }}>読み取り機にかざしてください</Alert>
                             <BtnLink onClick={ () => router.push(nextUrl) } primary>決定</BtnLink>

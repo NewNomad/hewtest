@@ -7,6 +7,7 @@ import Image from 'next/image'
 import React, { ComponentPropsWithRef } from 'react'
 import { motion } from "framer-motion"
 import { buttonTransition } from '../../animation/animation'
+
 // ----------------------------------------------------
 // 型宣言
 // ----------------------------------------------------
@@ -144,8 +145,6 @@ export const ShowModalInfo = React.forwardRef<HTMLDivElement, refProps>(
                                             padding: 2,
                                             // borderRadius: 20,
                                         }}
-
-
 
                                         startIcon={<AddShoppingCart sx={{
                                             width: 50,

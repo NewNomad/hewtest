@@ -12,10 +12,10 @@ type Props = {
 // =================================================
 export const GridItem = ( props: Props ) =>{
 
-    const { children, title, button } = props
+    const { children, title } = props
 
     return (
-        <Grid item xs={ title? 5: 7 } height={80}>
+        <Grid item xs={ title? 5: 7 } height={75}>
             { children }
         </Grid>
     )

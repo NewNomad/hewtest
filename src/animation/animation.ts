@@ -56,3 +56,11 @@ export const buttonTransition: HTMLMotionProps<'div'> = {
 
     // transition: { ease: "easeInOut", duration: 0.5 },
 }
+
+export const buttonTransDown: HTMLMotionProps<'div'> = {
+    // 下へスライド
+    // ホバー・クリックなし
+    initial: { y: -1000, opacity: 0.5 },
+    animate: { y: 0, opacity: 1 },
+    exit: { y: -1000, opacity: 0.5 },
+}

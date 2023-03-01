@@ -88,8 +88,6 @@ export default function RecommendProduct({ proinfo, rank }: Props) {
                     }>
 
                     {/* 画像部 */}
-                    {/* TODO:[hoverアクション] 選択してるかどうか分からない。画像の透明度を下げるとか色を追加するとか追加する */}
-
 
                     <Tooltip title="この商品の詳細を見る" arrow>
                         <Button
@@ -164,7 +162,6 @@ export default function RecommendProduct({ proinfo, rank }: Props) {
                     <Divider />
 
                     {/* 値段部 */}
-                    {/* TODO:[hoverアクション] 選択してるかどうか分からない。画像部まで含めて変化 もしくｈｓ */}
                     <Tooltip title="この商品をカートに追加する" arrow>
 
                         <Button

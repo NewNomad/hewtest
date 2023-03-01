@@ -12,7 +12,7 @@ import { useRecoilState } from 'recoil'
 import React, { useState, useRef } from 'react'
 import useSWR from 'swr'
 import { motion } from "framer-motion"
-import { buttonTransition, walletTransition } from '../animation/animation'
+import { buttonTransition, walletTransition, buttonTransDown } from '../animation/animation'
 
 type Props = { ElProps: any, QrProps: any }
 
@@ -78,10 +78,11 @@ export default function SelectPayInfo() {
 
                     <TextTitle primary>お支払方法を選択してください</TextTitle>
 
-                    <Grid container textAlign="center" height={700} paddingBottom={5} spacing={1}>
+                    <Grid container textAlign="center" height={700} paddingBottom={5} spacing={3}>
                         <Grid item xs={6}>
                             <motion.div
-                                {...buttonTransition}
+                                // {...buttonTransition}
+                                {...buttonTransDown}
                                 style={{ height: "100%" }}
                             >
                                 <BtnLink onClick={() => getPayInfoId(data[0])} primary>
@@ -90,10 +91,11 @@ export default function SelectPayInfo() {
                             </motion.div>
                         </Grid>
 
-                        <Grid container item xs={6} direction="column" spacing={1}>
+                        <Grid container item xs={6} direction="column" spacing={3}>
                             <Grid item xs={6}>
                                 <motion.div
-                                    {...buttonTransition}
+                                    // {...buttonTransition}
+                                    {...buttonTransDown}
                                     style={{ height: "100%" }}
                                 >
                                     <BtnLink onClick={OpenMEl} primary>電子マネー</BtnLink>
@@ -101,7 +103,8 @@ export default function SelectPayInfo() {
                             </Grid>
                             <Grid item xs={6}>
                                 <motion.div
-                                    {...buttonTransition}
+                                    // {...buttonTransition}
+                                    {...buttonTransDown}
                                     style={{ height: "100%" }}
                                 >
                                     <BtnLink onClick={OpenMQr} primary>QRコード決済</BtnLink>
@@ -110,7 +113,8 @@ export default function SelectPayInfo() {
                         </Grid>
                     </Grid>
                     <motion.div
-                        {...buttonTransition}
+                        // {...buttonTransition}
+                        {...buttonTransDown}
                         style={{ height: "100%" }}
                     >
                         <BtnLink onClick={() => router.push(backUrl)}>商品一覧に戻る</BtnLink>

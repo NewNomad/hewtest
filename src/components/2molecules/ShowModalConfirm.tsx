@@ -5,6 +5,7 @@ import { cartState, totalPriceSelector } from '../types/TypeCart'
 import { useRecoilValue } from 'recoil'
 import Link from 'next/link'
 import React, { ComponentPropsWithRef } from 'react'
+import { motion } from "framer-motion"
 
 // ----------------------------------------------------
 // 型宣言
@@ -54,17 +55,25 @@ export const ShowModalConfirm = React.forwardRef<HTMLDivElement, refProps>(
                     以上{totalProducts}点でよろしいですか？
                 </Typography>
 
-                <Grid container textAlign="center">
+                <Grid container textAlign="center" component={motion.div}>
                     <Grid item xs={6}>
-                        <Button variant='contained' color='secondary' onClick={closeModal}>
-                            <Typography variant='h3' padding={2}>戻る</Typography>
-                        </Button>
+                        <motion.div
+                            whileTap={{ scale: 0.9 }}
+                            whileHover={{ scale: 1.1 }}>
+                            <Button variant='contained' color='secondary' onClick={closeModal}>
+                                <Typography variant='h3' padding={2}>戻る</Typography>
+                            </Button>
+                        </motion.div>
                     </Grid>
                     <Grid item xs={6}>
                         <Link href="/SelectPayInfo">
-                            <Button variant='contained' color='primary'>
-                                <Typography variant='h3' padding={2}>決定</Typography>
-                            </Button>
+                            <motion.div
+                                whileTap={{ scale: 0.9 }}
+                                whileHover={{ scale: 1.1 }}>
+                                <Button variant='contained' color='primary'>
+                                    <Typography variant='h3' padding={2}>決定</Typography>
+                                </Button>
+                            </motion.div>
                         </Link>
                     </Grid>
                 </Grid>

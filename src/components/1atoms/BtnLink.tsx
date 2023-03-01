@@ -1,4 +1,5 @@
 import { Button } from '@mui/material'
+import { motion } from "framer-motion"
 
 type Props = {
     children: React.ReactNode,      // ボタン内表示テキスト
@@ -15,15 +16,22 @@ export const BtnLink = (props: Props) => {
     const { children, onClick, primary, disabled } = props
 
     return (
-        <Button
-            variant='contained'
-            color={primary ? 'primary' : 'secondary'}
-            onClick={onClick}
-            sx={{ width: 1, height: 1, fontSize: primary ? 40 : 20 }}
-            disabled={disabled}
-        >
-            {children}
-        </Button>
+        <motion.div
+            style={{ height: "100%" }}
+            whileTap={{ scale: disabled? 1.0: 0.9 }}
+            whileHover={{ scale: disabled? 1.0: 1.05 }}
+            >
+            <Button
+                component={motion.div}
+                variant='contained'
+                color={primary ? 'primary' : 'secondary'}
+                onClick={onClick}
+                sx={{ width: 1, height: 1, fontSize: primary ? 40 : 20 }}
+                disabled={disabled}
+            >
+                {children}
+            </Button>
+        </motion.div>
     )
 }
 

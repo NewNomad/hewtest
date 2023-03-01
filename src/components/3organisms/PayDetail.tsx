@@ -1,7 +1,7 @@
-import { Box, Paper, Grid } from '@mui/material'
-import { BtnLink } from '../1atoms/BtnLink'
-import { GridItem } from '../1atoms/GridItem'
-import { ShowPayDetail } from '../2molecules/ShowPayDetail'
+import { Box, Paper, Grid }     from '@mui/material'
+import { BtnLink }              from '../1atoms/BtnLink'
+import { GridItem }             from '../1atoms/GridItem'
+import { ShowPayDetail }        from '../2molecules/ShowPayDetail'
 import { useRouter } from 'next/router'
 import React from 'react';
 import Image from 'next/image'
@@ -62,7 +62,7 @@ export const PayDetail = (props: Props) => {
             <Grid item xs={5} textAlign="center">
                 <Paper sx={{ width: '100%', height: 600 }}>
 
-                    <Box height={500} sx={{ padding: 10 }}>
+                    <Box height={500} sx={{ padding: 10}}>
 
                         <Grid container textAlign="center" spacing={1} >
                             <GridItem title>決済方法</GridItem>
@@ -73,7 +73,7 @@ export const PayDetail = (props: Props) => {
                         <ShowPayDetail price={price} onChange={onChange} />
 
                         {/* 戻る/支払 ボタン */}
-                        <Grid container textAlign="center" spacing={1} >
+                        <Grid container textAlign="center" spacing={1}>
                             <GridItem title>
                                 <BtnLink onClick={() => router.push(url.back)}>戻る</BtnLink>
                             </GridItem>
