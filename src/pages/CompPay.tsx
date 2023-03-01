@@ -1,17 +1,18 @@
-import { Box }                                      from '@mui/material'
-import { Container }                                from '@mui/system'
-import { TextTitle }                                from '../components/1atoms/TextTitle'
-import { BtnLink }                                  from '../components/1atoms/BtnLink'
-import { HeadInfo }                                 from '../components/2molecules/HeadInfo'
-import { Header }                                   from '../components/2molecules/Header'
-import { cartState, TypeCart }                      from '../components/types/TypeCart'
-import { paymentState, TypePayment }                from '../components/types/TypePayment'
-import { TypeMarketingData, marketingDataState }    from '../components/types/TypeMarketingData'
-import { useRouter }        from 'next/router'
-import { useRecoilState }   from 'recoil'
-import axios                from "axios"
-import { useEffect }        from 'react'
-import Image                from 'next/image'
+import { Box } from '@mui/material'
+import { Container } from '@mui/system'
+import { TextTitle } from '../components/1atoms/TextTitle'
+import { BtnLink } from '../components/1atoms/BtnLink'
+import { HeadInfo } from '../components/2molecules/HeadInfo'
+import { Header } from '../components/2molecules/Header'
+import { cartState, totalPriceSelector, TypeCart } from '../components/types/TypeCart'
+import { paymentState, TypePayment } from '../components/types/TypePayment'
+import { TypeMarketingData, marketingDataState } from '../components/types/TypeMarketingData'
+import { useRouter } from 'next/router'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import axios from "axios"
+import { useEffect } from 'react'
+import Image from 'next/image'
+import { backgroundState, TypeBackground } from '../components/types/TypeBackground'
 
 // DB操作系
 const insertReceiptURL = "/api/insertReceipt"
@@ -52,17 +53,30 @@ export default function CheckPay() {
         })
     }
 
-    const [cart, setCart]                   = useRecoilState(cartState)
-    const [payment, setPaymant]             = useRecoilState(paymentState)
+    const [cart, setCart] = useRecoilState(cartState)
+    const [payment, setPaymant] = useRecoilState(paymentState)
     const [marketingData, setMarketingData] = useRecoilState(marketingDataState)
+    const [background, setBackground] = useRecoilState(backgroundState)
+
+    const total = useRecoilValue(totalPriceSelector)
+    const picture = ""
 
     useEffect(() => {
         insertReceipt(cart, payment, marketingData)
+
+        // backgroundにお金たす
+        const setbackground: TypeBackground = {
+            money: total,
+            pictures: [...background.pictures, picture]
+        }
+        setBackground(setbackground)
 
         // 初期化
         setCart({ products: [] })
         setPaymant({ payment: 0, payInfo: { id: 0, name: "", type: 0, image: "" } })
         setMarketingData({ customerId: 1, temperature: "", humidity: "", getDataDt: "" })
+
+
     }, [])
 
     return (
