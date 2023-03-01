@@ -1,10 +1,11 @@
 import type { PlaneProps, Triplet } from '@react-three/cannon'
 import { Physics, useBox, usePlane, useSphere } from '@react-three/cannon'
-import type { MeshPhongMaterialProps } from '@react-three/fiber'
+import { MeshPhongMaterialProps, useLoader } from '@react-three/fiber'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useMemo, useRef } from 'react'
 import type { InstancedMesh, Mesh } from 'three'
 import { Color } from 'three'
+import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader"
 
 const niceColors = ['#99b898', '#fecea8', '#ff847c', '#e84a5f', '#2a363b']
 
@@ -48,7 +49,7 @@ function InstancedSpheres({ number = 100 }) {
     const colors = useMemo(() => {
         const array = new Float32Array(number * 3)
         const color = new Color()
-        for (let i = 0; i < number; i++)
+        for (let i = 0; i < 10; i++)
             color
                 .set(niceColors[Math.floor(Math.random() * 5)])
                 .convertSRGBToLinear()
@@ -56,13 +57,37 @@ function InstancedSpheres({ number = 100 }) {
         return array
     }, [number])
 
+
     return (
-        <instancedMesh ref={ref} castShadow receiveShadow args={[undefined, undefined, number]}>
+        <instancedMesh ref={ref} castShadow receiveShadow args={[undefined, undefined, 10]}>
             <sphereBufferGeometry args={[1, 16, 16]}>
                 <instancedBufferAttribute attach="attributes-color" args={[colors, 3]} />
             </sphereBufferGeometry>
             <meshPhongMaterial vertexColors />
+
         </instancedMesh>
+    )
+}
+
+type yen = {
+    coinId: number
+}
+const Yen = ({ coinId }: yen) => {
+    const fbxs = ["./coins/yen500.fbx", "./coins/yen100.fbx", "./coins/yen50.fbx", "./coins/yen10.fbx", "./coins/yen5.fbx", "./coins/yen1.fbx"]
+
+    const [ref] = useSphere(
+        (index) => ({
+            args: [1],
+            mass: 1,
+            position: [Math.random() - 0.5, Math.random() - 0.5, index * 2],
+        }),
+        useRef<InstancedMesh>(null),
+    )
+
+    const fbx = useLoader(FBXLoader, fbxs[coinId])
+    let fbxClone = fbx.clone()
+    return (
+        <primitive object={fbxClone} ref={ref} scale={0.1} />
     )
 }
 
@@ -95,7 +120,8 @@ export const ThreeBackground = () => (
             <Plane color={niceColors[3]} position={[0, 6, 0]} rotation={[0.9, 0, 0]} />
             <Plane color={niceColors[0]} position={[0, -6, 0]} rotation={[-0.9, 0, 0]} />
             <Box />
-            <InstancedSpheres number={100} />
+            {/* <InstancedSpheres number={100} /> */}
+            <Yen coins={[0]} />
         </Physics>
     </Canvas>
 )
