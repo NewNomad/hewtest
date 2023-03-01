@@ -4,7 +4,7 @@ import { MeshPhongMaterialProps, useLoader } from '@react-three/fiber'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { memo, useMemo, useRef } from 'react'
 import { useRecoilState } from 'recoil'
-import type { InstancedMesh, Mesh } from 'three'
+import { InstancedMesh, Mesh, TextureLoader } from 'three'
 import { Color } from 'three'
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader"
 import { backgroundState } from '../types/TypeBackground'
@@ -32,10 +32,14 @@ function Box() {
         api.position.set(Math.sin(t * 2) * 5, Math.cos(t * 2) * 5, 3)
         api.rotation.set(Math.sin(t * 6), Math.cos(t * 6), 0)
     })
+    const textureLoader = new TextureLoader()
+    const texture = textureLoader.load("./canvas.jpg")
+
     return (
         <mesh ref={ref} castShadow receiveShadow>
             <boxBufferGeometry args={boxSize} />
-            <meshLambertMaterial color="white" />
+            {/* <meshLambertMaterial color="white" /> */}
+            <meshLambertMaterial color="white" map={texture} />
         </mesh>
     )
 }
