@@ -1,11 +1,12 @@
-import { AddShoppingCart, AcUnit, Whatshot, CurrencyYen, LocalOffer, Announcement} from '@mui/icons-material'
+import { AddShoppingCart, AcUnit, Whatshot, CurrencyYen, LocalOffer, Announcement } from '@mui/icons-material'
 import { Button, Container, Grid, Rating, Typography, Chip, List, ListItem, ListItemText, ListItemIcon, Stack } from '@mui/material'
-import { ShowModal }    from '../1atoms/ShowModal'
-import { useCart }      from '../types/TypeCart'
+import { ShowModal } from '../1atoms/ShowModal'
+import { useCart } from '../types/TypeCart'
 import { TypeProducts } from '../types/TypeProducts'
-import Image            from 'next/image'
-import React, { ComponentPropsWithRef }            from 'react'
-
+import Image from 'next/image'
+import React, { ComponentPropsWithRef } from 'react'
+import { motion } from "framer-motion"
+import { buttonTransition } from '../../animation/animation'
 // ----------------------------------------------------
 // 型宣言
 // ----------------------------------------------------
@@ -21,7 +22,7 @@ type refProps = ComponentPropsWithRef<'div'> & Props
 // ===================================================-
 export const ShowModalInfo = React.forwardRef<HTMLDivElement, refProps>(
 
-    function ShowModalInfo ( { product, closeModal }, ref ) {
+    function ShowModalInfo({ product, closeModal }, ref) {
 
         const { addCart } = useCart()
 
@@ -45,29 +46,29 @@ export const ShowModalInfo = React.forwardRef<HTMLDivElement, refProps>(
                     <Grid item xs={8}>
 
                         {/* 商品詳細情報 */}
-                        <Container sx={{height: 430, marginTop: 10}}> 
+                        <Container sx={{ height: 430, marginTop: 10 }}>
                             <List>
                                 {/* 商品名 */}
                                 <ListItem>
                                     <ListItemIcon>
-                                        { product.isice == 1 ? <AcUnit color="info" /> : <Whatshot color='primary'/>}
+                                        {product.isice == 1 ? <AcUnit color="info" /> : <Whatshot color='primary' />}
                                     </ListItemIcon>
                                     <ListItemText>
-                                            {
-                                                [...arrName].map(( proName, i:number) => (
-                                                    <Typography variant='h4' sx={{display: 'inline-block', whiteSpace: 'nowrap', marginRight: 1,fontWeight:"bold"}} key={i}>{ proName }</Typography>
-                                                ))
-                                            }
+                                        {
+                                            [...arrName].map((proName, i: number) => (
+                                                <Typography variant='h4' sx={{ display: 'inline-block', whiteSpace: 'nowrap', marginRight: 1, fontWeight: "bold" }} key={i}>{proName}</Typography>
+                                            ))
+                                        }
                                     </ListItemText>
                                 </ListItem>
 
                                 {/* 商品金額 */}
-                                <ListItem sx={{borderBottom: 1, marginBottom: 5}}>
+                                <ListItem sx={{ borderBottom: 1, marginBottom: 5 }}>
                                     <ListItemIcon>
                                         <CurrencyYen />
                                     </ListItemIcon>
                                     <ListItemText>
-                                        <Typography variant='h3'>{ product.price }円</Typography>
+                                        <Typography variant='h3'>{product.price}円</Typography>
                                     </ListItemText>
                                 </ListItem>
 
@@ -81,14 +82,14 @@ export const ShowModalInfo = React.forwardRef<HTMLDivElement, refProps>(
                                         sx={{ borderLeft: 2, bgcolor: '#ddd', color: 'gray', padding: 2 }}
                                     >
                                         {
-                                            product.tags.length <= 0?
-                                                <ListItemText>{ `タグはまだ設定されていません` }</ListItemText>
-                                                :[...product.tags].map((tag, i:number) => (
-                                                    <ListItemText key={i} sx={{display: 'inline-block', marginRight: 1}}>
-                                                        { `#${tag}` }
+                                            product.tags.length <= 0 ?
+                                                <ListItemText>{`タグはまだ設定されていません`}</ListItemText>
+                                                : [...product.tags].map((tag, i: number) => (
+                                                    <ListItemText key={i} sx={{ display: 'inline-block', marginRight: 1 }}>
+                                                        {`#${tag}`}
                                                     </ListItemText>
                                                 ))
-                                        }   
+                                        }
                                     </List>
                                 </ListItem>
 
@@ -98,16 +99,16 @@ export const ShowModalInfo = React.forwardRef<HTMLDivElement, refProps>(
                                         <Announcement />
                                     </ListItemIcon>
                                     <Stack>
-                                        <ListItemText>{ "原材料に含まれるアレルギー物質" }</ListItemText>
+                                        <ListItemText>{"原材料に含まれるアレルギー物質"}</ListItemText>
                                         <div>
-                                        {
-                                            product.tags.length <= 0
-                                                ? <Typography variant='body1'>{ `ありません` }</Typography>
-                                                : [...product.allergens].map((allergen, i:number) => ( <Chip key={i} sx={{ marginRight: 1 }} label={ allergen } />))
-                                        }
+                                            {
+                                                product.tags.length <= 0
+                                                    ? <Typography variant='body1'>{`ありません`}</Typography>
+                                                    : [...product.allergens].map((allergen, i: number) => (<Chip key={i} sx={{ marginRight: 1 }} label={allergen} />))
+                                            }
                                         </div>
                                     </Stack>
-                                    
+
                                 </ListItem>
 
                                 {/* <ListItem>
@@ -131,22 +132,29 @@ export const ShowModalInfo = React.forwardRef<HTMLDivElement, refProps>(
                             </Grid>
 
                             <Grid item xs={6}>
-                                <Button
-                                    color='primary'
-                                    variant="contained"
-                                    sx={{
-                                        width: "100%",
-                                        fontSize: 20,
-                                        padding: 2,
-                                        // borderRadius: 20,
-                                    }}
-                                    startIcon={<AddShoppingCart sx={{
-                                        width: 50,
-                                        height: 50
-                                    }} />}
-                                    onClick={() => { addCart(product); closeModal() }} >
-                                    カートに追加
-                                </Button>
+                                <motion.div
+                                {...buttonTransition}
+                                >
+                                    <Button
+                                        color='primary'
+                                        variant="contained"
+                                        sx={{
+                                            width: "100%",
+                                            fontSize: 20,
+                                            padding: 2,
+                                            // borderRadius: 20,
+                                        }}
+
+
+
+                                        startIcon={<AddShoppingCart sx={{
+                                            width: 50,
+                                            height: 50
+                                        }} />}
+                                        onClick={() => { addCart(product); closeModal() }} >
+                                        カートに追加
+                                    </Button>
+                                </motion.div>
                             </Grid>
 
                         </Grid>
