@@ -1,16 +1,18 @@
-import { Box, Grid, Modal }     from '@mui/material'
-import { Container }            from '@mui/system'
-import { TextTitle }            from '../components/1atoms/TextTitle'
-import { BtnLink }              from '../components/1atoms/BtnLink'
-import { HeadInfo }             from '../components/2molecules/HeadInfo'
-import { Header }               from '../components/2molecules/Header'
-import { ModalPayType }         from '../components/3organisms/ModalPayType'
-import { TypePayInfos }         from '../components/types/TypePayInfos'
-import { paymentState }         from '../components/types/TypePayment'
-import { useRouter }            from 'next/router'
-import { useRecoilState }       from 'recoil'
+import { Box, Grid, Modal } from '@mui/material'
+import { Container } from '@mui/system'
+import { TextTitle } from '../components/1atoms/TextTitle'
+import { BtnLink } from '../components/1atoms/BtnLink'
+import { HeadInfo } from '../components/2molecules/HeadInfo'
+import { Header } from '../components/2molecules/Header'
+import { ModalPayType } from '../components/3organisms/ModalPayType'
+import { TypePayInfos } from '../components/types/TypePayInfos'
+import { paymentState } from '../components/types/TypePayment'
+import { useRouter } from 'next/router'
+import { useRecoilState } from 'recoil'
 import React, { useState, useRef } from 'react'
 import useSWR from 'swr'
+import { motion } from "framer-motion"
+import { buttonTransition, walletTransition } from '../animation/animation'
 
 type Props = { ElProps: any, QrProps: any }
 
@@ -47,8 +49,8 @@ export default function SelectPayInfo() {
     // 決済方法選択
     // -----------------------------------------------
     const [pay, setPay] = useRecoilState(paymentState)
-    const getPayInfoId = ( e:TypePayInfos ) => {
-        setPay({ payment: 0, payInfo: {...e} });
+    const getPayInfoId = (e: TypePayInfos) => {
+        setPay({ payment: 0, payInfo: { ...e } });
         router.push(nextUrl)
     }
 
@@ -78,33 +80,51 @@ export default function SelectPayInfo() {
 
                     <Grid container textAlign="center" height={700} paddingBottom={5} spacing={1}>
                         <Grid item xs={6}>
-                            <BtnLink onClick={ () => getPayInfoId(data[0]) } primary>
-                                {data[0].type == payTypeCoins ? data[0].name : '設定エラー'}
-                            </BtnLink>
+                            <motion.div
+                                {...buttonTransition}
+                                style={{ height: "100%" }}
+                            >
+                                <BtnLink onClick={() => getPayInfoId(data[0])} primary>
+                                    {data[0].type == payTypeCoins ? data[0].name : '設定エラー'}
+                                </BtnLink>
+                            </motion.div>
                         </Grid>
 
                         <Grid container item xs={6} direction="column" spacing={1}>
                             <Grid item xs={6}>
-                                <BtnLink onClick={OpenMEl} primary>電子マネー</BtnLink>
+                                <motion.div
+                                    {...buttonTransition}
+                                    style={{ height: "100%" }}
+                                >
+                                    <BtnLink onClick={OpenMEl} primary>電子マネー</BtnLink>
+                                </motion.div>
                             </Grid>
                             <Grid item xs={6}>
-                                <BtnLink onClick={OpenMQr} primary>QRコード決済</BtnLink>
+                                <motion.div
+                                    {...buttonTransition}
+                                    style={{ height: "100%" }}
+                                >
+                                    <BtnLink onClick={OpenMQr} primary>QRコード決済</BtnLink>
+                                </motion.div>
                             </Grid>
                         </Grid>
                     </Grid>
-
-                    <BtnLink onClick={() => router.push(backUrl)}>商品一覧に戻る</BtnLink>
-
+                    <motion.div
+                        {...buttonTransition}
+                        style={{ height: "100%" }}
+                    >
+                        <BtnLink onClick={() => router.push(backUrl)}>商品一覧に戻る</BtnLink>
+                    </motion.div>
                 </Container>
 
                 {/* 電子マネー決済選択 */}
                 <Modal open={mordalEl} onClose={CloseMEl} >
-                    <ModalPayType payType='El' nextUrl={ nextUrl } closeModal={ CloseMEl } paytypeInfo={ data } />
+                    <ModalPayType payType='El' nextUrl={nextUrl} closeModal={CloseMEl} paytypeInfo={data} />
                 </Modal>
 
                 {/* QRコード決済選択 */}
                 <Modal open={mordalQr} onClose={CloseMQr} >
-                    <ModalPayType payType='QR' nextUrl={ nextUrl } closeModal={ CloseMQr } paytypeInfo={ data } />
+                    <ModalPayType payType='QR' nextUrl={nextUrl} closeModal={CloseMQr} paytypeInfo={data} />
                 </Modal>
 
             </Box>
