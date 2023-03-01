@@ -36,6 +36,8 @@ const Cart = () => {
             }
             whileHover={{ scale: 1. }}
             id='cart'
+            drag
+            dragSnapToOrigin
         >
             <Container sx={{ padding: 2 }}>
                 <Typography variant='h4' fontWeight={"bold"}>
