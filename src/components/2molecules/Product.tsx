@@ -80,8 +80,9 @@ export default function Product({ proinfo }: Props) {
                     }
                 }}
                 exit={{ opacity: 0 }}
-                whileHover={{ scale: 1.2, zIndex: 999 }}
-                whileTap={{ scale: 0.9 }}
+
+                whileHover={isActive ? { scale: 1.2, zIndex: 999 } : {}}
+                whileTap={isActive ? { scale: 0.9 } : {}}
                 whileDrag={{ scale: 1.2, zIndex: 1000 }}
                 // onTap={OpenMInfo}
 
@@ -94,7 +95,7 @@ export default function Product({ proinfo }: Props) {
                 //     bottom: 0
                 // }}
                 // dragElastic={1}
-                drag
+                drag={isActive ? true : false}
                 dragSnapToOrigin
             >
 
