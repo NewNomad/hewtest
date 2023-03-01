@@ -25,7 +25,7 @@ const ShowInfo: React.FC<Props> = () => {
             lng: 136.8815       //西経　　名古屋
 
         },
-        zoom: 20                //拡大率
+        zoom: 16              //拡大率
     };
 
     const [center, setCenter] = useState(defaultProps.center);
@@ -49,7 +49,8 @@ const ShowInfo: React.FC<Props> = () => {
 
             <Box sx={{ flexGrow: 1 }}>
                 <Header onMap />
-                <Box sx={{ height: 16, pt: 10, backgroundColor: '000', position: 'sticky', }}>
+                <Box sx={{ height: 16, pt: 10, backgroundColor: '000', position:'fixed',display:'flex',}}>
+                    <Typography sx={{color:'gray',}}>アイコンをクリックして施設検索</Typography>
                     <Button onClick={() => fetchData('restaurant')}><Tooltip title="レストラン" style={{ fontSize: 40 }}><Restaurant /></Tooltip></Button>
                     <Button onClick={() => fetchData('cafe')}><Tooltip title="カフェ" style={{ fontSize: 40 }}><LocalCafe /></Tooltip></Button>
                     <Button onClick={() => fetchData('bank')}><Tooltip title="銀行" style={{ fontSize: 40 }}><AccountBalance /></Tooltip></Button>
@@ -61,7 +62,7 @@ const ShowInfo: React.FC<Props> = () => {
                 </Box>
 
                 <Box sx={{ pt: 8 }}>
-                    <Box sx={{ width: '100%', height: 800, backgroundColor: 'primary.main', opacity: 1 }}>
+                    <Box sx={{ width: '100%', height: 800, backgroundColor: 'primary.main', opacity: 1,position:'absolute',bottom:0,}}>
                         <div style={{ height: '100%', width: '100%' }}>
                             <GoogleMapReact
                                 bootstrapURLKeys={{ key: process.env.MAP_API! }}
