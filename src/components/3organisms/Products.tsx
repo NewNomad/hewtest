@@ -1,5 +1,5 @@
 import { LocalDrink } from '@mui/icons-material'
-import { CircularProgress, Container, Grid, Modal, Paper, Tab, Tabs } from '@mui/material'
+import { Box, CircularProgress, Container, Grid, Modal, Paper, Tab, Tabs } from '@mui/material'
 import Product from '../2molecules/Product'
 import { ProductTabs } from '../2molecules/ProductTabs'
 import { ShowModalInfo } from '../2molecules/ShowModalInfo'
@@ -52,7 +52,9 @@ export const Products = () => {
                     // -----------------------------------------------
                     // おすすめタブ
                     // -----------------------------------------------
-                    : <Recommend />
+                    : tabval == 1 ?
+                        <Recommend />
+                        : <Box></Box>
 
                 }
                 <Grid item xs={1} marginTop={2}>
@@ -72,6 +74,7 @@ export const Products = () => {
                             }}>
                             <Tab icon={<LocalDrink />} label="商品一覧" iconPosition='start' />
                             <Tab icon={<LocalDrink />} label="おすすめ" iconPosition='start' />
+                            <Tab icon={<LocalDrink />} label="なし" iconPosition='start' />
                             {/* <Tab icon={<LocalDrink />} label="商品3" iconPosition='start' /> */}
                         </Tabs>
                     </Paper>

@@ -14,6 +14,7 @@ import * as faceapi from "face-api.js"
 import Weather from '../../pages/api/weather.json'
 import { log } from 'console'
 import { motion } from 'framer-motion'
+import { walletTransition } from '../../animation/animation'
 
 
 const fetchProduct = "/api/fetchProducts"
@@ -106,33 +107,35 @@ export const Recommend = () => {
 
     return (
         <>
-            <Paper
-                sx={{
-                    width: 500,
-                    position: "absolute"
-                }}
-                component={motion.div}
+            <motion.div
+                {...walletTransition}
                 drag
                 dragSnapToOrigin
-                whileHover={{ scale: 1.1 }}
+                whileHover={{ scale: 0.9 }}
             >
-                <Webcam
-                    style={{
-                        width: "100%",
-                        borderRadius: 4
+                <Paper
+                    sx={{
+                        width: 500,
+                        position: "absolute"
                     }}
-                    audio={false}
-                    ref={webcamRef}
-                />
-                <Typography variant="h5" textAlign="center" color={colors.amber[900]} fontWeight="bold">
-                    {
-                        user != undefinedUser ?
-                            "推定年齢:" + user?.age + ", 性別:" + user?.gendar
-                            : "顔をかざしてね"
-                    }
-                </Typography>
-            </Paper>
-
+                >
+                    <Webcam
+                        style={{
+                            width: "100%",
+                            borderRadius: 4
+                        }}
+                        audio={false}
+                        ref={webcamRef}
+                    />
+                    <Typography variant="h5" textAlign="center" color={colors.amber[900]} fontWeight="bold">
+                        {
+                            user != undefinedUser ?
+                                "推定年齢:" + user?.age + ", 性別:" + user?.gendar
+                                : "顔をかざしてね"
+                        }
+                    </Typography>
+                </Paper>
+            </motion.div>
             {recommend &&
                 <Grid container spacing={1}
                     sx={{
