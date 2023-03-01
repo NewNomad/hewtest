@@ -1,4 +1,4 @@
-import { Box } from '@mui/material'
+import { Box, Button, Modal, Paper, Typography } from '@mui/material'
 import { Container } from '@mui/system'
 import { TextTitle } from '../components/1atoms/TextTitle'
 import { BtnLink } from '../components/1atoms/BtnLink'
@@ -10,9 +10,13 @@ import { TypeMarketingData, marketingDataState } from '../components/types/TypeM
 import { useRouter } from 'next/router'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import axios from "axios"
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { backgroundState, TypeBackground } from '../components/types/TypeBackground'
+import { ShowModal } from '../components/1atoms/ShowModal'
+import Webcam from 'react-webcam'
+import { motion } from "framer-motion"
+import html2canvas from 'html2canvas'
 
 // DB操作系
 const insertReceiptURL = "/api/insertReceipt"
@@ -25,14 +29,15 @@ export default function CheckPay() {
 
     //5秒後に商品一覧画面へ
     const router = useRouter()
-    useEffect(() => {
-        setTimeout(() => {
-            homejump()
-        }, 8000);
-    }, [])
-    const homejump = () => {
-        router.push("/")
-    }
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         homejump()
+    //         // }, 8000);
+    //     }, 60000);
+    // }, [])
+    // const homejump = () => {
+    //     router.push("/")
+    // }
 
     // -----------------------------------------------
     // 購入履歴管理
@@ -58,8 +63,12 @@ export default function CheckPay() {
     const [marketingData, setMarketingData] = useRecoilState(marketingDataState)
     const [background, setBackground] = useRecoilState(backgroundState)
 
-    const total = useRecoilValue(totalPriceSelector)
+    let total = useRecoilValue(totalPriceSelector)
+    total = Math.min(100000, total)
     const picture = ""
+    const [modal, setmodal] = useState<boolean>(false)
+    const webcamRef = useRef<Webcam>(null)
+
 
     useEffect(() => {
         insertReceipt(cart, payment, marketingData)
@@ -79,14 +88,33 @@ export default function CheckPay() {
 
     }, [])
 
+    // 撮影ボタン
+    const handlePicture = () => {
+        console.log(1);
+
+        const target = document.getElementById("webcam") as HTMLElement
+        html2canvas(target, {
+            scale: 2
+        }).then(canvas => {
+            const targetImgUri = canvas.toDataURL("img/jpeg")
+            fetch('/api/save-canvas', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ targetImgUri })
+            });
+        })
+    }
+
     return (
         <>
             <HeadInfo title='mopacal | 入金完了' />
 
-            <Box sx={{ flexGrow: 1 }} onClick={() => router.push("/")}>
+            <Box sx={{ flexGrow: 1 }} >
                 <Header />
 
-                <Container sx={{ pt: 8 }}>
+                <Container sx={{ pt: 8 }} >
                     <TextTitle primary>ありがとうございました！</TextTitle>
 
                     <Box sx={{
@@ -98,20 +126,87 @@ export default function CheckPay() {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center'
-                    }}>
-                        <Image
+                    }}
+                    >
+                        <img
                             src={"/movemopa.gif"}
                             height={500}
                             width={500}
-                            objectFit="contain"
-                            alt="logo" />
+                            style={{
+                                objectFit: "contain"
+                            }}
+                            // objectFit="contain"
+                            alt="logo"
+                            onClick={() => router.push("/")}
+                        />
                     </Box>
 
                     {/* <BtnLink onClick={() => router.push("/")}>時間経過(未実装)で商品一覧に戻ります</BtnLink> */}
+                    <Button variant="contained" sx={{ alignSelf: "center" }} size="large"
+                        onClick={() => setmodal(true)}
+                    >記念撮影する！！</Button>
+                    <Modal open={modal} onClose={() => setmodal(false)}>
+                        <ShowModal closeModal={() => setmodal(false)}>
+                            <div
+                                id='webcam'
+                            >
+                                <Webcam
+                                    style={{
+                                        width: 820,
+                                        borderRadius: 4
+                                    }}
+                                    audio={false}
+                                    ref={webcamRef}
+                                />
+                                <motion.div
+                                    drag
+                                    style={{
+                                        position: "absolute",
+                                        bottom: 200
+                                    }}
+                                // dragConstraints={{
+                                //     top: 800,
+                                //     left: 0,
+                                //     right: 0,
+                                //     bottom: 0
+                                // }}
+                                >
+                                    <Image
+                                        src={"/mopaLR.png"}
+                                        width={200}
+                                        height={204}
+                                        draggable={false}
+                                    />
+                                </motion.div>
+                                <motion.div
+                                    drag
+                                    style={{
+                                        position: "absolute",
+                                        bottom: 200,
+                                        left: 200
+                                    }}
+                                >
+                                    <Image
+                                        src={"/paca.png"}
+                                        width={200}
+                                        height={204}
+                                        draggable={false}
+                                    />
+                                </motion.div>
+                            </div>
+                            <Button
+                                variant="contained" size='large' sx={{
+                                    marginLeft: 45
+                                }}
+                                onClick={handlePicture}
+                            >撮影</Button>
 
+                            <Typography>※しばらくはみんなに見られます</Typography>
+                        </ShowModal>
+                    </Modal>
                 </Container>
 
-            </Box>
+            </Box >
 
         </>
     )
