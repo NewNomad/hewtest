@@ -43,14 +43,14 @@ export const PayDetail = (props: Props) => {
                     
                     {price.payType == 0o1 ?
                         <Image
-                            src={"/genkin.png"}
+                            src={"/genkin.gif"}
                             height={500}
                             width={500}
                             objectFit="contain"
                             alt="logo" />
                         :
                         <Image
-                            src={"/code.png"}
+                            src={"/code.gif"}
                             height={500}
                             width={500}
                             objectFit="contain"
