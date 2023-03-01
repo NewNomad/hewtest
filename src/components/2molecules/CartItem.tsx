@@ -6,6 +6,7 @@ import { useCart } from '../types/TypeCart'
 import { TypeProducts } from '../types/TypeProducts'
 import Image from 'next/image'
 import React from 'react'
+import { motion } from "framer-motion"
 
 type Props = {
     product: TypeProducts
@@ -18,7 +19,9 @@ export const CartItem = ({ product }: Props) => {
     const { addCart, removeCart } = useCart()
 
     return (
-        <Grid container padding={3} spacing={0} alignItems="center">
+        <Grid container padding={3} spacing={0} alignItems="center"
+    
+        >
             <Grid item xs={4}>
                 <Paper sx={{
                     padding: 1
@@ -31,8 +34,8 @@ export const CartItem = ({ product }: Props) => {
                 <Typography variant='h6' fontWeight="bold">
                     {/* カート内のホット・アイスアイコン */}
                     {product.isice == 1
-                            ? <AcUnit color="info" />
-                            : <Whatshot color='primary' />}
+                        ? <AcUnit color="info" />
+                        : <Whatshot color='primary' />}
                     {product.name}
                 </Typography>
 
@@ -47,19 +50,30 @@ export const CartItem = ({ product }: Props) => {
                     {/* <QuantityButton/> */}
 
                     <ButtonGroup variant='contained' size='small'>
-                        <Button
-                            onClick={() => removeCart(product)}
+                        <motion.div
+                            whileHover={{ scale: 1.2 }}
+                            whileTap={{ scale: 0.9 }}
                         >
-                            <Remove />
-                        </Button>
+                            <Button
+                                onClick={() => removeCart(product)}
+                            >
+                                <Remove />
+                            </Button>
+                        </motion.div>
+
                         <Button variant='text' disableFocusRipple disableTouchRipple>
                             {product.quantity}
                         </Button>
-                        <Button
-                            onClick={() => addCart(product)}
+                        <motion.div
+                            whileHover={{ scale: 1.2 }}
+                            whileTap={{ scale: 0.9 }}
                         >
-                            <Add />
-                        </Button>
+                            <Button
+                                onClick={() => addCart(product)}
+                            >
+                                <Add />
+                            </Button>
+                        </motion.div>
                     </ButtonGroup>
                     <Typography variant='h6' fontWeight="bold">
                         ¥{product.price} 計¥{product.price * product.quantity}

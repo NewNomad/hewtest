@@ -1,4 +1,4 @@
-import { LocalDrink} from '@mui/icons-material'
+import { LocalDrink } from '@mui/icons-material'
 import { CircularProgress, Container, Grid, Modal, Paper, Tab, Tabs } from '@mui/material'
 import Product from '../2molecules/Product'
 import { ProductTabs } from '../2molecules/ProductTabs'
@@ -8,7 +8,7 @@ import { cartState } from '../types/TypeCart'
 import { useRecoilState } from 'recoil'
 import React, { useState, useRef } from 'react'
 import useSWR from 'swr'
-import { Recommend } from './recommend'
+import { Recommend } from './Recommend'
 
 const fetchProduct = "/api/fetchProducts"
 const fetcher = (url: string) => fetch(url).then(response => response.json());
@@ -52,14 +52,24 @@ export const Products = () => {
                     // -----------------------------------------------
                     // おすすめタブ
                     // -----------------------------------------------
-                    :<Recommend />
+                    : <Recommend />
 
                 }
                 <Grid item xs={1} marginTop={2}>
                     {/* <ProductTabs />
                      */}
-                    <Paper>
-                        <Tabs value={tabval} onChange={handleTabVal} centered variant='fullWidth' sx={{ bgColor: "secondary" }}>
+                    <Paper
+                        sx={{
+                            position: "absolute",
+                            bottom: 50,
+                            width: "70%"
+                        }}
+                    >
+                        <Tabs value={tabval} onChange={handleTabVal} centered variant="fullWidth"
+                            sx={{
+                                bgColor: "secondary",
+
+                            }}>
                             <Tab icon={<LocalDrink />} label="商品一覧" iconPosition='start' />
                             <Tab icon={<LocalDrink />} label="おすすめ" iconPosition='start' />
                             {/* <Tab icon={<LocalDrink />} label="商品3" iconPosition='start' /> */}

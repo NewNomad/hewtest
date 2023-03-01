@@ -1,11 +1,11 @@
-import Weather                                      from '../../pages/api/weather.json'
-import { TypeMarketingData, marketingDataState }    from '../types/TypeMarketingData'
-import { WbSunny, WbCloudy, Umbrella, AcUnit }      from '@mui/icons-material'
-import { DeviceThermostat, Opacity }                from '@mui/icons-material'
-import { Typography, Stack }                        from '@mui/material'
-import { useRecoilState }                           from 'recoil'
+import Weather from '../../pages/api/weather.json'
+import { TypeMarketingData, marketingDataState } from '../types/TypeMarketingData'
+import { WbSunny, WbCloudy, Umbrella, AcUnit } from '@mui/icons-material'
+import { DeviceThermostat, Opacity } from '@mui/icons-material'
+import { Typography, Stack } from '@mui/material'
+import { useRecoilState } from 'recoil'
 // import useSWR   from 'swr'
-import React, { useEffect }    from 'react'
+import React, { useEffect } from 'react'
 
 // ===================================================
 // 定数
@@ -14,13 +14,13 @@ import React, { useEffect }    from 'react'
 // const url: string = 'https://api.aoikujira.com/tenki/week.php?fmt=json';
 
 // 天気情報をアイコンに変換
-function iconWeather(value:string, key:number){
-    switch(value){
-        case "晴れ":    return <WbSunny key={key} />
-        case "くもり":  return <WbCloudy key={key} />
-        case "雨":      return <Umbrella key={key} />
-        case "雪":      return <AcUnit key={key} />
-        default:        return value
+function iconWeather(value: string, key: number) {
+    switch (value) {
+        case "晴れ": return <WbSunny color="primary" key={key} />
+        case "くもり": return <WbCloudy key={key} />
+        case "雨": return <Umbrella color="info" key={key} />
+        case "雪": return <AcUnit color="info" key={key} />
+        default: return value
     }
 }
 
@@ -39,9 +39,10 @@ export const ShowWeather = () => {
             customerId: marketingData.customerId,
             temperature: Weather.temperature,
             humidity: Weather.humidity,
-            getDataDt: marketingData.getDataDt } );
+            getDataDt: marketingData.getDataDt
+        });
         console.log(`【取得】気温:${Weather.temperature}/湿度:${Weather.humidity}`)
-    },[])
+    }, [])
 
     return <Stack spacing={0}>
                 <Typography>
