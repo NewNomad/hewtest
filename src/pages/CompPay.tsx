@@ -172,7 +172,7 @@ export default function CheckPay() {
                                 //     bottom: 0
                                 // }}
                                 >
-                                    <Image
+                                    <img
                                         src={"/mopaLR.png"}
                                         width={200}
                                         height={204}
@@ -181,15 +181,15 @@ export default function CheckPay() {
 
                                     />
                                 </motion.div>
-                                {/* <motion.div
+                                <motion.div
                                     drag
                                     style={{
                                         position: "absolute",
                                         bottom: 200,
                                         left: 200,
                                     }}
-                                > */}
-                                    <Image
+                                >
+                                    <img
                                         src={"/paca.png"}
                                         width={200}
                                         height={204}
@@ -200,7 +200,7 @@ export default function CheckPay() {
                                             top:100
                                         }}
                                     />
-                                {/* </motion.div> */}
+                                </motion.div>
                             </Box>
                             <Button
                                 variant="contained" size='large' sx={{
