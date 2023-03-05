@@ -29,8 +29,8 @@ function Box() {
     const [ref, api] = useBox(() => ({ args: boxSize, mass: 1, type: 'Kinematic' }), useRef<Mesh>(null))
     useFrame((state) => {
         const t = state.clock.getElapsedTime()
-        api.position.set(Math.sin(t * 2) * 5, Math.cos(t * 2) * 5, 3)
-        api.rotation.set(Math.sin(t * 6), Math.cos(t * 6), 0)
+        api.position.set(Math.sin(t * 2) * 5, Math.cos(t * 2) * 5 * 0.3, 3)
+        api.rotation.set(Math.sin(t * 6), Math.cos(t * 6) * 0.5, 0)
     })
     const textureLoader = new TextureLoader()
     const texture = textureLoader.load("./canvas.jpg")
