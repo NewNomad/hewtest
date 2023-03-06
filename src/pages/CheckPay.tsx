@@ -64,7 +64,7 @@ export default function CheckPay(){
             <Box sx={{ flexGrow: 1 }}>
                 <Header />
 
-                <Container sx={{ pt: 8 }}>
+                <Container sx={{ pt: 9 }}>
 
                     <TextTitle primary>{ costs.payInfo.type == payTypeCoins ? 'お金を投入してください': '入金処理を行っています…' }</TextTitle>
 

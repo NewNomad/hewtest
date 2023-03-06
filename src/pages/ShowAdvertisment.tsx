@@ -27,7 +27,7 @@ export default function ShowAdvertisment() {
             <Box sx={{ flexGrow: 1 }} onClick={() => router.push("/")}>
                 <Header onMap/>
 
-                <Box sx={{ pt: 8 }}>
+                <Box sx={{ pt: 9 }}>
                     <Box sx={{ width: '100%', height: 800, backgroundColor: 'primary.main', opacity: 1.0 }}>
                         {/* <Typography>広告表示</Typography> */}
                         <React.StrictMode>

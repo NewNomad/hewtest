@@ -72,7 +72,7 @@ const ShowInfo: React.FC<Props> = () => {
                     <Button onClick={() => fetchData('doctor')} disabled={buttonDisabled}><Tooltip title="病院" style={{ fontSize: 40 }}><LocalHospital /></Tooltip></Button>
                 </Box>
 
-                <Box sx={{ pt: 8 }}>
+                <Box sx={{ pt: 9 }}>
                     <Box sx={{ width: '100%', height: 800, backgroundColor: 'primary.main', opacity: 1, position: 'absolute', bottom: 0, }}>
                         <div style={{ height: '100%', width: '100%' }}>
                             <GoogleMapReact

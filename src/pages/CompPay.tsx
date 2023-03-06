@@ -1,7 +1,7 @@
 import { Box, Button, Modal, Paper, Typography } from '@mui/material'
 import { Container } from '@mui/system'
 import { TextTitle } from '../components/1atoms/TextTitle'
-import { BtnLink } from '../components/1atoms/BtnLink'
+// import { BtnLink } from '../components/1atoms/BtnLink'
 import { HeadInfo } from '../components/2molecules/HeadInfo'
 import { Header } from '../components/2molecules/Header'
 import { cartState, totalPriceSelector, TypeCart } from '../components/types/TypeCart'
@@ -84,8 +84,6 @@ export default function CheckPay() {
         setCart({ products: [] })
         setPaymant({ payment: 0, payInfo: { id: 0, name: "", type: 0, image: "" } })
         setMarketingData({ customerId: 1, temperature: "", humidity: "", getDataDt: "" })
-
-
     }, [])
 
     // 撮影ボタン
@@ -114,7 +112,7 @@ export default function CheckPay() {
             <Box sx={{ flexGrow: 1 }} >
                 <Header />
 
-                <Container sx={{ pt: 8 }} >
+                <Container sx={{ pt: 9 }} >
                     <TextTitle primary>ありがとうございました！</TextTitle>
 
                     <Box sx={{
@@ -128,7 +126,7 @@ export default function CheckPay() {
                         justifyContent: 'center'
                     }}
                     >
-                        <img
+                        <Image
                             src={"/movemopa.gif"}
                             height={500}
                             width={500}
@@ -176,6 +174,7 @@ export default function CheckPay() {
                                         width={200}
                                         height={204}
                                         draggable={false}
+                                        alt=""
                                     />
                                 </motion.div>
                                 <motion.div
@@ -191,6 +190,7 @@ export default function CheckPay() {
                                         width={200}
                                         height={204}
                                         draggable={false}
+                                        alt=""
                                     />
                                 </motion.div>
                             </div>

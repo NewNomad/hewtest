@@ -32,9 +32,9 @@ export const Header = ({ onMap = false }) => {
                 : <BtnShowInfo link='/' name='メイン画面に戻る' />)
             }
             </Grid>
-          
+
         </Grid>
-        
+
       </Toolbar>
     </AppBar>
   )

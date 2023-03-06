@@ -78,7 +78,7 @@ const Home: NextPage = () => {
                     </motion.div>
                     {/* <Container component="main" sx={{ height: "100vh",mt:10}} >1 */}
 
-                    <Grid container direction="column" height="100vh" sx={{ pt: 8 }}>{/* 縦並び */}
+                    <Grid container direction="column" height="100vh" sx={{ pt: 10 }}>{/* 縦並び */}
                         {/* justify:horizon alighitem:vertical */}
 
                         <Grid item xs={12} container spacing={2} padding={2} justifyItems="center"> {/* 横並び */}

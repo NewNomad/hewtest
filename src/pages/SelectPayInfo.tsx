@@ -74,7 +74,7 @@ export default function SelectPayInfo() {
             <Box sx={{ flexGrow: 1 }}>
                 <Header />
 
-                <Container sx={{ pt: 8 }}>
+                <Container sx={{ pt: 9 }}>
 
                     <TextTitle primary>お支払方法を選択してください</TextTitle>
 

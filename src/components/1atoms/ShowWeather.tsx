@@ -45,15 +45,15 @@ export const ShowWeather = () => {
     }, [])
 
     return <Stack spacing={0}>
-                <Typography>
+                <Typography sx={{ fontSize: 12 }}>
                     {
                         [...Weather.weather .split(",")].map( (e, i) => iconWeather(e, i))
                     }
                     {/* { Weather.weather } */}
                 </Typography> 
                 <Stack direction="row" spacing={2}>
-                    <Typography><DeviceThermostat />気温:{ Weather.temperature }℃</Typography>
-                    <Typography><Opacity />湿度:{ Weather.humidity }%</Typography>
+                    <Typography sx={{ fontSize: 14 }}><DeviceThermostat />気温:{ Weather.temperature }℃</Typography>
+                    <Typography sx={{ fontSize: 14 }}><Opacity />湿度:{ Weather.humidity }%</Typography>
                 </Stack>
             </Stack> 
 }
