@@ -60,8 +60,11 @@ const ShowInfo: React.FC<Props> = () => {
 
             <Box sx={{ flexGrow: 1 }}>
                 <Header onMap />
-                <Box sx={{ height: 16, pt: 11, backgroundColor: '000', position: 'fixed', display: 'flex', }}>
-                    <Typography sx={{ color: 'gray', }}>アイコンをクリックして施設検索</Typography>
+                <Box sx={{
+                    height: 80, pt: 5, backgroundColor: '#333', position: 'fixed', display: 'flex', width: "100%", zIndex: 998, top: 100,paddingBottom:3
+                }}>
+                    <Typography sx={{ color: 'orange', }
+                    } > アイコンをクリックして施設検索</Typography>
                     <Button onClick={() => fetchData('restaurant')} disabled={buttonDisabled}><Tooltip title="レストラン" style={{ fontSize: 40 }}><Restaurant /></Tooltip></Button>
                     <Button onClick={() => fetchData('cafe')} disabled={buttonDisabled}><Tooltip title="カフェ" style={{ fontSize: 40 }}><LocalCafe /></Tooltip></Button>
                     <Button onClick={() => fetchData('bank')} disabled={buttonDisabled}><Tooltip title="銀行" style={{ fontSize: 40 }}><AccountBalance /></Tooltip></Button>
@@ -70,7 +73,7 @@ const ShowInfo: React.FC<Props> = () => {
                     <Button onClick={() => fetchData('post_office')} disabled={buttonDisabled}><Tooltip title="郵便局" style={{ fontSize: 40 }}><LocalPostOffice /></Tooltip></Button>
                     <Button onClick={() => fetchData('parking')} disabled={buttonDisabled}><Tooltip title="駐車場" style={{ fontSize: 40 }}><LocalParking /></Tooltip></Button>
                     <Button onClick={() => fetchData('doctor')} disabled={buttonDisabled}><Tooltip title="病院" style={{ fontSize: 40 }}><LocalHospital /></Tooltip></Button>
-                </Box>
+                </Box >
 
                 <Box sx={{ pt: 9 }}>
                     <Box sx={{ width: '100%', height: 800, backgroundColor: 'primary.main', opacity: 1, position: 'absolute', bottom: 0, }}>
@@ -98,7 +101,7 @@ const ShowInfo: React.FC<Props> = () => {
 
                     </Box>
                 </Box>
-            </Box>
+            </Box >
 
         </>
     )

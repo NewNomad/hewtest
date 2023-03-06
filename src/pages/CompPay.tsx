@@ -17,6 +17,7 @@ import { ShowModal } from '../components/1atoms/ShowModal'
 import Webcam from 'react-webcam'
 import { motion } from "framer-motion"
 import html2canvas from 'html2canvas'
+import { css } from '@emotion/react'
 
 // DB操作系
 const insertReceiptURL = "/api/insertReceipt"
@@ -145,7 +146,7 @@ export default function CheckPay() {
                     >記念撮影する！！</Button>
                     <Modal open={modal} onClose={() => setmodal(false)}>
                         <ShowModal closeModal={() => setmodal(false)}>
-                            <div
+                            <Box
                                 id='webcam'
                             >
                                 <Webcam
@@ -169,11 +170,13 @@ export default function CheckPay() {
                                 //     bottom: 0
                                 // }}
                                 >
-                                    <Image
+                                    <img
                                         src={"/mopaLR.png"}
                                         width={200}
                                         height={204}
                                         draggable={false}
+                                        className='container'
+
                                         alt=""
                                     />
                                 </motion.div>
@@ -182,18 +185,23 @@ export default function CheckPay() {
                                     style={{
                                         position: "absolute",
                                         bottom: 200,
-                                        left: 200
+                                        left: 200,
                                     }}
                                 >
-                                    <Image
+                                    <img
                                         src={"/paca.png"}
                                         width={200}
                                         height={204}
                                         draggable={false}
+                                        className='container'
+                                        style={{
+                                            position:"absolute",
+                                            top:100
+                                        }}
                                         alt=""
                                     />
                                 </motion.div>
-                            </div>
+                            </Box>
                             <Button
                                 variant="contained" size='large' sx={{
                                     marginLeft: 45
@@ -211,3 +219,4 @@ export default function CheckPay() {
         </>
     )
 }
+
