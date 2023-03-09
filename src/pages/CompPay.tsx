@@ -76,7 +76,7 @@ export default function CheckPay() {
 
         // backgroundにお金たす
         const setbackground: TypeBackground = {
-            money: total,
+            money: background.money + total,
             pictures: [...background.pictures, picture]
         }
         setBackground(setbackground)
@@ -195,8 +195,8 @@ export default function CheckPay() {
                                         draggable={false}
                                         className='container'
                                         style={{
-                                            position:"absolute",
-                                            top:100
+                                            position: "absolute",
+                                            top: 100
                                         }}
                                         alt=""
                                     />

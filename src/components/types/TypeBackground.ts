@@ -18,7 +18,7 @@ export type TypeBackground = {
 
 // デフォルト値
 const initialState: TypeBackground = {
-    money: 0,
+    money: 59999,
     pictures: []
 }
 
